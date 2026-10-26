@@ -19,7 +19,8 @@
   align-items: flex-end;
   justify-content: space-between;
   overflow: hidden;
-  background: #121312;
+  /* Gully Safe: GullyChain brand panel */
+  background: radial-gradient(circle at 50% 70%, rgba(0, 178, 250, 0.18), transparent 60%), var(--gc-night);
 }
 
 .leftSide {
@@ -29,7 +30,9 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  background-color: #fff;
+  /* Gully Safe: the GullyChain logo is made for dark backgrounds */
+  background-color: var(--gc-ink);
+  color: var(--gc-white);
 }
 
 .logoContainer {
@@ -51,14 +54,15 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #a1a3a7;
+  color: var(--gc-cyan);
 }
 
 .mainTitle {
   font-size: 32px;
-  font-weight: 700;
   line-height: 117%;
-  color: #ffffff;
+  font-family: var(--gc-font);
+  font-weight: 800;
+  color: var(--gc-white);
   margin-top: var(--space-2);
 }
 
@@ -70,6 +74,13 @@
 
 .mockupImage {
   max-width: 50vw;
+}
+
+.mascotImage {
+  align-self: center;
+  width: min(370px, 40vw);
+  height: auto;
+  margin-bottom: var(--space-8);
 }
 
 @media (max-width: 1199.95px) {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '@mui/material'
 import css from './styles.module.css'
 import WelcomeLogin from './WelcomeLogin'
-import SafeLabsLogo from '@/public/images/logo-safe-labs.svg'
+import GullySafeLogo from '@/components/common/GullySafeLogo'
 import footerCss from './welcomeFooter.module.css'
 import Footer from '../common/Footer'
 
@@ -11,7 +11,7 @@ const NewSafe = () => {
     <div className={css.loginPage}>
       <div className={css.leftSide}>
         <div className={css.logoContainer}>
-          <SafeLabsLogo className={css.logo} />
+          <GullySafeLogo />
         </div>
         <div className={css.loginContainer}>
           <WelcomeLogin />
@@ -21,11 +21,18 @@ const NewSafe = () => {
 
       <div className={css.rightSide}>
         <div className={css.rightContent}>
-          <Typography className={css.label}>FOR ORGANIZATIONS AND POWER USERS</Typography>
-          <Typography className={css.mainTitle}>Own your assets onchain securely</Typography>
+          {/* Gully Safe: GullyChain brand panel instead of Safe's marketing mockup */}
+          <Typography className={css.label}>GULLY CHAIN TESTNET</Typography>
+          <Typography className={css.mainTitle}>Multisig smart accounts on Gully Chain</Typography>
         </div>
         <div className={css.mockupImageContainer}>
-          <img src="/images/welcome/safe-mockup.png" alt="Safe interface mockup" className={css.mockupImage} />
+          <img
+            src="/brand/mascots/gullychain-mascot-builder.png"
+            width={370}
+            height={385}
+            alt="GullyChain mascot"
+            className={css.mascotImage}
+          />
         </div>
       </div>
     </div>

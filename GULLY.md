@@ -52,6 +52,8 @@ To change an address, edit `gully-contracts.json` and rebuild.
 Env-driven (all empty in `.env.gully`): Google Analytics/GTM, Mixpanel, Sentry, Datadog, Beamer, WalletConnect
 project id (WalletConnect wallet option hidden), Infura, Blockaid, Tenderly, Hypernative OAuth client, Firebase push.
 The GA script is not loaded at all without a tracking id.
+The "Private key" signer wallet (a testing aid; upstream hides it through the chain's `disabledWallets`) is only
+included when `NEXT_PUBLIC_GULLY_ENABLE_PK_WALLET=true` (default `false`).
 
 Config-driven (Gully Config Service, chain features of 485590), keep these off: `NATIVE_SWAPS*`, `BRIDGE`, `STAKING*`,
 `EARN*`, `RISK_MITIGATION`, `HYPERNATIVE*`, `TX_SIMULATION`, `PUSH_NOTIFICATIONS`, `RECOVERY`, `ZODIAC_ROLES`,
