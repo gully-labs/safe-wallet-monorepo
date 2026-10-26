@@ -28,6 +28,7 @@ import { SPACE_EVENTS } from '@/services/analytics/events/spaces'
 import SafeLogo from '@/components/common/SafeLogo'
 import SpaceSafeBar from '@/components/common/SpaceSafeBar'
 import SafenetStakingButton from './SafenetStakingButton'
+import GullySignIn from '@/components/common/GullySignIn'
 import { useSafeTokenEnabled } from '@/hooks/useSafeTokenEnabled'
 import { TxModalContext } from '@/components/tx-flow'
 import { cn } from '@safe-global/views/utils/cn'
@@ -130,6 +131,8 @@ const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
               <SafenetStakingButton />
             </div>
           )}
+
+          <GullySignIn />
 
           <HeaderNavigation
             walletAddress={wallet?.address ?? ''}
