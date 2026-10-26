@@ -26,6 +26,7 @@ import { useSafeTokenEnabled } from '@/hooks/useSafeTokenEnabled'
 import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { BRAND_LOGO, BRAND_NAME } from '@/config/constants'
 import GullySafeLogo from '@/components/common/GullySafeLogo'
+import GullySignIn from '@/components/common/GullySignIn'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -117,6 +118,10 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
           <WalletConnectWidget />
         </div>
       </Box>
+
+      <div className={css.element}>
+        <GullySignIn />
+      </div>
 
       <div className={classnames(css.element, css.connectWallet)}>
         <Track label={OVERVIEW_LABELS.top_bar} {...OVERVIEW_EVENTS.OPEN_ONBOARD}>
