@@ -23,5 +23,5 @@ export const GULLY_SERVICES: GullyService[] = [
   { name: 'HolderMaps', description: 'Token holder bubble maps', href: 'https://holdermaps.xyz' },
   { name: 'Gully Security', description: 'Contract scans and monitoring', href: 'https://gullysecurity.xyz' },
   { name: 'Explorer', description: 'Gully Chain Testnet explorer', href: 'https://testnet-explorer.gullychain.xyz' },
-  { name: 'Faucet', description: 'Get testnet GULLY', href: 'https://testnet-faucet.gullychain.xyz' },
+  { name: 'Faucet', description: 'Get testnet ETH', href: 'https://faucet.gullychain.xyz' },
 ]
