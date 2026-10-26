@@ -45,3 +45,9 @@
 .orDivider::before {
   background-color: #1a2433;
 }
+
+/* Gully Safe: kit primary button on the dark card */
+.fullWidth :global(.MuiButton-contained) {
+  background-color: var(--gc-cyan);
+  color: var(--gc-night);
+}
