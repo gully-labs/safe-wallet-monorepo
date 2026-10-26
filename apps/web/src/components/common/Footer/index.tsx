@@ -12,6 +12,13 @@ import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
 import { IS_PRODUCTION, COMMIT_HASH } from '@/config/constants'
 import type { FooterProps } from './footer.type'
+import {
+  GULLY_LABS_URL,
+  GULLY_PRIVACY_URL,
+  GULLY_SOURCE_URL,
+  GULLY_TERMS_URL,
+  UPSTREAM_SOURCE_URL,
+} from '@/config/gully'
 
 const footerPages = [
   AppRoutes.settings.index,
@@ -20,6 +27,10 @@ const footerPages = [
   AppRoutes.cookie,
   AppRoutes.terms,
   AppRoutes.licenses,
+  // Gully Safe: also show the footer (Powered by Gully Labs, source code) on the main pages
+  AppRoutes.home,
+  AppRoutes.welcome.index,
+  AppRoutes.gullyServices,
 ]
 
 const FooterLink = ({ children, href }: { children: ReactNode; href: string }): ReactElement => {
@@ -90,7 +101,46 @@ const Footer: React.FC<FooterProps> = ({
             )}
           </>
         ) : (
-          <li>This is an unofficial distribution of the app</li>
+          <>
+            <li>
+              <a href={GULLY_LABS_URL} target="_blank" rel="noopener noreferrer" className={css.badge}>
+                <img
+                  src="/brand/badges/powered-by-gully-labs-dark.svg"
+                  srcSet="/brand/badges/powered-by-gully-labs-dark.png 1x, /brand/badges/powered-by-gully-labs-dark-2x.png 2x, /brand/badges/powered-by-gully-labs-dark-3x.png 3x"
+                  width={189}
+                  height={56}
+                  alt="Powered by Gully Labs"
+                />
+              </a>
+            </li>
+            <li>
+              <ExternalLink href={GULLY_TERMS_URL} noIcon>
+                Terms
+              </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href={GULLY_PRIVACY_URL} noIcon>
+                Privacy
+              </ExternalLink>
+            </li>
+            <li>
+              <FooterLink href={getHref(AppRoutes.licenses)}>Licenses</FooterLink>
+            </li>
+            <li>
+              <ExternalLink href={GULLY_SOURCE_URL} noIcon>
+                Source code
+              </ExternalLink>
+            </li>
+            <li>
+              <Typography variant="caption">
+                Gully Safe is a fork of{' '}
+                <ExternalLink href={UPSTREAM_SOURCE_URL} noIcon>
+                  Safe&#123;Wallet&#125;
+                </ExternalLink>{' '}
+                (GPL-3.0)
+              </Typography>
+            </li>
+          </>
         )}
 
         <li>

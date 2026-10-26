@@ -55,6 +55,7 @@ export const HelperCenterArticleTitles = {
   RECOVERY: 'Learn more about the Account recovery process',
 }
 // Social
-export const DISCORD_URL = 'https://chat.safe.global'
-export const TWITTER_URL = 'https://twitter.com/safe'
+// Gully Safe: point community links at Gully Labs
+export const DISCORD_URL = 'https://gullylabs.xyz'
+export const TWITTER_URL = 'https://gullylabs.xyz'
 export const SAFE_TO_L2_MIGRATION_VERSION = '1.4.1'

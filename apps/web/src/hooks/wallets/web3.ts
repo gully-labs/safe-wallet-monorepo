@@ -1,5 +1,5 @@
 import { type Chain, type RpcUri } from '@safe-global/store/gateway/AUTO_GENERATED/chains'
-import { JsonRpcProvider, BrowserProvider, type Eip1193Provider } from 'ethers'
+import { JsonRpcProvider, BrowserProvider, EnsPlugin, Network, type Eip1193Provider } from 'ethers'
 import { INFURA_TOKEN, SAFE_APPS_INFURA_TOKEN } from '@safe-global/utils/config/constants'
 
 // Re-export stores from lightweight module for backwards compatibility
@@ -30,10 +30,22 @@ export const getRpcServiceUrl = (rpcUri: RpcUri): string => {
   return formatRpcServiceUrl(rpcUri, INFURA_TOKEN)
 }
 
+/**
+ * Gully Safe: ethers only knows ENS registries for well-known chains. For other chains, use the registry from
+ * the chain config (e.g. the .gully registry on Gully Chain) so names like `alice.gully` resolve.
+ */
+const getNetwork = (chain: Chain): Network => {
+  const network = Network.from(Number(chain.chainId))
+  if (chain.ensRegistryAddress && !network.getPlugin('org.ethers.plugins.network.Ens')) {
+    network.attachPlugin(new EnsPlugin(chain.ensRegistryAddress, Number(chain.chainId)))
+  }
+  return network
+}
+
 export const createWeb3ReadOnly = (chain: Chain, customRpc?: string): JsonRpcProvider | undefined => {
   const url = customRpc || getRpcServiceUrl(chain.rpcUri)
   if (!url) return
-  return new JsonRpcProvider(url, Number(chain.chainId), {
+  return new JsonRpcProvider(url, getNetwork(chain), {
     staticNetwork: true,
     batchMaxCount: BATCH_MAX_COUNT,
   })

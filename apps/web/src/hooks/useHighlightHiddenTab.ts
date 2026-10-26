@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const ALT_FAVICON = '/favicons/favicon-dot.ico'
+const ALT_FAVICON = '/favicons/favicon-dot.ico' // Gully Safe: kept from upstream, shown while a hidden tab needs attention
 const TITLE_PREFIX = '‼️ '
 
 const setFavicon = (favicon: HTMLLinkElement | null, href: string) => {

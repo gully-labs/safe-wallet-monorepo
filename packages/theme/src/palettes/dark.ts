@@ -2,30 +2,31 @@ import type { ColorPalette } from './types'
 
 /**
  * Unified dark mode color palette.
+ * Gully Safe: GullyChain brand kit v3 colours (night, ink, cyan, blue, green, white, muted).
  * Merged from web and mobile palettes with mobile's extended colors as the base.
  */
 const darkPalette: ColorPalette = {
   text: {
-    primary: '#FFFFFF',
-    secondary: '#636669',
-    disabled: '#636669',
-    contrast: '#000000',
+    primary: '#F2F5F7',
+    secondary: '#8A97A8',
+    disabled: '#8A97A8',
+    contrast: '#05080D',
   },
   primary: {
-    dark: '#0cb259',
-    main: '#12FF80',
+    dark: '#2563FF',
+    main: '#00B2FA',
     light: '#A1A3A7',
   },
   secondary: {
-    dark: '#636669',
-    main: '#FFFFFF',
-    light: '#B0FFC9',
-    background: '#1B2A22',
+    dark: '#8A97A8',
+    main: '#F2F5F7',
+    light: '#7FD8FD',
+    background: '#0D1A26',
   },
   border: {
-    main: '#636669',
-    light: '#303033',
-    background: '#121312',
+    main: '#8A97A8',
+    light: '#1A2433',
+    background: '#05080D',
   },
   error: {
     dark: '#FFE0E6',
@@ -39,13 +40,13 @@ const darkPalette: ColorPalette = {
   },
   success: {
     dark: '#DEFDEA',
-    main: '#00B460',
+    main: '#46FB04',
     light: '#3B7A54',
     background: '#173026',
   },
   info: {
     dark: '#D9F4FB',
-    main: '#00BFE5',
+    main: '#00B2FA',
     light: '#458898',
     background: '#203339',
   },
@@ -61,28 +62,28 @@ const darkPalette: ColorPalette = {
     contrastText: '#FF8C00',
   },
   background: {
-    default: '#121312',
-    main: '#121312',
-    sheet: '#121312',
-    paper: '#1C1C1C',
-    light: '#1B2A22',
-    secondary: '#303033',
+    default: '#05080D',
+    main: '#05080D',
+    sheet: '#05080D',
+    paper: '#0A1018',
+    light: '#0D1A26',
+    secondary: '#1A2433',
     skeleton: 'rgba(255, 255, 255, 0.04)',
     disabled: '#7878801F',
   },
   backdrop: {
-    main: '#636669',
+    main: '#8A97A8',
   },
   logo: {
-    main: '#FFFFFF',
-    background: '#303033',
+    main: '#F2F5F7',
+    background: '#1A2433',
   },
   static: {
-    main: '#121312',
-    light: '#636669',
-    primary: '#FFFFFF',
+    main: '#05080D',
+    light: '#8A97A8',
+    primary: '#F2F5F7',
     textSecondary: '#A1A3A7',
-    textBrand: '#12FF80',
+    textBrand: '#00B2FA',
   },
 }
 

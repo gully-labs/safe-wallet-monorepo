@@ -1,0 +1,13 @@
+{
+  "name": "Gully Safe",
+  "short_name": "Gully Safe",
+  "description": "Multisig smart accounts on Gully Chain, built on Safe{Wallet}.",
+  "icons": [
+    { "src": "/android-chrome-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#05080D",
+  "background_color": "#05080D",
+  "start_url": "/",
+  "display": "standalone"
+}

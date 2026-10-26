@@ -25,6 +25,7 @@ import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { useSafeTokenEnabled } from '@/hooks/useSafeTokenEnabled'
 import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { BRAND_LOGO, BRAND_NAME } from '@/config/constants'
+import GullySafeLogo from '@/components/common/GullySafeLogo'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -79,13 +80,19 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
 
       <div className={classnames(css.element, css.logoMobile)}>
         <Link href={logoHref} passHref>
-          {isOfficialHost ? <SafeLogoMobile alt="Safe logo" /> : null}
+          {isOfficialHost ? <SafeLogoMobile alt="Safe logo" /> : <GullySafeLogo compact />}
         </Link>
       </div>
 
       <div className={classnames(css.element, css.hideMobile, css.logo)}>
         <Link href={logoHref} passHref>
-          {isOfficialHost ? <SafeLabsLogo alt={BRAND_NAME} /> : BRAND_LOGO && <img src={BRAND_LOGO} alt={BRAND_NAME} />}
+          {isOfficialHost ? (
+            <SafeLabsLogo alt={BRAND_NAME} />
+          ) : BRAND_LOGO ? (
+            <img src={BRAND_LOGO} alt={BRAND_NAME} />
+          ) : (
+            <GullySafeLogo />
+          )}
         </Link>
       </div>
 

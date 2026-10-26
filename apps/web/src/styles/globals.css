@@ -26,6 +26,31 @@ main {
   width: 100%;
 }
 
+/* Gully Safe: GullyChain brand kit v3 tokens and headline font */
+:root {
+  --gc-night: #05080d;
+  --gc-ink: #0a1018;
+  --gc-blue: #2563ff;
+  --gc-cyan: #00b2fa;
+  --gc-green: #46fb04;
+  --gc-white: #f2f5f7;
+  --gc-muted: #8a97a8;
+  --gc-chain-gradient: linear-gradient(90deg, #00b2fa, #46fb04);
+  --gc-font: 'Exo 2', system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3,
+.MuiTypography-h4 {
+  font-family: var(--gc-font);
+  font-weight: 800;
+}
+
 a {
   color: inherit;
   text-decoration: none;

@@ -35,3 +35,13 @@
     visibility: hidden;
   }
 }
+
+/* Gully Safe: Powered by Gully Labs badge, native 189x56 */
+.badge {
+  display: inline-flex;
+}
+
+.badge img {
+  width: 189px;
+  height: 56px;
+}
