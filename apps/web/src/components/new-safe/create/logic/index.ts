@@ -36,6 +36,7 @@ import {
   Safe_to_l2_setup__factory,
 } from '@safe-global/utils/types/contracts'
 import { createWeb3 } from '@/hooks/wallets/web3'
+import { getCustomContractNetworks } from '@safe-global/utils/services/contracts/customDeployments'
 import { hasMultiChainCreationFeatures } from '@/features/multichain'
 import { getLatestSafeVersion } from '@safe-global/utils/utils/chains'
 
@@ -69,10 +70,13 @@ export const createNewSafe = async (
 ): Promise<void> => {
   let txResponse: TransactionResponse
   if (isPredictedSafeProps(undeployedSafeProps)) {
+    // Gully Safe: chains with non-canonical deployments (gully-contracts.json) pass their addresses explicitly
+    const contractNetworks = getCustomContractNetworks(chain.chainId, !!isL1SafeSingleton)
     const safe = await Safe.init({
       predictedSafe: undeployedSafeProps,
       provider,
       isL1SafeSingleton,
+      ...(contractNetworks ? { contractNetworks } : {}),
     })
 
     const creationTx = await safe.createSafeDeploymentTransaction()

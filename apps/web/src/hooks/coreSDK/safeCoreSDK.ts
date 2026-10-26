@@ -14,6 +14,7 @@ import {
   isL2MasterCopyCodeHash,
 } from '@safe-global/utils/services/contracts/deployments'
 import { logError, Errors } from '@/services/exceptions'
+import { getCustomContractNetworks } from '@safe-global/utils/services/contracts/customDeployments'
 
 // Safe Core SDK
 export const initSafeSDK = async ({
@@ -91,6 +92,9 @@ export const initSafeSDK = async ({
   if (isLegacyVersion(safeVersion)) {
     isL1SafeSingleton = true
   }
+
+  // Gully Safe: chains with non-canonical deployments (gully-contracts.json) pass their addresses explicitly
+  contractNetworks = getCustomContractNetworks(chainId, isL1SafeSingleton) ?? contractNetworks
 
   if (undeployedSafe) {
     if (isPredictedSafeProps(undeployedSafe.props) || isReplayedSafeProps(undeployedSafe.props)) {

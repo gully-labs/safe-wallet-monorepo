@@ -9,6 +9,7 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { readFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
+import { createRequire } from 'module'
 import { SriManifestWebpackPlugin } from './plugins/sri-manifest-webpack-plugin.mjs'
 
 let withRspack = null
@@ -134,6 +135,11 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       'bn.js': path.resolve('../../node_modules/bn.js/lib/bn.js'),
+      // Gully Safe: one safe-deployments instance for the app, packages/utils and protocol-kit, so the
+      // custom contract registration (src/config/gully-deployments.ts) is seen by all of them.
+      '@safe-global/safe-deployments': path.dirname(
+        createRequire(import.meta.url).resolve('@safe-global/safe-deployments/package.json'),
+      ),
       'mainnet.json': path.resolve('../..node_modules/@ethereumjs/common/dist.browser/genesisStates/mainnet.json'),
       '@mui/material$': path.resolve('./src/components/common/Mui'),
     }
