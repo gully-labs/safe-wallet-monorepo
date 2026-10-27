@@ -7,6 +7,7 @@ import PendingTxsList from '@/components/dashboard/PendingTxs/PendingTxsList'
 import AssetsWidget from '@/components/dashboard/Assets'
 import Overview from '@/components/dashboard/Overview/Overview'
 import ExplorePossibleWidget from '@/components/dashboard/ExplorePossibleWidget'
+import GullyServices from '@/components/gully/GullyServices'
 import { useIsRecoverySupported } from '@/features/recovery/hooks/useIsRecoverySupported'
 import { useHasFeature } from '@/hooks/useChains'
 import css from './styles.module.css'
@@ -129,6 +130,9 @@ const Dashboard = (): ReactElement => {
               )}
 
               {showSafeApps && <ExplorePossibleWidget />}
+
+              {/* Gully Safe: links to the other Gully products */}
+              <GullyServices />
 
               <NewsDisclaimers />
             </>

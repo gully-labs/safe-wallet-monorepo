@@ -17,6 +17,9 @@ const Analytics = () => {
     })
   }, [])
 
+  // Gully Safe: without a tracking ID, do not load gtag.js from Google at all
+  if (!GA_TRACKING_ID) return null
+
   return <GoogleAnalytics gaId={GA_TRACKING_ID} debugMode={!IS_PRODUCTION} />
 }
 

@@ -1,4 +1,4 @@
-import { WC_PROJECT_ID } from '@/config/constants'
+import { GULLY_ENABLE_PK_WALLET, WC_PROJECT_ID } from '@/config/constants'
 import type { Chain } from '@safe-global/store/gateway/AUTO_GENERATED/chains'
 import type { InitOptions } from '@web3-onboard/core'
 import coinbaseModule from '@web3-onboard/coinbase'
@@ -41,7 +41,11 @@ const WALLET_MODULES: Partial<{ [_key in WALLET_KEYS]: (chain: Chain) => WalletI
   [WALLET_KEYS.WALLETCONNECT_V2]: (chain) => walletConnectV2(chain) as WalletInit,
   [WALLET_KEYS.COINBASE]: () => coinbaseModule({ darkMode: prefersDarkMode() }) as WalletInit,
   [WALLET_KEYS.LEDGER]: () => ledgerModule(),
-  [WALLET_KEYS.PK]: (chain) => pkModule(chain.chainId, chain.rpcUri) as WalletInit,
+  // Gully Safe: the private-key signer is a testing aid (upstream hides it via the chain's disabledWallets).
+  // It is off unless NEXT_PUBLIC_GULLY_ENABLE_PK_WALLET=true at build time.
+  ...(GULLY_ENABLE_PK_WALLET
+    ? { [WALLET_KEYS.PK]: (chain: Chain) => pkModule(chain.chainId, chain.rpcUri) as WalletInit }
+    : {}),
 }
 
 export const getAllWallets = (chain: Chain): WalletInits => {

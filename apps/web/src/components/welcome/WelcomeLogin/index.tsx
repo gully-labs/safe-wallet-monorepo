@@ -37,7 +37,7 @@ const WelcomeLogin = () => {
   }, [redirect, shouldRedirect])
 
   return (
-    <Paper className={css.loginCard} data-testid="welcome-login" style={{ background: '#fff' }}>
+    <Paper className={css.loginCard} data-testid="welcome-login">
       <Box className={css.loginContent}>
         <Typography variant="h2" mt={6} fontWeight={700}>
           Get started

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Typography, Table, TableBody, TableRow, TableCell, TableHead, TableContainer, Box } from '@mui/material'
 import ExternalLink from '@/components/common/ExternalLink'
 import Paper from '@mui/material/Paper'
-import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
+import { GULLY_SOURCE_URL, UPSTREAM_SOURCE_URL } from '@/config/gully'
 import { BRAND_NAME } from '@/config/constants'
 
 const SafeLicenses = () => (
@@ -531,15 +531,21 @@ const SafeLicenses = () => (
 )
 
 const Licenses: NextPage = () => {
-  const isOfficialHost = useIsOfficialHost()
-
   return (
     <>
       <Head>
         <title>{`${BRAND_NAME} – Licenses`}</title>
       </Head>
 
-      <main>{isOfficialHost && <SafeLicenses />}</main>
+      <main>
+        {/* Gully Safe: GPL-3.0 notice and attribution notices are shown on every host */}
+        <Typography mb={3}>
+          {BRAND_NAME} is a fork of <ExternalLink href={UPSTREAM_SOURCE_URL}>Safe&#123;Wallet&#125;</ExternalLink>,
+          licensed under the GNU General Public License v3.0. The source code of this build is available at{' '}
+          <ExternalLink href={GULLY_SOURCE_URL}>{GULLY_SOURCE_URL}</ExternalLink>.
+        </Typography>
+        <SafeLicenses />
+      </main>
     </>
   )
 }

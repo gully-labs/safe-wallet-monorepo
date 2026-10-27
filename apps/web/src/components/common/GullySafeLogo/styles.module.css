@@ -1,0 +1,26 @@
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo {
+  height: 32px !important;
+  width: auto !important;
+}
+
+.icon {
+  height: 24px !important;
+  width: 24px !important;
+}
+
+.label {
+  font-family: var(--gc-font);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+  background: var(--gc-chain-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

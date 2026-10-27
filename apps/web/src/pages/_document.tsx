@@ -12,6 +12,10 @@ export default class WebCoreDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* Gully Safe: GullyChain brand font */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+          <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;800&display=swap" rel="stylesheet" />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
         </Head>

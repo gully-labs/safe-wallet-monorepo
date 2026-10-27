@@ -6,14 +6,15 @@
   justify-content: center;
   align-items: center;
   padding: var(--space-2);
-  background: #fff;
+  /* Gully Safe: dark welcome page (GullyChain kit) */
+  background: var(--gc-ink);
 }
 
 .loginContent {
   display: flex;
   width: 320px;
   gap: var(--space-1);
-  color: #000;
+  color: var(--gc-white);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -28,19 +29,25 @@
 }
 
 .watchViewAccountLink button {
-  color: #000;
+  color: var(--gc-white);
 }
 
 .watchViewAccountLink button:hover {
-  --variant-containedBg: #3c3c3c;
-  --variant-textBg: rgba(18, 19, 18, 0.04);
-  --variant-outlinedBorder: #121312;
-  --variant-outlinedBg: rgba(18, 19, 18, 0.04);
+  --variant-containedBg: #1a2433;
+  --variant-textBg: rgba(0, 178, 250, 0.08);
+  --variant-outlinedBorder: var(--gc-cyan);
+  --variant-outlinedBg: rgba(0, 178, 250, 0.08);
 }
 
 .orDivider::after {
-  background-color: #dcdee0;
+  background-color: #1a2433;
 }
 .orDivider::before {
-  background-color: #dcdee0;
+  background-color: #1a2433;
+}
+
+/* Gully Safe: kit primary button on the dark card */
+.fullWidth :global(.MuiButton-contained) {
+  background-color: var(--gc-cyan);
+  color: var(--gc-night);
 }
