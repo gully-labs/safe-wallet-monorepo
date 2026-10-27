@@ -1,0 +1,29 @@
+# Gully Safe (safe.gullychain.xyz): only the public landing pages are indexable.
+# Everything that needs a connected wallet or a Safe address is app state, not content.
+User-agent: *
+Allow: /$
+Allow: /welcome$
+Allow: /gully-services
+Disallow: /home
+Disallow: /balances
+Disallow: /transactions
+Disallow: /settings
+Disallow: /apps
+Disallow: /address-book
+Disallow: /new-safe
+Disallow: /addOwner
+Disallow: /share
+Disallow: /spaces
+Disallow: /welcome/
+Disallow: /user-settings
+Disallow: /wc
+Disallow: /swap
+Disallow: /stake
+Disallow: /earn
+Disallow: /bridge
+Disallow: /hypernative
+Disallow: /_offline
+Disallow: /403
+Disallow: /404
+
+Sitemap: https://safe.gullychain.xyz/sitemap.xml

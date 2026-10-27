@@ -189,7 +189,7 @@ const SafeWalletApp = ({
     <Provider store={reduxStore}>
       <Head>
         <title key="default-title">{BRAND_NAME}</title>
-        <MetaTags prefetchUrl={GATEWAY_URL} />
+        <MetaTags prefetchUrl={GATEWAY_URL} pathname={router.pathname} />
       </Head>
 
       <CacheProvider value={emotionCache}>
