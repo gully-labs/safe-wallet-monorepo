@@ -7,7 +7,7 @@ const Welcome: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`${BRAND_NAME} – Welcome`}</title>
+        <title>{`${BRAND_NAME} – Multisig smart accounts on Gully Chain`}</title>
       </Head>
 
       <NewSafe />
