@@ -100,4 +100,18 @@
   .hideMobile {
     display: none;
   }
+
+  /* Gully Safe: at 375 px the network selector ended 6 px past the screen edge */
+  .container {
+    padding-right: var(--space-1);
+  }
+
+  .logoMobile {
+    margin-left: var(--space-1);
+    min-width: 0;
+  }
+
+  .connectWallet {
+    margin-left: 4px;
+  }
 }
