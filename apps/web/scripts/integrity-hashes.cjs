@@ -4,7 +4,10 @@ const crypto = require('crypto')
 const cheerio = require('cheerio')
 
 const OUT_DIR = 'out'
-const MANIFEST_JS_FILENAME = 'chunks-sri-manifest.js'
+// The manifest gets a content hash in its name (chunks-sri-manifest.<hash>.js). /_next/static/* is served as
+// immutable for a year, so a fixed name let a CDN keep serving an older build's manifest, whose bytes no longer
+// match the integrity attribute in the new HTML, and the browser blocked it.
+const MANIFEST_JS_PREFIX = 'chunks-sri-manifest'
 const CHUNKS_DIR = path.join(OUT_DIR, '_next/static/chunks')
 
 /**
@@ -107,7 +110,7 @@ function generateChunkManifest() {
       const fullPath = path.join(dir, entry.name)
       if (entry.isDirectory()) {
         files.push(...findJsFiles(fullPath))
-      } else if (entry.isFile() && entry.name.endsWith('.js')) {
+      } else if (entry.isFile() && entry.name.endsWith('.js') && !entry.name.startsWith(MANIFEST_JS_PREFIX)) {
         files.push(fullPath)
       }
     }
@@ -135,14 +138,16 @@ function generateChunkManifest() {
  * Write chunk SRI manifest to disk
  */
 function writeChunkManifest(manifest) {
-  const manifestPath = path.join(CHUNKS_DIR, MANIFEST_JS_FILENAME)
+  // Drop manifests left from an earlier run of this script on the same out/ directory
+  for (const name of fs.readdirSync(CHUNKS_DIR)) {
+    if (name.startsWith(MANIFEST_JS_PREFIX) && name.endsWith('.js')) fs.unlinkSync(path.join(CHUNKS_DIR, name))
+  }
 
   const manifestJson = JSON.stringify(manifest, null, 2)
 
   const fileContents = `/**
  * Auto-generated chunk SRI manifest.
  * DO NOT EDIT.
- * Generated at: ${new Date().toISOString()}
  */
 (function() {
   'use strict';
@@ -172,8 +177,11 @@ function writeChunkManifest(manifest) {
 })();
 `
 
-  fs.writeFileSync(manifestPath, fileContents, 'utf8')
-  console.log(`Generated chunk SRI manifest with ${Object.keys(manifest).length} chunks`)
+  const contentHash = crypto.createHash('sha256').update(fileContents).digest('hex').slice(0, 16)
+  const fileName = `${MANIFEST_JS_PREFIX}.${contentHash}.js`
+  fs.writeFileSync(path.join(CHUNKS_DIR, fileName), fileContents, 'utf8')
+  console.log(`Generated chunk SRI manifest ${fileName} with ${Object.keys(manifest).length} chunks`)
+  return fileName
 }
 
 /**
@@ -185,10 +193,10 @@ function main() {
 
   // 1. Generate chunk manifest from actual files on disk (after Next.js export)
   const chunkManifest = generateChunkManifest()
-  writeChunkManifest(chunkManifest)
+  const manifestFileName = writeChunkManifest(chunkManifest)
 
   // 2. Process HTML files: inject manifest script tag and add SRI to static scripts
-  const manifestScriptPublicPath = `/_next/static/chunks/${MANIFEST_JS_FILENAME}`
+  const manifestScriptPublicPath = `/_next/static/chunks/${manifestFileName}`
   const totalProcessed = processAllHtmlFiles(OUT_DIR, manifestScriptPublicPath)
 
   console.log(`SRI processing complete: added integrity to ${totalProcessed} scripts across all HTML files.`)

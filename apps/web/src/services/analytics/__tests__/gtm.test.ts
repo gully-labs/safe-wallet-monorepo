@@ -10,6 +10,13 @@ describe('gtm', () => {
   // Reset mocks before each test
   beforeEach(() => {
     jest.clearAllMocks()
+    window.dataLayer = []
+  })
+
+  it('does not call GA when it has not been initialized', () => {
+    delete window.dataLayer
+    gtm.gtmTrack({ event: EventType.CLICK, category: 'c', action: 'a' })
+    expect(GA.sendGAEvent).not.toHaveBeenCalled()
   })
 
   describe('gtmTrack', () => {

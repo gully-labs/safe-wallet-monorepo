@@ -1,0 +1,137 @@
+.chartWrap {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.grid {
+  stroke: rgba(242, 245, 247, 0.08);
+  stroke-width: 1;
+}
+
+.axis {
+  fill: var(--gc-muted);
+  font-size: 11px;
+  font-family: var(--gc-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.area {
+  fill: var(--gc-cyan);
+  opacity: 0.1;
+}
+
+.line {
+  fill: none;
+  stroke: var(--gc-cyan);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: draw 1.4s ease-out both;
+}
+
+.dot {
+  fill: var(--gc-cyan);
+  stroke: var(--gc-ink);
+  stroke-width: 2;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.crosshair {
+  stroke: rgba(242, 245, 247, 0.35);
+  stroke-width: 1;
+}
+
+.bar {
+  fill: var(--gc-cyan);
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: grow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  background: var(--gc-night);
+  border: 1px solid rgba(242, 245, 247, 0.16);
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.ttLabel {
+  font-size: 11px;
+  color: var(--gc-muted);
+}
+
+.ttValue {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gc-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line,
+  .bar,
+  .pulse {
+    animation: none;
+  }
+}

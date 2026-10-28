@@ -1,0 +1,235 @@
+.stage {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  width: min(380px, 100%);
+  aspect-ratio: 370 / 420;
+  margin: 0 auto;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stage:focus-visible {
+  outline: 2px solid var(--gc-cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.glow,
+.bob,
+.wave,
+.burst,
+.bubble {
+  display: block;
+}
+
+.glow {
+  position: absolute;
+  inset: 10% 5% 0;
+  background: radial-gradient(circle at 50% 55%, rgba(0, 178, 250, 0.35), rgba(70, 251, 4, 0.12) 45%, transparent 70%);
+  filter: blur(8px);
+  animation: glow 4s ease-in-out infinite;
+}
+
+.bob {
+  position: absolute;
+  inset: 0;
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+.wave {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 90%;
+}
+
+.stage:hover .wave,
+.stage:focus-visible .wave {
+  animation: wave 0.9s ease-in-out 2;
+}
+
+.img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: 92%;
+  height: auto;
+  /* blend the art's own background into the page */
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.partyImg {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.celebrating .idleImg {
+  opacity: 0;
+}
+
+.celebrating .partyImg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.celebrating .bob {
+  animation: jump 0.6s ease-in-out 4;
+}
+
+.floatCoin,
+.coin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font: 800 16px/1 var(--gc-font);
+  color: var(--gc-night);
+  background: var(--gc-chain-gradient);
+  box-shadow: 0 0 18px rgba(70, 251, 4, 0.45);
+}
+
+.fc1 {
+  top: 8%;
+  left: 2%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.fc2 {
+  top: 20%;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  animation: float 6s ease-in-out -2s infinite;
+}
+
+.fc3 {
+  bottom: 18%;
+  left: 6%;
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+  animation: float 4.5s ease-in-out -1s infinite;
+}
+
+.burst {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 0;
+  height: 0;
+}
+
+.coin {
+  left: -17px;
+  top: -17px;
+  animation: burst 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 2 both;
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 60%;
+  padding: 6px 10px;
+  font: 600 13px/1.3 var(--gc-font);
+  color: var(--gc-night);
+  background: var(--gc-white);
+  border-radius: 4px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  animation: float 4s ease-in-out infinite;
+}
+
+.celebrating .bubble {
+  background: var(--gc-green);
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-24px);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes burst {
+  0% {
+    transform: rotate(var(--a)) translateX(0) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--a)) translateX(150px) scale(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow,
+  .bob,
+  .fc1,
+  .fc2,
+  .fc3,
+  .bubble,
+  .coin,
+  .celebrating .bob,
+  .stage:hover .wave,
+  .stage:focus-visible .wave {
+    animation: none;
+  }
+  .coin {
+    display: none;
+  }
+}

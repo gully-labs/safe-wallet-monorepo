@@ -187,6 +187,10 @@ export const gtmTrackSafeApp = (eventData: AnalyticsEvent, appName?: string, sdk
 }
 
 const sendEvent = (eventName: string, data: object) => {
+  // GA is only loaded when a measurement id is configured (see Analytics.tsx), which creates window.dataLayer.
+  // Without it, sendGAEvent only logs "GA has not been initialized", so skip the call.
+  if (typeof window === 'undefined' || !Array.isArray(window.dataLayer)) return
+
   sendGAEvent('event', eventName, data)
 
   if (!IS_PRODUCTION) {

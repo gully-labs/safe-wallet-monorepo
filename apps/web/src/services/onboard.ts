@@ -38,9 +38,7 @@ export const createOnboard = (
       desktop: { enabled: false },
     },
 
-    notify: {
-      enabled: false,
-    },
+    // No `notify` option: web3-onboard deprecated transaction notifications and logs a warning when it is passed.
 
     appMetadata: {
       name: BRAND_NAME,
