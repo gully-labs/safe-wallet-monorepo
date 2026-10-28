@@ -12,11 +12,13 @@ const isCypress = Boolean(typeof window !== 'undefined' && window.Cypress)
  *
  * Fonts URLs are needed for WalletConnect
  * Calendly domain is needed for the scheduling integration
+ * Gully Safe: Cloudflare Web Analytics injects its beacon from static.cloudflareinsights.com (it reports to
+ * cloudflareinsights.com, already covered by connect-src *)
  */
 export const ContentSecurityPolicy = `
  default-src 'self';
  connect-src 'self' *;
- script-src 'self' 'unsafe-inline' https://*.getbeamer.com https://www.googletagmanager.com https://*.ingest.sentry.io https://sentry.io https://assets.calendly.com ${
+ script-src 'self' 'unsafe-inline' https://*.getbeamer.com https://www.googletagmanager.com https://*.ingest.sentry.io https://sentry.io https://assets.calendly.com https://static.cloudflareinsights.com ${
    !IS_PRODUCTION || isCypress
      ? "'unsafe-eval'" // Dev server and cypress need unsafe-eval
      : "'wasm-unsafe-eval'"
