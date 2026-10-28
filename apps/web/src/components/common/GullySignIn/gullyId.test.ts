@@ -27,7 +27,7 @@ describe('gullyId', () => {
     expect(loadGullyId(cfg)).toBe(first)
     const scripts = document.head.querySelectorAll('script')
     expect(scripts).toHaveLength(1)
-    expect(scripts[0].src).toBe('https://id.gullychain.xyz/sdk.js')
+    expect(scripts[0].src).toBe('https://gullyid.xyz/sdk.js')
     scripts[0].dispatchEvent(new Event('error'))
     await expect(first).resolves.toBeNull()
   })

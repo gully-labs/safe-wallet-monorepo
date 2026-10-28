@@ -25,7 +25,7 @@ describe('GullySignIn', () => {
       }),
     }
     ;(window as WithGully).GullyID = { init: () => client }
-    const { unmount } = render(<GullySignIn config={{ clientId: 'gully-safe', issuer: 'https://id.gullychain.xyz' }} />)
+    const { unmount } = render(<GullySignIn config={{ clientId: 'gully-safe', issuer: 'https://gullyid.xyz' }} />)
     await waitFor(() => expect(screen.getByTestId('gully-sign-in')).toHaveStyle({ display: 'flex' }))
     expect(screen.getByText('Sign in with Gully')).toBeInTheDocument()
     expect(client.renderButton).toHaveBeenCalledWith(expect.any(HTMLElement), { passkey: true, theme: 'dark' })
