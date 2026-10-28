@@ -3,7 +3,7 @@
 // unchanged, and the Gully ID token is never treated as permission for anything. The SDK is fetched lazily from the
 // Gully ID server; any failure resolves to null so the header shows no button.
 
-export const DEFAULT_GULLY_ID_ISSUER = 'https://id.gullychain.xyz'
+export const DEFAULT_GULLY_ID_ISSUER = 'https://gullyid.xyz'
 
 export type GullyWallet = { chainId: number | null; address: string; kind: 'kernel-v3.3' | 'eoa' }
 
