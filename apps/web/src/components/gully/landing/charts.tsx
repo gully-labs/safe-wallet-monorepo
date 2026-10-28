@@ -27,7 +27,9 @@ const niceMax = (v: number) => {
 }
 
 const compact = (n: number) =>
-  n >= 1000 ? `${(n / 1000).toFixed(n >= 10_000 ? 0 : 1).replace(/\.0$/, '')}K` : String(Math.round(n))
+  n >= 1000
+    ? `${(n / 1000).toFixed(n >= 10_000 ? 0 : 1).replace(/\.0$/, '')}K`
+    : String(Number.isInteger(n) ? n : Number(n.toFixed(1)))
 
 const fmtDate = (t: number, withTime = false) =>
   new Date(t).toLocaleString('en-US', {

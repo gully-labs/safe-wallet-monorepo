@@ -118,7 +118,6 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 40px;
   align-items: center;
-  background: radial-gradient(circle at 80% 30%, rgba(0, 178, 250, 0.12), transparent 50%);
 }
 
 .heroCopy {
@@ -569,6 +568,7 @@
 
   .heroArt {
     order: -1;
+    width: 100%;
     max-width: 300px;
     margin: 0 auto;
   }
