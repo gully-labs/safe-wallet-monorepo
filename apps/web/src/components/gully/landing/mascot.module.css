@@ -3,8 +3,9 @@
   box-sizing: border-box;
   display: block;
   position: relative;
-  width: min(380px, 100%);
-  aspect-ratio: 370 / 420;
+  width: min(460px, 100%);
+  /* kit v4 mascots are landscape (builder 630x502, presenter 644x552) */
+  aspect-ratio: 644 / 600;
   margin: 0 auto;
   cursor: pointer;
   outline: none;
@@ -28,7 +29,7 @@
 .glow {
   position: absolute;
   inset: 10% 5% 0;
-  background: radial-gradient(circle at 50% 55%, rgba(0, 178, 250, 0.35), rgba(70, 251, 4, 0.12) 45%, transparent 70%);
+  background: radial-gradient(circle at 50% 55%, rgba(0, 200, 120, 0.35), rgba(44, 242, 154, 0.12) 45%, transparent 70%);
   filter: blur(8px);
   animation: glow 4s ease-in-out infinite;
 }
@@ -93,7 +94,7 @@
   font: 800 16px/1 var(--gc-font);
   color: var(--gc-night);
   background: var(--gc-chain-gradient);
-  box-shadow: 0 0 18px rgba(70, 251, 4, 0.45);
+  box-shadow: 0 0 18px rgba(44, 242, 154, 0.45);
 }
 
 .fc1 {

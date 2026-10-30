@@ -1,12 +1,12 @@
 .lockup {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .logo {
   height: 32px !important;
-  width: auto !important;
+  width: 32px !important;
 }
 
 .icon {
@@ -14,13 +14,12 @@
   width: 24px !important;
 }
 
+/* product label next to the kit icon (kit v4: white Inter, no gradient, no typed GullyChain wordmark) */
 .label {
   font-family: var(--gc-font);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 20px;
   line-height: 1;
-  background: var(--gc-chain-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary, #ffffff);
 }

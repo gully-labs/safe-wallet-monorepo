@@ -3,13 +3,13 @@ import { Typography } from '@mui/material'
 import { GULLY_SERVICES } from '@/config/gully'
 import css from './styles.module.css'
 
-/** Gully Safe: the other Gully products, as external links (new tab). */
+/** Gully Safe: the other Gully Chain products, as external links (new tab). */
 const GullyServices = (): ReactElement => (
   <section className={css.panel}>
     <Typography variant="h2" className={css.title}>
       Gully services
     </Typography>
-    <Typography className={css.subtitle}>Everything else on Gully Chain. Links open in a new tab.</Typography>
+    <Typography className={css.subtitle}>Everything else on Gully Chain. Links open in a new tab; other projects are on the Ecosystem page.</Typography>
 
     <ul className={css.grid}>
       {GULLY_SERVICES.map((service) => (

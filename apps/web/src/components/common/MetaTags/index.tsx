@@ -35,7 +35,7 @@ const MetaTags = ({ prefetchUrl, pathname }: { prefetchUrl: string; pathname: st
       <meta property="og:image" content={OG_IMAGE_URL} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="GullyChain logo with the GullyChain mascot" />
+      <meta property="og:image:alt" content="Gully Safe on GullyChain: the GullyChain icon and the GullyChain mascot" />
       <meta property="og:description" content={descriptionText} />
       <meta property="og:title" content={canonicalUrl ? landingTitle : titleText} />
       <meta name="twitter:card" content="summary_large_image" />
@@ -61,6 +61,7 @@ const MetaTags = ({ prefetchUrl, pathname }: { prefetchUrl: string; pathname: st
       <link rel="manifest" href="/site.webmanifest" {...(IS_BEHIND_IAP && { crossOrigin: 'use-credentials' })} />
 
       {/* Favicons */}
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

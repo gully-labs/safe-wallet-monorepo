@@ -2,35 +2,37 @@ import type { ColorPalette } from './types'
 
 /**
  * Unified dark mode color palette.
- * Gully Safe: GullyChain brand kit v3 colours (night, ink, cyan, blue, green, white, muted).
+ * Gully Safe: GullyChain brand kit v4 (GN 2.0 roles): ink #0A0F0E ground, #111716 cards, charcoal #1A1F1E surfaces,
+ * emerald #00C878 primary (ink text), deep green #005B39, mint #2CF29A live/links, white/silver text, #8FA09C secondary,
+ * kit success #10B981 / warning #F59E0B / error #EF4444.
  * Merged from web and mobile palettes with mobile's extended colors as the base.
  */
 const darkPalette: ColorPalette = {
   text: {
-    primary: '#F2F5F7',
-    secondary: '#8A97A8',
-    disabled: '#8A97A8',
-    contrast: '#05080D',
+    primary: '#FFFFFF',
+    secondary: '#8FA09C',
+    disabled: '#8FA09C',
+    contrast: '#0A0F0E',
   },
   primary: {
-    dark: '#2563FF',
-    main: '#00B2FA',
-    light: '#A1A3A7',
+    dark: '#005B39',
+    main: '#00C878',
+    light: '#D0D5DA',
   },
   secondary: {
-    dark: '#8A97A8',
-    main: '#F2F5F7',
-    light: '#7FD8FD',
-    background: '#0D1A26',
+    dark: '#8FA09C',
+    main: '#FFFFFF',
+    light: '#2CF29A',
+    background: '#111716',
   },
   border: {
-    main: '#8A97A8',
-    light: '#1A2433',
-    background: '#05080D',
+    main: '#8FA09C',
+    light: '#1A1F1E',
+    background: '#0A0F0E',
   },
   error: {
     dark: '#FFE0E6',
-    main: '#FF5F72',
+    main: '#EF4444',
     light: '#4A2125',
     background: '#4A2125',
   },
@@ -40,19 +42,19 @@ const darkPalette: ColorPalette = {
   },
   success: {
     dark: '#DEFDEA',
-    main: '#46FB04',
+    main: '#10B981',
     light: '#3B7A54',
     background: '#173026',
   },
   info: {
     dark: '#D9F4FB',
-    main: '#00B2FA',
+    main: '#00C878',
     light: '#458898',
     background: '#203339',
   },
   warning: {
     dark: '#FFE4CB',
-    main: '#FF8C00',
+    main: '#F59E0B',
     light: '#A65F34',
     background: '#4A3621',
   },
@@ -62,28 +64,28 @@ const darkPalette: ColorPalette = {
     contrastText: '#FF8C00',
   },
   background: {
-    default: '#05080D',
-    main: '#05080D',
-    sheet: '#05080D',
-    paper: '#0A1018',
-    light: '#0D1A26',
-    secondary: '#1A2433',
+    default: '#0A0F0E',
+    main: '#0A0F0E',
+    sheet: '#0A0F0E',
+    paper: '#111716',
+    light: '#111716',
+    secondary: '#1A1F1E',
     skeleton: 'rgba(255, 255, 255, 0.04)',
     disabled: '#7878801F',
   },
   backdrop: {
-    main: '#8A97A8',
+    main: '#8FA09C',
   },
   logo: {
-    main: '#F2F5F7',
-    background: '#1A2433',
+    main: '#FFFFFF',
+    background: '#1A1F1E',
   },
   static: {
-    main: '#05080D',
-    light: '#8A97A8',
-    primary: '#F2F5F7',
+    main: '#0A0F0E',
+    light: '#8FA09C',
+    primary: '#FFFFFF',
     textSecondary: '#A1A3A7',
-    textBrand: '#00B2FA',
+    textBrand: '#00C878',
   },
 }
 

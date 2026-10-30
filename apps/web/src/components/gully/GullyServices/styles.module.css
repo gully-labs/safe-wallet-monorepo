@@ -2,7 +2,7 @@
   padding: var(--space-3);
   border-radius: 12px;
   background: var(--gc-ink);
-  border: 1px solid #1a2433;
+  border: 1px solid #1a1f1e;
 }
 
 .title {
@@ -34,7 +34,7 @@
   padding: var(--space-2);
   border-radius: 10px;
   background: var(--gc-night);
-  border: 1px solid #1a2433;
+  border: 1px solid #1a1f1e;
   text-decoration: none;
   transition:
     border-color 0.15s,

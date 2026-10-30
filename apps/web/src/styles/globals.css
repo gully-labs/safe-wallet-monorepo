@@ -17,6 +17,7 @@ body {
   padding: 0;
   margin: 0;
   font-family:
+    Inter,
     DM Sans,
     sans-serif;
   background-color: var(--color-background-paper);
@@ -26,17 +27,25 @@ main {
   width: 100%;
 }
 
-/* Gully Safe: GullyChain brand kit v3 tokens and headline font */
+/* Gully Safe: GullyChain brand kit v4 tokens (GN 2.0 roles; the --gc-* names are kept, the values are kit v4).
+   night = ink ground, ink = cards, cyan = the emerald primary (ink text on it), blue = deep green fills,
+   green = mint (live, links, focus), white = text, muted = AA secondary text on ink. */
 :root {
-  --gc-night: #05080d;
-  --gc-ink: #0a1018;
-  --gc-blue: #2563ff;
-  --gc-cyan: #00b2fa;
-  --gc-green: #46fb04;
-  --gc-white: #f2f5f7;
-  --gc-muted: #8a97a8;
-  --gc-chain-gradient: linear-gradient(90deg, #00b2fa, #46fb04);
-  --gc-font: 'Exo 2', system-ui, sans-serif;
+  --gc-night: #0a0f0e;
+  --gc-ink: #111716;
+  --gc-charcoal: #1a1f1e;
+  --gc-blue: #005b39;
+  --gc-cyan: #00c878;
+  --gc-green: #2cf29a;
+  --gc-emerald: #00c878;
+  --gc-deep-green: #005b39;
+  --gc-mint: #2cf29a;
+  --gc-silver: #d0d5da;
+  --gc-white: #ffffff;
+  --gc-muted: #8fa09c;
+  --gc-line: rgba(208, 213, 218, 0.12);
+  --gc-chain-gradient: linear-gradient(90deg, #2cf29a, #007a4b);
+  --gc-font: 'Inter', system-ui, sans-serif;
 }
 
 h1,
@@ -48,7 +57,8 @@ h4,
 .MuiTypography-h3,
 .MuiTypography-h4 {
   font-family: var(--gc-font);
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 a {

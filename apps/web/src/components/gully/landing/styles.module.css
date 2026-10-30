@@ -1,6 +1,6 @@
 /* Gully Safe landing: Gully Terminal look (black ground, GullyChain accents, square 4px buttons). */
 .page {
-  --line: rgba(242, 245, 247, 0.1);
+  --line: rgba(208, 213, 218, 0.1);
   background: var(--gc-night);
   color: var(--gc-white);
   font-family: var(--gc-font);
@@ -31,7 +31,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(5, 8, 13, 0.85);
+  background: rgba(10, 15, 14, 0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -55,12 +55,15 @@
 }
 
 .topnav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--gc-muted);
   text-decoration: none;
 }
 
 .topnav a:hover {
-  color: var(--gc-white);
+  color: var(--gc-mint);
 }
 
 .btnPrimary,
@@ -70,8 +73,9 @@
   justify-content: center;
   gap: 8px;
   min-height: 40px;
-  padding: 0 16px;
-  border-radius: 4px;
+  padding: 0 18px;
+  /* kit v4 signature button: pill */
+  border-radius: 999px;
   font: 700 14px/1 var(--gc-font);
   text-decoration: none;
   white-space: nowrap;
@@ -84,17 +88,17 @@
 }
 
 .btnPrimary:hover {
-  background: #33c3fb;
+  background: #2cf29a;
 }
 
 .page .btnGhost {
-  border: 1px solid rgba(242, 245, 247, 0.25);
+  border: 1px solid rgba(208, 213, 218, 0.25);
   color: var(--gc-white);
 }
 
 .btnGhost:hover {
   border-color: var(--gc-cyan);
-  background: rgba(0, 178, 250, 0.08);
+  background: rgba(0, 200, 120, 0.08);
 }
 
 .btnPrimary:focus-visible,
@@ -145,10 +149,8 @@
 }
 
 .grad {
-  background: var(--gc-chain-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  /* kit v4: the second headline line is solid emerald (the art's style), no gradient text */
+  color: var(--gc-emerald);
 }
 
 .lead {
@@ -156,7 +158,7 @@
   max-width: 560px;
   font-size: 17px;
   line-height: 1.6;
-  color: #c3ccd6;
+  color: #d0d5da;
 }
 
 .ctaRow {
@@ -213,7 +215,7 @@
   height: 8px;
   border-radius: 50%;
   background: var(--gc-green);
-  box-shadow: 0 0 0 0 rgba(70, 251, 4, 0.6);
+  box-shadow: 0 0 0 0 rgba(44, 242, 154, 0.6);
   animation: live 1.8s ease-out infinite;
 }
 
@@ -257,7 +259,7 @@
 .chartSkel {
   display: block;
   border-radius: 4px;
-  background: linear-gradient(90deg, rgba(242, 245, 247, 0.05), rgba(242, 245, 247, 0.12), rgba(242, 245, 247, 0.05));
+  background: linear-gradient(90deg, rgba(208, 213, 218, 0.05), rgba(208, 213, 218, 0.12), rgba(208, 213, 218, 0.05));
   background-size: 200% 100%;
   animation: shimmer 1.4s linear infinite;
 }
@@ -361,7 +363,7 @@
 }
 
 .card:hover {
-  border-color: rgba(0, 178, 250, 0.5);
+  border-color: rgba(0, 200, 120, 0.5);
   transform: translateY(-2px);
 }
 
@@ -372,7 +374,7 @@
   height: 40px;
   border-radius: 4px;
   color: var(--gc-cyan);
-  background: rgba(0, 178, 250, 0.1);
+  background: rgba(0, 200, 120, 0.1);
   margin-bottom: 14px;
 }
 
@@ -453,7 +455,7 @@
 .faqItem p {
   margin: 0;
   padding: 0 16px 16px;
-  color: #c3ccd6;
+  color: #d0d5da;
   line-height: 1.6;
   font-size: 15px;
 }
@@ -490,7 +492,7 @@
 }
 
 .linkCard:hover {
-  border-color: rgba(0, 178, 250, 0.5);
+  border-color: rgba(0, 200, 120, 0.5);
 }
 
 .linkCard span {
@@ -544,10 +546,10 @@
 
 @keyframes live {
   0% {
-    box-shadow: 0 0 0 0 rgba(70, 251, 4, 0.6);
+    box-shadow: 0 0 0 0 rgba(44, 242, 154, 0.6);
   }
   100% {
-    box-shadow: 0 0 0 10px rgba(70, 251, 4, 0);
+    box-shadow: 0 0 0 10px rgba(44, 242, 154, 0);
   }
 }
 
