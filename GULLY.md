@@ -58,7 +58,10 @@ included when `NEXT_PUBLIC_GULLY_ENABLE_PK_WALLET=true` (default `false`).
 Config-driven (Gully Config Service, chain features of 485590), keep these off: `NATIVE_SWAPS*`, `BRIDGE`, `STAKING*`,
 `EARN*`, `RISK_MITIGATION`, `HYPERNATIVE*`, `TX_SIMULATION`, `PUSH_NOTIFICATIONS`, `RECOVERY`, `ZODIAC_ROLES`,
 `RELAYING`, `MIXPANEL`, `NATIVE_WALLETCONNECT`, `SAFE_APPS`, `SPACES`, `MULTI_CHAIN_SAFE_*`, `TARGETED_SURVEY`,
-`SAP_BANNER`, `EURCV_BOOST`, `SPENDING_LIMIT` (the allowance module is not deployed on 485590).
+`SAP_BANNER`, `EURCV_BOOST`.
+`SPENDING_LIMIT` is ON (since 2026-10-30): AllowanceModule 0.1.1 at `0x0Fd09Bd80206854b1dAd588A2eFCd7573De536b9` on 485590
+(canonical code, Arachnid-deployed, so not in `@safe-global/safe-modules-deployments`; the address is overlaid from
+`apps/web/src/config/gully-contracts.json` `modules.allowanceModule` in `spendingLimitDeployments.ts`).
 `DOMAIN_LOOKUP` on enables `.gully` names (registry from the chain's `ensRegistryAddress`).
 
 ## Gully changes in this fork
