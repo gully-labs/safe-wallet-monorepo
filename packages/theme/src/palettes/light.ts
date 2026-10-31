@@ -2,6 +2,7 @@ import type { ColorPalette } from './types'
 
 /**
  * Unified light mode color palette.
+ * Gully Safe: GullyChain brand kit v4 accents on the Safe light base (secondary = kit emerald / deep green / mint).
  * Merged from web and mobile palettes with mobile's extended colors as the base.
  */
 const lightPalette: ColorPalette = {
@@ -17,10 +18,10 @@ const lightPalette: ColorPalette = {
     light: '#636669',
   },
   secondary: {
-    dark: '#0FDA6D',
-    main: '#12FF80',
-    light: '#B0FFC9',
-    background: '#EFFFF4',
+    dark: '#005B39',
+    main: '#00C878',
+    light: '#2CF29A',
+    background: '#E6F9F0',
   },
   border: {
     main: '#A1A3A7',
@@ -65,7 +66,7 @@ const lightPalette: ColorPalette = {
     main: '#F4F4F4',
     sheet: '#F4F4F4',
     paper: '#FFFFFF',
-    light: '#EFFFF4',
+    light: '#E6F9F0',
     secondary: '#DDDEE0',
     skeleton: 'rgba(0, 0, 0, 0.04)',
     disabled: '#7878801F',
@@ -82,7 +83,7 @@ const lightPalette: ColorPalette = {
     light: '#636669',
     primary: '#FFFFFF',
     textSecondary: '#A1A3A7',
-    textBrand: '#12FF80',
+    textBrand: '#005B39',
   },
 }
 

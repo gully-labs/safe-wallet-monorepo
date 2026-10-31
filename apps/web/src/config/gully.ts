@@ -13,15 +13,16 @@ export type GullyService = {
   href: string
 }
 
+// Gully Chain products only (owner rule 2026-10-29/30, same list as gc-switcher 1.8.2 minus Safe itself). kre8.fun and
+// the other Gully products (Pay, HolderMaps, Security, ...) are listed once, on the Ecosystem page.
 export const GULLY_SERVICES: GullyService[] = [
-  { name: 'Gully Swap', description: 'Swap tokens on Gully Chain', href: 'https://app.gullychain.xyz/swap' },
-  { name: 'Gully Launchpad', description: 'Launch a token', href: 'https://app.gullychain.xyz/launch' },
-  { name: 'Gully Bridge', description: 'Bridge to Gully Chain Testnet', href: 'https://testnet-bridge.gullychain.xyz' },
-  { name: 'Gully Pay', description: 'Payments and checkout', href: 'https://gullypay.xyz' },
-  { name: 'Gully Quests', description: 'On-chain quests', href: 'https://app.gullychain.xyz/quests' },
-  { name: '.gully names', description: 'Register a .gully name', href: 'https://app.gullychain.xyz/names' },
-  { name: 'HolderMaps', description: 'Token holder bubble maps', href: 'https://holdermaps.xyz' },
-  { name: 'Gully Security', description: 'Contract scans and monitoring', href: 'https://gullysecurity.xyz' },
-  { name: 'Explorer', description: 'Gully Chain Testnet explorer', href: 'https://testnet-explorer.gullychain.xyz' },
-  { name: 'Faucet', description: 'Get testnet ETH', href: 'https://faucet.gullychain.xyz' },
+  { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
+  { name: 'Explorer', description: 'Blocks, transactions and tokens', href: 'https://testnet-explorer.gullychain.xyz/' },
+  { name: 'Faucet', description: 'Free testnet ETH', href: 'https://faucet.gullychain.xyz/' },
+  { name: 'Verify', description: 'Contract source, Sourcify', href: 'https://verify.gullychain.xyz/' },
+  { name: 'Sentry', description: 'Free keys, run a watcher', href: 'https://sentry.gullychain.xyz/' },
+  { name: 'Docs', description: 'Guides and reference', href: 'https://docs.gullychain.xyz/' },
+  { name: 'Developers', description: 'Starters and grants', href: 'https://dev.gullychain.xyz/' },
+  { name: 'Ecosystem', description: 'Projects on Gully Chain', href: 'https://gullychain.xyz/ecosystem/' },
+  { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
 ]

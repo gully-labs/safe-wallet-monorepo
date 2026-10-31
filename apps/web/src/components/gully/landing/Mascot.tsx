@@ -2,8 +2,9 @@ import { useEffect, useState, type ReactElement } from 'react'
 import css from './mascot.module.css'
 
 /**
- * GullyChain mascot (brand kit v3 art, unmodified files): bobs while idle, waves on hover/focus, and switches to the
- * "bullish" pose with a burst of G coins when `celebrateKey` changes (a new Safe was created on Gully Chain).
+ * GullyChain mascot (brand kit v4 art, unmodified kit files): the builder pose bobs while idle and waves on hover/focus,
+ * and it switches to the presenter pose with a burst of G coins when `celebrateKey` changes (a new Safe was created on
+ * Gully Chain).
  * All motion stops under prefers-reduced-motion.
  */
 const COINS = [0, 1, 2, 3, 4, 5, 6, 7]
@@ -38,16 +39,16 @@ const Mascot = ({ celebrateKey }: { celebrateKey: number }): ReactElement => {
       <span className={css.bob}>
         <span className={css.wave}>
           <img
-            src="/brand/mascots/gullychain-mascot-builder.png"
-            width={370}
-            height={385}
+            src="/brand/mascots/mascot-builder.png"
+            width={630}
+            height={502}
             alt=""
             className={`${css.img} ${css.idleImg}`}
           />
           <img
-            src="/brand/mascots/gullychain-mascot-bullish.png"
-            width={355}
-            height={405}
+            src="/brand/mascots/mascot-presenter.png"
+            width={644}
+            height={552}
             alt=""
             className={`${css.img} ${css.partyImg}`}
           />

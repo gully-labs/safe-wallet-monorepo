@@ -272,25 +272,25 @@ const GullyLanding = (): ReactElement => {
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       </Head>
-      {/* GullyChain product switcher 1.1.0 (gully-ops sites/_shared/gc-switcher, byte-identical copy) */}
+      {/* GullyChain product switcher 1.8.2 (gully-ops sites/_shared/gc-switcher, byte-identical copy; kit v4 dark theme) */}
       <Script src="/assets/gc-switcher.js" strategy="afterInteractive" />
 
       <header className={css.topbar}>
         <div className={css.topbarInner}>
-          {createElement('gc-switcher', { current: 'safe' })}
+          {createElement('gc-switcher', { current: 'safe', theme: 'dark' })}
           <nav className={css.topnav} aria-label="Gully Safe links">
             <a href={DOCS_SAFE} {...EXT}>
-              Docs
+              <Icon name="bookOpen" size={18} /> Docs
             </a>
             <a href={GULLY_EXPLORER} {...EXT}>
-              Explorer
+              <Icon name="search" size={18} /> Explorer
             </a>
             <a href={BRIDGE} {...EXT}>
-              Bridge
+              <Icon name="arrowLeftRight" size={18} /> Bridge
             </a>
           </nav>
           <a href="#get-started" className={css.btnPrimary}>
-            Get started
+            <Icon name="rocket" size={16} /> Get started
           </a>
         </div>
       </header>

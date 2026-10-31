@@ -6,6 +6,7 @@ import injectedWalletModule from '@web3-onboard/injected-wallets'
 import walletConnect from '@web3-onboard/walletconnect'
 import pkModule from '@/services/private-key-module'
 import { ledgerModule } from '@/services/onboard/ledger-module'
+import gullyWalletModule from '@/services/onboard/gully-wallet-module'
 
 import { CGW_NAMES, WALLET_KEYS } from './consts'
 
@@ -37,6 +38,8 @@ const walletConnectV2 = (chain: Chain) => {
 }
 
 const WALLET_MODULES: Partial<{ [_key in WALLET_KEYS]: (chain: Chain) => WalletInit }> = {
+  // Gully Safe: Gully Wallet first (owner order 2026-10-30: Gully Wallet, WalletConnect, detected wallets)
+  [WALLET_KEYS.GULLY]: () => gullyWalletModule() as WalletInit,
   [WALLET_KEYS.INJECTED]: () => injectedWalletModule() as WalletInit,
   [WALLET_KEYS.WALLETCONNECT_V2]: (chain) => walletConnectV2(chain) as WalletInit,
   [WALLET_KEYS.COINBASE]: () => coinbaseModule({ darkMode: prefersDarkMode() }) as WalletInit,

@@ -21,3 +21,11 @@
   /** check that the font is loaded on the website. IDEs fail to find the file */
   src: url('/fonts/DMSans600.woff2') format('woff2');
 }
+
+/* Gully Safe: GullyChain brand kit v4 type, Inter (variable 100-900, SIL OFL 1.1, see Inter-OFL.txt), self-hosted */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/inter-var.woff2') format('woff2');
+}
