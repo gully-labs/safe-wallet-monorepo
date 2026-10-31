@@ -29,7 +29,7 @@ describe('generateTamaguiColorTokens', () => {
     const tokens = generateTamaguiColorTokens()
 
     expect(tokens.textPrimaryDark).toBe('#FFFFFF')
-    expect(tokens.primaryMainDark).toBe('#12FF80')
+    expect(tokens.primaryMainDark).toBe('#00C878') // Gully Safe: kit v4 emerald
   })
 })
 

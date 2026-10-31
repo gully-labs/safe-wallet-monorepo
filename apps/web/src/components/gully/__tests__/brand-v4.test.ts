@@ -88,6 +88,8 @@ describe('Gully Safe brand kit v4', () => {
     ['public/brand/mascots/mascot-builder.png', 'e3ebd29bff2ab4577246de3c97d4bad72421af2c7df0fc7adce6ae44f14b4c97'],
     ['public/brand/mascots/mascot-executive.png', '3e130446792c626fcaea3c51b7ee98a6874ebb0ea4782dab819a119681ee47d6'],
     ['public/brand/mascots/mascot-presenter.png', '93e59014a26463e60dd14ab2e217eb808222f057287221ae75e2e79057f2262e'],
+    // OG card: gully-ops sites/_shared/brand/og/safe.gullychain.xyz.png (feat/gc-sync-v4 bf6aee9)
+    ['public/og-image.png', 'dcb7f18f5443ca1a28a6e9b15feb593d305fec1d54a25edc34f8dfb2725ba153'],
     ['public/fonts/inter-var.woff2', 'f052ee44c3728dfd23aba8a4567150bc314d23903026fbb6ad089422c2df56af'],
     ['public/assets/gc-switcher.js', '4022b13d3de24363824b6c317032bf22187aa84549631905f570fa4e9286228b'],
     ['public/assets/gc-connect.js', 'a6ba55b038ed7e7eece270ae8473472341723e05cbe999cf9f7844258812587f'],
