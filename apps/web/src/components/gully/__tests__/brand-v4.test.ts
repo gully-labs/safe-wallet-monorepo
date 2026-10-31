@@ -92,7 +92,7 @@ describe('Gully Safe brand kit v4', () => {
     ['public/og-image.png', 'dcb7f18f5443ca1a28a6e9b15feb593d305fec1d54a25edc34f8dfb2725ba153'],
     ['public/fonts/inter-var.woff2', 'f052ee44c3728dfd23aba8a4567150bc314d23903026fbb6ad089422c2df56af'],
     ['public/assets/gc-switcher.js', '4022b13d3de24363824b6c317032bf22187aa84549631905f570fa4e9286228b'],
-    ['public/assets/gc-connect.js', 'a6ba55b038ed7e7eece270ae8473472341723e05cbe999cf9f7844258812587f'],
+    ['public/assets/gc-connect.js', '29c387340d0151ad2c2a01277853090b2d1442907b631146169ebd6a9bba2c2e'],
   ]
   it.each(KIT)('%s is the byte-identical source file', (file, hash) => {
     const p = join(WEB, file)
@@ -104,7 +104,7 @@ describe('Gully Safe brand kit v4', () => {
     const sw = readFileSync(join(WEB, 'public', 'assets', 'gc-switcher.js'), 'utf8')
     expect(sw).toContain("GC_SWITCHER_VERSION = '1.8.2'")
     expect(sw).not.toMatch(/href: 'https:\/\/(offers\.)?kre8\.fun\//)
-    expect(readFileSync(join(WEB, 'public', 'assets', 'gc-connect.js'), 'utf8')).toContain("GC_CONNECT_VERSION = '1.0.0'")
+    expect(readFileSync(join(WEB, 'public', 'assets', 'gc-connect.js'), 'utf8')).toContain("GC_CONNECT_VERSION = '1.1.0'")
   })
 
   it('the Gully services list has Gully Chain products only', () => {

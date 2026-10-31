@@ -1,5 +1,5 @@
 /*!
- * Gully Chain "Connect a wallet" dialog 1.0.0   GullyConnect.open({ appName, chainId, walletConnect })
+ * Gully Chain "Connect a wallet" dialog 1.1.0   GullyConnect.open({ appName, chainId, walletConnect })
  * Canonical source: gully-labs/gully-ops sites/_shared/gc-connect/gc-connect.js (spec: README.md next to it).
  * Copies live in gully-explorer, eth-faucet, hyperlane-warp-ui-template (bridge) and safe-wallet-monorepo: change the
  * canonical file, then copy it byte for byte (each copy carries the same GC_CONNECT_VERSION; repos hash-check it).
@@ -8,7 +8,9 @@
  * dialog names the action, not the brand.
  *
  * Order (owner, 2026-10-30):
- *   1. Gully Wallet (Gully ID passkey): the EIP-1193 provider from https://gullyid.xyz/wallet.js (window.gully,
+ * 1.1.0 (2026-10-30, owner): row 1 reads "Sign in with Gully ID" in every dialog (data-gcc="gully-id", checked
+ *   headlessly after each deploy by gully-ops scripts/check-gully-id-connect.mjs).
+ *   1. Sign in with Gully ID = the Gully Wallet (Gully ID passkey): the EIP-1193 provider from https://gullyid.xyz/wallet.js (window.gully,
  *      EIP-6963 rdns xyz.gullyid.wallet). The script is preloaded when the dialog opens, so eth_requestAccounts (which
  *      opens the gullyid.xyz approval pop-up) still runs inside the user's click.
  *   2. WalletConnect (QR): the host passes `walletConnect: () => Promise<EIP-1193 provider>`; without it the row says
@@ -33,7 +35,7 @@
   'use strict';
   if (typeof root === 'undefined' || root.GullyConnect) return;
 
-  var GC_CONNECT_VERSION = '1.0.0';
+  var GC_CONNECT_VERSION = '1.1.0';
   var GULLY_WALLET_SRC = 'https://gullyid.xyz/wallet.js';
   var GULLY_RDNS = 'xyz.gullyid.wallet';
   var INSTALL = [
@@ -219,7 +221,7 @@
     }
 
     function row(id, ico, title, sub, extra, attrs) {
-      return '<li><button type="button" class="row' + (attrs && attrs.pri ? ' pri' : '') + '" data-id="' + id + '"' + (attrs && attrs.disabled ? ' aria-disabled="true"' : '') + '>' +
+      return '<li><button type="button" class="row' + (attrs && attrs.pri ? ' pri' : '') + '" data-id="' + id + '"' + (attrs && attrs.gcc ? ' data-gcc="' + attrs.gcc + '"' : '') + (attrs && attrs.disabled ? ' aria-disabled="true"' : '') + '>' +
         '<span class="ico">' + ico + '</span><span class="t"><b>' + esc(title) + '</b><span>' + esc(sub) + '</span></span>' + (extra || '<span class="go">' + svg('arrow') + '</span>') + '</button></li>';
     }
 
@@ -231,7 +233,7 @@
       h += '<p class="lab">Recommended</p><ul>';
       if (wantGully) {
         var gi = gullyIcon();
-        h += row('gully', gi ? '<img src="' + gi + '" alt="">' : svg('passkey'), 'Gully Wallet', gullyFailed ? gullyFailed : (gullyReady ? 'Sign in with your Gully ID passkey' : 'Loading Gully Wallet…'), '<span class="tag">Passkey</span>', { pri: true, disabled: !gullyReady });
+        h += row('gully', gi ? '<img src="' + gi + '" alt="">' : svg('passkey'), 'Sign in with Gully ID', gullyFailed ? gullyFailed : (gullyReady ? 'Gully Wallet: your passkey is the key, no extension' : 'Loading Gully Wallet…'), '<span class="tag">Passkey</span>', { pri: true, disabled: !gullyReady, gcc: 'gully-id' });
       }
       var wc = typeof opts.walletConnect === 'function';
       h += row('walletconnect', svg('qr'), 'WalletConnect', wc ? 'Scan a QR code with a mobile wallet' : 'Not enabled on this site yet', wc ? '' : '<span class="tag">Soon</span>', { disabled: !wc });
