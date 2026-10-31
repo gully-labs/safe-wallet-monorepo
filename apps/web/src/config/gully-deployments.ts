@@ -6,7 +6,8 @@
  * singleton, safeL2, proxyFactory, fallbackHandler, multiSend, multiSendCallOnly, signMessageLib,
  * createCall, simulateTxAccessor, safeToL2Setup, safeToL2Migration. The other entries (tokenCallbackHandler,
  * WebAuthn, 4337, Daimo verifier) are kept for reference only: the web app does not use passkeys or 4337.
- * Not deployed on 485590: SafeMigration (in-place upgrades) and the allowance module (spending limits).
+ * Not deployed on 485590: SafeMigration (in-place upgrades). The allowance module (spending limits, 0.1.1) is in
+ * `gully-contracts.json` under `modules` and resolved by features/spending-limits/services/spendingLimitDeployments.ts.
  */
 import { registerCustomDeployments } from '@safe-global/utils/services/contracts/customDeployments'
 import gullyContracts from './gully-contracts.json'

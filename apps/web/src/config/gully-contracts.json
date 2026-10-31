@@ -19,5 +19,10 @@
     "safe4337Module": "0x75cf11467937ce3F2f357CE24ffc3DBF8fD5c226",
     "safeModuleSetup": "0x2dd68b007B46fBe91B9A7c3EDa5A7a1063cB5b47",
     "daimoP256Verifier": "0xc2b78104907F722DABAc4C69f826a522B2754De4"
+  },
+  "modules": {
+    "allowanceModule": {
+      "0.1.1": "0x0Fd09Bd80206854b1dAd588A2eFCd7573De536b9"
+    }
   }
 }
