@@ -14,11 +14,13 @@ const isCypress = Boolean(typeof window !== 'undefined' && window.Cypress)
  * Calendly domain is needed for the scheduling integration
  * Gully Safe: Cloudflare Web Analytics injects its beacon from static.cloudflareinsights.com (it reports to
  * cloudflareinsights.com, already covered by connect-src *)
+ * Gully Safe: Sign in with Gully ID loads its SDK from https://gullyid.xyz (its token and profile calls are covered by
+ * connect-src *, the button needs no style-src: the SDK styles it through CSSOM)
  */
 export const ContentSecurityPolicy = `
  default-src 'self';
  connect-src 'self' *;
- script-src 'self' 'unsafe-inline' https://*.getbeamer.com https://www.googletagmanager.com https://*.ingest.sentry.io https://sentry.io https://assets.calendly.com https://static.cloudflareinsights.com ${
+ script-src 'self' 'unsafe-inline' https://*.getbeamer.com https://www.googletagmanager.com https://*.ingest.sentry.io https://sentry.io https://assets.calendly.com https://static.cloudflareinsights.com https://gullyid.xyz ${
    !IS_PRODUCTION || isCypress
      ? "'unsafe-eval'" // Dev server and cypress need unsafe-eval
      : "'wasm-unsafe-eval'"
