@@ -289,8 +289,8 @@ const GullyLanding = (): ReactElement => {
               <Icon name="arrowLeftRight" size={18} /> Bridge
             </a>
           </nav>
-          <a href="#get-started" className={css.btnPrimary}>
-            <Icon name="rocket" size={16} /> Get started
+          <a href="https://dev.gullychain.xyz/quickstart/" className={css.btnPrimary}>
+            <Icon name="rocket" size={16} /> Start building
           </a>
         </div>
       </header>

@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from 'react'
 import type { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import type { Url } from 'next/dist/shared/lib/router/router'
-import { Box, IconButton, Paper } from '@mui/material'
+import { Box, Button, IconButton, Paper } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import classnames from 'classnames'
 import css from './styles.module.css'
@@ -118,6 +118,15 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
           <WalletConnectWidget />
         </div>
       </Box>
+
+      {!isOfficialHost && (
+        <div className={classnames(css.element, css.hideMobile)}>
+          {/* the one Gully Chain header action (gully-ops sites/_shared/gc-chrome.json) */}
+          <Button component="a" href="https://dev.gullychain.xyz/quickstart/" size="small" variant="contained" disableElevation>
+            Start building
+          </Button>
+        </div>
+      )}
 
       <div className={css.element}>
         <GullySignIn />
