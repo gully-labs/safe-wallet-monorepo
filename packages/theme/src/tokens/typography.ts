@@ -6,7 +6,8 @@
 /**
  * Font family used across all platforms.
  */
-export const fontFamily = 'DM Sans, sans-serif'
+// Gully Safe: GullyChain brand kit v4 type is Inter (self-hosted, apps/web/public/fonts/inter-var.woff2)
+export const fontFamily = 'Inter, DM Sans, sans-serif'
 
 /**
  * Font size scale (in pixels).

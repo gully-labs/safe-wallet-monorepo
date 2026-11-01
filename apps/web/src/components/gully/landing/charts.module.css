@@ -11,7 +11,7 @@
 }
 
 .grid {
-  stroke: rgba(242, 245, 247, 0.08);
+  stroke: rgba(208, 213, 218, 0.08);
   stroke-width: 1;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .crosshair {
-  stroke: rgba(242, 245, 247, 0.35);
+  stroke: rgba(208, 213, 218, 0.35);
   stroke-width: 1;
 }
 
@@ -71,7 +71,7 @@
   gap: 2px;
   padding: 6px 10px;
   background: var(--gc-night);
-  border: 1px solid rgba(242, 245, 247, 0.16);
+  border: 1px solid rgba(208, 213, 218, 0.16);
   border-radius: 4px;
   white-space: nowrap;
   z-index: 2;

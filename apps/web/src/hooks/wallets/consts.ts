@@ -1,4 +1,6 @@
 export const enum WALLET_KEYS {
+  // Gully Safe: the Gully ID passkey wallet (window.gully from gullyid.xyz/wallet.js)
+  GULLY = 'GULLY',
   INJECTED = 'INJECTED',
   WALLETCONNECT_V2 = 'WALLETCONNECT_V2',
   COINBASE = 'COINBASE',
@@ -10,6 +12,7 @@ export const enum WALLET_KEYS {
 
 // TODO: Check if undefined is needed as a return type, possibly couple this with WALLET_MODULES
 export const CGW_NAMES: { [_key in WALLET_KEYS]: string | undefined } = {
+  [WALLET_KEYS.GULLY]: 'gullyWallet',
   [WALLET_KEYS.INJECTED]: 'detectedwallet',
   [WALLET_KEYS.WALLETCONNECT_V2]: 'walletConnect_v2',
   [WALLET_KEYS.COINBASE]: 'coinbase',

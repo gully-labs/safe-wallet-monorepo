@@ -33,17 +33,17 @@
 }
 
 .watchViewAccountLink button:hover {
-  --variant-containedBg: #1a2433;
-  --variant-textBg: rgba(0, 178, 250, 0.08);
+  --variant-containedBg: #1a1f1e;
+  --variant-textBg: rgba(0, 200, 120, 0.08);
   --variant-outlinedBorder: var(--gc-cyan);
-  --variant-outlinedBg: rgba(0, 178, 250, 0.08);
+  --variant-outlinedBg: rgba(0, 200, 120, 0.08);
 }
 
 .orDivider::after {
-  background-color: #1a2433;
+  background-color: #1a1f1e;
 }
 .orDivider::before {
-  background-color: #1a2433;
+  background-color: #1a1f1e;
 }
 
 /* Gully Safe: kit primary button on the dark card */
