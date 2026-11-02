@@ -588,6 +588,16 @@
 }
 
 @media (max-width: 599.95px) {
+  /* Gully Safe: the welcome footer (Footer with className={css.footer}, so Footer's own .container rule does not apply)
+     needs 44 px phone tap targets too: Terms, Privacy, Licenses, Source code and the version link were 16 px tall */
+  .footer li > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   .topnav {
     display: none;
   }
