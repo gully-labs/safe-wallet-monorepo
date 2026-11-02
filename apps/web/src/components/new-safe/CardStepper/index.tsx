@@ -21,12 +21,18 @@ export function CardStepper<StepperData>(props: TxStepperProps<StepperData>) {
       {/* Gully Safe: the whole path at a glance */}
       {steps.length > 1 && (
         <ol className={css.path} aria-label="Steps">
-          {steps.map((s, i) => (
-            <li key={i} className={i === activeStep ? css.pathOn : i < activeStep ? css.pathDone : undefined} aria-current={i === activeStep ? 'step' : undefined}>
-              <span className={css.pathN}>{i + 1}</span>
-              <span className={css.pathT}>{s.title}</span>
-            </li>
-          ))}
+          {steps.map((s, i) =>
+            s.title ? (
+              <li
+                key={i}
+                className={i === activeStep ? css.pathOn : i < activeStep ? css.pathDone : undefined}
+                aria-current={i === activeStep ? 'step' : undefined}
+              >
+                <span className={css.pathN}>{i + 1}</span>
+                <span className={css.pathT}>{s.title}</span>
+              </li>
+            ) : null,
+          )}
         </ol>
       )}
       {currentStep.title && (

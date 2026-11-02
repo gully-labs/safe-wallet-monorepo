@@ -44,7 +44,7 @@
   color: var(--color-text-secondary);
 }
 
-.container.inverted :global(.MuiButton-root) {
+.container.inverted :global(.MuiButton-text) {
   color: var(--color-primary-main);
 }
 
