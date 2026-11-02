@@ -128,7 +128,8 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         </div>
       )}
 
-      <div className={css.element}>
+      {/* Gully Safe: on phones this slot is the header's second row (styles.module.css) */}
+      <div className={classnames(css.element, css.signIn)}>
         <GullySignIn />
       </div>
 
