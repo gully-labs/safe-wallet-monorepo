@@ -74,7 +74,7 @@ describe('footers', () => {
   const src = (p: string) => readFileSync(join(__dirname, '..', '..', p), 'utf8')
 
   it('the welcome page has exactly one: the landing renders it and the layout skips that route only', () => {
-    expect(src('gully/landing/GullyLanding.tsx').match(/<Footer/g)).toHaveLength(1)
+    expect(src('gully/landing/GullyLanding.tsx').match(/<Footer\b/g)).toHaveLength(1)
     expect(src('common/PageLayout/index.tsx')).toContain('{!isSafeLabsTermsPage && !isWelcomePage && <Footer />}')
     expect(src('common/PageLayout/index.tsx')).toContain('const isWelcomePage = pathname === AppRoutes.welcome.index')
   })
