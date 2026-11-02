@@ -84,6 +84,13 @@ button {
   --footer-height: 67px;
 }
 
+/* Gully Safe: the two-row phone header (components/common/Header/styles.module.css) */
+@media (max-width: 599.95px) {
+  :root {
+    --header-height: 108px;
+  }
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

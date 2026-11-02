@@ -79,3 +79,22 @@ describe('footers', () => {
     expect(src('common/PageLayout/index.tsx')).toContain('const isWelcomePage = pathname === AppRoutes.welcome.index')
   })
 })
+
+describe('phone header', () => {
+  const src = (p: string) => readFileSync(join(__dirname, '..', '..', p), 'utf8')
+
+  it('keeps one sign-in, so the redirect is handled once', () => {
+    expect(src('common/Header/index.tsx').match(/<GullySignIn/g)).toHaveLength(1)
+  })
+
+  it('is two rows below the phone breakpoint only, and the rows add up to the header height', () => {
+    const globals = readFileSync(join(__dirname, '..', '..', '..', 'styles', 'globals.css'), 'utf8')
+    expect(globals).toMatch(/--header-height: 56px;/)
+    expect(globals).toMatch(/@media \(max-width: 599\.95px\) \{\s+:root \{\s+--header-height: 108px;/)
+    const css = src('common/Header/styles.module.css')
+    const phone = css.slice(css.indexOf('@media (max-width: 599.95px)'))
+    expect(phone).toMatch(/\.element \{\s+height: 56px;/)
+    expect(phone).toMatch(/\.signIn \{[^}]*height: 52px;/)
+    expect(css.slice(0, css.indexOf('@media (max-width: 599.95px)'))).not.toContain('.signIn')
+  })
+})
