@@ -1,5 +1,6 @@
 import { useMemo, type ReactElement } from 'react'
-import useSafeInfo from '@/hooks/useSafeInfo'
+import useChainId from '@/hooks/useChainId'
+import useSafeAddress from '@/hooks/useSafeAddress'
 import { useGullySafeStats } from '@/components/gully/landing/useGullySafeStats'
 import { CountUp, DailyColumns } from '@/components/gully/landing/charts'
 import css from './styles.module.css'
@@ -27,11 +28,13 @@ export const dailyExecutions = (timestamps: number[], days = DAYS, now = Date.no
 
 /**
  * Gully Safe: this Safe's activity on Gully Chain Testnet, live from the chain (read-only, no signing or tx code here).
- * Renders nothing on any other chain, so the upstream screens stay as they are.
+ * Renders nothing on any other chain, so the upstream screens stay as they are. It reads the chain and address from the
+ * URL, not the loaded Safe info, so its place is held from the first paint and nothing below it jumps.
  */
 const GullySafeActivity = (): ReactElement | null => {
-  const { safe, safeAddress } = useSafeInfo()
-  if (safe.chainId !== GULLY_TESTNET || !safeAddress) return null
+  const chainId = useChainId()
+  const safeAddress = useSafeAddress()
+  if (chainId !== GULLY_TESTNET) return null
   return <Activity safeAddress={safeAddress} />
 }
 
@@ -43,7 +46,7 @@ const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
   const bars = useMemo(() => dailyExecutions(mine.map((e) => e.timestamp)), [mine])
   const inWindow = bars.reduce((sum, b) => sum + b.v, 0)
 
-  const dash = !data
+  const dash = !data || !safeAddress
   return (
     <section className={css.card} aria-label="This Safe on Gully Chain Testnet" data-testid="gully-safe-activity">
       <div className={css.head}>
@@ -60,16 +63,16 @@ const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
           <span>in the last {DAYS} days</span>
         </div>
         <div className={css.kpi}>
-          <b>{dash ? '–' : <CountUp value={data.safes.length} />}</b>
+          <b>{!data ? '–' : <CountUp value={data.safes.length} />}</b>
           <span>Safes on Gully Chain</span>
         </div>
       </div>
       <div className={css.plot}>
-        {data ? (
+        {data && safeAddress ? (
           <DailyColumns bars={bars} label="This Safe's executed transactions per day" unit="transactions" />
         ) : (
           <p className={css.note} role="status">
-            {loading ? 'Reading the chain…' : `The chain did not answer (${error ?? 'no response'}). Retrying every 20 seconds.`}
+            {loading || data ? 'Reading the chain…' : `The chain did not answer (${error ?? 'no response'}). Retrying every 20 seconds.`}
           </p>
         )}
       </div>
