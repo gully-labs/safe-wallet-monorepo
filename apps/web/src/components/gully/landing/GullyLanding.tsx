@@ -3,11 +3,11 @@ import Script from 'next/script'
 import Head from 'next/head'
 import { formatEther } from 'ethers'
 import WelcomeLogin from '@/components/welcome/WelcomeLogin'
-import Footer from '@/components/common/Footer'
 import { GATEWAY_URL_PRODUCTION } from '@/config/constants'
 import { CountUp, CumulativeChart, DailyColumns } from './charts'
 import { Icon, type IconName } from './icons'
 import Mascot from './Mascot'
+import Footer from '@/components/common/Footer'
 import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGullySafeStats'
 import css from './styles.module.css'
 
@@ -39,12 +39,6 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
     title: 'Audited Safe 1.4.1 code',
     text: 'The same Safe 1.4.1 contracts that secure billions on Ethereum, byte for byte, deployed on Gully Chain.',
   },
-]
-
-const STEPS = [
-  { title: 'Connect a wallet', text: 'Any browser wallet on Gully Chain Testnet. Get free test ETH from the faucet.' },
-  { title: 'Add owners and a threshold', text: 'Name the Safe, add the owner addresses and choose how many must sign.' },
-  { title: 'Deploy and use it', text: 'One transaction creates the Safe. Then receive, propose, sign and execute.' },
 ]
 
 const FAQ = [
@@ -303,20 +297,21 @@ const GullyLanding = (): ReactElement => {
               The multi-sig smart wallet <span className={css.grad}>built on Gully Chain</span>
             </h1>
             <p className={css.lead}>
-              Gully Safe keeps a team&apos;s or a protocol&apos;s funds behind several keys. Owners propose, a threshold
-              signs, the Safe executes. Passkey signers and sponsored gas are on chain, on the same audited Safe code
-              that secures billions on Ethereum.
+              Owners propose, a threshold signs, the Safe executes. The same audited Safe 1.4.1 contracts, with passkey signers and
+              sponsored gas.
             </p>
-            <div className={css.ctaRow}>
-              <a href="#get-started" className={css.btnPrimary}>
-                Create a Safe <Icon name="arrowRight" size={16} />
-              </a>
-              <a href={DOCS_SAFE} {...EXT} className={css.btnGhost}>
-                Read the docs <Icon name="externalLink" size={16} />
-              </a>
-            </div>
             <div id="get-started" className={css.loginWrap}>
               <WelcomeLogin />
+              <p className={css.loginHint}>
+                Need gas?{' '}
+                <a href={FAUCET} {...EXT}>
+                  Get test ETH
+                </a>{' '}
+                ·{' '}
+                <a href={DOCS_SAFE} {...EXT}>
+                  Read the docs
+                </a>
+              </p>
             </div>
           </div>
           <div className={css.heroArt}>
@@ -346,34 +341,6 @@ const GullyLanding = (): ReactElement => {
           </div>
         </section>
 
-        <section className={css.section} aria-labelledby="steps-title">
-          <div className={css.sectionHead}>
-            <p className={css.eyebrow}>Three steps</p>
-            <h2 id="steps-title" className={css.h2}>
-              Create your Safe
-            </h2>
-          </div>
-          <ol className={css.steps}>
-            {STEPS.map((s, i) => (
-              <li key={s.title} className={css.step}>
-                <span className={css.stepNum}>{i + 1}</span>
-                <div>
-                  <h3 className={css.cardTitle}>{s.title}</h3>
-                  <p className={css.cardText}>{s.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className={css.ctaRow}>
-            <a href="#get-started" className={css.btnPrimary}>
-              Start now <Icon name="arrowRight" size={16} />
-            </a>
-            <a href={FAUCET} {...EXT} className={css.btnGhost}>
-              Get test ETH <Icon name="droplet" size={16} />
-            </a>
-          </div>
-        </section>
-
         <section className={css.section} aria-labelledby="faq-title">
           <div className={css.sectionHead}>
             <p className={css.eyebrow}>FAQ</p>
@@ -394,28 +361,6 @@ const GullyLanding = (): ReactElement => {
           </div>
         </section>
 
-        <section className={css.section} aria-labelledby="links-title">
-          <h2 id="links-title" className={css.srOnly}>
-            Gully Chain links
-          </h2>
-          <div className={css.links}>
-            {[
-              { icon: 'bookOpen' as const, title: 'Safe on Gully Chain docs', text: 'Contract addresses and guides', href: DOCS_SAFE },
-              { icon: 'search' as const, title: 'Explorer', text: 'Blocks, transactions, Safes', href: GULLY_EXPLORER },
-              { icon: 'arrowLeftRight' as const, title: 'Bridge', text: 'Move ETH to Gully Chain', href: BRIDGE },
-              { icon: 'droplet' as const, title: 'Faucet', text: 'Free testnet ETH', href: FAUCET },
-            ].map((l) => (
-              <a key={l.title} href={l.href} {...EXT} className={css.linkCard}>
-                <Icon name={l.icon} size={20} />
-                <span>
-                  <strong>{l.title}</strong>
-                  <small>{l.text}</small>
-                </span>
-                <Icon name="externalLink" size={14} className={css.linkExt} />
-              </a>
-            ))}
-          </div>
-        </section>
       </main>
 
       <Footer forceShow versionIcon={false} helpCenter={false} preferences={false} className={css.footer} />

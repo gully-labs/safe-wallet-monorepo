@@ -1,0 +1,81 @@
+import { readFileSync } from 'fs'
+import { join } from 'path'
+import { watchForUpdates } from '../GullySwUpdate'
+import { dailyExecutions } from '../GullySafeActivity'
+
+const fakeSw = (controller: unknown) => {
+  const handlers: Record<string, () => void> = {}
+  return {
+    handlers,
+    update: jest.fn(() => Promise.resolve()),
+    sw: {
+      controller,
+      addEventListener: (n: string, h: () => void) => (handlers[n] = h),
+      removeEventListener: (n: string) => delete handlers[n],
+      getRegistration: () => Promise.resolve({ update: () => Promise.resolve() }),
+    },
+  }
+}
+const fakeDoc = () => {
+  const handlers: Record<string, () => void> = {}
+  return {
+    handlers,
+    doc: { visibilityState: 'visible', addEventListener: (n: string, h: () => void) => (handlers[n] = h), removeEventListener: jest.fn() },
+  }
+}
+
+describe('service worker updates', () => {
+  it('offers a reload when a new worker takes over a page that already had one', () => {
+    const f = fakeSw({})
+    const d = fakeDoc()
+    const onNew = jest.fn()
+    const stop = watchForUpdates(f.sw as never, onNew, d.doc as never)
+    f.handlers.controllerchange()
+    expect(onNew).toHaveBeenCalledTimes(1)
+    stop()
+  })
+
+  it('stays quiet when the first worker of a first visit takes control', () => {
+    const f = fakeSw(null)
+    const d = fakeDoc()
+    const onNew = jest.fn()
+    const stop = watchForUpdates(f.sw as never, onNew, d.doc as never)
+    f.handlers.controllerchange()
+    expect(onNew).not.toHaveBeenCalled()
+    f.handlers.controllerchange()
+    expect(onNew).toHaveBeenCalledTimes(1)
+    stop()
+  })
+
+  it('a failed update check, as when offline, is ignored', async () => {
+    const f = fakeSw({})
+    const d = fakeDoc()
+    f.sw.getRegistration = () => Promise.reject(new Error('offline'))
+    const stop = watchForUpdates(f.sw as never, jest.fn(), d.doc as never)
+    expect(() => d.handlers.visibilitychange()).not.toThrow()
+    await Promise.resolve()
+    stop()
+  })
+})
+
+describe('dailyExecutions', () => {
+  it('counts real executions per local day, oldest first and today last', () => {
+    const now = new Date(2026, 10, 2, 12).getTime()
+    const bars = dailyExecutions([new Date(2026, 10, 2, 1).getTime(), new Date(2026, 10, 1, 23).getTime(), new Date(2026, 10, 1, 1).getTime(), new Date(2026, 0, 1).getTime()], 3, now)
+    expect(bars.map((b) => b.v)).toEqual([0, 2, 1])
+  })
+
+  it('has no invented activity when nothing ran', () => {
+    expect(dailyExecutions([], 14).every((b) => b.v === 0)).toBe(true)
+  })
+})
+
+describe('footers', () => {
+  const src = (p: string) => readFileSync(join(__dirname, '..', '..', p), 'utf8')
+
+  it('the welcome page has exactly one: the landing renders it and the layout skips that route only', () => {
+    expect(src('gully/landing/GullyLanding.tsx').match(/<Footer\b/g)).toHaveLength(1)
+    expect(src('common/PageLayout/index.tsx')).toContain('{!isSafeLabsTermsPage && !isWelcomePage && <Footer />}')
+    expect(src('common/PageLayout/index.tsx')).toContain('const isWelcomePage = pathname === AppRoutes.welcome.index')
+  })
+})

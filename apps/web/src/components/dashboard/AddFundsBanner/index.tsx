@@ -21,7 +21,7 @@ const AddFundsToGetStarted = () => {
   return (
     <Stack
       direction={{ xs: 'column', md: 'row' }}
-      sx={{ backgroundColor: 'info.light' }}
+      sx={{ backgroundColor: 'background.paper', border: '1px solid', borderColor: 'border.light' }}
       p={2}
       gap={2}
       alignItems={{ xs: 'flex-start', md: 'center' }}
@@ -30,7 +30,7 @@ const AddFundsToGetStarted = () => {
       <Box
         width="40px"
         height="40px"
-        bgcolor="background.paper"
+        bgcolor="background.default"
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -40,18 +40,18 @@ const AddFundsToGetStarted = () => {
         <SvgIcon component={FiatIcon} inheritViewBox fontSize="small" />
       </Box>
       <Box>
-        <Typography fontWeight="bold" color="static.main">
+        <Typography fontWeight="bold" color="text.primary">
           Add funds to get started
         </Typography>
-        <Typography variant="body2" color="primary.light">
-          Onramp crypto or send tokens directly to your address from a different wallet.{' '}
+        <Typography variant="body2" color="text.secondary">
+          Send ETH to your address from another wallet, or get free test ETH from the faucet.
         </Typography>
       </Box>
       <Box ml={{ xs: 0, md: 'auto' }}>
         <CopyTooltip text={addressCopyText}>
           <Button
-            variant="contained"
-            color="background.paper"
+            variant="outlined"
+            sx={{ whiteSpace: 'nowrap' }}
             startIcon={<SvgIcon component={CopyIcon} inheritViewBox fontSize="small" />}
             size="small"
             disableElevation
