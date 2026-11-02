@@ -1,9 +1,10 @@
 import { BRAND_NAME, IS_PRODUCTION, IS_BEHIND_IAP } from '@/config/constants'
 import { ContentSecurityPolicy, StrictTransportSecurity } from '@/config/securityHeaders'
 import { lightPalette, darkPalette } from '@safe-global/theme'
+import { GULLY_CHAIN_ID } from '@/config/gully-chains'
 
 // Gully Safe: multisig smart accounts on Gully Chain. Absolute URLs are required for OG/Twitter images.
-const descriptionText = `${BRAND_NAME}: create and run multisig Safe smart accounts on Gully Chain (chain 485590). Shared custody, owner thresholds and batched transactions, built on Safe{Wallet}.`
+const descriptionText = `${BRAND_NAME}: create and run multisig Safe smart accounts on Gully Chain (chain ${GULLY_CHAIN_ID}). Shared custody, owner thresholds and batched transactions, built on Safe{Wallet}.`
 const OG_IMAGE_URL = 'https://safe.gullychain.xyz/og-image.png'
 const titleText = BRAND_NAME
 const landingTitle = `${BRAND_NAME} – Multisig smart accounts on Gully Chain`

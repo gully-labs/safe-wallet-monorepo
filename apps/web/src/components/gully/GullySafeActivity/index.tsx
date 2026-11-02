@@ -3,9 +3,9 @@ import useChainId from '@/hooks/useChainId'
 import useSafeAddress from '@/hooks/useSafeAddress'
 import { useGullySafeStats } from '@/components/gully/landing/useGullySafeStats'
 import { CountUp, DailyColumns } from '@/components/gully/landing/charts'
+import { gullyChain, hasGullySafe, type GullyChain } from '@/config/gully-chains'
 import css from './styles.module.css'
 
-const GULLY_TESTNET = '485590'
 const DAYS = 14
 const DAY = 86_400_000
 
@@ -27,19 +27,20 @@ export const dailyExecutions = (timestamps: number[], days = DAYS, now = Date.no
 }
 
 /**
- * Gully Safe: this Safe's activity on Gully Chain Testnet, live from the chain (read-only, no signing or tx code here).
+ * Gully Safe: this Safe's activity on a Gully chain (gully-chains.ts), live from the chain (read-only, no signing or tx code here).
  * Renders nothing on any other chain, so the upstream screens stay as they are. It reads the chain and address from the
  * URL, not the loaded Safe info, so its place is held from the first paint and nothing below it jumps.
  */
 const GullySafeActivity = (): ReactElement | null => {
   const chainId = useChainId()
   const safeAddress = useSafeAddress()
-  if (chainId !== GULLY_TESTNET) return null
-  return <Activity safeAddress={safeAddress} />
+  const chain = gullyChain(chainId)
+  if (!chain || !hasGullySafe(chainId)) return null
+  return <Activity chain={chain} safeAddress={safeAddress} />
 }
 
-const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
-  const { data, error, loading } = useGullySafeStats()
+const Activity = ({ chain, safeAddress }: { chain: GullyChain; safeAddress: string }): ReactElement => {
+  const { data, error, loading } = useGullySafeStats(chain.chainId)
   const me = safeAddress.toLowerCase()
 
   const mine = useMemo(() => (data?.executions ?? []).filter((e) => e.safe === me), [data, me])
@@ -48,10 +49,10 @@ const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
 
   const dash = !data || !safeAddress
   return (
-    <section className={css.card} aria-label="This Safe on Gully Chain Testnet" data-testid="gully-safe-activity">
+    <section className={css.card} aria-label={`This Safe on ${chain.name}`} data-testid="gully-safe-activity">
       <div className={css.head}>
         <h2 className={css.title}>This Safe on Gully Chain</h2>
-        <span className={css.tag}>Testnet</span>
+        {chain.testnet && <span className={css.tag}>Testnet</span>}
       </div>
       <div className={css.kpis}>
         <div className={css.kpi}>

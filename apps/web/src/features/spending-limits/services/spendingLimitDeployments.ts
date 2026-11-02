@@ -10,20 +10,22 @@ import {
   type Deployment,
   type DeploymentFilter,
 } from '@safe-global/safe-modules-deployments'
-import gullyContracts from '@/config/gully-contracts.json'
+import { GULLY_CHAINS } from '@/config/gully-chains'
 import { type SafeState } from '@safe-global/store/gateway/AUTO_GENERATED/safes'
 import { sameAddress } from '@safe-global/utils/utils/addresses'
 
 /**
- * Gully Safe: the AllowanceModule on Gully Chain (485590). The code is the canonical 0.1.1 creation code with salt 0,
+ * Gully Safe: the AllowanceModule on each Gully chain that has one (gully-contracts.json `modules`; today 485590). The code is the canonical 0.1.1 creation code with salt 0,
  * replayed through the Arachnid deterministic deployer instead of the Safe singleton factory, so it has the canonical
  * runtime and ABI but its own address (gully-ops l3/generated/safe-allowance.json). `@safe-global/safe-modules-deployments`
  * has no 485590 entry, so the address is overlaid on the canonical deployment of the same version. Every other chain
  * resolves exactly as upstream.
  */
-const GULLY_ALLOWANCE_MODULES: Record<string, Record<string, string>> = {
-  [gullyContracts.chainId]: gullyContracts.modules.allowanceModule,
-}
+const GULLY_ALLOWANCE_MODULES: Record<string, Record<string, string>> = Object.fromEntries(
+  Object.values(GULLY_CHAINS).flatMap((c) =>
+    c.modules?.allowanceModule ? [[c.chainId, c.modules.allowanceModule]] : [],
+  ),
+)
 
 export const getAllowanceModuleDeployment = (filter?: DeploymentFilter): Deployment | undefined => {
   const gully = filter?.network ? GULLY_ALLOWANCE_MODULES[filter.network] : undefined

@@ -1,23 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
-import gullyContracts from '@/config/gully-contracts.json'
+import { GULLY_CHAIN, GULLY_CHAIN_ID, gullyChain, type GullyChain } from '@/config/gully-chains'
 
 /**
- * Gully Safe landing: live Safe numbers for Gully Chain Testnet, read straight from the chain through the public RPC.
- * - Safes: ProxyCreation logs of both Safe 1.4.1 factories on 485590 (the Gully deployment the app uses, and the
- *   canonical-address factory that ERC-4337 / SDK flows use).
+ * Gully Safe landing: live Safe numbers for a Gully chain (gully-chains.ts), read straight from the chain through its
+ * public RPC.
+ * - Safes: ProxyCreation logs of the chain's Safe 1.4.1 factories (factoriesFor: the Gully deployment the app uses, and
+ *   on 485590 the canonical-address factory that ERC-4337 / SDK flows use).
  * - Transactions executed: ExecutionSuccess logs emitted by those Safes.
  * - Value held: the Safes' native ETH balances.
  * Block timestamps come from the blocks that hold the creations (Gully Chain only makes blocks when there are txs,
  * so timestamps cannot be interpolated from block numbers).
  */
 
-export const GULLY_TESTNET_RPC = 'https://testnet-rpc.gullychain.xyz'
-export const GULLY_EXPLORER = 'https://testnet-explorer.gullychain.xyz'
+/** the build's Gully chain (gully-chains.ts): RPC and explorer of NEXT_PUBLIC_GULLY_CHAIN_ID, testnet by default */
+export const GULLY_RPC = GULLY_CHAIN.rpc
+export const GULLY_EXPLORER = GULLY_CHAIN.explorer
 
-const FACTORIES = [
-  gullyContracts.contracts.proxyFactory,
-  '0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67', // canonical SafeProxyFactory 1.4.1 address, also on Gully Chain
-]
+/** The Gully deployment's factory plus the other factories listed for the chain (on 485590 the canonical-address
+ * SafeProxyFactory 1.4.1 that ERC-4337 / SDK flows use). Empty when the chain has no Safe contracts. Pure. */
+export const factoriesFor = (chain: GullyChain): string[] =>
+  chain.contracts?.proxyFactory ? [chain.contracts.proxyFactory, ...chain.extraFactories] : []
 // keccak256('ProxyCreation(address,address)'), Safe 1.4.1: event ProxyCreation(SafeProxy indexed proxy, address singleton)
 const PROXY_CREATION = '0x4f51faf6c4561ff95f067657e43439f0f856d97c04d9ec9070a6199ad418e235'
 // keccak256('ExecutionSuccess(bytes32,uint256)')
@@ -43,10 +45,10 @@ type RpcLog = { address: string; topics: string[]; blockNumber: string; transact
 type RpcReq = { method: string; params: unknown[] }
 
 let rpcId = 0
-async function rpcBatch<T = unknown>(reqs: RpcReq[], signal?: AbortSignal): Promise<T[]> {
+async function rpcBatch<T = unknown>(rpc: string, reqs: RpcReq[], signal?: AbortSignal): Promise<T[]> {
   if (reqs.length === 0) return []
   const body = reqs.map((r) => ({ jsonrpc: '2.0', id: ++rpcId, method: r.method, params: r.params }))
-  const res = await fetch(GULLY_TESTNET_RPC, {
+  const res = await fetch(rpc, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body),
@@ -64,7 +66,12 @@ async function rpcBatch<T = unknown>(reqs: RpcReq[], signal?: AbortSignal): Prom
 
 const hex = (n: number) => '0x' + n.toString(16)
 
-async function getLogs(filter: Record<string, unknown>, head: number, signal?: AbortSignal): Promise<RpcLog[]> {
+async function getLogs(
+  rpc: string,
+  filter: Record<string, unknown>,
+  head: number,
+  signal?: AbortSignal,
+): Promise<RpcLog[]> {
   const reqs: RpcReq[] = []
   for (let from = 0; from <= head; from += LOG_RANGE) {
     reqs.push({
@@ -72,20 +79,26 @@ async function getLogs(filter: Record<string, unknown>, head: number, signal?: A
       params: [{ ...filter, fromBlock: hex(from), toBlock: hex(Math.min(head, from + LOG_RANGE - 1)) }],
     })
   }
-  const parts = await rpcBatch<RpcLog[]>(reqs, signal)
+  const parts = await rpcBatch<RpcLog[]>(rpc, reqs, signal)
   return parts.flat()
 }
 
 const topicToAddress = (topic: string) => '0x' + topic.slice(26).toLowerCase()
 
-export async function loadGullySafeStats(signal?: AbortSignal): Promise<GullySafeStats> {
-  const [headHex] = await rpcBatch<string>([{ method: 'eth_blockNumber', params: [] }], signal)
+export async function loadGullySafeStats(
+  signal?: AbortSignal,
+  chain: GullyChain = GULLY_CHAIN,
+): Promise<GullySafeStats> {
+  const rpc = chain.rpc
+  const factories = factoriesFor(chain)
+  if (factories.length === 0) return { head: 0, safes: [], executions: [], heldWei: 0n, updatedAt: Date.now() }
+  const [headHex] = await rpcBatch<string>(rpc, [{ method: 'eth_blockNumber', params: [] }], signal)
   const head = parseInt(headHex, 16)
 
-  const creationLogs = await getLogs({ address: FACTORIES, topics: [PROXY_CREATION] }, head, signal)
+  const creationLogs = await getLogs(rpc, { address: factories, topics: [PROXY_CREATION] }, head, signal)
   const safeSet = new Set(creationLogs.map((l) => topicToAddress(l.topics[1])))
 
-  const execLogs = (await getLogs({ topics: [EXECUTION_SUCCESS] }, head, signal)).filter((l) =>
+  const execLogs = (await getLogs(rpc, { topics: [EXECUTION_SUCCESS] }, head, signal)).filter((l) =>
     safeSet.has(l.address.toLowerCase()),
   )
 
@@ -95,6 +108,7 @@ export async function loadGullySafeStats(signal?: AbortSignal): Promise<GullySaf
   ).sort((a, b) => b - a)
   const wanted = blocks.slice(0, MAX_TIMESTAMP_BLOCKS)
   const blockRes = await rpcBatch<{ timestamp: string } | null>(
+    rpc,
     wanted.map((b) => ({ method: 'eth_getBlockByNumber', params: [hex(b), false] })),
     signal,
   )
@@ -126,6 +140,7 @@ export async function loadGullySafeStats(signal?: AbortSignal): Promise<GullySaf
 
   const balanceOf = safes.slice(-MAX_BALANCES)
   const balances = await rpcBatch<string>(
+    rpc,
     balanceOf.map((s) => ({ method: 'eth_getBalance', params: [s.address, 'latest'] })),
     signal,
   )
@@ -136,8 +151,9 @@ export async function loadGullySafeStats(signal?: AbortSignal): Promise<GullySaf
 
 export type StatsState = { data?: GullySafeStats; error?: string; loading: boolean }
 
-/** Loads the stats, then refreshes them every 20 s while the tab is visible. */
-export function useGullySafeStats(): StatsState {
+/** Loads the stats of a Gully chain (default: the build's, gully-chains.ts), then refreshes them every 20 s while the
+ * tab is visible. */
+export function useGullySafeStats(chainId: string = GULLY_CHAIN_ID): StatsState {
   const [state, setState] = useState<StatsState>({ loading: true })
   const busy = useRef(false)
 
@@ -149,7 +165,7 @@ export function useGullySafeStats(): StatsState {
       if (!busy.current && document.visibilityState === 'visible') {
         busy.current = true
         try {
-          const data = await loadGullySafeStats(ctrl.signal)
+          const data = await loadGullySafeStats(ctrl.signal, gullyChain(chainId) ?? GULLY_CHAIN)
           setState({ data, loading: false })
         } catch (e) {
           if (!ctrl.signal.aborted) {
@@ -167,7 +183,7 @@ export function useGullySafeStats(): StatsState {
       ctrl.abort()
       if (timer) clearTimeout(timer)
     }
-  }, [])
+  }, [chainId])
 
   return state
 }
