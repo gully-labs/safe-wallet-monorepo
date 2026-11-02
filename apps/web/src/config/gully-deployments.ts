@@ -1,6 +1,7 @@
 /**
- * Gully Safe: registers the Safe v1.4.1 contracts of Gully Chain Testnet (485590) before anything resolves
- * contract addresses. Imported first in `pages/_app.tsx`. Addresses live in `gully-contracts.json`.
+ * Gully Safe: registers the Safe v1.4.1 contracts of every Gully chain that has them (gully-contracts.json, keyed by
+ * chain id; today Gully Chain Testnet 485590) before anything resolves contract addresses. Imported first in
+ * `pages/_app.tsx`. The chain the build serves is NEXT_PUBLIC_GULLY_CHAIN_ID (gully-chains.ts).
  *
  * Only the contracts the web app resolves through `@safe-global/safe-deployments` are registered:
  * singleton, safeL2, proxyFactory, fallbackHandler, multiSend, multiSendCallOnly, signMessageLib,
@@ -10,16 +11,23 @@
  * `gully-contracts.json` under `modules` and resolved by features/spending-limits/services/spendingLimitDeployments.ts.
  */
 import { registerCustomDeployments } from '@safe-global/utils/services/contracts/customDeployments'
-import gullyContracts from './gully-contracts.json'
+import { GULLY_CHAIN_ID, GULLY_CHAINS } from './gully-chains'
 
-export const GULLY_CHAIN_ID = gullyContracts.chainId
+export { GULLY_CHAIN_ID }
 
-export const GULLY_DEPLOYMENTS_REGISTERED = registerCustomDeployments(
-  gullyContracts.chainId,
-  gullyContracts.safeVersion,
-  gullyContracts.contracts,
-)
+/** Registers every Gully chain that has Safe contracts (a chain with `contracts: null` is skipped). Returns chain id -> ok. */
+export const registerGullyDeployments = (): Record<string, boolean> =>
+  Object.fromEntries(
+    Object.values(GULLY_CHAINS).flatMap((c) =>
+      c.contracts ? [[c.chainId, registerCustomDeployments(c.chainId, c.safeVersion, c.contracts)]] : [],
+    ),
+  )
+
+const REGISTERED = registerGullyDeployments()
+
+/** true when the build's own Gully chain has its Safe contracts registered */
+export const GULLY_DEPLOYMENTS_REGISTERED = !!REGISTERED[GULLY_CHAIN_ID]
 
 if (!GULLY_DEPLOYMENTS_REGISTERED && typeof window !== 'undefined') {
-  console.warn(`[Gully Safe] gully-contracts.json is incomplete, chain ${GULLY_CHAIN_ID} has no Safe contracts`)
+  console.warn(`[Gully Safe] the Gully chain config has no complete Safe contracts for chain ${GULLY_CHAIN_ID}`)
 }

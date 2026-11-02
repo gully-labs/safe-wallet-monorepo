@@ -9,12 +9,13 @@ import { Icon, type IconName } from './icons'
 import Mascot from './Mascot'
 import Footer from '@/components/common/Footer'
 import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGullySafeStats'
+import { GULLY_CHAIN, GULLY_CHAIN_ID } from '@/config/gully-chains'
 import css from './styles.module.css'
 
 /** Gully Safe landing (/welcome): marketing copy, the connect card, live Safe numbers from Gully Chain and the mascot. */
 
 const DOCS_SAFE = 'https://docs.gullychain.xyz/safe/'
-const BRIDGE = 'https://testnet-bridge.gullychain.xyz/'
+const BRIDGE = GULLY_CHAIN.bridge
 const FAUCET = 'https://faucet.gullychain.xyz/'
 const EXT = { target: '_blank', rel: 'noopener noreferrer' } as const
 
@@ -48,7 +49,9 @@ const FAQ = [
   },
   {
     q: 'Which network does it run on?',
-    a: 'Gully Chain Testnet (chain id 485590), an L3 that settles to Arbitrum. Mainnet support follows when Gully Chain mainnet launches.',
+    a: GULLY_CHAIN.testnet
+      ? `${GULLY_CHAIN.name} (chain id ${GULLY_CHAIN_ID}), an L3 that settles to Arbitrum. Mainnet support follows when Gully Chain mainnet launches.`
+      : `${GULLY_CHAIN.name} (chain id ${GULLY_CHAIN_ID}), an L3 that settles to Arbitrum One.`,
   },
   {
     q: 'Are the contracts the official Safe contracts?',
@@ -92,7 +95,9 @@ const useSafeInfos = (safes: SafeCreation[]): Record<string, SafeInfo> => {
     const ctrl = new AbortController()
     key.split(',').forEach(async (addr) => {
       try {
-        const res = await fetch(`${GATEWAY_URL_PRODUCTION}/v1/chains/485590/safes/${addr}`, { signal: ctrl.signal })
+        const res = await fetch(`${GATEWAY_URL_PRODUCTION}/v1/chains/${GULLY_CHAIN_ID}/safes/${addr}`, {
+          signal: ctrl.signal,
+        })
         if (!res.ok) return
         const j = (await res.json()) as { threshold: number; owners: unknown[]; nonce: number }
         setInfos((prev) => ({ ...prev, [addr]: { threshold: j.threshold, owners: j.owners.length, nonce: j.nonce } }))
@@ -143,7 +148,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
       <div className={css.sectionHead}>
         <p className={css.eyebrow}>
           <span className={`${css.liveDot} ${error && !data ? css.liveDotOff : ''}`} aria-hidden />
-          {error && !data ? 'Live data unavailable' : 'Live from Gully Chain Testnet'}
+          {error && !data ? 'Live data unavailable' : `Live from ${GULLY_CHAIN.name}`}
         </p>
         <h2 id="live-title" className={css.h2}>
           Safes on Gully Chain, block by block
@@ -292,7 +297,7 @@ const GullyLanding = (): ReactElement => {
       <main>
         <section className={css.hero}>
           <div className={css.heroCopy}>
-            <p className={css.eyebrow}>Gully Chain Testnet · Safe 1.4.1</p>
+            <p className={css.eyebrow}>{GULLY_CHAIN.name} · Safe {GULLY_CHAIN.safeVersion}</p>
             <h1 className={css.h1}>
               The multi-sig smart wallet <span className={css.grad}>built on Gully Chain</span>
             </h1>

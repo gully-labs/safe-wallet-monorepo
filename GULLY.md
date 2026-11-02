@@ -47,6 +47,16 @@ chain is not in `@safe-global/safe-deployments`. The addresses live in `apps/web
 
 To change an address, edit `gully-contracts.json` and rebuild.
 
+### One build per Gully chain (mainnet readiness, 2026-11-02)
+
+`gully-contracts.json` is keyed by chain id (`chains.<id>`: name, rpc, explorer, bridge, faucet, safeVersion,
+contracts, modules, extraFactories). `apps/web/src/config/gully-chains.ts` picks the build's chain from
+`NEXT_PUBLIC_GULLY_CHAIN_ID` (default `defaultChainId`, 485590; an unknown id falls back to it). Every chain with
+contracts is registered; the landing, the activity card, the meta tags and the Gully services list read the build's
+chain. **48559 (Gully Chain mainnet) has `contracts: null`** until its Safe set exists (own CREATE2 set or the
+safe-singleton-factory request); fill it from gully-ops `l3/safe/addresses.json` and add 48559 to the Gully Config
+Service (gully-ops `l3/safe`) before a mainnet build ships.
+
 ## What is turned off
 
 Env-driven (all empty in `.env.gully`): Google Analytics/GTM, Mixpanel, Sentry, Datadog, Beamer, WalletConnect
