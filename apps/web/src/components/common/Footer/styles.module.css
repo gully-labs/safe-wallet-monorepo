@@ -34,6 +34,15 @@
   .container li:not(:last-of-type):after {
     visibility: hidden;
   }
+
+  /* Gully Safe: 44 px phone tap targets; a link inside the fork sentence stays inline */
+  .container li > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 
 /* Gully Safe: Powered by Gully Labs badge, native 189x56 */

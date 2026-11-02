@@ -26,6 +26,7 @@ import { Tooltip } from '@mui/material'
 import { BRIDGE_EVENTS, BRIDGE_LABELS } from '@/services/analytics/events/bridge'
 import { EARN_EVENTS, EARN_LABELS } from '@/services/analytics/events/earn'
 import { isNonCriticalUpdate } from '@safe-global/utils/utils/chains'
+import { useIsHydrated } from '@/hooks/useIsHydrated'
 
 const getSubdirectory = (pathname: string): string => {
   return pathname.split('/')[1]
@@ -47,6 +48,9 @@ const Navigation = (): ReactElement | null => {
   const currentSubdirectory = getSubdirectory(router.pathname)
   const queueSize = useQueuedTxsLength()
   const isBlockedCountry = useContext(GeoblockingContext)
+  // The prerender has router.isReady === false, the browser hydrates a query-less URL (/gully-services, /spaces, /404)
+  // with true: wait for the hydration pass so both render the same (React #418 on those pages, 2026-11-02).
+  const isHydrated = useIsHydrated()
 
   const visibleNavItems = useMemo(() => {
     return navItems.filter((item) => {
@@ -64,7 +68,7 @@ const Navigation = (): ReactElement | null => {
       : visibleNavItems.filter((item) => !UNDEPLOYED_SAFE_BLOCKED_ROUTES.includes(item.href))
   }, [safe.deployed, visibleNavItems])
 
-  if (!router.isReady) {
+  if (!router.isReady || !isHydrated) {
     return null
   }
 

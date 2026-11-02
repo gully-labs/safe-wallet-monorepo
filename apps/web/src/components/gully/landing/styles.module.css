@@ -655,6 +655,23 @@
     color: var(--gc-muted);
     font-size: 12px;
   }
+
+  /* 44 px phone tap targets: the header CTA, the hero buttons, the activity links and the login hint links */
+  .btnPrimary,
+  .btnGhost {
+    min-height: 44px;
+  }
+
+  .table td {
+    align-items: center;
+  }
+
+  .table td a,
+  .loginHint a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

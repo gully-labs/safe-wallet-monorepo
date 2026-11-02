@@ -130,6 +130,14 @@
   .logoMobile {
     margin-left: var(--space-1);
     min-width: 0;
+    height: 56px !important;
+  }
+
+  /* the logo link is the tap target: 44 px tall, the logo stays 20 px */
+  .logoMobile a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .connectWallet {
