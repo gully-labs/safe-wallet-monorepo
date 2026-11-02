@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs'
+import { join } from 'path'
 import { watchForUpdates } from '../GullySwUpdate'
 import { dailyExecutions } from '../GullySafeActivity'
 
@@ -65,5 +67,15 @@ describe('dailyExecutions', () => {
 
   it('has no invented activity when nothing ran', () => {
     expect(dailyExecutions([], 14).every((b) => b.v === 0)).toBe(true)
+  })
+})
+
+describe('footers', () => {
+  const src = (p: string) => readFileSync(join(__dirname, '..', '..', p), 'utf8')
+
+  it('the welcome page has exactly one: the landing renders it and the layout skips that route only', () => {
+    expect(src('gully/landing/GullyLanding.tsx').match(/<Footer/g)).toHaveLength(1)
+    expect(src('common/PageLayout/index.tsx')).toContain('{!isSafeLabsTermsPage && !isWelcomePage && <Footer />}')
+    expect(src('common/PageLayout/index.tsx')).toContain('const isWelcomePage = pathname === AppRoutes.welcome.index')
   })
 })

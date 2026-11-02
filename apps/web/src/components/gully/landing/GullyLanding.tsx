@@ -7,6 +7,7 @@ import { GATEWAY_URL_PRODUCTION } from '@/config/constants'
 import { CountUp, CumulativeChart, DailyColumns } from './charts'
 import { Icon, type IconName } from './icons'
 import Mascot from './Mascot'
+import Footer from '@/components/common/Footer'
 import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGullySafeStats'
 import css from './styles.module.css'
 
@@ -362,6 +363,7 @@ const GullyLanding = (): ReactElement => {
 
       </main>
 
+      <Footer forceShow versionIcon={false} helpCenter={false} preferences={false} className={css.footer} />
     </div>
   )
 }
