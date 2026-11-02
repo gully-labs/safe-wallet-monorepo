@@ -2,6 +2,7 @@ import { useId } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import useTxQueue from '@/hooks/useTxQueue'
+import GullySafeActivity from '@/components/gully/GullySafeActivity'
 import PaginatedTxns from '@/components/common/PaginatedTxns'
 import TxHeader from '@/components/transactions/TxHeader'
 import BatchExecuteButton from '@/components/transactions/BatchExecuteButton'
@@ -48,6 +49,8 @@ const Queue: NextPage = () => {
         </TxHeader>
 
         <main>
+          {/* Gully Safe: live activity of this Safe on Gully Chain; nothing on other chains */}
+          <GullySafeActivity />
           <Box mb={4}>
             {hnLoading && (
               <Box mb={3}>

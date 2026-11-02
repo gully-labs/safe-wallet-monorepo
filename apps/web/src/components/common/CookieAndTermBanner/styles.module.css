@@ -24,17 +24,28 @@
 }
 
 .container.inverted {
-  background: var(--color-text-primary);
+  /* Gully Safe: the night surface, not a white box on a black page */
+  background: var(--color-background-paper);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px !important;
 }
 
 .container.inverted,
 .container.inverted :global(.MuiCheckbox-root),
 .container.inverted a {
-  color: var(--color-background-paper);
+  color: var(--color-text-primary);
 }
 
 .container.inverted :global(.Mui-checked) {
-  color: var(--color-background-paper);
+  color: var(--color-primary-main);
+}
+
+.container.inverted :global(.MuiFormControlLabel-label.Mui-disabled) {
+  color: var(--color-text-secondary);
+}
+
+.container.inverted :global(.MuiButton-root) {
+  color: var(--color-primary-main);
 }
 
 .container.inverted :global(.Mui-checked.Mui-disabled) {

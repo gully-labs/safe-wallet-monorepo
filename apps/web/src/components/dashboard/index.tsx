@@ -8,6 +8,7 @@ import AssetsWidget from '@/components/dashboard/Assets'
 import Overview from '@/components/dashboard/Overview/Overview'
 import ExplorePossibleWidget from '@/components/dashboard/ExplorePossibleWidget'
 import GullyServices from '@/components/gully/GullyServices'
+import GullySafeActivity from '@/components/gully/GullySafeActivity'
 import { useIsRecoverySupported } from '@/features/recovery/hooks/useIsRecoverySupported'
 import { useHasFeature } from '@/hooks/useChains'
 import css from './styles.module.css'
@@ -103,6 +104,9 @@ const Dashboard = (): ReactElement => {
       <div className={css.dashboardGrid}>
         <div className={css.leftCol}>
           <Overview />
+
+          {/* Gully Safe: live activity of this Safe on Gully Chain; nothing on other chains */}
+          <GullySafeActivity />
 
           {noAssets ? (
             <Stack spacing={1}>

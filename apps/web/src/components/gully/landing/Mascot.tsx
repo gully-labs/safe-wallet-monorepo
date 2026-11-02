@@ -27,15 +27,6 @@ const Mascot = ({ celebrateKey }: { celebrateKey: number }): ReactElement => {
       onClick={() => setCelebrating(true)}
     >
       <span className={css.glow} aria-hidden />
-      <span className={`${css.floatCoin} ${css.fc1}`} aria-hidden>
-        G
-      </span>
-      <span className={`${css.floatCoin} ${css.fc2}`} aria-hidden>
-        G
-      </span>
-      <span className={`${css.floatCoin} ${css.fc3}`} aria-hidden>
-        G
-      </span>
       <span className={css.bob}>
         <span className={css.wave}>
           <img

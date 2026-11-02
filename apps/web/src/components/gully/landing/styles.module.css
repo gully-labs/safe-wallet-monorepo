@@ -670,3 +670,15 @@
     transform: none;
   }
 }
+
+.loginHint {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--gn-text-2, #d0d5da);
+}
+
+.loginHint a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
