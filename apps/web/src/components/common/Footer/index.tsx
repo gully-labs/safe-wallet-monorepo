@@ -113,6 +113,7 @@ const Footer: React.FC<FooterProps> = ({
                 />
               </a>
             </li>
+            {/* Gully Safe: the Gully Chain Terms and Privacy Policy cover this app */}
             <li>
               <ExternalLink href={GULLY_TERMS_URL} noIcon>
                 Terms
@@ -122,6 +123,9 @@ const Footer: React.FC<FooterProps> = ({
               <ExternalLink href={GULLY_PRIVACY_URL} noIcon>
                 Privacy
               </ExternalLink>
+            </li>
+            <li>
+              <FooterLink href={getHref(AppRoutes.cookie)}>Cookies</FooterLink>
             </li>
             <li>
               <FooterLink href={getHref(AppRoutes.licenses)}>Licenses</FooterLink>

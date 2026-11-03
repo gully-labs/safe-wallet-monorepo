@@ -1,17 +1,7 @@
 import type { StepRenderProps } from '@/components/new-safe/CardStepper/useCardStepper'
 import type { LoadSafeFormData } from '@/components/new-safe/load'
 import { FormProvider, useForm } from 'react-hook-form'
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Divider,
-  Grid,
-  InputAdornment,
-  SvgIcon,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Box, Button, CircularProgress, Divider, Grid, InputAdornment, SvgIcon, Tooltip } from '@mui/material'
 import layoutCss from '@/components/new-safe/create/styles.module.css'
 import NameInput from '@/components/common/NameInput'
 import InfoIcon from '@/public/images/notifications/info.svg'
@@ -27,9 +17,7 @@ import useChainId from '@/hooks/useChainId'
 import { useAppSelector } from '@/store'
 import { selectAddedSafes } from '@/store/addedSafesSlice'
 import { LOAD_SAFE_EVENTS, trackEvent } from '@/services/analytics'
-import { AppRoutes } from '@/config/routes'
-import MUILink from '@mui/material/Link'
-import Link from 'next/link'
+import { GullyLegalConsent } from '@/components/common/GullyLegal'
 
 enum Field {
   name = 'name',
@@ -157,21 +145,9 @@ const SetAddressStep = ({ data, onSubmit, onBack }: StepRenderProps<LoadSafeForm
             name={Field.address}
           />
 
-          <Typography
-            sx={{
-              mt: 4,
-            }}
-          >
-            By continuing you consent to the{' '}
-            <Link href={AppRoutes.terms} passHref legacyBehavior>
-              <MUILink>terms of use</MUILink>
-            </Link>{' '}
-            and{' '}
-            <Link href={AppRoutes.privacy} passHref legacyBehavior>
-              <MUILink>privacy policy</MUILink>
-            </Link>
-            .
-          </Typography>
+          <Box mt={4}>
+            <GullyLegalConsent />
+          </Box>
         </Box>
 
         <Divider />

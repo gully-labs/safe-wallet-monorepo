@@ -1,8 +1,11 @@
 /** Gully Safe: Gully Labs links and the Gully services shown in the app. All open in a new tab. */
 
 export const GULLY_LABS_URL = 'https://gullylabs.xyz'
-export const GULLY_TERMS_URL = 'https://gullylabs.xyz/terms'
-export const GULLY_PRIVACY_URL = 'https://gullylabs.xyz/privacy'
+// Gully Chain has one Terms and one Privacy Policy, and they cover Gully Safe: /terms and /privacy here redirect to them.
+export const GULLY_TERMS_URL = 'https://gullychain.xyz/terms'
+export const GULLY_PRIVACY_URL = 'https://gullychain.xyz/privacy'
+// Gully Labs LLC company details and the index of every product's legal pages (/imprint redirects here)
+export const GULLY_LEGAL_URL = 'https://gullylabs.xyz/legal'
 // GPL-3.0: the corresponding source of this build
 export const GULLY_SOURCE_URL = 'https://github.com/gully-labs/safe-wallet-monorepo/tree/gully/testnet'
 export const UPSTREAM_SOURCE_URL = 'https://github.com/safe-global/safe-wallet-monorepo'
@@ -17,7 +20,11 @@ export type GullyService = {
 // the other Gully products (Pay, HolderMaps, Security, ...) are listed once, on the Ecosystem page.
 export const GULLY_SERVICES: GullyService[] = [
   { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
-  { name: 'Explorer', description: 'Blocks, transactions and tokens', href: 'https://testnet-explorer.gullychain.xyz/' },
+  {
+    name: 'Explorer',
+    description: 'Blocks, transactions and tokens',
+    href: 'https://testnet-explorer.gullychain.xyz/',
+  },
   { name: 'Faucet', description: 'Free testnet ETH', href: 'https://faucet.gullychain.xyz/' },
   { name: 'Verify', description: 'Contract source, Sourcify', href: 'https://verify.gullychain.xyz/' },
   { name: 'Sentry', description: 'Free keys, run a watcher', href: 'https://sentry.gullychain.xyz/' },

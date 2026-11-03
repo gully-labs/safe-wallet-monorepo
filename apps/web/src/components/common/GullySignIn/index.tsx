@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactElement } from 'react'
 import { useDarkMode } from '@/hooks/useDarkMode'
 import { GULLY_ID_CONFIG, loadGullyId, markGullyIdFlag, type GullyIdConfig } from './gullyId'
+import { GULLY_LEGAL_CONSENT_TEXT } from '@/components/common/GullyLegal'
 
 /**
  * "Sign in with Gully ID" in the header: the official button drawn by the Gully ID SDK (renderButton), next to the
@@ -38,10 +39,12 @@ const GullySignIn = ({ config = GULLY_ID_CONFIG }: { config?: GullyIdConfig | nu
   }, [config, isDark])
 
   if (!config) return null
+  // The header has no room for a text line: the consent line is the sign-in button's tooltip
   return (
     <div
       ref={slot}
       data-testid="gully-sign-in"
+      title={GULLY_LEGAL_CONSENT_TEXT}
       style={ready ? { display: 'flex', alignItems: 'center' } : { display: 'none' }}
     />
   )
