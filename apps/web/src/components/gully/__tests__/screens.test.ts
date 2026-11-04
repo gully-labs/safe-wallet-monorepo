@@ -78,6 +78,14 @@ describe('footers', () => {
     expect(src('common/PageLayout/index.tsx')).toContain('{!isSafeLabsTermsPage && !isWelcomePage && <Footer />}')
     expect(src('common/PageLayout/index.tsx')).toContain('const isWelcomePage = pathname === AppRoutes.welcome.index')
   })
+
+  it('the welcome footer links are 44 px on phones (the landing replaces the Footer container class)', () => {
+    const css = src('gully/landing/styles.module.css')
+    const phone = css.slice(css.indexOf('@media (max-width: 599.95px)'))
+    const rule = /\.footer li > a \{([^}]*)\}/.exec(phone)?.[1] ?? ''
+    expect(rule).toMatch(/min-height: 44px/)
+    expect(rule).toMatch(/min-width: 44px/)
+  })
 })
 
 describe('phone header', () => {

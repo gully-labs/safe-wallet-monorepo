@@ -89,6 +89,21 @@ button {
   :root {
     --header-height: 108px;
   }
+
+  /* Gully Safe: every tap target on a phone is at least 44 px (WCAG 2.5.5). MUI's small and medium buttons are 32 to 42
+     px tall and its small icon buttons 24 to 28 px. min-height leaves desktop and tablet alone and wins over a fixed
+     height. Links inside a sentence keep their line (the WCAG inline exception). */
+  .MuiButton-root,
+  .MuiLoadingButton-root,
+  .MuiToggleButton-root,
+  .MuiInputBase-root {
+    min-height: 44px;
+  }
+
+  .MuiIconButton-root {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 
 input::-webkit-outer-spin-button,
