@@ -120,14 +120,14 @@ exports[`./index.stories LegalDisclaimer 1`] = `
                  
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways mui-style-ey0kse-MuiTypography-root-MuiLink-root"
-                  href="/terms"
+                  href="https://gullychain.xyz/terms"
                   rel="noreferrer noopener"
                   target="_blank"
                 >
                   <span
                     class="MuiBox-root mui-style-u9xrjn"
                   >
-                    Terms
+                    Gully Chain Terms
                     <svg
                       aria-hidden="true"
                       class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall external-link-icon mui-style-tqxw8e-MuiSvgIcon-root"

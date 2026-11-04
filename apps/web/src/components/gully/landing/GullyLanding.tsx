@@ -10,6 +10,7 @@ import Mascot from './Mascot'
 import Footer from '@/components/common/Footer'
 import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGullySafeStats'
 import css from './styles.module.css'
+import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
 
 /** Gully Safe landing (/welcome): marketing copy, the connect card, live Safe numbers from Gully Chain and the mascot. */
 
@@ -132,9 +133,21 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
   const held = data ? Number(formatEther(data.heldWei)) : 0
 
   const tiles = [
-    { label: 'Safes on Gully Chain', value: data?.safes.length ?? 0, fmt: (n: number) => Math.round(n).toLocaleString('en-US') },
-    { label: 'Transactions executed', value: data?.executions.length ?? 0, fmt: (n: number) => Math.round(n).toLocaleString('en-US') },
-    { label: 'ETH held in Safes', value: held, fmt: (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 4 }) },
+    {
+      label: 'Safes on Gully Chain',
+      value: data?.safes.length ?? 0,
+      fmt: (n: number) => Math.round(n).toLocaleString('en-US'),
+    },
+    {
+      label: 'Transactions executed',
+      value: data?.executions.length ?? 0,
+      fmt: (n: number) => Math.round(n).toLocaleString('en-US'),
+    },
+    {
+      label: 'ETH held in Safes',
+      value: held,
+      fmt: (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 4 }),
+    },
     { label: 'Latest block', value: data?.head ?? 0, fmt: (n: number) => Math.round(n).toLocaleString('en-US') },
   ]
 
@@ -173,7 +186,9 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
           ) : cumulative.length === 0 ? (
             <div className={css.empty}>
               <Icon name="activity" />
-              <span>{error ? 'Could not reach the Gully Chain RPC. Retrying…' : 'No Safes yet. Yours can be the first.'}</span>
+              <span>
+                {error ? 'Could not reach the Gully Chain RPC. Retrying…' : 'No Safes yet. Yours can be the first.'}
+              </span>
             </div>
           ) : (
             <CumulativeChart points={cumulative} label="Safes created on Gully Chain, running total" />
@@ -255,7 +270,11 @@ const GullyLanding = (): ReactElement => {
         {
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+          mainEntity: FAQ.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
         },
       ]),
     [],
@@ -297,8 +316,8 @@ const GullyLanding = (): ReactElement => {
               The multi-sig smart wallet <span className={css.grad}>built on Gully Chain</span>
             </h1>
             <p className={css.lead}>
-              Owners propose, a threshold signs, the Safe executes. The same audited Safe 1.4.1 contracts, with passkey signers and
-              sponsored gas.
+              Owners propose, a threshold signs, the Safe executes. The same audited Safe 1.4.1 contracts, with passkey
+              signers and sponsored gas.
             </p>
             <div id="get-started" className={css.loginWrap}>
               <WelcomeLogin />
@@ -311,6 +330,17 @@ const GullyLanding = (): ReactElement => {
                 <a href={DOCS_SAFE} {...EXT}>
                   Read the docs
                 </a>
+              </p>
+              <p className={css.loginHint} style={{ paddingTop: 0 }} data-testid="gully-legal-consent">
+                By continuing you agree to the{' '}
+                <a href={GULLY_TERMS_URL} {...EXT}>
+                  Gully Chain Terms
+                </a>{' '}
+                and{' '}
+                <a href={GULLY_PRIVACY_URL} {...EXT}>
+                  Privacy Policy
+                </a>
+                .
               </p>
             </div>
           </div>
@@ -360,7 +390,6 @@ const GullyLanding = (): ReactElement => {
             ))}
           </div>
         </section>
-
       </main>
 
       <Footer forceShow versionIcon={false} helpCenter={false} preferences={false} className={css.footer} />

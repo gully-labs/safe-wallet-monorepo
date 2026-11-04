@@ -19,6 +19,8 @@ import css from './styles.module.css'
 import { AppRoutes } from '@/config/routes'
 import ExternalLink from '../ExternalLink'
 import { useRouter } from 'next/router'
+import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
+import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
 
 const COOKIE_AND_TERM_WARNING: Record<CookieAndTermType, string> = {
   [CookieAndTermType.TERMS]: '',
@@ -44,7 +46,9 @@ export const CookieAndTermBanner = ({
   warningKey?: CookieAndTermType
   inverted?: boolean
 }): ReactElement => {
-  const warning = warningKey ? COOKIE_AND_TERM_WARNING[warningKey] : undefined
+  const isOfficialHost = useIsOfficialHost()
+  // Gully Safe: Beamer and analytics are not part of this build, so there is nothing to opt in to and no warning
+  const warning = warningKey && isOfficialHost ? COOKIE_AND_TERM_WARNING[warningKey] : undefined
   const dispatch = useAppDispatch()
   const cookies = useAppSelector(selectCookies)
 
@@ -97,18 +101,28 @@ export const CookieAndTermBanner = ({
           }}
         >
           <Grid item xs>
-            <Typography
-              variant="body2"
-              sx={{
-                mb: 2,
-              }}
-            >
-              By browsing this page, you accept our{' '}
-              <ExternalLink href={AppRoutes.terms}>Terms & Conditions</ExternalLink> (last updated{' '}
-              {metadata.lastUpdated}) and the use of necessary cookies. By clicking &quot;Accept all&quot; you
-              additionally agree to the use of Beamer and Analytics cookies as listed below.{' '}
-              <ExternalLink href={AppRoutes.cookie}>Cookie policy</ExternalLink>
-            </Typography>
+            {isOfficialHost ? (
+              <Typography
+                variant="body2"
+                sx={{
+                  mb: 2,
+                }}
+              >
+                By browsing this page, you accept our{' '}
+                <ExternalLink href={AppRoutes.terms}>Terms & Conditions</ExternalLink> (last updated{' '}
+                {metadata.lastUpdated}) and the use of necessary cookies. By clicking &quot;Accept all&quot; you
+                additionally agree to the use of Beamer and Analytics cookies as listed below.{' '}
+                <ExternalLink href={AppRoutes.cookie}>Cookie policy</ExternalLink>
+              </Typography>
+            ) : (
+              <Typography variant="body2" sx={{ mb: 2 }} data-testid="gully-terms-notice">
+                By using Gully Safe you agree to the{' '}
+                <ExternalLink href={GULLY_TERMS_URL}>Gully Chain Terms</ExternalLink> (last updated{' '}
+                {metadata.lastUpdated}) and the <ExternalLink href={GULLY_PRIVACY_URL}>Privacy Policy</ExternalLink>.
+                Gully Safe sets no tracking cookies: it keeps your settings and Safe data in this browser&apos;s local
+                storage. <ExternalLink href={AppRoutes.cookie}>Cookies and local storage</ExternalLink>
+              </Typography>
+            )}
 
             <Grid
               container
@@ -128,29 +142,32 @@ export const CookieAndTermBanner = ({
                   <Typography variant="body2">Locally stored data for core functionality</Typography>
                 </Box>
 
-                <Box
-                  sx={{
-                    mb: 2,
-                  }}
-                >
-                  <CookieCheckbox
-                    checkboxProps={{ ...register(CookieAndTermType.UPDATES), id: 'beamer' }}
-                    label="Beamer"
-                    checked={watch(CookieAndTermType.UPDATES)}
-                  />
-                  <br />
-                  <Typography variant="body2">New features and product announcements</Typography>
-                </Box>
-
-                <Box>
-                  <CookieCheckbox
-                    checkboxProps={{ ...register(CookieAndTermType.ANALYTICS), id: 'ga' }}
-                    label="Analytics"
-                    checked={watch(CookieAndTermType.ANALYTICS)}
-                  />
-                  <br />
-                  <Typography variant="body2">Analytics tools to understand usage patterns.</Typography>
-                </Box>
+                {isOfficialHost && (
+                  <Box
+                    sx={{
+                      mb: 2,
+                    }}
+                  >
+                    <CookieCheckbox
+                      checkboxProps={{ ...register(CookieAndTermType.UPDATES), id: 'beamer' }}
+                      label="Beamer"
+                      checked={watch(CookieAndTermType.UPDATES)}
+                    />
+                    <br />
+                    <Typography variant="body2">New features and product announcements</Typography>
+                  </Box>
+                )}
+                {isOfficialHost && (
+                  <Box>
+                    <CookieCheckbox
+                      checkboxProps={{ ...register(CookieAndTermType.ANALYTICS), id: 'ga' }}
+                      label="Analytics"
+                      checked={watch(CookieAndTermType.ANALYTICS)}
+                    />
+                    <br />
+                    <Typography variant="body2">Analytics tools to understand usage patterns.</Typography>
+                  </Box>
+                )}
               </Grid>
             </Grid>
 
@@ -163,19 +180,35 @@ export const CookieAndTermBanner = ({
                 gap: 2,
               }}
             >
-              <Grid item>
-                <Typography>
-                  <Button onClick={handleAccept} variant="text" size="small" color="inherit" disableElevation>
-                    Save settings
-                  </Button>
-                </Typography>
-              </Grid>
+              {isOfficialHost ? (
+                <>
+                  <Grid item>
+                    <Typography>
+                      <Button onClick={handleAccept} variant="text" size="small" color="inherit" disableElevation>
+                        Save settings
+                      </Button>
+                    </Typography>
+                  </Grid>
 
-              <Grid item>
-                <Button onClick={handleAcceptAll} variant="contained" color="secondary" size="small" disableElevation>
-                  Accept all
-                </Button>
-              </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={handleAcceptAll}
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      disableElevation
+                    >
+                      Accept all
+                    </Button>
+                  </Grid>
+                </>
+              ) : (
+                <Grid item>
+                  <Button onClick={handleAccept} variant="contained" color="secondary" size="small" disableElevation>
+                    Accept
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Grid>
