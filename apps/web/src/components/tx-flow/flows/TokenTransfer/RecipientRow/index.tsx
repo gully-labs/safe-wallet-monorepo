@@ -40,7 +40,6 @@ const RecipientRow = ({ fieldArray, removable = true, remove, disableSpendingLim
     formState: { errors },
     trigger,
     watch,
-    setValue,
   } = useFormContext<MultiTokenTransferParams>()
 
   const { setNonceNeeded } = useContext(SafeTxContext)
@@ -56,11 +55,13 @@ const RecipientRow = ({ fieldArray, removable = true, remove, disableSpendingLim
   // Gully Multisig: where the native coin pays gas only it is not in the list (useVisibleTokens), so a row that
   // starts on the native coin (the flow's default) moves to the first token the Safe holds.
   const { noNativeValue } = useGullyNoNativeValue()
+  // untyped form access, as TokenAmountInput does: the typed field-path union gives setValue a value type of never
+  const { setValue } = useFormContext()
   const firstTokenAddress = balancesItems[0]?.tokenInfo.address
   const tokenAddressFieldName = getFieldName(TokenTransferFields.tokenAddress, fieldArray)
   useEffect(() => {
     if (noNativeValue && !selectedToken && firstTokenAddress) {
-      setValue(tokenAddressFieldName as `recipients.${number}.tokenAddress`, firstTokenAddress)
+      setValue(tokenAddressFieldName, firstTokenAddress)
     }
   }, [noNativeValue, selectedToken, firstTokenAddress, tokenAddressFieldName, setValue])
 
