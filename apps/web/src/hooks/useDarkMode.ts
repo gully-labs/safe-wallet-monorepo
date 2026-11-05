@@ -7,7 +7,7 @@ export const useDarkMode = (): boolean => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
 
   useEffect(() => {
-    // Gully Safe: dark theme by default, the user can still switch to light in Settings
+    // Gully Multisig: dark theme by default, the user can still switch to light in Settings
     const isDark = settings.theme.darkMode ?? true
 
     setIsDarkMode(isDark)

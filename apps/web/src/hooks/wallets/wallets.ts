@@ -38,13 +38,13 @@ const walletConnectV2 = (chain: Chain) => {
 }
 
 const WALLET_MODULES: Partial<{ [_key in WALLET_KEYS]: (chain: Chain) => WalletInit }> = {
-  // Gully Safe: Gully Wallet first (owner order 2026-10-30: Gully Wallet, WalletConnect, detected wallets)
+  // Gully Multisig: Gully Wallet first (owner order 2026-10-30: Gully Wallet, WalletConnect, detected wallets)
   [WALLET_KEYS.GULLY]: () => gullyWalletModule() as WalletInit,
   [WALLET_KEYS.INJECTED]: () => injectedWalletModule() as WalletInit,
   [WALLET_KEYS.WALLETCONNECT_V2]: (chain) => walletConnectV2(chain) as WalletInit,
   [WALLET_KEYS.COINBASE]: () => coinbaseModule({ darkMode: prefersDarkMode() }) as WalletInit,
   [WALLET_KEYS.LEDGER]: () => ledgerModule(),
-  // Gully Safe: the private-key signer is a testing aid (upstream hides it via the chain's disabledWallets).
+  // Gully Multisig: the private-key signer is a testing aid (upstream hides it via the chain's disabledWallets).
   // It is off unless NEXT_PUBLIC_GULLY_ENABLE_PK_WALLET=true at build time.
   ...(GULLY_ENABLE_PK_WALLET
     ? { [WALLET_KEYS.PK]: (chain: Chain) => pkModule(chain.chainId, chain.rpcUri) as WalletInit }

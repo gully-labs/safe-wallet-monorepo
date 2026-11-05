@@ -2,12 +2,12 @@ import { BRAND_NAME, IS_PRODUCTION, IS_BEHIND_IAP } from '@/config/constants'
 import { ContentSecurityPolicy, StrictTransportSecurity } from '@/config/securityHeaders'
 import { lightPalette, darkPalette } from '@safe-global/theme'
 
-// Gully Safe: multisig smart accounts on Gully Chain. Absolute URLs are required for OG/Twitter images.
+// Gully Multisig: multisig smart accounts on Gully Chain. Absolute URLs are required for OG/Twitter images.
 const descriptionText = `${BRAND_NAME}: create and run multisig Safe smart accounts on Gully Chain (chain 485590). Shared custody, owner thresholds and batched transactions, built on Safe{Wallet}.`
-const OG_IMAGE_URL = 'https://safe.gullychain.xyz/og-image.png'
+const OG_IMAGE_URL = 'https://multisig.gullychain.xyz/og-image.png'
 const titleText = BRAND_NAME
 const landingTitle = `${BRAND_NAME} – Multisig smart accounts on Gully Chain`
-const SITE_URL = 'https://safe.gullychain.xyz'
+const SITE_URL = 'https://multisig.gullychain.xyz'
 
 // Only the public landing pages are indexable; every other route is wallet/app state and gets noindex.
 // '/' only redirects to /welcome, so both share the /welcome canonical. Keep in sync with public/robots.txt + sitemap.xml.
@@ -35,7 +35,10 @@ const MetaTags = ({ prefetchUrl, pathname }: { prefetchUrl: string; pathname: st
       <meta property="og:image" content={OG_IMAGE_URL} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Gully Safe on GullyChain: the GullyChain icon and the GullyChain mascot" />
+      <meta
+        property="og:image:alt"
+        content="Gully Multisig on GullyChain: the GullyChain icon and the GullyChain mascot"
+      />
       <meta property="og:description" content={descriptionText} />
       <meta property="og:title" content={canonicalUrl ? landingTitle : titleText} />
       <meta name="twitter:card" content="summary_large_image" />

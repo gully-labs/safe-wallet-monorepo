@@ -1,4 +1,4 @@
-// Gully Safe: the AllowanceModule overlay for Gully Chain (485590), see spendingLimitDeployments.ts
+// Gully Multisig: the AllowanceModule overlay for Gully Chain (485590), see spendingLimitDeployments.ts
 import {
   getAllowanceModuleDeployment,
   getDeployedSpendingLimitModuleAddress,
@@ -22,7 +22,7 @@ describe('Gully Chain AllowanceModule overlay', () => {
     expect(getAllowanceModuleDeployment({ network: GULLY, version: '0.1.0' })).toBeUndefined()
   })
 
-  it('finds the module among a Gully Safe’s enabled modules', () => {
+  it('finds the module among a Gully Multisig’s enabled modules', () => {
     expect(getDeployedSpendingLimitModuleAddress(GULLY, [{ value: GULLY_MODULE }])).toBe(GULLY_MODULE)
     expect(getDeployedSpendingLimitModuleAddress(GULLY, [{ value: CANONICAL_011 }])).toBeUndefined()
   })

@@ -1,5 +1,5 @@
 /**
- * Gully Safe regression (2026-11-02): React #418 on /gully-services, /spaces, /safe-labs-terms,
+ * Gully Multisig regression (2026-11-02): React #418 on /gully-services, /spaces, /safe-labs-terms,
  * /hypernative/oauth-callback and the 404 page.
  *
  * Next's static export prerenders those pages with router.isReady === false, so the sidebar navigation rendered

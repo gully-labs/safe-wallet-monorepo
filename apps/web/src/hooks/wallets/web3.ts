@@ -31,7 +31,7 @@ export const getRpcServiceUrl = (rpcUri: RpcUri): string => {
 }
 
 /**
- * Gully Safe: ethers only knows ENS registries for well-known chains. For other chains, use the registry from
+ * Gully Multisig: ethers only knows ENS registries for well-known chains. For other chains, use the registry from
  * the chain config (e.g. the .gully registry on Gully Chain) so names like `alice.gully` resolve.
  */
 const getNetwork = (chain: Chain): Network => {

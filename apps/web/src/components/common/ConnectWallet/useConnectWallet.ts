@@ -7,7 +7,7 @@ import { pickWallet, type GullyPick } from '@/services/gully-connect'
 type Picker = () => Promise<GullyPick | null | undefined>
 
 /**
- * Gully Safe: every "Connect" button opens the shared Gully Chain dialog (Gully Wallet, WalletConnect, detected
+ * Gully Multisig: every "Connect" button opens the shared Gully Chain dialog (Gully Wallet, WalletConnect, detected
  * wallets, install links) and then connects the pick through web3-onboard. If the dialog cannot load, or onboard
  * does not know the picked wallet, the stock web3-onboard modal opens instead, so connecting never dead-ends.
  */

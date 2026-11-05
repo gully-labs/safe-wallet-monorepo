@@ -1,7 +1,7 @@
-/** Gully Safe: Gully Labs links and the Gully services shown in the app. All open in a new tab. */
+/** Gully Multisig: Gully Labs links and the Gully services shown in the app. All open in a new tab. */
 
 export const GULLY_LABS_URL = 'https://gullylabs.xyz'
-// Gully Chain has one Terms and one Privacy Policy, and they cover Gully Safe: /terms and /privacy here redirect to them.
+// Gully Chain has one Terms and one Privacy Policy, and they cover Gully Multisig: /terms and /privacy here redirect to them.
 export const GULLY_TERMS_URL = 'https://gullychain.xyz/terms'
 export const GULLY_PRIVACY_URL = 'https://gullychain.xyz/privacy'
 // Gully Labs LLC company details and the index of every product's legal pages (/imprint redirects here)
@@ -16,7 +16,7 @@ export type GullyService = {
   href: string
 }
 
-// Gully Chain products only (owner rule 2026-10-29/30, same list as gc-switcher 1.8.2 minus Safe itself). kre8.fun and
+// Gully Chain products only (owner rule 2026-10-29/30, same list as gc-switcher 1.8.3 minus Safe itself). kre8.fun and
 // the other Gully products (Pay, HolderMaps, Security, ...) are listed once, on the Ecosystem page.
 export const GULLY_SERVICES: GullyService[] = [
   { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },

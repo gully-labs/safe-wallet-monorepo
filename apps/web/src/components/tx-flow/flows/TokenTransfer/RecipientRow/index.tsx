@@ -18,6 +18,7 @@ import { sameAddress } from '@safe-global/utils/utils/addresses'
 import Track from '@/components/common/Track'
 import { MODALS_EVENTS } from '@/services/analytics'
 import SpendingLimitRow from '../SpendingLimitRow'
+import { useGullyNoNativeValue } from '@/hooks/useGullyNoNativeValue'
 
 const getFieldName = (
   field: keyof TokenTransferParams,
@@ -39,6 +40,7 @@ const RecipientRow = ({ fieldArray, removable = true, remove, disableSpendingLim
     formState: { errors },
     trigger,
     watch,
+    setValue,
   } = useFormContext<MultiTokenTransferParams>()
 
   const { setNonceNeeded } = useContext(SafeTxContext)
@@ -50,6 +52,17 @@ const RecipientRow = ({ fieldArray, removable = true, remove, disableSpendingLim
   const tokenAddress = watch(getFieldName(TokenTransferFields.tokenAddress, fieldArray))
 
   const selectedToken = balancesItems.find((item) => sameAddress(item.tokenInfo.address, tokenAddress))
+
+  // Gully Multisig: where the native coin pays gas only it is not in the list (useVisibleTokens), so a row that
+  // starts on the native coin (the flow's default) moves to the first token the Safe holds.
+  const { noNativeValue } = useGullyNoNativeValue()
+  const firstTokenAddress = balancesItems[0]?.tokenInfo.address
+  const tokenAddressFieldName = getFieldName(TokenTransferFields.tokenAddress, fieldArray)
+  useEffect(() => {
+    if (noNativeValue && !selectedToken && firstTokenAddress) {
+      setValue(tokenAddressFieldName, firstTokenAddress)
+    }
+  }, [noNativeValue, selectedToken, firstTokenAddress, tokenAddressFieldName, setValue])
 
   const { totalAmount, spendingLimitAmount } = useTokenAmount(selectedToken)
 

@@ -1,6 +1,6 @@
 {
-  "name": "Gully Safe",
-  "short_name": "Gully Safe",
+  "name": "Gully Multisig",
+  "short_name": "Gully Multisig",
   "description": "Multisig smart accounts on Gully Chain, built on Safe{Wallet}.",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },

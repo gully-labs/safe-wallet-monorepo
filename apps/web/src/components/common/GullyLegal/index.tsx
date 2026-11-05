@@ -7,8 +7,8 @@ import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
 const replaceLocation = (url: string) => window.location.replace(url)
 
 /**
- * Gully Safe legal pages. Gully Chain has one Terms and one Privacy Policy (gullychain.xyz/terms, /privacy), and they
- * cover Gully Safe. The static export cannot answer with an HTTP redirect, so /terms, /privacy, /imprint and
+ * Gully Multisig legal pages. Gully Chain has one Terms and one Privacy Policy (gullychain.xyz/terms, /privacy), and they
+ * cover Gully Multisig. The static export cannot answer with an HTTP redirect, so /terms, /privacy, /imprint and
  * /safe-labs-terms render this short page: a meta refresh (works without JavaScript), a client-side replace, and a
  * visible link for anyone whose browser blocks both.
  */
@@ -28,7 +28,7 @@ export const GullyLegalRedirect = ({
   return (
     <>
       <Head>
-        <title>{`Gully Safe – ${title}`}</title>
+        <title>{`Gully Multisig – ${title}`}</title>
         <meta httpEquiv="refresh" content={`0; url=${href}`} />
         <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href={href} />
@@ -37,7 +37,7 @@ export const GullyLegalRedirect = ({
         {title}
       </Typography>
       <Typography mb={1} data-testid="gully-legal-redirect">
-        Gully Safe is run by Gully Labs LLC. The {title} for Gully Safe is published at{' '}
+        Gully Multisig is run by Gully Labs LLC. The {title} for Gully Multisig is published at{' '}
         <ExternalLink href={href}>{href}</ExternalLink>. Taking you there now.
       </Typography>
     </>

@@ -17,7 +17,7 @@ describe('gullyId', () => {
     document.head.innerHTML = ''
   })
 
-  it('is on by default with the Gully Safe client and the gullyid.xyz issuer', () => {
+  it('is on by default with the Gully Multisig client and the gullyid.xyz issuer', () => {
     expect(DEFAULT_GULLY_ID_CLIENT_ID).toBe('gully-safe')
     expect(DEFAULT_GULLY_ID_ISSUER).toBe('https://gullyid.xyz')
     expect(getGullyIdConfig()).toEqual({ clientId: 'gully-safe', issuer: 'https://gullyid.xyz' })

@@ -1,4 +1,4 @@
-# Gully Safe (safe.gullychain.xyz): only the public landing pages are indexable.
+# Gully Multisig (multisig.gullychain.xyz): only the public landing pages are indexable.
 # Everything that needs a connected wallet or a Safe address is app state, not content.
 User-agent: *
 Allow: /$
@@ -26,4 +26,4 @@ Disallow: /_offline
 Disallow: /403
 Disallow: /404
 
-Sitemap: https://safe.gullychain.xyz/sitemap.xml
+Sitemap: https://multisig.gullychain.xyz/sitemap.xml

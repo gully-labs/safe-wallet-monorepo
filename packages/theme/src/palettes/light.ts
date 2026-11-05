@@ -2,7 +2,7 @@ import type { ColorPalette } from './types'
 
 /**
  * Unified light mode color palette.
- * Gully Safe: GullyChain brand kit v4 accents on the Safe light base (secondary = kit emerald / deep green / mint).
+ * Gully Multisig: GullyChain brand kit v4 accents on the Safe light base (secondary = kit emerald / deep green / mint).
  * Merged from web and mobile palettes with mobile's extended colors as the base.
  */
 const lightPalette: ColorPalette = {

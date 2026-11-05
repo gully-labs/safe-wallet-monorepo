@@ -6,6 +6,8 @@ import { type Balances } from '@safe-global/store/gateway/AUTO_GENERATED/balance
 import { useTrustedTokenBalances } from '@/hooks/loadables/useTrustedTokenBalances'
 import useHiddenTokens from '@/hooks/useHiddenTokens'
 import { useMemo } from 'react'
+import { TokenType } from '@safe-global/store/gateway/types'
+import { useGullyNoNativeValue } from '@/hooks/useGullyNoNativeValue'
 
 export const useTokenAmount = (selectedToken: Balances['items'][0] | undefined) => {
   const spendingLimit = useSpendingLimit(selectedToken?.tokenInfo)
@@ -25,13 +27,17 @@ export const useVisibleTokens = () => {
   const spendingLimits = useAppSelector(selectSpendingLimits)
   const wallet = useWallet()
   const hiddenTokens = useHiddenTokens()
+  // Gully Multisig: on a chain whose native coin pays gas only (Anubis gasDAI) it is not a token one can send
+  const { noNativeValue } = useGullyNoNativeValue()
 
   return useMemo(() => {
     if (!balances) {
       return []
     }
 
-    const items = filterHiddenTokens(balances.items, hiddenTokens)
+    const items = filterHiddenTokens(balances.items, hiddenTokens).filter(
+      ({ tokenInfo }) => !(noNativeValue && tokenInfo.type === TokenType.NATIVE_TOKEN),
+    )
 
     if (isOnlySpendingLimitBeneficiary) {
       return items.filter(({ tokenInfo }) => {
@@ -42,5 +48,5 @@ export const useVisibleTokens = () => {
     }
 
     return items
-  }, [balances, hiddenTokens, isOnlySpendingLimitBeneficiary, spendingLimits, wallet?.address])
+  }, [balances, hiddenTokens, isOnlySpendingLimitBeneficiary, noNativeValue, spendingLimits, wallet?.address])
 }

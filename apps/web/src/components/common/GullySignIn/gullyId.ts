@@ -1,4 +1,4 @@
-// Sign in with Gully ID for Gully Safe (contract: gully-id docs/gully-id-current-spec.md). On by default: the flag
+// Sign in with Gully ID for Gully Multisig (contract: gully-id docs/gully-id-current-spec.md). On by default: the flag
 // NEXT_PUBLIC_GULLY_ID_SIGNIN=off hides the button (the code path stays). Client id gully-safe, issuer gullyid.xyz,
 // both overridable at build time. Identity only: wallet connection and Safe signing are unchanged (the browser wallet
 // stays the signer), and the Gully ID token is never treated as permission for anything. The SDK is fetched lazily
@@ -47,7 +47,7 @@ type GullyIDGlobal = { init(opts: { clientId: string; issuer?: string }): GullyC
 
 export type GullyIdConfig = { clientId: string; issuer: string }
 
-/** The flag: on unless `signin` is "off" (also false/0/no). Blank client id or issuer = the Gully Safe defaults. */
+/** The flag: on unless `signin` is "off" (also false/0/no). Blank client id or issuer = the Gully Multisig defaults. */
 export const getGullyIdConfig = (signin?: string, clientId?: string, issuer?: string): GullyIdConfig | null => {
   if (/^(off|false|0|no)$/i.test(signin?.trim() ?? '')) return null
   return {

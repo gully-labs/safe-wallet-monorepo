@@ -49,7 +49,7 @@ const Queue: NextPage = () => {
         </TxHeader>
 
         <main>
-          {/* Gully Safe: live activity of this Safe on Gully Chain; nothing on other chains */}
+          {/* Gully Multisig: live activity of this Safe on Gully Chain; nothing on other chains */}
           <GullySafeActivity />
           <Box mb={4}>
             {hnLoading && (

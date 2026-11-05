@@ -86,7 +86,7 @@ export const DATADOG_RUM_DEFAULT_PRIVACY_LEVEL = (process.env.NEXT_PUBLIC_DATADO
 
 // Wallets
 export const WC_PROJECT_ID = process.env.NEXT_PUBLIC_WC_PROJECT_ID || ''
-// Gully Safe: private-key signer wallet option, off by default
+// Gully Multisig: private-key signer wallet option, off by default
 export const GULLY_ENABLE_PK_WALLET = process.env.NEXT_PUBLIC_GULLY_ENABLE_PK_WALLET === 'true'
 
 // Safe Token

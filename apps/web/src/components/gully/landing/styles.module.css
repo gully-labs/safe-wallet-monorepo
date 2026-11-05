@@ -1,4 +1,4 @@
-/* Gully Safe landing: Gully Terminal look (black ground, GullyChain accents, square 4px buttons). */
+/* Gully Multisig landing: Gully Terminal look (black ground, GullyChain accents, square 4px buttons). */
 .page {
   --line: rgba(208, 213, 218, 0.1);
   background: var(--gc-night);
@@ -588,7 +588,7 @@
 }
 
 @media (max-width: 599.95px) {
-  /* Gully Safe: the welcome footer (Footer with className={css.footer}, so Footer's own .container rule does not apply)
+  /* Gully Multisig: the welcome footer (Footer with className={css.footer}, so Footer's own .container rule does not apply)
      needs 44 px phone tap targets too: Terms, Privacy, Licenses, Source code and the version link were 16 px tall */
   .footer li > a {
     display: inline-flex;

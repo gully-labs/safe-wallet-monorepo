@@ -93,7 +93,7 @@ export const initSafeSDK = async ({
     isL1SafeSingleton = true
   }
 
-  // Gully Safe: chains with non-canonical deployments (gully-contracts.json) pass their addresses explicitly
+  // Gully Multisig: chains with non-canonical deployments (gully-contracts.json) pass their addresses explicitly
   contractNetworks = getCustomContractNetworks(chainId, isL1SafeSingleton) ?? contractNetworks
 
   if (undeployedSafe) {

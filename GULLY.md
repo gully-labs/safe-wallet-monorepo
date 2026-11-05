@@ -1,12 +1,12 @@
-# Gully Safe
+# Gully Multisig
 
-Gully Safe is Gully Labs' deployment of [Safe{Wallet}](https://github.com/safe-global/safe-wallet-monorepo) for
+Gully Multisig is Gully Labs' deployment of [Safe{Wallet}](https://github.com/safe-global/safe-wallet-monorepo) for
 Gully Chain. It is a fork of the Safe{Wallet} web app and, like it, licensed under the GNU General Public License
 v3.0 (see `LICENSE` and `apps/web/LICENSE`, unchanged). Source of the running build:
 https://github.com/gully-labs/safe-wallet-monorepo/tree/gully/testnet
 
-- App: https://safe.gullychain.xyz
-- Backend (Safe Client Gateway): https://safe.gullychain.xyz/cgw
+- App: https://multisig.gullychain.xyz
+- Backend (Safe Client Gateway): https://multisig.gullychain.xyz/cgw
 - Default chain: Gully Chain Testnet, chain id 485590, shortName `gully-test`
 
 ## Base version
@@ -66,6 +66,6 @@ Config-driven (Gully Config Service, chain features of 485590), keep these off: 
 
 ## Gully changes in this fork
 
-Search for `Gully Safe` in the code. Branding: GullyChain brand kit v3 (logo, favicons, OG image, colours, Exo 2),
+Search for `Gully Multisig` in the code. Branding: GullyChain brand kit v3 (logo, favicons, OG image, colours, Exo 2),
 dark theme by default, "Powered by Gully Labs" footer badge, Gully terms/privacy, "Gully services" page and
 dashboard panel, `.gully` name resolution through the chain's ENS registry.

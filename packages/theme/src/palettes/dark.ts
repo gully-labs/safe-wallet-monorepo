@@ -2,7 +2,7 @@ import type { ColorPalette } from './types'
 
 /**
  * Unified dark mode color palette.
- * Gully Safe: GullyChain brand kit v4 (GN 2.0 roles): ink #0A0F0E ground, #111716 cards, charcoal #1A1F1E surfaces,
+ * Gully Multisig: GullyChain brand kit v4 (GN 2.0 roles): ink #0A0F0E ground, #111716 cards, charcoal #1A1F1E surfaces,
  * emerald #00C878 primary (ink text), deep green #005B39, mint #2CF29A live/links, white/silver text, #8FA09C secondary,
  * kit success #10B981 / warning #F59E0B / error #EF4444.
  * Merged from web and mobile palettes with mobile's extended colors as the base.

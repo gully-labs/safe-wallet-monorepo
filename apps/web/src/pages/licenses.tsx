@@ -538,7 +538,7 @@ const Licenses: NextPage = () => {
       </Head>
 
       <main>
-        {/* Gully Safe: GPL-3.0 notice and attribution notices are shown on every host */}
+        {/* Gully Multisig: GPL-3.0 notice and attribution notices are shown on every host */}
         <Typography mb={3}>
           {BRAND_NAME} is a fork of <ExternalLink href={UPSTREAM_SOURCE_URL}>Safe&#123;Wallet&#125;</ExternalLink>,
           licensed under the GNU General Public License v3.0. The source code of this build is available at{' '}

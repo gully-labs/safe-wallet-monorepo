@@ -70,7 +70,7 @@ export const createNewSafe = async (
 ): Promise<void> => {
   let txResponse: TransactionResponse
   if (isPredictedSafeProps(undeployedSafeProps)) {
-    // Gully Safe: chains with non-canonical deployments (gully-contracts.json) pass their addresses explicitly
+    // Gully Multisig: chains with non-canonical deployments (gully-contracts.json) pass their addresses explicitly
     const contractNetworks = getCustomContractNetworks(chain.chainId, !!isL1SafeSingleton)
     const safe = await Safe.init({
       predictedSafe: undeployedSafeProps,

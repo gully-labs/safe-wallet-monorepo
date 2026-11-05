@@ -18,7 +18,7 @@ export function CardStepper<StepperData>(props: TxStepperProps<StepperData>) {
       <Box className={css.progress} color={progressColor}>
         <LinearProgress color="inherit" variant="determinate" value={Math.min(progress, 100)} />
       </Box>
-      {/* Gully Safe: the whole path at a glance */}
+      {/* Gully Multisig: the whole path at a glance */}
       {steps.length > 1 && (
         <ol className={css.path} aria-label="Steps">
           {steps.map((s, i) =>
