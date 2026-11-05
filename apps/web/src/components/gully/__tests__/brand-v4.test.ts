@@ -91,7 +91,7 @@ describe('Gully Multisig brand kit v4', () => {
     // OG card: gully-ops sites/_shared/brand/og/multisig.gullychain.xyz.png (feat/gc-sync-v4 bf6aee9)
     ['public/og-image.png', 'dcb7f18f5443ca1a28a6e9b15feb593d305fec1d54a25edc34f8dfb2725ba153'],
     ['public/fonts/inter-var.woff2', 'f052ee44c3728dfd23aba8a4567150bc314d23903026fbb6ad089422c2df56af'],
-    ['public/assets/gc-switcher.js', '4022b13d3de24363824b6c317032bf22187aa84549631905f570fa4e9286228b'],
+    ['public/assets/gc-switcher.js', '1f50fccea5fb6b88bd8fd913e60f9576d45202178d068c1f9b71259133ecde2c'],
     ['public/assets/gc-connect.js', '29c387340d0151ad2c2a01277853090b2d1442907b631146169ebd6a9bba2c2e'],
   ]
   it.each(KIT)('%s is the byte-identical source file', (file, hash) => {
