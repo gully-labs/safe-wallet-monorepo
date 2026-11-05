@@ -2,7 +2,10 @@ import { chainHasNoNativeValue, noNativeValueNote, GULLY_NO_NATIVE_VALUE } from 
 import gullyChains from '@/config/gully-chains.json'
 import gullyContracts from '@/config/gully-contracts.json'
 import { getSafeL2SingletonDeployment, getProxyFactoryDeployment } from '@safe-global/safe-deployments'
-import { registerCustomDeployments, getCustomContractNetworks } from '@safe-global/utils/services/contracts/customDeployments'
+import {
+  registerCustomDeployments,
+  getCustomContractNetworks,
+} from '@safe-global/utils/services/contracts/customDeployments'
 
 describe('Gully Multisig: chains whose native coin pays gas only', () => {
   it('reads the feature key from the chain config', () => {

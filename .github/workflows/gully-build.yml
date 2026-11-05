@@ -1,0 +1,107 @@
+# Gully Multisig: builds and tests the static export of a pull request into gully/testnet, on the merged tree, with the
+# same steps as the box recipe (gully-ops deploy recipe "web.sh": apps/web/scripts/gully-build.sh in node:22-bookworm,
+# prettier on the changed files, the Gully jest suites, the red check of the new test, the export checks) and keeps the
+# export as an artifact. The deploy recipe ships exactly that export after checking that the merged tree is the tested
+# one. No secrets: every build value is public (apps/web/.env.gully).
+name: Gully Multisig build
+
+on:
+  pull_request:
+    branches: [gully/testnet]
+  workflow_dispatch:
+    inputs:
+      new_test:
+        description: Path of the PR's new test for the red check (must fail on the base branch's sources)
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gully-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    container: node:22-bookworm
+    env:
+      NEW_TEST: ${{ github.event.inputs.new_test || 'apps/web/src/hooks/__tests__/useGullyNoNativeValue.test.ts' }}
+      JEST_SUITES: components/common/(GullyLegal|Disclaimer|CookieAndTermBanner|Header|Footer|PageLayout|MetaTags)|components/sidebar|components/gully|GullySignIn|new-safe/(create|load)|config/__tests__/gully|services/analytics/__tests__/useMixpanel|store/__tests__/index|hooks/__tests__/useGullyNoNativeValue|tx-flow/flows/TokenTransfer|balances/AssetsTable|features/spending-limits/__tests__/spendingLimitDeployments|services/__tests__/gully-connect
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tree under test
+        id: tree
+        run: |
+          git config --global --add safe.directory '*'
+          echo "merged tree: $(git rev-parse 'HEAD^{tree}')"
+          echo "tree=$(git rev-parse 'HEAD^{tree}' | cut -c1-12)" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify HEAD^2 >/dev/null; then
+            echo "base $(git rev-parse HEAD^1), head $(git rev-parse HEAD^2)"
+            echo "NEXT_PUBLIC_COMMIT_HASH=$(git rev-parse HEAD^2 | cut -c1-7)" >> "$GITHUB_ENV"
+            git diff --name-only --diff-filter=d HEAD^1 HEAD -- 'apps/web/src/*.ts' 'apps/web/src/*.tsx' 'apps/web/src/*.js' > /tmp/changed.txt
+          else
+            echo "NEXT_PUBLIC_COMMIT_HASH=$(git rev-parse HEAD | cut -c1-7)" >> "$GITHUB_ENV"
+            : > /tmp/changed.txt
+          fi
+          echo "changed source files: $(wc -l < /tmp/changed.txt)"
+
+      - name: Build the static export (apps/web/scripts/gully-build.sh)
+        run: sh apps/web/scripts/gully-build.sh
+
+      - name: Prettier on the changed files
+        run: |
+          rc=0
+          for f in $(grep -vxF "$NEW_TEST" /tmp/changed.txt) $( [ -f "$NEW_TEST" ] && echo "$NEW_TEST" ); do
+            ./node_modules/.bin/prettier --check --config ./.prettierrc --ignore-path ./.prettierignore "$f" >/dev/null 2>&1 && continue
+            if git cat-file -e "HEAD^1:$f" 2>/dev/null && ! git show "HEAD^1:$f" | ./node_modules/.bin/prettier --config ./.prettierrc --stdin-filepath "$f" --check >/dev/null 2>&1; then
+              echo "prettier: $f was not prettier-clean on the base either (skipped)"
+            else
+              echo "prettier FAILED: $f"; ./node_modules/.bin/prettier --config ./.prettierrc "$f" | diff "$f" - | head -20; rc=1
+            fi
+          done
+          exit $rc
+
+      - name: Jest (the Gully suites and the touched flows)
+        run: yarn workspace @safe-global/web jest --ci --runInBand --testPathPattern "$JEST_SUITES"
+
+      - name: Export checks
+        run: |
+          O=apps/web/out
+          test -f $O/index.html
+          has() { cat $O/_next/static/chunks/*.js $O/_next/static/chunks/pages/*.js $O/_next/static/chunks/pages/*/*.js 2>/dev/null | grep -qF -- "$1" || { echo "the export has no: $1"; exit 1; }; }
+          for m in gully-safe-activity 'A new version of Gully Multisig' 'https://gullychain.xyz/terms' 'https://multisig.gullychain.xyz/cgw' GULLY_NO_NATIVE_VALUE 0x29fcB43b46531BcA003ddC8FCB67FFE91900C762 'pays gas only'; do has "$m"; done
+          n=$(grep -rlF 'safe.gullychain.xyz' $O --include=*.js --include=*.html --include=*.txt --include=*.xml --include=*.json --include=*.webmanifest | wc -l)
+          [ "$n" = 0 ] || { echo "the export still names safe.gullychain.xyz:"; grep -rlF 'safe.gullychain.xyz' $O --include=*.js --include=*.html --include=*.txt --include=*.xml --include=*.json | head -5; exit 1; }
+          n=$(grep -lF 'Gully Safe' $O/*.html $O/*/*.html 2>/dev/null | wc -l)
+          [ "$n" = 0 ] || { echo "$n exported page(s) still say Gully Safe:"; grep -lF 'Gully Safe' $O/*.html $O/*/*.html | head -5; exit 1; }
+          grep -qF 'Gully Multisig' $O/welcome.html && grep -qF 'https://multisig.gullychain.xyz/' $O/sitemap.xml && grep -qF 'multisig.gullychain.xyz' $O/robots.txt
+          grep -q skipWaiting $O/sw.js && grep -q clientsClaim $O/sw.js
+          echo "export checks OK"
+          tar -czf /tmp/out.tgz -C apps/web out
+          sha256sum /tmp/out.tgz
+
+      - name: Keep the export
+        uses: actions/upload-artifact@v4
+        with:
+          name: gully-multisig-export-${{ steps.tree.outputs.tree }}
+          path: /tmp/out.tgz
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Red check (the new test must fail on the base branch's sources)
+        run: |
+          git rev-parse -q --verify HEAD^2 >/dev/null || { echo "not a pull request merge: skipped"; exit 0; }
+          git cat-file -e "HEAD^1:$NEW_TEST" 2>/dev/null && { echo "the base already has $NEW_TEST: the red check proves nothing"; exit 1; }
+          cp "$NEW_TEST" /tmp/new.test
+          rm -rf apps/web/src && git archive HEAD^1 apps/web/src | tar -x
+          mkdir -p "$(dirname "$NEW_TEST")" && cp /tmp/new.test "$NEW_TEST"
+          if yarn workspace @safe-global/web jest --ci --runInBand "$NEW_TEST" > /tmp/red.log 2>&1; then
+            echo "RED FAILED: the new test passes on the base branch's sources"; tail -20 /tmp/red.log; exit 1
+          fi
+          grep -E '^Tests:|^Test Suites:|Cannot find module' /tmp/red.log | head -5
+          echo "RED OK: the new test fails on the base branch's sources"

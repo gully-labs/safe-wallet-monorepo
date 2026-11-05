@@ -60,7 +60,7 @@ const RecipientRow = ({ fieldArray, removable = true, remove, disableSpendingLim
   const tokenAddressFieldName = getFieldName(TokenTransferFields.tokenAddress, fieldArray)
   useEffect(() => {
     if (noNativeValue && !selectedToken && firstTokenAddress) {
-      setValue(tokenAddressFieldName, firstTokenAddress)
+      setValue(tokenAddressFieldName as `recipients.${number}.tokenAddress`, firstTokenAddress)
     }
   }, [noNativeValue, selectedToken, firstTokenAddress, tokenAddressFieldName, setValue])
 
