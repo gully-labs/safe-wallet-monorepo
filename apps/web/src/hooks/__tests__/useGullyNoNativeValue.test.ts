@@ -24,9 +24,9 @@ describe('Gully Multisig: chains whose native coin pays gas only', () => {
 
 describe('Gully Multisig: Safe contracts per served chain', () => {
   it('registers Gully Chain Testnet and Anubis side by side without one overwriting the other', () => {
-    expect(registerCustomDeployments(gullyContracts.chainId, gullyContracts.safeVersion, gullyContracts.contracts)).toBe(
-      true,
-    )
+    expect(
+      registerCustomDeployments(gullyContracts.chainId, gullyContracts.safeVersion, gullyContracts.contracts),
+    ).toBe(true)
     for (const chain of gullyChains.chains) {
       expect(registerCustomDeployments(chain.chainId, chain.safeVersion, chain.contracts)).toBe(true)
     }
