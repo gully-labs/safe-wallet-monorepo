@@ -1,6 +1,7 @@
 import { ImplementationVersionState } from '@safe-global/store/gateway/types'
 import React, { useContext, useMemo, type ReactElement } from 'react'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import { Divider, ListItemButton } from '@mui/material'
 
 import {
@@ -27,6 +28,9 @@ import { BRIDGE_EVENTS, BRIDGE_LABELS } from '@/services/analytics/events/bridge
 import { EARN_EVENTS, EARN_LABELS } from '@/services/analytics/events/earn'
 import { isNonCriticalUpdate } from '@safe-global/utils/utils/chains'
 import { useIsHydrated } from '@/hooks/useIsHydrated'
+
+// Gully Multisig: its own chunk, the Safe's links to Gully Chain products (config/gullyIntegrations.ts)
+const GullyChainTools = dynamic(() => import('./GullyChainTools'), { ssr: false })
 
 const getSubdirectory = (pathname: string): string => {
   return pathname.split('/')[1]
@@ -125,44 +129,42 @@ const Navigation = (): ReactElement | null => {
         const shouldPlaceDivider = item.href === AppRoutes.apps.index || item.href === AppRoutes.stake
 
         return (
-          <Tooltip
-            title={isDisabled ? 'You need to activate your Safe first.' : ''}
-            placement="right"
-            key={item.href}
-            arrow
-          >
-            <div>
-              <ListItemButton
-                // disablePadding
-                sx={{ padding: 0 }}
-                disabled={isDisabled}
-                selected={isSelected}
-                onClick={isDisabled ? undefined : () => handleNavigationClick(item)}
-                key={item.href}
-              >
-                <SidebarListItemButton
-                  selected={isSelected}
-                  href={
-                    item.href && {
-                      pathname: getRoute(item.href),
-                      query,
-                    }
-                  }
+          <React.Fragment key={item.href}>
+            {item.href === AppRoutes.gullyServices && <GullyChainTools />}
+            <Tooltip title={isDisabled ? 'You need to activate your Safe first.' : ''} placement="right" arrow>
+              <div>
+                <ListItemButton
+                  // disablePadding
+                  sx={{ padding: 0 }}
                   disabled={isDisabled}
+                  selected={isSelected}
+                  onClick={isDisabled ? undefined : () => handleNavigationClick(item)}
+                  key={item.href}
                 >
-                  {item.icon && <SidebarListItemIcon badge={getBadge(item)}>{item.icon}</SidebarListItemIcon>}
+                  <SidebarListItemButton
+                    selected={isSelected}
+                    href={
+                      item.href && {
+                        pathname: getRoute(item.href),
+                        query,
+                      }
+                    }
+                    disabled={isDisabled}
+                  >
+                    {item.icon && <SidebarListItemIcon badge={getBadge(item)}>{item.icon}</SidebarListItemIcon>}
 
-                  <SidebarListItemText data-testid="sidebar-list-item" bold>
-                    {item.label}
+                    <SidebarListItemText data-testid="sidebar-list-item" bold>
+                      {item.label}
 
-                    {ItemTag}
-                  </SidebarListItemText>
-                </SidebarListItemButton>
-              </ListItemButton>
+                      {ItemTag}
+                    </SidebarListItemText>
+                  </SidebarListItemButton>
+                </ListItemButton>
 
-              {shouldPlaceDivider && <Divider sx={{ mt: 1, mb: 0.5, borderColor: 'background.main' }} />}
-            </div>
-          </Tooltip>
+                {shouldPlaceDivider && <Divider sx={{ mt: 1, mb: 0.5, borderColor: 'background.main' }} />}
+              </div>
+            </Tooltip>
+          </React.Fragment>
         )
       })}
     </SidebarList>

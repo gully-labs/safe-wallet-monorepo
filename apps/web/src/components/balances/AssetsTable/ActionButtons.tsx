@@ -1,10 +1,14 @@
 import React, { type ReactElement } from 'react'
+import dynamic from 'next/dynamic'
 import { Box, Checkbox, Stack } from '@mui/material'
 import SendButton from './SendButton'
 import SwapButton from '@/features/swap/components/SwapButton'
 import { SWAP_LABELS } from '@/services/analytics/events/swaps'
 import { type Balance } from '@safe-global/store/gateway/AUTO_GENERATED/balances'
 import css from './styles.module.css'
+
+// Gully Multisig: its own chunk, the read-only Gully views of a token (renders nothing where no product serves it)
+const GullyTokenActions = dynamic(() => import('./GullyTokenActions'), { ssr: false })
 
 interface ActionButtonsProps {
   tokenInfo: Balance['tokenInfo']
@@ -37,6 +41,8 @@ export const ActionButtons = ({
             <SwapButton tokenInfo={tokenInfo} amount="0" trackingLabel={SWAP_LABELS.asset} />
           </Box>
         )}
+
+        <GullyTokenActions tokenAddress={tokenInfo.address} />
       </Stack>
     )
   }
@@ -55,6 +61,8 @@ export const ActionButtons = ({
       {isSwapFeatureEnabled && (
         <SwapButton tokenInfo={tokenInfo} amount="0" trackingLabel={SWAP_LABELS.asset} onlyIcon={onlyIcon} />
       )}
+
+      <GullyTokenActions tokenAddress={tokenInfo.address} />
 
       {showHiddenAssets && onToggleAsset && (
         <Box display="flex" alignItems="center" height="28px">

@@ -1,6 +1,8 @@
 /** Gully Multisig: Gully Labs links and the Gully services shown in the app. All open in a new tab. */
 
 export const GULLY_LABS_URL = 'https://gullylabs.xyz'
+// The Gully Multisig guide: the sidebar's help button
+export const GULLY_DOCS_URL = 'https://docs.gullychain.xyz/safe/'
 // Gully Chain has one Terms and one Privacy Policy, and they cover Gully Multisig: /terms and /privacy here redirect to them.
 export const GULLY_TERMS_URL = 'https://gullychain.xyz/terms'
 export const GULLY_PRIVACY_URL = 'https://gullychain.xyz/privacy'
@@ -22,6 +24,7 @@ export const GULLY_SERVICES: GullyService[] = [
   { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
   { name: 'Explorer', description: 'Blocks, transactions and tokens', href: 'https://testnet-explorer.gullychain.xyz/' },
   { name: 'Faucet', description: 'Free testnet ETH', href: 'https://faucet.gullychain.xyz/' },
+  { name: 'Gully Core', description: 'Pools and tokens on the testnet', href: 'https://gullychain.xyz/core/' },
   { name: 'Verify', description: 'Contract source, Sourcify', href: 'https://verify.gullychain.xyz/' },
   { name: 'Sentry', description: 'Free keys, run a watcher', href: 'https://sentry.gullychain.xyz/' },
   { name: 'Docs', description: 'Guides and reference', href: 'https://docs.gullychain.xyz/' },
