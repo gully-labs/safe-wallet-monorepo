@@ -3,7 +3,7 @@ import { Typography } from '@mui/material'
 import { GULLY_SERVICES } from '@/config/gully'
 import css from './styles.module.css'
 
-/** Gully Safe: the other Gully Chain products, as external links (new tab). */
+/** Gully Multisig: the other Gully Chain products, as external links (new tab). */
 const GullyServices = (): ReactElement => (
   <section className={css.panel}>
     <Typography variant="h2" className={css.title}>

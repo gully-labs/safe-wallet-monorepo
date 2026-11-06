@@ -42,7 +42,7 @@ export const createOnboard = (
 
     appMetadata: {
       name: BRAND_NAME,
-      // Gully Safe: GullyChain brand kit v4 icon (logo/gc-icon.svg) in the web3-onboard modal
+      // Gully Multisig: GullyChain brand kit v4 icon (logo/gc-icon.svg) in the web3-onboard modal
       icon: location.origin + '/brand/logo/gc-icon.svg',
       description: `${BRAND_NAME} – multisig smart accounts on Gully Chain`,
     },

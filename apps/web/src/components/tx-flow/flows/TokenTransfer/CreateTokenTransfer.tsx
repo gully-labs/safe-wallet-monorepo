@@ -1,4 +1,5 @@
 import { useVisibleTokens } from '@/components/tx-flow/flows/TokenTransfer/utils'
+import { useGullyNoNativeValue } from '@/hooks/useGullyNoNativeValue'
 import { type ReactElement, useContext, useEffect, useMemo, useState } from 'react'
 import { type Balance } from '@safe-global/store/gateway/AUTO_GENERATED/balances'
 import { FormProvider, useFieldArray, useForm, useWatch } from 'react-hook-form'
@@ -92,6 +93,7 @@ const CreateTokenTransfer = ({ txNonce }: CreateTokenTransferProps): ReactElemen
   const canCreateStandardTx = useHasPermission(Permission.CreateTransaction)
   const canCreateSpendingLimitTx = useHasPermission(Permission.CreateSpendingLimitTransaction)
   const balancesItems = useVisibleTokens()
+  const { noNativeValue, note: noNativeValueNote } = useGullyNoNativeValue()
   const { setNonce } = useContext(SafeTxContext)
   const [safeApps] = useRemoteSafeApps({ name: SafeAppsName.CSV })
   const isMassPayoutsEnabled = useHasFeature(FEATURES.MASS_PAYOUTS)
@@ -191,6 +193,11 @@ const CreateTokenTransfer = ({ txNonce }: CreateTokenTransferProps): ReactElemen
       <FormProvider {...formMethods}>
         <form onSubmit={handleSubmit(onNext)} className={commonCss.form}>
           <Stack spacing={3}>
+            {noNativeValue && (
+              <Alert severity="info" data-testid="gully-no-native-value">
+                {noNativeValueNote}
+              </Alert>
+            )}
             <Stack spacing={8}>
               {recipientFields.map((field, index) => (
                 <RecipientRow

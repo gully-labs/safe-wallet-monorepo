@@ -1,5 +1,5 @@
 #!/bin/sh
-# Gully Safe: build the static export (apps/web/out) with the values in apps/web/.env.gully.
+# Gully Multisig: build the static export (apps/web/out) with the values in apps/web/.env.gully.
 # Run from the repo root, e.g. in a node:22 container:
 #   docker run --rm -v "$PWD":/app -w /app node:22 sh apps/web/scripts/gully-build.sh
 set -eu

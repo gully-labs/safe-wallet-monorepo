@@ -35,7 +35,7 @@ export const navItems: NavItem[] = [
     href: AppRoutes.earn,
   },
   { label: 'Stake', icon: <SvgIcon component={StakeIcon} inheritViewBox />, href: AppRoutes.stake },
-  // Gully Safe: links to the other Gully products
+  // Gully Multisig: links to the other Gully products
   { label: 'Gully services', icon: <HubOutlinedIcon />, href: AppRoutes.gullyServices },
   {
     label: 'Settings',

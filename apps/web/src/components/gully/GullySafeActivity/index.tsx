@@ -27,7 +27,7 @@ export const dailyExecutions = (timestamps: number[], days = DAYS, now = Date.no
 }
 
 /**
- * Gully Safe: this Safe's activity on Gully Chain Testnet, live from the chain (read-only, no signing or tx code here).
+ * Gully Multisig: this Safe's activity on Gully Chain Testnet, live from the chain (read-only, no signing or tx code here).
  * Renders nothing on any other chain, so the upstream screens stay as they are. It reads the chain and address from the
  * URL, not the loaded Safe info, so its place is held from the first paint and nothing below it jumps.
  */

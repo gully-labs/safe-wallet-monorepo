@@ -1,8 +1,8 @@
 /**
- * Gully Safe: GullyChain brand kit v4 guard. Fails on any kit v3 leftover (colours, Exo 2, the 3D logo, wordmark files,
+ * Gully Multisig: GullyChain brand kit v4 guard. Fails on any kit v3 leftover (colours, Exo 2, the 3D logo, wordmark files,
  * v3 mascots), on a typed "GullyChain" wordmark in markup, and when a shipped kit file or shared script is not the
  * byte-identical copy of the source (kit: Desktop\GULLY LABS GRAPHICS\Gully Chain\brand-kit-v4; scripts: gully-ops
- * sites/_shared/gc-switcher 1.8.2 and sites/_shared/gc-connect 1.0.0).
+ * sites/_shared/gc-switcher 1.8.3 and sites/_shared/gc-connect 1.0.0).
  */
 import { createHash } from 'crypto'
 import { existsSync, readdirSync, readFileSync, statSync } from 'fs'
@@ -54,7 +54,7 @@ const V3: [string, RegExp][] = [
   ['kit v3 mascot', /gullychain-mascot/],
 ]
 
-describe('Gully Safe brand kit v4', () => {
+describe('Gully Multisig brand kit v4', () => {
   it('scans a real tree', () => {
     expect(SCANNED.length).toBeGreaterThan(500)
   })
@@ -88,10 +88,10 @@ describe('Gully Safe brand kit v4', () => {
     ['public/brand/mascots/mascot-builder.png', 'e3ebd29bff2ab4577246de3c97d4bad72421af2c7df0fc7adce6ae44f14b4c97'],
     ['public/brand/mascots/mascot-executive.png', '3e130446792c626fcaea3c51b7ee98a6874ebb0ea4782dab819a119681ee47d6'],
     ['public/brand/mascots/mascot-presenter.png', '93e59014a26463e60dd14ab2e217eb808222f057287221ae75e2e79057f2262e'],
-    // OG card: gully-ops sites/_shared/brand/og/safe.gullychain.xyz.png (feat/gc-sync-v4 bf6aee9)
+    // OG card: gully-ops sites/_shared/brand/og/multisig.gullychain.xyz.png (feat/gc-sync-v4 bf6aee9)
     ['public/og-image.png', 'dcb7f18f5443ca1a28a6e9b15feb593d305fec1d54a25edc34f8dfb2725ba153'],
     ['public/fonts/inter-var.woff2', 'f052ee44c3728dfd23aba8a4567150bc314d23903026fbb6ad089422c2df56af'],
-    ['public/assets/gc-switcher.js', '4022b13d3de24363824b6c317032bf22187aa84549631905f570fa4e9286228b'],
+    ['public/assets/gc-switcher.js', '1f50fccea5fb6b88bd8fd913e60f9576d45202178d068c1f9b71259133ecde2c'],
     ['public/assets/gc-connect.js', '29c387340d0151ad2c2a01277853090b2d1442907b631146169ebd6a9bba2c2e'],
   ]
   it.each(KIT)('%s is the byte-identical source file', (file, hash) => {
@@ -100,9 +100,9 @@ describe('Gully Safe brand kit v4', () => {
     expect(sha(p)).toBe(hash)
   })
 
-  it('carries gc-switcher 1.8.2 (no kre8 entries) and gc-connect 1.0.0', () => {
+  it('carries gc-switcher 1.8.3 (no kre8 entries) and gc-connect 1.0.0', () => {
     const sw = readFileSync(join(WEB, 'public', 'assets', 'gc-switcher.js'), 'utf8')
-    expect(sw).toContain("GC_SWITCHER_VERSION = '1.8.2'")
+    expect(sw).toContain("GC_SWITCHER_VERSION = '1.8.3'")
     expect(sw).not.toMatch(/href: 'https:\/\/(offers\.)?kre8\.fun\//)
     expect(readFileSync(join(WEB, 'public', 'assets', 'gc-connect.js'), 'utf8')).toContain("GC_CONNECT_VERSION = '1.1.0'")
   })

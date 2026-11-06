@@ -1,0 +1,24 @@
+{
+  "$comment": "Gully Multisig: Safe contracts of every served chain besides Gully Chain Testnet (gully-contracts.json). The chain list itself (name, RPC, explorer, logo, features) comes from the Gully Config Service; these addresses are registered in the safe-deployments tables because the chains are not in @safe-global/safe-deployments. Source of truth: gully-ops l3/safe/chains/<chainId>.json and gullychain-sdk src/registry.ts.",
+  "chains": [
+    {
+      "chainId": "6714",
+      "name": "Anubis Network",
+      "route": "canonical",
+      "safeVersion": "1.4.1",
+      "contracts": {
+        "singleton": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+        "safeL2": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+        "proxyFactory": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+        "fallbackHandler": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+        "multiSend": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+        "multiSendCallOnly": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+        "signMessageLib": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+        "createCall": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+        "simulateTxAccessor": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+        "safeToL2Setup": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54",
+        "safeToL2Migration": "0xfF83F6335d8930cBad1c0D439A841f01888D9f69"
+      }
+    }
+  ]
+}

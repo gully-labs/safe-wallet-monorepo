@@ -1,5 +1,5 @@
 /**
- * Gully Safe: "Gully Wallet" as a web3-onboard wallet. The Gully Wallet is the user's Gully ID passkey wallet; its
+ * Gully Multisig: "Gully Wallet" as a web3-onboard wallet. The Gully Wallet is the user's Gully ID passkey wallet; its
  * EIP-1193 provider is `window.gully` from https://gullyid.xyz/wallet.js (EIP-6963 rdns xyz.gullyid.wallet, approvals
  * in a gullyid.xyz pop-up). The shared connect dialog (gc-connect) preloads the SDK; if it is not there yet,
  * getInterface loads it. CSP: script-src already allows https://gullyid.xyz (securityHeaders.ts).

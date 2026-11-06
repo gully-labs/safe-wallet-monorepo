@@ -35,7 +35,7 @@ const read = (rel: string) => readFileSync(join(SRC, rel), 'utf-8')
 // Names and texts of the upstream operator that must never appear on our legal routes
 const UPSTREAM = /Safe Labs|Safe Ecosystem Foundation|GmbH|safe\.global|Core Contributors|Telemedia|Rahul|Berlin|Zug/i
 
-describe('Gully Safe legal routes', () => {
+describe('Gully Multisig legal routes', () => {
   beforeEach(() => mockNavigate.mockClear())
 
   it('the canonical URLs are the Gully Chain Terms and Privacy Policy', () => {
@@ -90,7 +90,7 @@ describe('Gully Safe legal routes', () => {
   })
 })
 
-describe('Gully Safe footer', () => {
+describe('Gully Multisig footer', () => {
   it('links Terms and Privacy to gullychain.xyz, plus Cookies and Licenses, and keeps the GPL credit', () => {
     render(<Footer forceShow />, { routerProps: { pathname: '/home' } })
     const terms = screen.getByRole('link', { name: 'Terms' })
@@ -105,7 +105,7 @@ describe('Gully Safe footer', () => {
   })
 })
 
-describe('Gully Safe terms notice', () => {
+describe('Gully Multisig terms notice', () => {
   it('uses a Gully version, so everyone who accepted the Safe{Wallet} terms sees the notice again', () => {
     expect(version).toBe('gully-2026-11-03')
     expect(lastUpdated).toBe('November 3, 2026')
@@ -132,7 +132,7 @@ describe('Gully Safe terms notice', () => {
   })
 })
 
-describe('Gully Safe consent line', () => {
+describe('Gully Multisig consent line', () => {
   it('reads "By continuing you agree to the Gully Chain Terms and Privacy Policy." with both links', () => {
     render(<GullyLegalConsent />)
     const line = screen.getByTestId('gully-legal-consent')

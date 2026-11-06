@@ -54,7 +54,7 @@ const PageLayout = ({ pathname, children }: { pathname: string; children: ReactE
 
         <BatchSidebar isOpen={isBatchOpen} onToggle={setBatchOpen} />
 
-        {/* Gully Safe: the welcome page renders its own restyled footer (GullyLanding) */}
+        {/* Gully Multisig: the welcome page renders its own restyled footer (GullyLanding) */}
         {!isSafeLabsTermsPage && !isWelcomePage && <Footer />}
       </div>
     </>

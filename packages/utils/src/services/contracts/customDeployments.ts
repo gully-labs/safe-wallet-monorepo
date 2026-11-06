@@ -1,13 +1,15 @@
 /**
- * Gully Safe: runtime registration of Safe contracts deployed at NON-canonical addresses.
+ * Gully Multisig: runtime registration of Safe contracts on chains the bundled tables do not list
+ * (non-canonical addresses on Gully Chain, Safe's canonical addresses on Anubis).
  *
  * The app and protocol-kit resolve every Safe contract address through the bundled
  * `@safe-global/safe-deployments` tables (`get*Deployment({ network: chainId })`). A chain that is not
  * in those tables has no Safe contracts as far as the app is concerned.
  *
- * `registerCustomDeployments` adds a chain to those tables in place: each contract gets an extra
- * deployment type `CUSTOM_DEPLOYMENT_TYPE` and `networkAddresses[chainId]` points to it. After that every
- * lookup for that chain returns the custom address. `getCustomContractNetworks` returns the same
+ * `registerCustomDeployments` adds a chain to those tables in place: `networkAddresses[chainId]` points to the
+ * `canonical` deployment type when the address is Safe's canonical one, otherwise to an extra deployment type
+ * (`CUSTOM_DEPLOYMENT_TYPE` for the first set of addresses, `custom-<chainId>` for a chain whose addresses differ
+ * from it, so one chain never overwrites another). After that every lookup for that chain returns its address. `getCustomContractNetworks` returns the same
  * addresses in protocol-kit's `contractNetworks` format, for callers that pass them explicitly.
  */
 import type { ContractNetworksConfig } from '@safe-global/protocol-kit'
@@ -88,12 +90,21 @@ export const registerCustomDeployments = (
     if (!deployment) continue
 
     const deploymentsByType = deployment.deployments as unknown as Record<string, { address: string; codeHash: string }>
-    deploymentsByType[CUSTOM_DEPLOYMENT_TYPE] = {
-      address,
-      // Same source as the canonical build, only the deployment address differs.
-      codeHash: deploymentsByType.canonical?.codeHash ?? '',
+    const same = (other: string | undefined) => !!other && other.toLowerCase() === address.toLowerCase()
+    let type = CUSTOM_DEPLOYMENT_TYPE
+    if (same(deploymentsByType.canonical?.address)) {
+      type = 'canonical'
+    } else if (deploymentsByType[type] && !same(deploymentsByType[type].address)) {
+      type = `${CUSTOM_DEPLOYMENT_TYPE}-${chainId}`
     }
-    ;(deployment.networkAddresses as unknown as Record<string, string>)[chainId] = CUSTOM_DEPLOYMENT_TYPE
+    if (type !== 'canonical') {
+      deploymentsByType[type] = {
+        address,
+        // Same source as the canonical build, only the deployment address differs.
+        codeHash: deploymentsByType.canonical?.codeHash ?? '',
+      }
+    }
+    ;(deployment.networkAddresses as unknown as Record<string, string>)[chainId] = type
   }
 
   registered.set(chainId, addresses)

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactElement, type RefObject } from 'react'
 import css from './charts.module.css'
 
-/** Gully Safe landing charts: plain SVG, single series each (so no legend: the title names it), crosshair/hover
+/** Gully Multisig landing charts: plain SVG, single series each (so no legend: the title names it), crosshair/hover
  * tooltips, a table view for screen readers, and draw-in animations that stop under prefers-reduced-motion. */
 
 const useWidth = <T extends HTMLElement>(): [RefObject<T | null>, number] => {

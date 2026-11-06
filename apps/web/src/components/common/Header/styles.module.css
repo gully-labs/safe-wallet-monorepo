@@ -101,7 +101,7 @@
     display: none;
   }
 
-  /* Gully Safe: two rows on phones. The kit's "Sign in with Gully ID" pill cannot shrink, so it gets its own row and
+  /* Gully Multisig: two rows on phones. The kit's "Sign in with Gully ID" pill cannot shrink, so it gets its own row and
      the logo, bell and Connect keep the first. Row heights add up to --header-height (globals.css). */
   .container {
     flex-wrap: wrap;
@@ -122,7 +122,7 @@
     border-top: 1px solid var(--color-background-main);
   }
 
-  /* Gully Safe: at 375 px the network selector ended 6 px past the screen edge */
+  /* Gully Multisig: at 375 px the network selector ended 6 px past the screen edge */
   .container {
     padding-right: var(--space-1);
   }

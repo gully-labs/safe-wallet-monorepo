@@ -24,7 +24,7 @@
 }
 
 .container.inverted {
-  /* Gully Safe: the night surface, not a white box on a black page */
+  /* Gully Multisig: the night surface, not a white box on a black page */
   background: var(--color-background-paper);
   border: 1px solid var(--color-border-light);
   border-radius: 12px !important;

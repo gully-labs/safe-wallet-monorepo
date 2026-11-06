@@ -135,7 +135,7 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       'bn.js': path.resolve('../../node_modules/bn.js/lib/bn.js'),
-      // Gully Safe: one safe-deployments instance for the app, packages/utils and protocol-kit, so the
+      // Gully Multisig: one safe-deployments instance for the app, packages/utils and protocol-kit, so the
       // custom contract registration (src/config/gully-deployments.ts) is seen by all of them.
       '@safe-global/safe-deployments': path.dirname(
         createRequire(import.meta.url).resolve('@safe-global/safe-deployments/package.json'),

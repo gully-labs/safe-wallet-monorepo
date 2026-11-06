@@ -12,7 +12,7 @@ import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGully
 import css from './styles.module.css'
 import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
 
-/** Gully Safe landing (/welcome): marketing copy, the connect card, live Safe numbers from Gully Chain and the mascot. */
+/** Gully Multisig landing (/welcome): marketing copy, the connect card, live Safe numbers from Gully Chain and the mascot. */
 
 const DOCS_SAFE = 'https://docs.gullychain.xyz/safe/'
 const BRIDGE = 'https://testnet-bridge.gullychain.xyz/'
@@ -44,8 +44,8 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
 
 const FAQ = [
   {
-    q: 'What is Gully Safe?',
-    a: "Gully Safe is Gully Labs' build of Safe{Wallet} for Gully Chain: a multi-signature smart account where a set of owners shares control and a transaction needs a threshold of their signatures.",
+    q: 'What is Gully Multisig?',
+    a: "Gully Multisig is Gully Labs' build of Safe{Wallet} for Gully Chain: a multi-signature smart account where a set of owners shares control and a transaction needs a threshold of their signatures.",
   },
   {
     q: 'Which network does it run on?',
@@ -57,7 +57,7 @@ const FAQ = [
   },
   {
     q: 'What does it cost?',
-    a: 'Gully Safe is free. Creating a Safe and executing transactions cost a small amount of gas in testnet ETH, which the faucet hands out.',
+    a: 'Gully Multisig is free. Creating a Safe and executing transactions cost a small amount of gas in testnet ETH, which the faucet hands out.',
   },
   {
     q: 'Can I watch a Safe without owning it?',
@@ -259,10 +259,10 @@ const GullyLanding = (): ReactElement => {
         {
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'Gully Safe',
+          name: 'Gully Multisig',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Web',
-          url: 'https://safe.gullychain.xyz/welcome',
+          url: 'https://multisig.gullychain.xyz/welcome',
           description: 'Multi-signature Safe smart accounts on Gully Chain, built on the audited Safe 1.4.1 contracts.',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           publisher: { '@type': 'Organization', name: 'Gully Labs', url: 'https://gullylabs.xyz' },
@@ -285,13 +285,13 @@ const GullyLanding = (): ReactElement => {
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       </Head>
-      {/* GullyChain product switcher 1.8.2 (gully-ops sites/_shared/gc-switcher, byte-identical copy; kit v4 dark theme) */}
+      {/* GullyChain product switcher 1.8.3 (gully-ops sites/_shared/gc-switcher, byte-identical copy; kit v4 dark theme) */}
       <Script src="/assets/gc-switcher.js" strategy="afterInteractive" />
 
       <header className={css.topbar}>
         <div className={css.topbarInner}>
           {createElement('gc-switcher', { current: 'safe', theme: 'dark' })}
-          <nav className={css.topnav} aria-label="Gully Safe links">
+          <nav className={css.topnav} aria-label="Gully Multisig links">
             <a href={DOCS_SAFE} {...EXT}>
               <Icon name="bookOpen" size={18} /> Docs
             </a>
@@ -353,7 +353,7 @@ const GullyLanding = (): ReactElement => {
 
         <section className={css.section} aria-labelledby="why-title">
           <div className={css.sectionHead}>
-            <p className={css.eyebrow}>Why Gully Safe</p>
+            <p className={css.eyebrow}>Why Gully Multisig</p>
             <h2 id="why-title" className={css.h2}>
               Shared custody without the trust fall
             </h2>

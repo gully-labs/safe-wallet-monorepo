@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import gullyContracts from '@/config/gully-contracts.json'
 
 /**
- * Gully Safe landing: live Safe numbers for Gully Chain Testnet, read straight from the chain through the public RPC.
+ * Gully Multisig landing: live Safe numbers for Gully Chain Testnet, read straight from the chain through the public RPC.
  * - Safes: ProxyCreation logs of both Safe 1.4.1 factories on 485590 (the Gully deployment the app uses, and the
  *   canonical-address factory that ERC-4337 / SDK flows use).
  * - Transactions executed: ExecutionSuccess logs emitted by those Safes.

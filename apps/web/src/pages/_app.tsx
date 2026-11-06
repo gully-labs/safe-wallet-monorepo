@@ -1,4 +1,4 @@
-// Gully Safe: must run before any Safe contract address is resolved.
+// Gully Multisig: must run before any Safe contract address is resolved.
 import '@/config/gully-deployments'
 import Analytics from '@/services/analytics/Analytics'
 import type { ReactNode } from 'react'

@@ -47,7 +47,7 @@ export const CookieAndTermBanner = ({
   inverted?: boolean
 }): ReactElement => {
   const isOfficialHost = useIsOfficialHost()
-  // Gully Safe: Beamer and analytics are not part of this build, so there is nothing to opt in to and no warning
+  // Gully Multisig: Beamer and analytics are not part of this build, so there is nothing to opt in to and no warning
   const warning = warningKey && isOfficialHost ? COOKIE_AND_TERM_WARNING[warningKey] : undefined
   const dispatch = useAppDispatch()
   const cookies = useAppSelector(selectCookies)
@@ -116,11 +116,11 @@ export const CookieAndTermBanner = ({
               </Typography>
             ) : (
               <Typography variant="body2" sx={{ mb: 2 }} data-testid="gully-terms-notice">
-                By using Gully Safe you agree to the{' '}
+                By using Gully Multisig you agree to the{' '}
                 <ExternalLink href={GULLY_TERMS_URL}>Gully Chain Terms</ExternalLink> (last updated{' '}
                 {metadata.lastUpdated}) and the <ExternalLink href={GULLY_PRIVACY_URL}>Privacy Policy</ExternalLink>.
-                Gully Safe sets no tracking cookies: it keeps your settings and Safe data in this browser&apos;s local
-                storage. <ExternalLink href={AppRoutes.cookie}>Cookies and local storage</ExternalLink>
+                Gully Multisig sets no tracking cookies: it keeps your settings and Safe data in this browser&apos;s
+                local storage. <ExternalLink href={AppRoutes.cookie}>Cookies and local storage</ExternalLink>
               </Typography>
             )}
 

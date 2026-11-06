@@ -9,6 +9,8 @@ import { ASSETS_EVENTS } from '@/services/analytics/events/assets'
 import { TokenTransferFlow } from '@/components/tx-flow/flows'
 import { TxModalContext } from '@/components/tx-flow'
 import css from '@/components/common/AssetActionButton/styles.module.css'
+import { TokenType } from '@safe-global/store/gateway/types'
+import { useGullyNoNativeValue } from '@/hooks/useGullyNoNativeValue'
 
 const SendButton = ({
   tokenInfo,
@@ -21,6 +23,9 @@ const SendButton = ({
 }) => {
   const spendingLimit = useSpendingLimit(tokenInfo)
   const { setTxFlow } = useContext(TxModalContext)
+  // Gully Multisig: a native coin that pays gas only (Anubis gasDAI) cannot be sent; the button says why
+  const { noNativeValue, note } = useGullyNoNativeValue()
+  const cannotSend = noNativeValue && tokenInfo.type === TokenType.NATIVE_TOKEN
 
   const onSendClick = () => {
     setTxFlow(<TokenTransferFlow recipients={[{ tokenAddress: tokenInfo.address }]} />)
@@ -31,12 +36,12 @@ const SendButton = ({
       {(isOk) => (
         <Track {...ASSETS_EVENTS.SEND}>
           {onlyIcon ? (
-            <Tooltip title={isOk ? 'Send' : ''} placement="top" arrow>
+            <Tooltip title={cannotSend ? note : isOk ? 'Send' : ''} placement="top" arrow>
               <span>
                 <IconButton
                   data-testid="send-button"
                   onClick={onSendClick}
-                  disabled={!isOk}
+                  disabled={!isOk || cannotSend}
                   size="small"
                   aria-label="Send"
                   className={css.assetActionIconButton}
@@ -46,18 +51,22 @@ const SendButton = ({
               </span>
             </Tooltip>
           ) : (
-            <Button
-              data-testid="send-button"
-              variant="contained"
-              color={light ? 'background.paper' : 'primary'}
-              size="compact"
-              startIcon={<ArrowIconNW />}
-              onClick={onSendClick}
-              disabled={!isOk}
-              className={css.sendButton}
-            >
-              Send
-            </Button>
+            <Tooltip title={cannotSend ? note : ''} placement="top" arrow>
+              <span>
+                <Button
+                  data-testid="send-button"
+                  variant="contained"
+                  color={light ? 'background.paper' : 'primary'}
+                  size="compact"
+                  startIcon={<ArrowIconNW />}
+                  onClick={onSendClick}
+                  disabled={!isOk || cannotSend}
+                  className={css.sendButton}
+                >
+                  Send
+                </Button>
+              </span>
+            </Tooltip>
           )}
         </Track>
       )}

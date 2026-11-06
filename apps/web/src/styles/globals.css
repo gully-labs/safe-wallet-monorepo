@@ -27,7 +27,7 @@ main {
   width: 100%;
 }
 
-/* Gully Safe: GullyChain brand kit v4 tokens (GN 2.0 roles; the --gc-* names are kept, the values are kit v4).
+/* Gully Multisig: GullyChain brand kit v4 tokens (GN 2.0 roles; the --gc-* names are kept, the values are kit v4).
    night = ink ground, ink = cards, cyan = the emerald primary (ink text on it), blue = deep green fills,
    green = mint (live, links, focus), white = text, muted = AA secondary text on ink. */
 :root {
@@ -84,13 +84,13 @@ button {
   --footer-height: 67px;
 }
 
-/* Gully Safe: the two-row phone header (components/common/Header/styles.module.css) */
+/* Gully Multisig: the two-row phone header (components/common/Header/styles.module.css) */
 @media (max-width: 599.95px) {
   :root {
     --header-height: 108px;
   }
 
-  /* Gully Safe: every tap target on a phone is at least 44 px (WCAG 2.5.5). MUI's small and medium buttons are 32 to 42
+  /* Gully Multisig: every tap target on a phone is at least 44 px (WCAG 2.5.5). MUI's small and medium buttons are 32 to 42
      px tall and its small icon buttons 24 to 28 px. min-height leaves desktop and tablet alone and wins over a fixed
      height. Links inside a sentence keep their line (the WCAG inline exception). */
   .MuiButton-root,

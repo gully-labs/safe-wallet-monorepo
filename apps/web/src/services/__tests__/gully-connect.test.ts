@@ -77,7 +77,7 @@ describe('public/assets/gc-connect.js (the shared dialog)', () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const api = require(join(__dirname, '..', '..', '..', 'public', 'assets', 'gc-connect.js')) as GullyConnectApi
     expect(api.VERSION).toBe('1.0.0')
-    void api.open({ appName: 'Gully Safe' }).catch(() => undefined)
+    void api.open({ appName: 'Gully Multisig' }).catch(() => undefined)
     const host = document.querySelector('gc-connect-dialog') as HTMLElement
     const root = (host.shadowRoot ?? host) as ParentNode
     const titles = Array.from(root.querySelectorAll('.row .t b')).map((b) => b.textContent)
@@ -85,7 +85,7 @@ describe('public/assets/gc-connect.js (the shared dialog)', () => {
     expect(titles[1]).toBe('WalletConnect')
     expect(titles[2]).toBe('Rabby Wallet')
     expect(titles.slice(3)).toEqual(['MetaMask', 'Coinbase Wallet'])
-    expect(root.querySelector('h2')?.textContent).toBe('Connect a wallet to Gully Safe')
+    expect(root.querySelector('h2')?.textContent).toBe('Connect a wallet to Gully Multisig')
     const links = Array.from(root.querySelectorAll('a.row')).map((a) => a.getAttribute('href'))
     expect(links).toEqual(['https://metamask.io/download/', 'https://www.coinbase.com/wallet/downloads'])
   })

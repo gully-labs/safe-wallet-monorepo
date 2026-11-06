@@ -5,7 +5,7 @@ import { showNotification } from '@/store/notificationsSlice'
 const CHECK_MS = 30 * 60_000
 
 /**
- * Gully Safe: updates after a deploy take effect promptly.
+ * Gully Multisig: updates after a deploy take effect promptly.
  * The generated service worker already calls skipWaiting + clientsClaim, but a tab that is already open keeps running the
  * old code, and a worker update was only looked for on a page load. So: look for one when the tab comes back and every
  * 30 minutes, and when a NEW worker takes over a page that already had one, offer a reload. It never reloads by itself,
@@ -48,7 +48,7 @@ const GullySwUpdate = (): null => {
         showNotification({
           groupKey: 'gully-new-version',
           variant: 'info',
-          message: 'A new version of Gully Safe is ready.',
+          message: 'A new version of Gully Multisig is ready.',
           link: { title: 'Reload', onClick: () => window.location.reload() },
         }),
       )

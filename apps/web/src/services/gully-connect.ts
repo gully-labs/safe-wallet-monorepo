@@ -1,5 +1,5 @@
 /**
- * Gully Safe: the shared Gully Chain "Connect a wallet" dialog (gully-ops sites/_shared/gc-connect/gc-connect.js 1.0.0,
+ * Gully Multisig: the shared Gully Chain "Connect a wallet" dialog (gully-ops sites/_shared/gc-connect/gc-connect.js 1.0.0,
  * byte-identical copy in public/assets/gc-connect.js). Order: Gully Wallet (Gully ID passkey), WalletConnect (QR),
  * detected EIP-6963 wallets, then MetaMask / Rabby / Coinbase Wallet install links.
  *

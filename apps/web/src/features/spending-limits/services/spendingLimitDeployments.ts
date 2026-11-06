@@ -15,7 +15,7 @@ import { type SafeState } from '@safe-global/store/gateway/AUTO_GENERATED/safes'
 import { sameAddress } from '@safe-global/utils/utils/addresses'
 
 /**
- * Gully Safe: the AllowanceModule on Gully Chain (485590). The code is the canonical 0.1.1 creation code with salt 0,
+ * Gully Multisig: the AllowanceModule on Gully Chain (485590). The code is the canonical 0.1.1 creation code with salt 0,
  * replayed through the Arachnid deterministic deployer instead of the Safe singleton factory, so it has the canonical
  * runtime and ABI but its own address (gully-ops l3/generated/safe-allowance.json). `@safe-global/safe-modules-deployments`
  * has no 485590 entry, so the address is overlaid on the canonical deployment of the same version. Every other chain

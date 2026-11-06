@@ -12,9 +12,9 @@ const isCypress = Boolean(typeof window !== 'undefined' && window.Cypress)
  *
  * Fonts URLs are needed for WalletConnect
  * Calendly domain is needed for the scheduling integration
- * Gully Safe: Cloudflare Web Analytics injects its beacon from static.cloudflareinsights.com (it reports to
+ * Gully Multisig: Cloudflare Web Analytics injects its beacon from static.cloudflareinsights.com (it reports to
  * cloudflareinsights.com, already covered by connect-src *)
- * Gully Safe: Sign in with Gully ID loads its SDK from https://gullyid.xyz (its token and profile calls are covered by
+ * Gully Multisig: Sign in with Gully ID loads its SDK from https://gullyid.xyz (its token and profile calls are covered by
  * connect-src *, the button needs no style-src: the SDK styles it through CSSOM)
  */
 export const ContentSecurityPolicy = `

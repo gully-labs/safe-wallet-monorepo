@@ -1,6 +1,7 @@
 /**
- * Gully Safe: registers the Safe v1.4.1 contracts of Gully Chain Testnet (485590) before anything resolves
- * contract addresses. Imported first in `pages/_app.tsx`. Addresses live in `gully-contracts.json`.
+ * Gully Multisig: registers the Safe v1.4.1 contracts of Gully Chain Testnet (485590) and of every other served
+ * chain (`gully-chains.json`: Anubis 6714, Safe's canonical addresses) before anything resolves contract
+ * addresses. Imported first in `pages/_app.tsx`. Gully Chain's addresses live in `gully-contracts.json`.
  *
  * Only the contracts the web app resolves through `@safe-global/safe-deployments` are registered:
  * singleton, safeL2, proxyFactory, fallbackHandler, multiSend, multiSendCallOnly, signMessageLib,
@@ -11,6 +12,7 @@
  */
 import { registerCustomDeployments } from '@safe-global/utils/services/contracts/customDeployments'
 import gullyContracts from './gully-contracts.json'
+import gullyChains from './gully-chains.json'
 
 export const GULLY_CHAIN_ID = gullyContracts.chainId
 
@@ -21,5 +23,10 @@ export const GULLY_DEPLOYMENTS_REGISTERED = registerCustomDeployments(
 )
 
 if (!GULLY_DEPLOYMENTS_REGISTERED && typeof window !== 'undefined') {
-  console.warn(`[Gully Safe] gully-contracts.json is incomplete, chain ${GULLY_CHAIN_ID} has no Safe contracts`)
+  console.warn(`[Gully Multisig] gully-contracts.json is incomplete, chain ${GULLY_CHAIN_ID} has no Safe contracts`)
 }
+
+/** Chain ids of the other served chains whose Safe contracts were registered (gully-chains.json). */
+export const GULLY_EXTRA_CHAINS_REGISTERED: string[] = gullyChains.chains
+  .filter((chain) => registerCustomDeployments(chain.chainId, chain.safeVersion, chain.contracts))
+  .map((chain) => chain.chainId)

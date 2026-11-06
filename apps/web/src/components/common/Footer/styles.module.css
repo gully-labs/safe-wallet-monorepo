@@ -35,7 +35,7 @@
     visibility: hidden;
   }
 
-  /* Gully Safe: 44 px phone tap targets; a link inside the fork sentence stays inline */
+  /* Gully Multisig: 44 px phone tap targets; a link inside the fork sentence stays inline */
   .container li > a {
     display: inline-flex;
     align-items: center;
@@ -45,7 +45,7 @@
   }
 }
 
-/* Gully Safe: Powered by Gully Labs badge, native 189x56 */
+/* Gully Multisig: Powered by Gully Labs badge, native 189x56 */
 .badge {
   display: inline-flex;
 }

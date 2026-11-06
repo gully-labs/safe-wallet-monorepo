@@ -27,7 +27,7 @@ const footerPages = [
   AppRoutes.cookie,
   AppRoutes.terms,
   AppRoutes.licenses,
-  // Gully Safe: also show the footer (Powered by Gully Labs, source code) on the main pages
+  // Gully Multisig: also show the footer (Powered by Gully Labs, source code) on the main pages
   AppRoutes.home,
   AppRoutes.welcome.index,
   AppRoutes.gullyServices,
@@ -113,7 +113,7 @@ const Footer: React.FC<FooterProps> = ({
                 />
               </a>
             </li>
-            {/* Gully Safe: the Gully Chain Terms and Privacy Policy cover this app */}
+            {/* Gully Multisig: the Gully Chain Terms and Privacy Policy cover this app */}
             <li>
               <ExternalLink href={GULLY_TERMS_URL} noIcon>
                 Terms
@@ -137,7 +137,7 @@ const Footer: React.FC<FooterProps> = ({
             </li>
             <li>
               <Typography variant="caption">
-                Gully Safe is a fork of{' '}
+                Gully Multisig is a fork of{' '}
                 <ExternalLink href={UPSTREAM_SOURCE_URL} noIcon>
                   Safe&#123;Wallet&#125;
                 </ExternalLink>{' '}

@@ -105,7 +105,7 @@ const Dashboard = (): ReactElement => {
         <div className={css.leftCol}>
           <Overview />
 
-          {/* Gully Safe: live activity of this Safe on Gully Chain; nothing on other chains */}
+          {/* Gully Multisig: live activity of this Safe on Gully Chain; nothing on other chains */}
           <GullySafeActivity />
 
           {noAssets ? (
@@ -135,7 +135,7 @@ const Dashboard = (): ReactElement => {
 
               {showSafeApps && <ExplorePossibleWidget />}
 
-              {/* Gully Safe: links to the other Gully products */}
+              {/* Gully Multisig: links to the other Gully products */}
               <GullyServices />
 
               <NewsDisclaimers />

@@ -1,5 +1,5 @@
 export const enum WALLET_KEYS {
-  // Gully Safe: the Gully ID passkey wallet (window.gully from gullyid.xyz/wallet.js)
+  // Gully Multisig: the Gully ID passkey wallet (window.gully from gullyid.xyz/wallet.js)
   GULLY = 'GULLY',
   INJECTED = 'INJECTED',
   WALLETCONNECT_V2 = 'WALLETCONNECT_V2',

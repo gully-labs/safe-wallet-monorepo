@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   padding: var(--space-2);
-  /* Gully Safe: dark welcome page (GullyChain kit) */
+  /* Gully Multisig: dark welcome page (GullyChain kit) */
   background: var(--gc-ink);
 }
 
@@ -46,7 +46,7 @@
   background-color: #1a1f1e;
 }
 
-/* Gully Safe: kit primary button on the dark card */
+/* Gully Multisig: kit primary button on the dark card */
 .fullWidth :global(.MuiButton-contained) {
   background-color: var(--gc-cyan);
   color: var(--gc-night);
