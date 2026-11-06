@@ -1,6 +1,6 @@
 <!-- gully-header:start -->
 <p align="center">
-  <a href="https://safe.gullychain.xyz">
+  <a href="https://multisig.gullychain.xyz">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset=".github/assets/gullychain-wordmark-for-dark-bg.png">
       <img alt="Gully Chain" src=".github/assets/gullychain-wordmark-for-light-bg.png" width="360">
@@ -10,11 +10,11 @@
 
 <p align="center"><b>The social chain where your profile is your wallet. Arbitrum Orbit L3, testnet chain 485590.</b></p>
 
-<p align="center">Gully Safe: the Safe wallet web app with Gully Chain as a supported network.</p>
+<p align="center">Gully Multisig: the Safe{Wallet} web app built by Gully Labs, serving Anubis Network and Gully Chain Testnet.</p>
 
 <p align="center">
   <a href="https://gullychain.xyz"><img src="https://img.shields.io/badge/gullychain.xyz-01D9FA?style=for-the-badge&labelColor=000000&logo=googlechrome&logoColor=000000" alt="Website"></a>
-  <a href="https://safe.gullychain.xyz"><img src="https://img.shields.io/badge/safe.gullychain.xyz-0A0F1A?style=for-the-badge&labelColor=000000&logo=googlechrome&logoColor=01D9FA" alt="App"></a>
+  <a href="https://multisig.gullychain.xyz"><img src="https://img.shields.io/badge/multisig.gullychain.xyz-0A0F1A?style=for-the-badge&labelColor=000000&logo=googlechrome&logoColor=01D9FA" alt="App"></a>
   <a href="https://docs.gullychain.xyz"><img src="https://img.shields.io/badge/Docs-0A0F1A?style=for-the-badge&labelColor=000000&logo=readthedocs&logoColor=01D9FA" alt="Docs"></a>
   <a href="https://t.me/GullyChain"><img src="https://img.shields.io/badge/Telegram-0A0F1A?style=for-the-badge&labelColor=000000&logo=telegram&logoColor=26A5E4" alt="Telegram"></a>
   <a href="https://discord.com/invite/tY2ErsNNBp"><img src="https://img.shields.io/badge/Discord-0A0F1A?style=for-the-badge&labelColor=000000&logo=discord&logoColor=5865F2" alt="Discord"></a>
