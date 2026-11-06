@@ -2,11 +2,12 @@ import { BRAND_NAME, IS_PRODUCTION, IS_BEHIND_IAP } from '@/config/constants'
 import { ContentSecurityPolicy, StrictTransportSecurity } from '@/config/securityHeaders'
 import { lightPalette, darkPalette } from '@safe-global/theme'
 
-// Gully Multisig: multisig smart accounts on Gully Chain. Absolute URLs are required for OG/Twitter images.
-const descriptionText = `${BRAND_NAME}: create and run multisig Safe smart accounts on Gully Chain (chain 485590). Shared custody, owner thresholds and batched transactions, built on Safe{Wallet}.`
+// Gully Multisig: multisig smart accounts on Anubis Network and Gully Chain Testnet. Absolute URLs are required for
+// OG/Twitter images. The description stays within 120 to 160 characters (checked in brand-v4.test.ts).
+export const descriptionText = `${BRAND_NAME}: multisig Safe smart accounts on Anubis Network and Gully Chain Testnet. Owner thresholds and batched transactions, built on Safe{Wallet}.`
 const OG_IMAGE_URL = 'https://multisig.gullychain.xyz/og-image.png'
 const titleText = BRAND_NAME
-const landingTitle = `${BRAND_NAME} – Multisig smart accounts on Gully Chain`
+export const landingTitle = `${BRAND_NAME}: shared wallets with many signers`
 const SITE_URL = 'https://multisig.gullychain.xyz'
 
 // Only the public landing pages are indexable; every other route is wallet/app state and gets noindex.
@@ -37,7 +38,7 @@ const MetaTags = ({ prefetchUrl, pathname }: { prefetchUrl: string; pathname: st
       <meta property="og:image:height" content="630" />
       <meta
         property="og:image:alt"
-        content="Gully Multisig on GullyChain: the GullyChain icon and the GullyChain mascot"
+        content="Gully Multisig: shared wallets, many signers. The Gully Chain icon and mascot."
       />
       <meta property="og:description" content={descriptionText} />
       <meta property="og:title" content={canonicalUrl ? landingTitle : titleText} />

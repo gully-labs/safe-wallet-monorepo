@@ -44,3 +44,10 @@
   height: 6px;
   color: transparent;
 }
+
+/* Gully Multisig: 44 px tap targets where the sidebar is a drawer */
+@media (max-width: 899.95px) {
+  .listItemButton {
+    min-height: 44px;
+  }
+}

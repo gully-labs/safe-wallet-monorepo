@@ -21,6 +21,12 @@ const NO_SIDEBAR_ROUTES = [
 
 const TOGGLE_SIDEBAR_ROUTES = [AppRoutes.apps.open]
 
+// Gully Multisig: app pages that work without an open Safe keep a navigation (components/sidebar/GullyAccountSidebar)
+const ACCOUNT_SIDEBAR_ROUTES = [AppRoutes.welcome.accounts, AppRoutes.gullyServices]
+
+export const isAccountSidebarRoute = (route: string): boolean =>
+  ACCOUNT_SIDEBAR_ROUTES.includes(route) || route.startsWith(`${AppRoutes.settings.index}/`)
+
 /**
  * Returns a boolean tuple indicating if the current route should display the sidebar and if the sidebar can be toggled
  * @param pathname Optional server-side pathname to check against
@@ -32,14 +38,15 @@ export function useIsSidebarRoute(pathname?: string): [boolean, boolean] {
   const isSpaceRoute = useIsSpaceRoute()
   const route = pathname || clientPathname || ''
   const sidebarQuery = router.query.sidebar === 'true'
-  const noSidebarRoute = NO_SIDEBAR_ROUTES.includes(route) && !sidebarQuery
+  const isAccountRoute = isAccountSidebarRoute(route)
+  const noSidebarRoute = NO_SIDEBAR_ROUTES.includes(route) && !sidebarQuery && !isAccountRoute
   const toggledSidebar = TOGGLE_SIDEBAR_ROUTES.includes(route) && !sidebarQuery
   const [isSidebarRoute, setIsSidebarRoute] = useState(!noSidebarRoute)
 
   useEffect(() => {
     if (!router.isReady) return
-    setIsSidebarRoute(!!router.query.safe)
-  }, [router.isReady, router.query.safe])
+    setIsSidebarRoute(!!router.query.safe || isAccountRoute)
+  }, [router.isReady, router.query.safe, isAccountRoute])
 
   const displaySidebar = isSidebarRoute || isSpaceRoute
 
