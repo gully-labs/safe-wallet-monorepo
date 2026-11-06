@@ -12,11 +12,14 @@ import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGully
 import css from './styles.module.css'
 import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
 
-/** Gully Multisig landing (/welcome): marketing copy, the connect card, live Safe numbers from Gully Chain and the mascot. */
+/**
+ * Gully Multisig landing (/welcome): marketing copy, the connect card, live Safe numbers and the mascot. The app serves
+ * Anubis Network (6714, a mainnet) and Gully Chain Testnet (485590): the copy names both, and what is only on the
+ * testnet (passkey signer contracts, the 4337 module and paymaster, the live numbers) says so.
+ */
 
 const DOCS_SAFE = 'https://docs.gullychain.xyz/safe/'
 const BRIDGE = 'https://testnet-bridge.gullychain.xyz/'
-const FAUCET = 'https://faucet.gullychain.xyz/'
 const EXT = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 const BENEFITS: { icon: IconName; title: string; text: string }[] = [
@@ -28,36 +31,36 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
   {
     icon: 'keyRound',
     title: 'Passkey signers',
-    text: 'The Safe WebAuthn signer contracts are live on Gully Chain, so a device passkey can be an owner of a Safe.',
+    text: 'The Safe WebAuthn signer contracts are live on Gully Chain Testnet, so a device passkey can be an owner of a Safe there.',
   },
   {
     icon: 'fuel',
     title: 'Gas sponsorship ready',
-    text: "Safe's ERC-4337 module and the Gully paymaster run on Gully Chain, so apps can pay their users' gas.",
+    text: "Safe's ERC-4337 module and the Gully paymaster run on Gully Chain Testnet, so apps can pay their users' gas there.",
   },
   {
     icon: 'shieldCheck',
-    title: 'Audited Safe 1.4.1 code',
-    text: 'The same Safe 1.4.1 contracts that secure billions on Ethereum, byte for byte, deployed on Gully Chain.',
+    title: 'Unmodified Safe 1.4.1 contracts',
+    text: 'The unmodified Safe 1.4.1 contracts: at the canonical addresses on Anubis Network, source-verified on verify.gullychain.xyz.',
   },
 ]
 
 const FAQ = [
   {
     q: 'What is Gully Multisig?',
-    a: "Gully Multisig is Gully Labs' build of Safe{Wallet} for Gully Chain: a multi-signature smart account where a set of owners shares control and a transaction needs a threshold of their signatures.",
+    a: "Gully Multisig is Gully Labs' build of Safe{Wallet}: a multi-signature smart account where a set of owners shares control and a transaction needs a threshold of their signatures. It is run by Gully Labs, not by Safe.",
   },
   {
-    q: 'Which network does it run on?',
-    a: 'Gully Chain Testnet (chain id 485590), an L3 that settles to Arbitrum. Mainnet support follows when Gully Chain mainnet launches.',
+    q: 'Which networks does it serve?',
+    a: 'Anubis Network (chain id 6714, a mainnet) and Gully Chain Testnet (chain id 485590, for developers). On Anubis Network the native coin gasDAI pays gas only and cannot be sent: a Safe there holds and moves ERC-20 tokens.',
   },
   {
     q: 'Are the contracts the official Safe contracts?',
-    a: 'Yes. They are the unmodified Safe 1.4.1 contracts (creation code checked against the published artifacts), deployed through a deterministic deployer. Their addresses are listed in the Gully Chain docs.',
+    a: 'Yes. They are the unmodified Safe 1.4.1 contracts. On Anubis Network they are at the canonical addresses; on Gully Chain Testnet they were deployed through a deterministic deployer, creation code checked against the published artifacts. The addresses are listed in the Gully Chain docs.',
   },
   {
     q: 'What does it cost?',
-    a: 'Gully Multisig is free. Creating a Safe and executing transactions cost a small amount of gas in testnet ETH, which the faucet hands out.',
+    a: 'Gully Multisig is free. Creating a Safe and executing transactions cost gas on the chain you use: gasDAI on Anubis Network, test ETH on Gully Chain Testnet.',
   },
   {
     q: 'Can I watch a Safe without owning it?',
@@ -263,7 +266,8 @@ const GullyLanding = (): ReactElement => {
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Web',
           url: 'https://multisig.gullychain.xyz/welcome',
-          description: 'Multi-signature Safe smart accounts on Gully Chain, built on the audited Safe 1.4.1 contracts.',
+          description:
+            'Multi-signature Safe smart accounts on Anubis Network and Gully Chain Testnet, on the unmodified Safe 1.4.1 contracts.',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           publisher: { '@type': 'Organization', name: 'Gully Labs', url: 'https://gullylabs.xyz' },
         },
@@ -311,22 +315,18 @@ const GullyLanding = (): ReactElement => {
       <main>
         <section className={css.hero}>
           <div className={css.heroCopy}>
-            <p className={css.eyebrow}>Gully Chain Testnet · Safe 1.4.1</p>
+            <p className={css.eyebrow}>Anubis Network · Gully Chain Testnet · Safe 1.4.1</p>
             <h1 className={css.h1}>
-              The multi-sig smart wallet <span className={css.grad}>built on Gully Chain</span>
+              Shared wallets, <span className={css.grad}>many signers</span>
             </h1>
             <p className={css.lead}>
-              Owners propose, a threshold signs, the Safe executes. The same audited Safe 1.4.1 contracts, with passkey
-              signers and sponsored gas.
+              Owners propose, a threshold signs, the Safe executes. The unmodified Safe 1.4.1 contracts, on Anubis
+              Network and Gully Chain Testnet.
             </p>
             <div id="get-started" className={css.loginWrap}>
               <WelcomeLogin />
               <p className={css.loginHint}>
-                Need gas?{' '}
-                <a href={FAUCET} {...EXT}>
-                  Get test ETH
-                </a>{' '}
-                ·{' '}
+                On Anubis Network gasDAI pays gas only; tokens are ERC-20.{' '}
                 <a href={DOCS_SAFE} {...EXT}>
                   Read the docs
                 </a>

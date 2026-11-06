@@ -3,20 +3,26 @@ import useSafeAddress from '@/hooks/useSafeAddress'
 import { useAppSelector } from '@/store'
 import { selectSettings } from '@/store/settingsSlice'
 import { useCurrentChain } from '@/hooks/useChains'
-import { Box, Button, Stack, SvgIcon, Typography } from '@mui/material'
+import { Box, Button, Link, Stack, SvgIcon, Typography } from '@mui/material'
 import FiatIcon from '@/public/images/common/fiat2.svg'
 import CopyTooltip from '@/components/common/CopyTooltip'
 import CopyIcon from '@/public/images/common/copy.svg'
+import { addFundsCopyFor } from '@/config/gully'
+import { useGullyNoNativeValue } from '@/hooks/useGullyNoNativeValue'
 
 const AddFundsToGetStarted = () => {
   const { safe } = useSafeInfo()
   const safeAddress = useSafeAddress()
   const settings = useAppSelector(selectSettings)
   const chain = useCurrentChain()
+  const { noNativeValue } = useGullyNoNativeValue()
 
   const addressCopyText = settings.shortName.copy && chain ? `${chain.shortName}:${safeAddress}` : safeAddress
 
   if (!safe.deployed) return null
+
+  // Gully Multisig: the copy follows the chain of the open Safe (config/gully.ts, addFundsCopyFor)
+  const copy = addFundsCopyFor(chain, noNativeValue)
 
   return (
     <Stack
@@ -41,10 +47,18 @@ const AddFundsToGetStarted = () => {
       </Box>
       <Box>
         <Typography fontWeight="bold" color="text.primary">
-          Add funds to get started
+          {copy.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Send ETH to your address from another wallet, or get free test ETH from the faucet.
+        <Typography variant="body2" color="text.secondary" data-testid="add-funds-copy">
+          {copy.text}
+          {copy.links.map((link) => (
+            <span key={link.href}>
+              {' '}
+              <Link href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </Link>
+            </span>
+          ))}
         </Typography>
       </Box>
       <Box ml={{ xs: 0, md: 'auto' }}>

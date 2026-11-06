@@ -27,8 +27,8 @@ jobs:
     timeout-minutes: 75
     container: node:22-bookworm
     env:
-      NEW_TEST: ${{ github.event.inputs.new_test || 'apps/web/src/hooks/__tests__/useGullyNoNativeValue.test.ts' }}
-      JEST_SUITES: components/common/(GullyLegal|Disclaimer|CookieAndTermBanner|Header|Footer|PageLayout|MetaTags)|components/sidebar|components/gully|GullySignIn|new-safe/(create|load)|config/__tests__/gully|services/analytics/__tests__/useMixpanel|store/__tests__/index|hooks/__tests__/useGullyNoNativeValue|tx-flow/flows/TokenTransfer|balances/AssetsTable|features/spending-limits/__tests__/spendingLimitDeployments
+      NEW_TEST: ${{ github.event.inputs.new_test || 'apps/web/src/components/gully/__tests__/chain-aware.test.ts' }}
+      JEST_SUITES: components/common/(GullyLegal|Disclaimer|CookieAndTermBanner|Header|Footer|PageLayout|MetaTags)|components/sidebar|components/gully|components/dashboard/AddFundsBanner|services/__tests__/gully-connect|GullySignIn|new-safe/(create|load)|config/__tests__/gully|services/analytics/__tests__/useMixpanel|store/__tests__/index|hooks/__tests__/useGullyNoNativeValue|tx-flow/flows/TokenTransfer|balances/AssetsTable|features/spending-limits/__tests__/spendingLimitDeployments
     steps:
       - uses: actions/checkout@v4
         with:
