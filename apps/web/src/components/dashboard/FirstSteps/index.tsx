@@ -10,6 +10,7 @@ import { selectUndeployedSafe } from '@/features/counterfactual/store'
 import { isReplayedSafeProps } from '@/features/counterfactual/services'
 import useBalances from '@/hooks/useBalances'
 import { useCurrentChain } from '@/hooks/useChains'
+import { useGullyNoNativeValue } from '@/hooks/useGullyNoNativeValue'
 import useSafeInfo from '@/hooks/useSafeInfo'
 import { OVERVIEW_EVENTS } from '@/services/analytics'
 import { useAppDispatch, useAppSelector } from '@/store'
@@ -128,8 +129,12 @@ const AddFundsWidget = ({ completed }: { completed: boolean }) => {
   const qrPrefix = settings.shortName.qr ? `${chain?.shortName}:` : ''
   const qrCode = `${qrPrefix}${safeAddress}`
 
-  const title = 'Add native assets'
-  const content = `Receive ${chain?.nativeCurrency.name} to start interacting with your account.`
+  // Gully Multisig: where the native coin pays gas only (Anubis gasDAI) a Safe cannot receive it: the step says tokens
+  const { noNativeValue, note } = useGullyNoNativeValue()
+  const title = noNativeValue ? 'Add tokens' : 'Add native assets'
+  const content = noNativeValue
+    ? `${note} Receive tokens to start interacting with your account.`
+    : `Receive ${chain?.nativeCurrency.name} to start interacting with your account.`
 
   const toggleDialog = () => {
     setOpen((prev) => !prev)

@@ -1,6 +1,12 @@
 import type { OnboardAPI } from '@web3-onboard/core'
 import { join } from 'path'
-import { onboardLabelFor, pickWallet, GULLY_WALLET_LABEL, type GullyConnectApi } from '@/services/gully-connect'
+import {
+  onboardLabelFor,
+  pickWallet,
+  GC_CONNECT_VERSION,
+  GULLY_WALLET_LABEL,
+  type GullyConnectApi,
+} from '@/services/gully-connect'
 import { connectWithGullyDialog } from '@/components/common/ConnectWallet/useConnectWallet'
 import * as useOnboard from '@/hooks/wallets/useOnboard'
 
@@ -16,13 +22,13 @@ describe('gully-connect: dialog pick -> web3-onboard label', () => {
 
   it('asks the wallet inside the click (request: true) and hides WalletConnect without a project id', async () => {
     const open = jest.fn().mockResolvedValue({ kind: 'gully', id: 'gully', name: 'Gully Wallet', rdns: 'xyz.gullyid.wallet', provider: {}, accounts: [] })
-    const pick = await pickWallet(async () => ({ VERSION: '1.0.0', open }) as GullyConnectApi)
+    const pick = await pickWallet(async () => ({ VERSION: GC_CONNECT_VERSION, open }) as GullyConnectApi)
     expect(pick).toEqual({ label: GULLY_WALLET_LABEL, kind: 'gully' })
     expect(open.mock.calls[0][0]).toMatchObject({ request: true, walletConnect: undefined })
   })
 
   it('null when the user closes the dialog, undefined when the dialog is unavailable', async () => {
-    const closed = { VERSION: '1.0.0', open: jest.fn().mockRejectedValue(Object.assign(new Error('closed'), { code: 4001 })) }
+    const closed = { VERSION: GC_CONNECT_VERSION, open: jest.fn().mockRejectedValue(Object.assign(new Error('closed'), { code: 4001 })) }
     expect(await pickWallet(async () => closed as GullyConnectApi)).toBeNull()
     expect(await pickWallet(async () => null)).toBeUndefined()
   })
@@ -65,7 +71,7 @@ describe('connectWithGullyDialog', () => {
 })
 
 describe('public/assets/gc-connect.js (the shared dialog)', () => {
-  it('lists Gully Wallet, then WalletConnect, then detected wallets, then install links', async () => {
+  it('lists Sign in with Gully ID, then WalletConnect, then detected wallets, then install links', async () => {
     // a detected EIP-6963 wallet announces itself
     window.addEventListener('eip6963:requestProvider', () => {
       window.dispatchEvent(
@@ -76,12 +82,16 @@ describe('public/assets/gc-connect.js (the shared dialog)', () => {
     })
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const api = require(join(__dirname, '..', '..', '..', 'public', 'assets', 'gc-connect.js')) as GullyConnectApi
-    expect(api.VERSION).toBe('1.0.0')
+    // the copy in public/assets is the version the service says it loads (1.1.0: row 1 reads "Sign in with Gully ID")
+    expect(GC_CONNECT_VERSION).toBe('1.1.0')
+    expect(api.VERSION).toBe(GC_CONNECT_VERSION)
     void api.open({ appName: 'Gully Multisig' }).catch(() => undefined)
     const host = document.querySelector('gc-connect-dialog') as HTMLElement
     const root = (host.shadowRoot ?? host) as ParentNode
     const titles = Array.from(root.querySelectorAll('.row .t b')).map((b) => b.textContent)
-    expect(titles[0]).toBe('Gully Wallet')
+    expect(titles[0]).toBe('Sign in with Gully ID')
+    // row 1 is still the Gully Wallet: the pick it returns maps to that web3-onboard label
+    expect(root.querySelector('[data-gcc="gully-id"]')?.getAttribute('data-id')).toBe('gully')
     expect(titles[1]).toBe('WalletConnect')
     expect(titles[2]).toBe('Rabby Wallet')
     expect(titles.slice(3)).toEqual(['MetaMask', 'Coinbase Wallet'])
