@@ -98,7 +98,9 @@ export type GullyPick = { label: string; kind: GullyConnectKind }
  *   null             the user closed the dialog (do nothing)
  *   undefined        the dialog is not available (fall back to the web3-onboard modal)
  */
-export const pickWallet = async (load: () => Promise<GullyConnectApi | null> = loadGullyConnect): Promise<GullyPick | null | undefined> => {
+export const pickWallet = async (
+  load: () => Promise<GullyConnectApi | null> = loadGullyConnect,
+): Promise<GullyPick | null | undefined> => {
   const api = await load()
   if (!api) return undefined
   try {

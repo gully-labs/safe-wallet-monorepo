@@ -68,7 +68,10 @@ const ADDRESS = /^0x[0-9a-fA-F]{40}$/
  * The Gully views of a token the Safe holds: inside the asset screen, not in a menu (owner rule: Gully Chain menus show
  * Gully Chain products only). All read-only. Empty for the native coin (no contract) and on any other chain.
  */
-export const gullyTokenActionsFor = (chainId: string | undefined, tokenAddress: string | undefined): GullyTokenAction[] => {
+export const gullyTokenActionsFor = (
+  chainId: string | undefined,
+  tokenAddress: string | undefined,
+): GullyTokenAction[] => {
   if (chainId !== GULLY_TESTNET_CHAIN_ID || !tokenAddress || !ADDRESS.test(tokenAddress)) return []
   if (BigInt(tokenAddress) === BigInt(0)) return []
 
@@ -81,5 +84,4 @@ export const gullyTokenActionsFor = (chainId: string | undefined, tokenAddress: 
 }
 
 /** The toast after a link copied the Safe's address. */
-export const addressCopiedMessage = (label: string): string =>
-  `Safe address copied. Paste it in the ${label}.`
+export const addressCopiedMessage = (label: string): string => `Safe address copied. Paste it in the ${label}.`

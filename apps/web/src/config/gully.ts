@@ -22,7 +22,11 @@ export type GullyService = {
 // the other Gully products (Pay, HolderMaps, Security, ...) are listed once, on the Ecosystem page.
 export const GULLY_SERVICES: GullyService[] = [
   { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
-  { name: 'Explorer', description: 'Blocks, transactions and tokens', href: 'https://testnet-explorer.gullychain.xyz/' },
+  {
+    name: 'Explorer',
+    description: 'Blocks, transactions and tokens',
+    href: 'https://testnet-explorer.gullychain.xyz/',
+  },
   { name: 'Faucet', description: 'Free testnet ETH', href: 'https://faucet.gullychain.xyz/' },
   { name: 'Gully Core', description: 'Pools and tokens on the testnet', href: 'https://gullychain.xyz/core/' },
   { name: 'Verify', description: 'Contract source, Sourcify', href: 'https://verify.gullychain.xyz/' },

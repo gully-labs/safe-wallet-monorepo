@@ -36,7 +36,8 @@ const GullyAccountSidebar = (): ReactElement => {
       <div className={css.scroll}>
         <SidebarList>
           {ITEMS.map(({ label, icon, href }) => {
-            const selected = href === pathname || (href === AppRoutes.settings.appearance && firstSegment(pathname) === 'settings')
+            const selected =
+              href === pathname || (href === AppRoutes.settings.appearance && firstSegment(pathname) === 'settings')
             return (
               <SidebarListItemButton key={href} href={href} selected={selected}>
                 <SidebarListItemIcon>{icon}</SidebarListItemIcon>

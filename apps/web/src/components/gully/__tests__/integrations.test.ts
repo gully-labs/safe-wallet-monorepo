@@ -85,7 +85,9 @@ describe('Gully Multisig: the navigation is lazy and keeps an icon on every item
 
   it('loads everything new as its own chunk', () => {
     expect(src('sidebar/SidebarNavigation/index.tsx')).toMatch(/dynamic\(\(\) => import\('\.\/GullyChainTools'\)/)
-    expect(src('common/PageLayout/SideDrawer.tsx')).toMatch(/dynamic\(\(\) => import\('@\/components\/sidebar\/GullyAccountSidebar'\)/)
+    expect(src('common/PageLayout/SideDrawer.tsx')).toMatch(
+      /dynamic\(\(\) => import\('@\/components\/sidebar\/GullyAccountSidebar'\)/,
+    )
     expect(src('balances/AssetsTable/ActionButtons.tsx')).toMatch(/dynamic\(\(\) => import\('\.\/GullyTokenActions'\)/)
   })
 

@@ -12,8 +12,12 @@ import * as useOnboard from '@/hooks/wallets/useOnboard'
 
 describe('gully-connect: dialog pick -> web3-onboard label', () => {
   it('maps every kind of pick', () => {
-    expect(onboardLabelFor({ kind: 'gully', name: 'Gully Wallet', rdns: 'xyz.gullyid.wallet' })).toBe(GULLY_WALLET_LABEL)
-    expect(onboardLabelFor({ kind: 'injected', name: 'Gully Wallet', rdns: 'xyz.gullyid.wallet' })).toBe(GULLY_WALLET_LABEL)
+    expect(onboardLabelFor({ kind: 'gully', name: 'Gully Wallet', rdns: 'xyz.gullyid.wallet' })).toBe(
+      GULLY_WALLET_LABEL,
+    )
+    expect(onboardLabelFor({ kind: 'injected', name: 'Gully Wallet', rdns: 'xyz.gullyid.wallet' })).toBe(
+      GULLY_WALLET_LABEL,
+    )
     expect(onboardLabelFor({ kind: 'walletconnect', name: 'WalletConnect', rdns: null })).toBe('WalletConnect')
     expect(onboardLabelFor({ kind: 'injected', name: 'Rabby Wallet', rdns: 'io.rabby' })).toBe('Rabby Wallet')
     expect(onboardLabelFor({ kind: 'injected', name: 'Browser wallet (MetaMask)', rdns: '' })).toBe('MetaMask')
@@ -21,14 +25,26 @@ describe('gully-connect: dialog pick -> web3-onboard label', () => {
   })
 
   it('asks the wallet inside the click (request: true) and hides WalletConnect without a project id', async () => {
-    const open = jest.fn().mockResolvedValue({ kind: 'gully', id: 'gully', name: 'Gully Wallet', rdns: 'xyz.gullyid.wallet', provider: {}, accounts: [] })
+    const open = jest
+      .fn()
+      .mockResolvedValue({
+        kind: 'gully',
+        id: 'gully',
+        name: 'Gully Wallet',
+        rdns: 'xyz.gullyid.wallet',
+        provider: {},
+        accounts: [],
+      })
     const pick = await pickWallet(async () => ({ VERSION: GC_CONNECT_VERSION, open }) as GullyConnectApi)
     expect(pick).toEqual({ label: GULLY_WALLET_LABEL, kind: 'gully' })
     expect(open.mock.calls[0][0]).toMatchObject({ request: true, walletConnect: undefined })
   })
 
   it('null when the user closes the dialog, undefined when the dialog is unavailable', async () => {
-    const closed = { VERSION: GC_CONNECT_VERSION, open: jest.fn().mockRejectedValue(Object.assign(new Error('closed'), { code: 4001 })) }
+    const closed = {
+      VERSION: GC_CONNECT_VERSION,
+      open: jest.fn().mockRejectedValue(Object.assign(new Error('closed'), { code: 4001 })),
+    }
     expect(await pickWallet(async () => closed as GullyConnectApi)).toBeNull()
     expect(await pickWallet(async () => null)).toBeUndefined()
   })
@@ -53,7 +69,11 @@ describe('connectWithGullyDialog', () => {
       order.push('connect')
       return [{ label: GULLY_WALLET_LABEL } as never]
     })
-    await connectWithGullyDialog(onboard, async () => void order.push('refresh'), async () => ({ label: GULLY_WALLET_LABEL, kind: 'gully' }))
+    await connectWithGullyDialog(
+      onboard,
+      async () => void order.push('refresh'),
+      async () => ({ label: GULLY_WALLET_LABEL, kind: 'gully' }),
+    )
     expect(order).toEqual(['refresh', 'connect'])
   })
 
@@ -76,7 +96,10 @@ describe('public/assets/gc-connect.js (the shared dialog)', () => {
     window.addEventListener('eip6963:requestProvider', () => {
       window.dispatchEvent(
         new CustomEvent('eip6963:announceProvider', {
-          detail: { info: { uuid: 'u-1', name: 'Rabby Wallet', rdns: 'io.rabby', icon: 'data:image/svg+xml;base64,AA==' }, provider: { request: jest.fn() } },
+          detail: {
+            info: { uuid: 'u-1', name: 'Rabby Wallet', rdns: 'io.rabby', icon: 'data:image/svg+xml;base64,AA==' },
+            provider: { request: jest.fn() },
+          },
         }),
       )
     })
