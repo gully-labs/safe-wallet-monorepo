@@ -45,12 +45,24 @@
   }
 }
 
-/* Gully Multisig: Powered by Gully Labs badge, native 189x56 */
+/* Gully Multisig: Powered by Gully Labs badge, kit ratio 256x88 */
 .badge {
   display: inline-flex;
 }
 
 .badge img {
-  width: 189px;
+  width: 163px;
   height: 56px;
+}
+
+.badge .badgeOnDark {
+  display: none;
+}
+
+[data-theme='dark'] .badge .badgeOnDark {
+  display: block;
+}
+
+[data-theme='dark'] .badge .badgeOnLight {
+  display: none;
 }
