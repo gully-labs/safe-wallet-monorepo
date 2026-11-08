@@ -98,7 +98,7 @@ const short = (a: string): string => `${a.slice(0, 6)}…${a.slice(-4)}`
 export const pipsToPercent = (pips: bigint | number): string => {
   const n = Number(pips) / 10000
   let s = n.toFixed(4)
-  s = s.replace(/(\.\d\d)0+$/, '$1')
+  while (s.endsWith('0') && /\.\d{3,}$/.test(s)) s = s.slice(0, -1)
   return `${s}%`
 }
 
