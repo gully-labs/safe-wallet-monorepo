@@ -29,7 +29,11 @@ const lower = (a: string) => a.toLowerCase()
  * The plain-language sentence for a call, decoded locally. Token symbols come from the Safe's balances, then from the
  * token contract itself; names come from the address book. Returns null while nothing is known about the selector.
  */
-export const useGullyDecoded = (call: { to?: string; data?: string | null; value?: string | null }): Described | null => {
+export const useGullyDecoded = (call: {
+  to?: string
+  data?: string | null
+  value?: string | null
+}): Described | null => {
   const { balances } = useBalances()
   const addressBook = useAddressBook()
   const chain = useCurrentChain()
@@ -94,7 +98,15 @@ export const GullyDecodedView = ({ described }: { described: Described }): React
   </Box>
 )
 
-const GullyDecoded = ({ to, data, value }: { to?: string; data?: string | null; value?: string | null }): ReactElement | null => {
+const GullyDecoded = ({
+  to,
+  data,
+  value,
+}: {
+  to?: string
+  data?: string | null
+  value?: string | null
+}): ReactElement | null => {
   const described = useGullyDecoded({ to, data, value })
   if (!described) return null
   return <GullyDecodedView described={described} />

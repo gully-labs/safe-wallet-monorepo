@@ -233,7 +233,9 @@ const RULES: Record<string, Rule> = {
   resolveByDefault: (a) => pay(`Settle the disputed Gully Pay escrow #${a.id} by the default outcome`),
   refund: (a) => pay(`Refund ${a.amount.toString()} units of Gully Pay escrow #${a.id} to the buyer`),
   resolve: (a) =>
-    pay(`Resolve disputed Gully Pay escrow #${a.id}: ${a.buyerAmount.toString()} units to the buyer, the rest to the seller`),
+    pay(
+      `Resolve disputed Gully Pay escrow #${a.id}: ${a.buyerAmount.toString()} units to the buyer, the rest to the seller`,
+    ),
   claim: (a, x) => pay(`Claim the ${tokenText(x, a.token)} balance owed to this Safe from Gully Pay`),
   claimTo: (a, x) =>
     pay(`Claim the ${tokenText(x, a.token)} balance owed to this Safe from Gully Pay and send it to ${who(x, a.to)}`),
@@ -242,7 +244,9 @@ const RULES: Record<string, Rule> = {
   setTokenAllowed: (a, x) =>
     pay(`${a.allowed ? 'Allow' : 'Stop allowing'} ${tokenText(x, a.token)} in Gully Pay escrow`),
   setFee: (a, x) =>
-    pay(`Set the Gully Pay treasury vault fee to ${(Number(a.feeBps) / 100).toFixed(2)}% paid to ${who(x, a.recipient)}`),
+    pay(
+      `Set the Gully Pay treasury vault fee to ${(Number(a.feeBps) / 100).toFixed(2)}% paid to ${who(x, a.recipient)}`,
+    ),
   setBuffer: (a) => pay(`Set the Gully Pay treasury vault cash buffer to ${(Number(a.bufferBps) / 100).toFixed(2)}%`),
   pauseDeposits: (a) => pay(`${a.paused ? 'Pause' : 'Resume'} deposits into the Gully Pay treasury vault`),
   setSettlementToken: (a, x) =>
