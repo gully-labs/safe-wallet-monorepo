@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type ReactElement } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react'
 import Head from 'next/head'
 import { formatEther } from 'ethers'
 import WelcomeLogin from '@/components/welcome/WelcomeLogin'
