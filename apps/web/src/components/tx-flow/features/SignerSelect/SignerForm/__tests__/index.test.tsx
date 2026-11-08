@@ -105,7 +105,7 @@ describe('SignerForm', () => {
     expect(result.queryByText('Sign with')).toBeNull()
   })
 
-  it('should not render if there are no nested Safes', () => {
+  it('should not render if there are no nested multisigs', () => {
     mockUseNestedSafeOwners.mockReturnValue([])
     mockUseIsNestedSafeOwner.mockReturnValue(false)
 
@@ -125,7 +125,7 @@ describe('SignerForm', () => {
     expect(result.queryByText('Sign with')).toBeNull()
   })
 
-  it('should render sign form if there are nested Safes', () => {
+  it('should render sign form if there are nested multisigs', () => {
     mockUseNestedSafeOwners.mockReturnValue([mockOwners[0].value])
     const result = render(
       <TestWalletContextProvider
@@ -142,7 +142,7 @@ describe('SignerForm', () => {
     expect(result.queryByText('Sign with')).toBeVisible()
   })
 
-  it('should render execution form if there are nested Safes', () => {
+  it('should render execution form if there are nested multisigs', () => {
     mockUseNestedSafeOwners.mockReturnValue([mockOwners[0].value])
     const result = render(
       <TestWalletContextProvider

@@ -166,7 +166,7 @@ describe('useRecoveryState', () => {
     })
   })
 
-  it('should refetch when interacting with a Delay Modifier via the Safe', async () => {
+  it('should refetch when interacting with a Delay Modifier via the multisig', async () => {
     mockUseHasFeature.mockReturnValue(true)
     const provider = {}
     mockUseWeb3ReadOnly.mockReturnValue(provider as any)

@@ -62,14 +62,14 @@ describe('useSafeNotifications', () => {
       expect(result.current).toBeUndefined()
       expect(showNotification).toHaveBeenCalledWith({
         variant: 'warning',
-        message: `Your Safe Account version 1.1.1 is out of date. Please update it.`,
+        message: `Your Multisig version 1.1.1 is out of date. Please update it.`,
         groupKey: 'safe-outdated-version',
         link: {
           href: {
             pathname: '/settings/setup',
             query: { safe: 'eth:0x123' },
           },
-          title: 'Update Safe Account',
+          title: 'Update multisig',
         },
         onClose: expect.anything(),
       })
@@ -94,7 +94,7 @@ describe('useSafeNotifications', () => {
       expect(result.current).toBeUndefined()
       expect(showNotification).toHaveBeenCalledWith({
         variant: 'warning',
-        message: `Safe Account version 0.0.1 is not supported by this web app anymore. You can update your Safe Account via the CLI.`,
+        message: `Multisig version 0.0.1 is not supported by this web app anymore. You can update your multisig via the CLI.`,
         groupKey: 'safe-outdated-version',
         link: {
           href: 'https://github.com/5afe/safe-cli',
@@ -141,7 +141,7 @@ describe('useSafeNotifications', () => {
       expect(result.current).toBeUndefined()
       expect(showNotification).toHaveBeenCalledWith({
         variant: 'warning',
-        message: `This Safe Account was created with an unsupported base contract.
+        message: `This multisig was created with an unsupported base contract.
            The web interface might not work correctly.
            We recommend using the command line interface instead.`,
         groupKey: 'invalid-mastercopy',
@@ -197,7 +197,7 @@ describe('useSafeNotifications', () => {
       expect(showNotification).toHaveBeenCalledWith({
         variant: 'info',
         message:
-          'This Safe Account was created with an unsupported base contract. It is possible to migrate it to a compatible base contract. You can migrate it to a compatible contract on the Home screen.',
+          'This multisig was created with an unsupported base contract. It is possible to migrate it to a compatible base contract. You can migrate it to a compatible contract on the Home screen.',
         groupKey: 'invalid-mastercopy',
         link: undefined,
       })

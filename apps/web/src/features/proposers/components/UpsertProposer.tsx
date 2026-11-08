@@ -79,7 +79,7 @@ const UpsertProposer = ({ onClose, onSuccess, proposer }: UpsertProposerProps) =
 
   const validateAddress = useCallback<Validate<string>>(
     (value) =>
-      addressIsNotCurrentSafe(safeAddress, 'Cannot add Safe Account itself as proposer')(value) ??
+      addressIsNotCurrentSafe(safeAddress, 'Cannot add multisig itself as proposer')(value) ??
       addressIsNotOwner(safeOwnerAddresses, 'Cannot add Safe Owner as proposer')(value),
     [safeAddress, safeOwnerAddresses],
   )

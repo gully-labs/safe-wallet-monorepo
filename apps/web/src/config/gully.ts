@@ -64,7 +64,7 @@ export const ANUBIS_EXPLORER_URL = 'https://browser.anubispace.org'
 const ANUBIS_LINKS: ChainLinks = {
   title: 'Anubis Network',
   subtitle:
-    'gasDAI pays gas only on Anubis Network and cannot be sent. Tokens are ERC-20: a Safe here holds and moves tokens. Links open in a new tab.',
+    'gasDAI pays gas only on Anubis Network and cannot be sent. Tokens are ERC-20: a multisig here holds and moves tokens. Links open in a new tab.',
   services: [
     { name: 'Anubis bridge', description: 'Move tokens to and from Anubis Network', href: ANUBIS_BRIDGE_URL },
     { name: 'Anubis explorer', description: 'Blocks, transactions and tokens', href: ANUBIS_EXPLORER_URL },
@@ -110,7 +110,7 @@ export const addFundsCopyFor = (chain: FundsChain | undefined, noNativeValue: bo
     const bridge = links.length ? ', or bring them in over the bridge' : ''
     return {
       title: 'Add tokens to get started',
-      text: `${symbol} pays gas only on ${where} and cannot be sent to a Safe. Tokens are ERC-20: send tokens to your address from another wallet${bridge}.`,
+      text: `${symbol} pays gas only on ${where} and cannot be sent to a multisig. Tokens are ERC-20: send tokens to your address from another wallet${bridge}.`,
       links,
     }
   }

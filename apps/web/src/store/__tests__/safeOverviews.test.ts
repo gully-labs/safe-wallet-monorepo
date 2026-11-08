@@ -138,7 +138,7 @@ describe('safeOverviews', () => {
       })
     })
 
-    it('should return the Safe overview if fetching is successful', async () => {
+    it('should return the multisig overview if fetching is successful', async () => {
       const request = { chainId: '1', safeAddress: faker.finance.ethereumAddress() }
 
       const mockOverview = {

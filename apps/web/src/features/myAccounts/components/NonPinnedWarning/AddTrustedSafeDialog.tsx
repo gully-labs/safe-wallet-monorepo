@@ -87,7 +87,7 @@ const AddTrustedSafeDialog = ({
 
             {!hasSimilarAddress && (
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                Review the full address above. Continue only if you recognize this Safe and want to add it to your
+                Review the full address above. Continue only if you recognize this multisig and want to add it to your
                 trusted list.
               </Typography>
             )}
@@ -96,8 +96,8 @@ const AddTrustedSafeDialog = ({
               <NameInput
                 data-testid="safe-name-input"
                 name="name"
-                label="Safe name"
-                placeholder="Enter a name for this Safe"
+                label="Multisig name"
+                placeholder="Enter a name for this multisig"
                 autoFocus
               />
             </Box>

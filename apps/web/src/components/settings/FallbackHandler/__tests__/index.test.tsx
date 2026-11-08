@@ -180,7 +180,7 @@ describe('FallbackHandler', () => {
       await waitFor(() => {
         expect(
           fbHandler.queryByText(
-            'The fallback handler adds fallback logic for funtionality that may not be present in the Safe Account contract. Learn more about the fallback handler',
+            'The fallback handler adds fallback logic for funtionality that may not be present in the multisig contract. Learn more about the fallback handler',
           ),
         ).toBeDefined()
 
@@ -218,7 +218,7 @@ describe('FallbackHandler', () => {
     })
   })
 
-  it('should render nothing if the Safe Account version does not support Fallback Handlers', () => {
+  it('should render nothing if the multisig version does not support Fallback Handlers', () => {
     jest.spyOn(useSafeInfoHook, 'default').mockImplementation(
       () =>
         ({
@@ -252,7 +252,7 @@ describe('FallbackHandler', () => {
 
     expect(
       getByText(
-        "This is CoW's fallback handler. It is needed for this Safe to be able to use the TWAP feature for Swaps.",
+        "This is CoW's fallback handler. It is needed for this multisig to be able to use the TWAP feature for Swaps.",
       ),
     ).toBeInTheDocument()
   })
@@ -275,7 +275,7 @@ describe('FallbackHandler', () => {
 
     expect(
       queryByText(
-        "This is CoW's fallback handler. It is needed for this Safe to be able to use the TWAP feature for Swaps.",
+        "This is CoW's fallback handler. It is needed for this multisig to be able to use the TWAP feature for Swaps.",
       ),
     ).not.toBeInTheDocument()
   })

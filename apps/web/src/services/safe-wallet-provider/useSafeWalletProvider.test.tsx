@@ -416,7 +416,7 @@ describe('useSafeWalletProvider', () => {
       expect(resp).toEqual(mockTxDetails)
     })
 
-    it('should request a Safe selection when switching chains', async () => {
+    it('should request a multisig selection when switching chains', async () => {
       const mockPush = jest.fn().mockResolvedValue(true)
       const safeItem = {
         chainId: '5',
@@ -474,7 +474,7 @@ describe('useSafeWalletProvider', () => {
       })
     })
 
-    it('should automatically switch to a Safe with the same address on the target chain', async () => {
+    it('should automatically switch to a multisig with the same address on the target chain', async () => {
       const mockPush = jest.fn().mockResolvedValue(true)
       const currentSafeAddress = '0xabcdefabcdefabcdefabcdefabcdefabcdefabcd'
       const safeItem = {

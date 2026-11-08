@@ -28,7 +28,7 @@ describe('Gully Multisig: the dashboard copy follows the chain of the open Safe'
     const copy = addFundsCopyFor(anubis, true)
     expect(copy.title).toBe('Add tokens to get started')
     expect(copy.text).toBe(
-      'gasDAI pays gas only on Anubis Network and cannot be sent to a Safe. Tokens are ERC-20: send tokens to your address from another wallet, or bring them in over the bridge.',
+      'gasDAI pays gas only on Anubis Network and cannot be sent to a multisig. Tokens are ERC-20: send tokens to your address from another wallet, or bring them in over the bridge.',
     )
     expect(copy.links.map((l) => l.href)).toEqual([ANUBIS_BRIDGE_URL, ANUBIS_EXPLORER_URL])
     expect(ANUBIS_BRIDGE_URL).toBe('https://app.anubisbridge.com')

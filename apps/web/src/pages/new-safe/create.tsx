@@ -8,7 +8,7 @@ const Open: NextPage = () => {
   return (
     <main>
       <Head>
-        <title>{`${BRAND_NAME} – Create Safe Account`}</title>
+        <title>{`${BRAND_NAME} – Create multisig`}</title>
       </Head>
 
       <CreateSafe />

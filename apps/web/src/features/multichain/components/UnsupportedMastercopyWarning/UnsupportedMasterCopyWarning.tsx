@@ -34,8 +34,8 @@ export const UnsupportedMastercopyWarning = () => {
   // Determine the message based on whether bytecode matched
   const isBytecodeMatch = bytecodeComparison.result?.isMatch
   const message = isBytecodeMatch
-    ? `Your Safe Account's base contract is not in the list of officially supported deployments, but its bytecode matches a supported L2 contract (${bytecodeComparison.result?.matchedVersion}). You can migrate it to the corresponding official deployment.`
-    : "Your Safe Account's base contract is not supported. You should migrate it to a compatible version."
+    ? `Your multisig's base contract is not in the list of officially supported deployments, but its bytecode matches a supported L2 contract (${bytecodeComparison.result?.matchedVersion}). You can migrate it to the corresponding official deployment.`
+    : "Your multisig's base contract is not supported. You should migrate it to a compatible version."
 
   return (
     <ErrorMessage level="warning" title="Base contract is not supported">

@@ -280,7 +280,7 @@ describe('useTrackBannerEligibilityOnConnect', () => {
   })
 
   describe('Event does not re-fire for the same Safe', () => {
-    it('should not track again if already tracked for this Safe', () => {
+    it('should not track again if already tracked for this multisig', () => {
       const initialReduxState: Partial<RootState> = {
         hnState: {
           [`${chainId}:${safeAddress}`]: {

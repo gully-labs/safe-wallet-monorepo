@@ -84,7 +84,7 @@ const FirstTxFlow = ({ open, onClose }: { open: boolean; onClose: () => void }) 
       >
         <Grid item>
           <ChoiceButton
-            title="Activate Safe now"
+            title="Activate your multisig"
             description="Pay a one-time network fee to deploy your safe onchain"
             icon={SafeLogo}
             onClick={() => handleClick(onActivateSafe)}
@@ -94,7 +94,7 @@ const FirstTxFlow = ({ open, onClose }: { open: boolean; onClose: () => void }) 
         <Grid item>
           <ChoiceButton
             title="Add another signer"
-            description="Improve the security of your Safe Account"
+            description="Improve the security of your multisig"
             icon={SaveAddressIcon}
             onClick={() => handleClick(onAddSigner)}
           />

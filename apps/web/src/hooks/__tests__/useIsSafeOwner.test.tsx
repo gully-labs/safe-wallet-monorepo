@@ -33,7 +33,7 @@ describe('useIsSafeOwner hook', () => {
     }
   }
 
-  it('should return true when signer is a Safe owner', () => {
+  it('should return true when signer is a multisig owner', () => {
     mockSigner(ownerAddress2)
 
     const mockSafe = extendedSafeInfoBuilder()
@@ -60,7 +60,7 @@ describe('useIsSafeOwner hook', () => {
     expect(result.current).toBe(true)
   })
 
-  it('should return false when signer is not a Safe owner', () => {
+  it('should return false when signer is not a multisig owner', () => {
     mockSigner(nonOwnerAddress)
 
     const mockSafe = extendedSafeInfoBuilder()

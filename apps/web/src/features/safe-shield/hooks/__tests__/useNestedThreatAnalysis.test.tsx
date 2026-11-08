@@ -406,8 +406,8 @@ describe('useNestedThreatAnalysis', () => {
     })
   })
 
-  describe('Nested Safe info usage', () => {
-    it('should use nested Safe address and version when available', async () => {
+  describe('Nested multisig info usage', () => {
+    it('should use nested multisig address and version when available', async () => {
       const nestedTx = buildSafeTransaction('0x1234')
       const nestedSafeInfo = buildNestedSafeInfo()
 
@@ -454,7 +454,7 @@ describe('useNestedThreatAnalysis', () => {
       })
     })
 
-    it('should use nested Safe address with Hypernative analysis', async () => {
+    it('should use nested multisig address with Hypernative analysis', async () => {
       const nestedTx = buildSafeTransaction('0x1234')
       const authToken = 'test-auth-token'
       const nestedSafeInfo = buildNestedSafeInfo()

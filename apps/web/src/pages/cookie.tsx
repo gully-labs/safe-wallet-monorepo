@@ -45,10 +45,10 @@ const CookiePolicy: NextPage = () => (
       </Typography>
       <Typography mb={2}>
         To work without an account, Gully Multisig keeps your data in this browser&apos;s local storage (keys that start
-        with <code>{LS_NAMESPACE}</code>): the Safe Accounts you added or visited, your address book, your settings,
-        pending and batched transactions, Safes you have not deployed yet, and your choice in the terms notice. It stays
-        on your device until you clear this site&apos;s data in your browser. The service worker keeps a copy of the app
-        files so it loads fast and works offline.
+        with <code>{LS_NAMESPACE}</code>): the multisigs you added or visited, your address book, your settings, pending
+        and batched transactions, Safes you have not deployed yet, and your choice in the terms notice. It stays on your
+        device until you clear this site&apos;s data in your browser. The service worker keeps a copy of the app files
+        so it loads fast and works offline.
       </Typography>
 
       <Typography variant="h3" mb={1}>

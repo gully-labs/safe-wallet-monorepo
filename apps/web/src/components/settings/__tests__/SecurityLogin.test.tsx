@@ -149,7 +149,7 @@ describe('SecurityLogin', () => {
       expect(screen.queryByTestId('hn-activated-banner-for-settings')).not.toBeInTheDocument()
     })
 
-    it('should NOT show HnBannerForSettings when user is not a Safe owner', () => {
+    it('should NOT show HnBannerForSettings when user is not a multisig owner', () => {
       jest.spyOn(useIsSafeOwnerHook, 'default').mockReturnValue(false)
 
       render(<SecurityLogin />)

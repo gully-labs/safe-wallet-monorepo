@@ -38,7 +38,7 @@ const CounterfactualStatusButton = () => {
   return (
     <Tooltip
       placement="right"
-      title={isActivating ? 'Safe Account is being activated' : 'Safe Account is not activated'}
+      title={isActivating ? 'Your multisig is being activated' : 'Your multisig is not activated'}
       arrow
     >
       <IconButton

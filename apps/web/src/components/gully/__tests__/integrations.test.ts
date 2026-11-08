@@ -7,8 +7,8 @@ const SAFE = '0x482DB3E6651e8ee1A36Aa0539B4711b1488896c8'
 const TOKEN = '0x83fd06F0846d9D90B3016bF670Efe2E0B11cDe14'
 const explorerUrl = `https://example.org/address/${SAFE}`
 
-describe('Gully Multisig: sidebar tools follow the Safe and its chain', () => {
-  it('puts the Safe in the Gully Bridge link on the testnet and offers the faucet', () => {
+describe('Gully Multisig: sidebar tools follow the multisig and its chain', () => {
+  it('puts the multisig in the Gully Bridge link on the testnet and offers the faucet', () => {
     const tools = gullyToolsFor({ chainId: GULLY_TESTNET_CHAIN_ID, safeAddress: SAFE, explorerUrl })
     expect(tools.map((t) => t.id)).toEqual(['explorer', 'bridge', 'faucet'])
 
@@ -39,7 +39,7 @@ describe('Gully Multisig: sidebar tools follow the Safe and its chain', () => {
     expect(tools.map((t) => t.id)).toEqual(['bridge', 'faucet'])
   })
 
-  it('has nothing without a Safe or a chain', () => {
+  it('has nothing without a multisig or a chain', () => {
     expect(gullyToolsFor({ chainId: GULLY_TESTNET_CHAIN_ID, safeAddress: undefined, explorerUrl })).toEqual([])
     expect(gullyToolsFor({ chainId: GULLY_TESTNET_CHAIN_ID, safeAddress: '', explorerUrl })).toEqual([])
     expect(gullyToolsFor({ chainId: undefined, safeAddress: SAFE, explorerUrl })).toEqual([])

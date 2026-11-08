@@ -114,9 +114,9 @@ export const PushNotifications = (): ReactElement => {
               <NotificationRenewal />
 
               <Typography>
-                Enable push notifications for {safeLoaded ? 'this Safe Account' : 'your Safe Accounts'} in your browser
-                with your signature. You will need to enable them again if you clear your browser cache. Learn more
-                about push notifications <ExternalLink href={HelpCenterArticle.PUSH_NOTIFICATIONS}>here</ExternalLink>
+                Enable push notifications for {safeLoaded ? 'this multisig' : 'your multisigs'} in your browser with
+                your signature. You will need to enable them again if you clear your browser cache. Learn more about
+                push notifications <ExternalLink href={HelpCenterArticle.PUSH_NOTIFICATIONS}>here</ExternalLink>
               </Typography>
 
               {shouldShowMacHelper && (
@@ -167,7 +167,7 @@ export const PushNotifications = (): ReactElement => {
 
                   <Paper className={css.globalInfo} variant="outlined">
                     <Typography variant="body2">
-                      Want to setup notifications for different or all Safe Accounts? You can do so in your{' '}
+                      Want to setup notifications for different or all multisigs? You can do so in your{' '}
                       <Link href={AppRoutes.settings.notifications} passHref legacyBehavior>
                         <MuiLink>global preferences</MuiLink>
                       </Link>

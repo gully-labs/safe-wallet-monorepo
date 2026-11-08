@@ -8,6 +8,7 @@ import NameInput from '@/components/common/NameInput'
 import useChainId from '@/hooks/useChainId'
 import { useAppDispatch } from '@/store'
 import { upsertAddressBookEntries } from '@/store/addressBookSlice'
+import { showNotification } from '@/store/notificationsSlice'
 import { useChain } from '@/hooks/useChains'
 
 export type AddressEntry = {
@@ -45,6 +46,13 @@ function EntryDialog({
 
   const submitCallback = handleSubmit((data: AddressEntry) => {
     dispatch(upsertAddressBookEntries({ ...data, chainIds: chainIds ?? [actualChainId] }))
+    dispatch(
+      showNotification({
+        variant: 'success',
+        groupKey: 'address-book',
+        message: `${data.name} saved to your address book.`,
+      }),
+    )
     handleClose()
   })
 

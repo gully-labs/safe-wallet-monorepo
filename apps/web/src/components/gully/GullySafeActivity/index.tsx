@@ -48,9 +48,9 @@ const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
 
   const dash = !data || !safeAddress
   return (
-    <section className={css.card} aria-label="This Safe on Gully Chain Testnet" data-testid="gully-safe-activity">
+    <section className={css.card} aria-label="This multisig on Gully Chain Testnet" data-testid="gully-safe-activity">
       <div className={css.head}>
-        <h2 className={css.title}>This Safe on Gully Chain</h2>
+        <h2 className={css.title}>This multisig on Gully Chain</h2>
         <span className={css.tag}>Testnet</span>
       </div>
       <div className={css.kpis}>
@@ -69,10 +69,12 @@ const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
       </div>
       <div className={css.plot}>
         {data && safeAddress ? (
-          <DailyColumns bars={bars} label="This Safe's executed transactions per day" unit="transactions" />
+          <DailyColumns bars={bars} label="This multisig's executed transactions per day" unit="transactions" />
         ) : (
           <p className={css.note} role="status">
-            {loading || data ? 'Reading the chain…' : `The chain did not answer (${error ?? 'no response'}). Retrying every 20 seconds.`}
+            {loading || data
+              ? 'Reading the chain…'
+              : `The chain did not answer (${error ?? 'no response'}). Retrying every 20 seconds.`}
           </p>
         )}
       </div>

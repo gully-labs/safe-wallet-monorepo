@@ -1,7 +1,7 @@
 import type { TransactionData } from '@safe-global/store/gateway/AUTO_GENERATED/transactions'
 import { _getFactoryAddressAndSetupData } from '../nested-safes'
 
-describe('Nested Safes', () => {
+describe('Nested multisigs', () => {
   describe('getFactoryAddressAndSetupData', () => {
     it('should return the factory address and setup data for direct createProxyWithNonce calls', () => {
       const txData = {

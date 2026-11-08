@@ -21,7 +21,7 @@ describe('useIsTargetedFeature', () => {
     jest.clearAllMocks()
   })
 
-  it('returns true if the Safe is targeted and the feature is enabled', () => {
+  it('returns true if the multisig is targeted and the feature is enabled', () => {
     const feature = faker.helpers.arrayElement(targetedFeatures)
     jest.spyOn(useChainsHook, 'useHasFeature').mockReturnValue(true)
     jest.spyOn(useOutreachSafeHook, 'useIsOutreachSafe').mockReturnValue({ isTargeted: true, loading: false })
@@ -43,7 +43,7 @@ describe('useIsTargetedFeature', () => {
     expect(result.current).toBe(true)
   })
 
-  it('returns false if the Safe is targeted but the feature is disabled', () => {
+  it('returns false if the multisig is targeted but the feature is disabled', () => {
     const feature = faker.helpers.arrayElement(targetedFeatures)
     jest.spyOn(useChainsHook, 'useHasFeature').mockReturnValue(false)
     jest.spyOn(useOutreachSafeHook, 'useIsOutreachSafe').mockReturnValue({ isTargeted: true, loading: false })
@@ -54,7 +54,7 @@ describe('useIsTargetedFeature', () => {
     expect(result.current).toBe(false)
   })
 
-  it('returns false if the Safe is targeted and the feature is unlocked', () => {
+  it('returns false if the multisig is targeted and the feature is unlocked', () => {
     const feature = faker.helpers.arrayElement(targetedFeatures)
     jest.spyOn(useChainsHook, 'useHasFeature').mockReturnValue(false)
     jest.spyOn(useOutreachSafeHook, 'useIsOutreachSafe').mockReturnValue({ isTargeted: true, loading: false })

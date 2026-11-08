@@ -14,7 +14,7 @@ export default function SpaceAccountsPage() {
   return (
     <>
       <Head>
-        <title>{`${BRAND_NAME} – Space Safe Accounts`}</title>
+        <title>{`${BRAND_NAME} – Space multisigs`}</title>
       </Head>
 
       <main>

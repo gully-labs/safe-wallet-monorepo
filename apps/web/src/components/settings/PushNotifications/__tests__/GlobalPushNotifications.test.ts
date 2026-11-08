@@ -326,7 +326,7 @@ describe('GlobalPushNotifications', () => {
       expect(_getTotalSignaturesRequired(selectedSafes, currentNotifiedSafes)).toEqual(0)
     })
 
-    it('should not increase the count if a Safe was removed', () => {
+    it('should not increase the count if a multisig was removed', () => {
       const currentNotifiedSafes = {
         '1': ['0x123', '0x456'],
         '4': ['0x789'],

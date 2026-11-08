@@ -29,7 +29,7 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
   {
     icon: 'keyRound',
     title: 'Passkey signers',
-    text: 'The Safe WebAuthn signer contracts are live on Gully Chain Testnet, so a device passkey can be an owner of a Safe there.',
+    text: 'The Safe WebAuthn signer contracts are live on Gully Chain Testnet, so a device passkey can be an owner of a multisig there.',
   },
   {
     icon: 'fuel',
@@ -50,7 +50,7 @@ const FAQ = [
   },
   {
     q: 'Which networks does it serve?',
-    a: 'Anubis Network (chain id 6714, a mainnet) and Gully Chain Testnet (chain id 485590, for developers). On Anubis Network the native coin gasDAI pays gas only and cannot be sent: a Safe there holds and moves ERC-20 tokens.',
+    a: 'Anubis Network (chain id 6714, a mainnet) and Gully Chain Testnet (chain id 485590, for developers). On Anubis Network the native coin gasDAI pays gas only and cannot be sent: a multisig there holds and moves ERC-20 tokens.',
   },
   {
     q: 'Are the contracts the official Safe contracts?',
@@ -58,11 +58,11 @@ const FAQ = [
   },
   {
     q: 'What does it cost?',
-    a: 'Gully Multisig is free. Creating a Safe and executing transactions cost gas on the chain you use: gasDAI on Anubis Network, test ETH on Gully Chain Testnet.',
+    a: 'Gully Multisig is free. Creating a multisig and executing transactions cost gas on the chain you use: gasDAI on Anubis Network, test ETH on Gully Chain Testnet.',
   },
   {
-    q: 'Can I watch a Safe without owning it?',
-    a: 'Yes. Use "Watch any account" with a Safe address to follow its balances and transactions read-only.',
+    q: 'Can I watch a multisig without owning it?',
+    a: 'Yes. Use "Watch any account" with a multisig address to follow its balances and transactions read-only.',
   },
 ]
 
@@ -163,7 +163,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
           Safes on Gully Chain, block by block
         </h2>
         <p className={css.sub}>
-          Read straight from the chain: every Safe the Safe 1.4.1 factories created, the transactions those Safes
+          Read straight from the chain: every Safe the multisig 1.4.1 factories created, the transactions those Safes
           executed and the ETH they hold. Refreshes every 20 seconds.
         </p>
       </div>
@@ -192,7 +192,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
               </span>
             </div>
           ) : (
-            <CumulativeChart points={cumulative} label="Safes created on Gully Chain, running total" />
+            <CumulativeChart points={cumulative} label="Multisigs created on Gully Chain, running total" />
           )}
         </div>
         <div className={css.panel}>
@@ -205,7 +205,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
               <span>No Safe transactions executed yet.</span>
             </div>
           ) : (
-            <DailyColumns bars={daily} label="Safe transactions executed per day" unit="transactions" />
+            <DailyColumns bars={daily} label="Multisig transactions executed per day" unit="transactions" />
           )}
         </div>
       </div>
@@ -227,7 +227,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
                 const info = infos[s.address]
                 return (
                   <tr key={s.address}>
-                    <td data-label="Safe">
+                    <td data-label="Multisig">
                       <a href={`${GULLY_EXPLORER}/address/${s.address}`} {...EXT} className={css.mono}>
                         {short(s.address)}
                       </a>
@@ -298,7 +298,7 @@ const GullyLanding = (): ReactElement => {
               Shared wallets, <span className={css.grad}>many signers</span>
             </h1>
             <p className={css.lead}>
-              Owners propose, a threshold signs, the Safe executes. The unmodified Safe 1.4.1 contracts, on Anubis
+              Owners propose, a threshold signs, the multisig executes. The unmodified Safe 1.4.1 contracts, on Anubis
               Network and Gully Chain Testnet.
             </p>
             <div id="get-started" className={css.loginWrap}>

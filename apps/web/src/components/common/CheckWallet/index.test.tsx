@@ -106,7 +106,7 @@ describe('CheckWallet', () => {
     const { getByText, getByLabelText } = renderButton()
 
     expect(getByText('Continue')).toBeDisabled()
-    expect(getByLabelText('Your connected wallet is not a signer of this Safe Account')).toBeInTheDocument()
+    expect(getByLabelText('Your connected wallet is not a signer of this multisig')).toBeInTheDocument()
   })
 
   it('should be disabled when connected to the wrong network', () => {
@@ -184,7 +184,7 @@ describe('CheckWallet', () => {
     const { getByText, getByLabelText } = renderButton()
 
     expect(getByText('Continue')).toBeDisabled()
-    expect(getByLabelText('You need to activate the Safe before transacting')).toBeInTheDocument()
+    expect(getByLabelText('You need to activate the multisig before transacting')).toBeInTheDocument()
   })
 
   it('should enable the button for counterfactual Safes if allowed', () => {
@@ -273,7 +273,7 @@ describe('CheckWallet', () => {
     expect(queryByText('Continue')).not.toBeDisabled()
   })
 
-  it('should allow nested Safe owners', () => {
+  it('should allow nested multisig owners', () => {
     ;(useIsSafeOwner as jest.MockedFunction<typeof useIsSafeOwner>).mockReturnValueOnce(false)
     mockUseNestedSafeOwners.mockReturnValue([faker.finance.ethereumAddress()])
 
