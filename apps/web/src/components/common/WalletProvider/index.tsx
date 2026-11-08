@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { type Eip1193Provider } from 'ethers'
 import { getNestedWallet } from '@/utils/nested-safe-wallet'
 import { sameAddress } from '@safe-global/utils/utils/addresses'
+import { trackGullyWallet } from '@/utils/gully-wallet'
+import { isSmartContractWallet } from '@/utils/wallets'
 
 export type SignerWallet = {
   provider: Eip1193Provider | null
@@ -29,7 +31,11 @@ const WalletProvider = ({ children }: { children: ReactNode }): ReactElement => 
   const web3ReadOnly = useWeb3ReadOnly()
   const router = useRouter()
   const onboardWallets = onboard?.state.get().wallets || []
-  const [wallet, setWallet] = useState<ConnectedWallet | null>(getConnectedWallet(onboardWallets))
+  const [wallet, setWallet] = useState<ConnectedWallet | null>(() => {
+    const initial = getConnectedWallet(onboardWallets)
+    trackGullyWallet(initial)
+    return initial
+  })
 
   const [signerAddress, setSignerAddress] = useState<string>()
 
@@ -46,6 +52,8 @@ const WalletProvider = ({ children }: { children: ReactNode }): ReactElement => 
     const walletSubscription = onboard.state.select('wallets').subscribe((wallets) => {
       const newWallet = getConnectedWallet(wallets)
 
+      // A Gully Wallet always signs on chain: forget a cached "not a contract" answer for it
+      if (trackGullyWallet(newWallet)) isSmartContractWallet.cache.clear?.()
       setWallet(newWallet)
     })
 

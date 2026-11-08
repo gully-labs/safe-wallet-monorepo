@@ -17,6 +17,7 @@ import layoutCss from '@/components/new-safe/create/styles.module.css'
 import { CREATE_SAFE_EVENTS, trackEvent } from '@/services/analytics'
 import OwnerRow from '@/components/new-safe/OwnerRow'
 import { maybePlural } from '@safe-global/utils/utils/formatters'
+import GullyIdSigner from '@/components/gully/GullyIdSigner'
 
 enum OwnerPolicyStepFields {
   owners = 'owners',
@@ -100,6 +101,11 @@ const OwnerPolicyStep = ({
     <form data-testid="owner-policy-step-form" onSubmit={onFormSubmit} id={OWNER_POLICY_STEP_FORM_ID}>
       <FormProvider {...formMethods}>
         <Box className={layoutCss.row}>
+          <GullyIdSigner
+            chainId={data.networks[0]?.chainId}
+            existing={ownerFields.map((f) => f.address)}
+            onAdd={(address) => appendOwner({ name: 'Gully ID', address }, { shouldFocus: true })}
+          />
           {ownerFields.map((field, i) => (
             <OwnerRow
               key={field.id}
