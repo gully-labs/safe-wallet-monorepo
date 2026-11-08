@@ -171,8 +171,8 @@ const RULES: Record<string, Rule> = {
       title: unlimited
         ? `Let ${who(x, a.spender)} spend unlimited ${tokenText(x, x.to)}`
         : a.amount === 0n
-          ? `Remove the spending allowance of ${who(x, a.spender)} on ${tokenText(x, x.to)}`
-          : `Let ${who(x, a.spender)} spend up to ${amountText(x, x.to, a.amount)}`,
+        ? `Remove the spending allowance of ${who(x, a.spender)} on ${tokenText(x, x.to)}`
+        : `Let ${who(x, a.spender)} spend up to ${amountText(x, x.to, a.amount)}`,
       lines: [`Spender: ${a.spender}`],
       level: unlimited ? 'careful' : 'normal',
       group: 'erc20',
@@ -234,7 +234,9 @@ const RULES: Record<string, Rule> = {
   refund: (a) => pay(`Refund ${a.amount.toString()} units of Gully Pay escrow #${a.id} to the buyer`),
   resolve: (a) =>
     pay(
-      `Resolve disputed Gully Pay escrow #${a.id}: ${a.buyerAmount.toString()} units to the buyer, the rest to the seller`,
+      `Resolve disputed Gully Pay escrow #${
+        a.id
+      }: ${a.buyerAmount.toString()} units to the buyer, the rest to the seller`,
     ),
   claim: (a, x) => pay(`Claim the ${tokenText(x, a.token)} balance owed to this Safe from Gully Pay`),
   claimTo: (a, x) =>
@@ -344,4 +346,4 @@ const QUEUE_LABELS: Record<string, string> = {
 
 /** A short queue label for a method name (the queue row only carries the name), or null to keep the gateway's. */
 export const queueLabel = (methodName?: string | null): string | null =>
-  methodName ? (QUEUE_LABELS[methodName] ?? null) : null
+  methodName ? QUEUE_LABELS[methodName] ?? null : null
