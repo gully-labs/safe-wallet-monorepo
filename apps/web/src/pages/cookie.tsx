@@ -19,7 +19,7 @@ const CookiePolicy: NextPage = () => (
         name="description"
         content="What Gully Multisig stores in your browser: no tracking cookies, settings and Safe data in local storage."
       />
-      <link rel="canonical" href="https://multisig.gullychain.xyz/cookie" />
+      <link rel="canonical" href="https://gullymultisig.xyz/cookie" />
     </Head>
 
     <main style={{ lineHeight: '1.5', maxWidth: '70ch' }} data-testid="gully-cookie-note">

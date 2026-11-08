@@ -5,10 +5,10 @@ import { lightPalette, darkPalette } from '@safe-global/theme'
 // Gully Multisig: multisig smart accounts on Anubis Network and Gully Chain Testnet. Absolute URLs are required for
 // OG/Twitter images. The description stays within 120 to 160 characters (checked in brand-v4.test.ts).
 export const descriptionText = `${BRAND_NAME}: multisig Safe smart accounts on Anubis Network and Gully Chain Testnet. Owner thresholds and batched transactions, built on Safe{Wallet}.`
-const OG_IMAGE_URL = 'https://multisig.gullychain.xyz/og-image.png'
+const OG_IMAGE_URL = 'https://gullymultisig.xyz/og-image.png'
 const titleText = BRAND_NAME
 export const landingTitle = `${BRAND_NAME}: shared wallets with many signers`
-const SITE_URL = 'https://multisig.gullychain.xyz'
+const SITE_URL = 'https://gullymultisig.xyz'
 
 // Only the public landing pages are indexable; every other route is wallet/app state and gets noindex.
 // '/' only redirects to /welcome, so both share the /welcome canonical. Keep in sync with public/robots.txt + sitemap.xml.

@@ -265,7 +265,7 @@ const GullyLanding = (): ReactElement => {
           name: 'Gully Multisig',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Web',
-          url: 'https://multisig.gullychain.xyz/welcome',
+          url: 'https://gullymultisig.xyz/welcome',
           description:
             'Multi-signature Safe smart accounts on Anubis Network and Gully Chain Testnet, on the unmodified Safe 1.4.1 contracts.',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
