@@ -165,3 +165,97 @@
     border-radius: 0;
   }
 }
+
+/* ---- Gully Multisig kit: the transaction flow (steppers + signature buttons) ----------------------------------- */
+
+/* cards and header share the kit radius */
+.header,
+.step > :global(.MuiCard-root) {
+  border-radius: 12px !important;
+}
+
+.header {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.step > :global(.MuiCard-root:first-child) {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* the signature button: a pill in the kit emerald with ink text, a shine sweep and an arrow that slides on hover,
+   0.98 scale when pressed, a focus ring; the split arrow of Sign/Execute keeps the pill's right edge */
+.step :global(.MuiCardActions-root .MuiButton-contained),
+.step :global(.MuiCardActions-root .MuiButtonGroup-root .MuiButton-root) {
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition:
+    transform 120ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.step :global(.MuiCardActions-root .MuiButtonGroup-root .MuiButton-root:first-of-type) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.step :global(.MuiCardActions-root .MuiButtonGroup-root .MuiButton-root:last-of-type:not(:first-of-type)) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.step :global(.MuiCardActions-root .MuiButton-contained:not(:disabled))::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 700ms ease;
+  pointer-events: none;
+}
+
+.step :global(.MuiCardActions-root .MuiButton-contained:not(:disabled):hover)::before {
+  transform: translateX(120%);
+}
+
+.step :global(.MuiCardActions-root .MuiButton-contained:not(:disabled):active) {
+  transform: scale(0.98);
+}
+
+.step :global(.MuiCardActions-root .MuiButton-root:focus-visible) {
+  outline: 3px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+
+/* the outlined (secondary) actions beside it share the pill */
+.step :global(.MuiCardActions-root .MuiButton-outlined) {
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* the step progress is the kit emerald, 3 px */
+.progressBar :global(.MuiLinearProgress-root) {
+  height: 3px;
+  background: var(--color-border-light);
+}
+
+.progressBar :global(.MuiLinearProgress-bar) {
+  background: var(--color-primary-main);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step :global(.MuiCardActions-root .MuiButton-contained)::before {
+    display: none;
+  }
+
+  .step :global(.MuiCardActions-root .MuiButton-contained:not(:disabled):active) {
+    transform: none;
+  }
+}
