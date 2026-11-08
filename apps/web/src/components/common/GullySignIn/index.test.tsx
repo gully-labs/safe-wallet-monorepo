@@ -69,7 +69,10 @@ describe('GullySignIn', () => {
   })
 
   it('a wallet connected through the Gully ID wallet is a Gully ID account: a chip, never the sign-in button', async () => {
-    ;(useWallet as jest.Mock).mockReturnValue({ label: 'Gully Wallet', address: '0xC46E0000000000000000000000000000000a07A0' })
+    ;(useWallet as jest.Mock).mockReturnValue({
+      label: 'Gully Wallet',
+      address: '0xC46E0000000000000000000000000000000a07A0',
+    })
     const { client } = mockSdk()
     const silentSignIn = jest.fn(() => Promise.resolve(null))
     Object.assign(client, { session: jest.fn(() => null), onChange: jest.fn(() => jest.fn()), silentSignIn })
@@ -81,7 +84,10 @@ describe('GullySignIn', () => {
   })
 
   it('the chip shows the Gully name once the SDK has a session', async () => {
-    ;(useWallet as jest.Mock).mockReturnValue({ label: 'Gully Wallet', address: '0xC46E0000000000000000000000000000000a07A0' })
+    ;(useWallet as jest.Mock).mockReturnValue({
+      label: 'Gully Wallet',
+      address: '0xC46E0000000000000000000000000000000a07A0',
+    })
     const { client } = mockSdk()
     Object.assign(client, {
       session: jest.fn(() => ({ user: { gullyName: 'team.gully', name: 'Team' } })),

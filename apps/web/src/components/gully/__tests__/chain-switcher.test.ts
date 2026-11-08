@@ -12,7 +12,9 @@ describe('Gully Multisig chain switcher', () => {
   it('the header shows the network selector with or without a Safe, and /welcome shows that header', () => {
     const header = read('components/common/Header/index.tsx')
     expect(header).toContain('data-testid="gully-network-selector"')
-    expect(header).not.toMatch(/\{safeAddress && \(\s*<div className=\{classnames\(css\.element, css\.networkSelector\)\}>/)
+    expect(header).not.toMatch(
+      /\{safeAddress && \(\s*<div className=\{classnames\(css\.element, css\.networkSelector\)\}>/,
+    )
 
     // /welcome shows that same header (it used to hide it and draw its own bar without the selector)
     expect(read('components/common/PageLayout/index.tsx')).not.toMatch(/hideHeader = [^\n]*isWelcomePage/)
