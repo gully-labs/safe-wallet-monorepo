@@ -62,7 +62,7 @@ describe('useSafeNotifications', () => {
       expect(result.current).toBeUndefined()
       expect(showNotification).toHaveBeenCalledWith({
         variant: 'warning',
-        message: `Your Multisig version 1.1.1 is out of date. Please update it.`,
+        message: `Your multisig version 1.1.1 is out of date. Please update it.`,
         groupKey: 'safe-outdated-version',
         link: {
           href: {
