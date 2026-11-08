@@ -16,6 +16,8 @@ export default class WebCoreDocument extends Document {
           <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="" />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
+          {/* Gully analytics: one self-hosted Umami, no cookies. The loader finds the site id from the host. */}
+          <script defer src="https://analytics.gullylabs.xyz/a.js" />
         </Head>
         <body>
           {/* Follow Gully Labs on X (owner, 2026-11-06): byte copy of gully-ops sites/_shared/x-banner. Sync on purpose, so

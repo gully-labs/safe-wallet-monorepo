@@ -1,0 +1,15 @@
+{
+  "_comment": "One navigation for the Gully Multisig landing and the app header. Canonical copy: gully-ops sites/gullymultisig.xyz/nav.json (a test there keeps the landing header in step); this file is the app's copy.",
+  "brand": { "name": "Gully Multisig", "icon": "/brand/logo/gc-icon.svg" },
+  "links": [
+    { "id": "live", "label": "Live", "appLabel": "Dashboard", "landing": "#live", "app": "/welcome/accounts", "icon": "activity" },
+    { "id": "features", "label": "Features", "landing": "#features", "app": "/#features", "icon": "layers" },
+    { "id": "chains", "label": "Chains", "landing": "#chains", "app": "/#chains", "icon": "link" },
+    { "id": "security", "label": "Security", "landing": "#security", "app": "/#security", "icon": "shieldCheck" },
+    { "id": "docs", "label": "Docs", "landing": "https://docs.gullychain.xyz/multisig/", "app": "https://docs.gullychain.xyz/multisig/", "icon": "bookOpen", "external": true }
+  ],
+  "primary": {
+    "landing": { "label": "Open app", "href": "/welcome" },
+    "app": { "label": "New Safe", "href": "/new-safe/create" }
+  }
+}
