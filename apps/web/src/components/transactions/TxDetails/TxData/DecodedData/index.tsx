@@ -8,6 +8,7 @@ import SendToBlock from '@/components/tx/SendToBlock'
 import MethodCall from './MethodCall'
 import { useNativeTokenInfo } from '@/hooks/useNativeTokenInfo'
 import { DelegateCallWarning, UntrustedFallbackHandlerWarning } from '@/components/transactions/Warning'
+import GullyDecoded from '@/components/gully/GullyDecoded'
 import { useSetsUntrustedFallbackHandler } from '@/components/tx/confirmation-views/SettingsChange/UntrustedFallbackHandlerTxAlert'
 
 interface Props {
@@ -52,6 +53,7 @@ const DecodedData = ({
     <Stack spacing={2}>
       {setsUntrustedFallbackHandler && <UntrustedFallbackHandlerWarning isTxExecuted={isTxExecuted} />}
       <DelegateCallWarning txData={txData} showWarning={isWarningEnabled} />
+      <GullyDecoded to={toAddress} data={txData.hexData} value={txData.value} />
 
       {method ? (
         <MethodCall contractAddress={toAddress} contractName={name} contractLogo={avatar} method={method} />
