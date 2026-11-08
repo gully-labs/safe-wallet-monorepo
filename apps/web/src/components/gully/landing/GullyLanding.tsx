@@ -18,7 +18,6 @@ import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
  */
 
 const DOCS_SAFE = 'https://docs.gullychain.xyz/safe/'
-const BRIDGE = 'https://testnet-bridge.gullychain.xyz/'
 const EXT = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 const BENEFITS: { icon: IconName; title: string; text: string }[] = [
