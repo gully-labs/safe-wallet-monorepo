@@ -16,7 +16,7 @@ const isCypress = Boolean(typeof window !== 'undefined' && window.Cypress)
 export const ContentSecurityPolicy = `
  default-src 'self';
  connect-src 'self' *;
- script-src 'self' 'unsafe-inline' https://*.getbeamer.com https://www.googletagmanager.com https://assets.calendly.com https://challenges.cloudflare.com https://*.hsforms.com https://*.hsforms.net https://*.hubspot.com https://*.hs-scripts.com ${
+ script-src 'self' 'unsafe-inline' https://*.getbeamer.com https://www.googletagmanager.com https://assets.calendly.com https://challenges.cloudflare.com https://*.hsforms.com https://*.hsforms.net https://*.hubspot.com https://*.hs-scripts.com https://analytics.gullylabs.xyz ${
    !IS_PRODUCTION || isCypress
      ? "'unsafe-eval'" // Dev server and cypress need unsafe-eval
      : "'wasm-unsafe-eval'"
