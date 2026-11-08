@@ -97,7 +97,7 @@ describe('phone header', () => {
 
   it('is two rows below the phone breakpoint only, and the rows add up to the header height', () => {
     const globals = readFileSync(join(__dirname, '..', '..', '..', 'styles', 'globals.css'), 'utf8')
-    expect(globals).toMatch(/--header-height: 56px;/)
+    expect(globals).toMatch(/--header-height: 64px;/)
     expect(globals).toMatch(/@media \(max-width: 599\.95px\) \{\s+:root \{\s+--header-height: 108px;/)
     const css = src('common/Header/styles.module.css')
     const phone = css.slice(css.indexOf('@media (max-width: 599.95px)'))

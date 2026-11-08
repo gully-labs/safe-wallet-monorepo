@@ -27,6 +27,7 @@ import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { BRAND_LOGO, BRAND_NAME } from '@/config/constants'
 import GullySafeLogo from '@/components/common/GullySafeLogo'
 import GullySignIn from '@/components/common/GullySignIn'
+import { GullyNavLinks, GullyNavMenu, NAV_PRIMARY } from '@/components/common/GullyNav'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -72,10 +73,12 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
   return (
     <Paper className={css.container}>
       <div className={classnames(css.element, css.menuButton)}>
-        {onMenuToggle && (
+        {onMenuToggle ? (
           <IconButton onClick={handleMenuToggle} size="large" color="default" aria-label="menu">
             <MenuIcon />
           </IconButton>
+        ) : (
+          <GullyNavMenu />
         )}
       </div>
 
@@ -103,6 +106,9 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         </div>
       )}
 
+      {/* Gully Multisig: the same links, in the same order, as the landing header (config/gully-nav.json) */}
+      <GullyNavLinks />
+
       <Box className={css.rightSideGroup}>
         <div data-testid="notifications-center" className={css.element}>
           <NotificationCenter />
@@ -121,9 +127,9 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
 
       {!isOfficialHost && (
         <div className={classnames(css.element, css.hideMobile)}>
-          {/* the one Gully Chain header action (gully-ops sites/_shared/gc-chrome.json) */}
-          <Button component="a" href="https://dev.gullychain.xyz/quickstart/" size="small" variant="contained" disableElevation>
-            Start building
+          {/* the one primary action: "Open app" on the landing, "New Safe" in the app (config/gully-nav.json) */}
+          <Button component={Link} href={NAV_PRIMARY.href} size="small" variant="contained" disableElevation>
+            {NAV_PRIMARY.label}
           </Button>
         </div>
       )}

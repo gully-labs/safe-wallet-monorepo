@@ -9,13 +9,14 @@ const src = join(__dirname, '..', '..', '..')
 const read = (p: string) => readFileSync(join(src, p), 'utf8')
 
 describe('Gully Multisig chain switcher', () => {
-  it('the header shows the network selector with or without a Safe, and the landing top bar has it too', () => {
+  it('the header shows the network selector with or without a Safe, and /welcome shows that header', () => {
     const header = read('components/common/Header/index.tsx')
     expect(header).toContain('data-testid="gully-network-selector"')
     expect(header).not.toMatch(/\{safeAddress && \(\s*<div className=\{classnames\(css\.element, css\.networkSelector\)\}>/)
 
-    const landing = read('components/gully/landing/GullyLanding.tsx')
-    expect(landing).toContain('<NetworkSelector')
+    // /welcome shows that same header (it used to hide it and draw its own bar without the selector)
+    expect(read('components/common/PageLayout/index.tsx')).not.toMatch(/hideHeader = [^
+]*isWelcomePage/)
   })
 
   it('the selector offers every configured chain, also with a Safe open', () => {
