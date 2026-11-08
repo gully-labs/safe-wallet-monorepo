@@ -45,7 +45,10 @@ const GullyIdSigner = ({
   const listed = address ? existing.some((a) => a.toLowerCase() === address.toLowerCase()) : false
   if (!address || listed) return null
   return (
-    <Box data-testid="gully-id-signer-offer" sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', mb: 2 }}>
+    <Box
+      data-testid="gully-id-signer-offer"
+      sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', mb: 2 }}
+    >
       <Typography variant="body2" sx={{ flex: 1, minWidth: 220 }}>
         You are signed in with Gully ID. Add your Gully ID wallet ({shortenAddress(address)}) as a signer: no seed
         phrase needed.

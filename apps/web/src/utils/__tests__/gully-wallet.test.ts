@@ -18,7 +18,9 @@ describe('Gully Wallet as a Safe signer', () => {
     forgetGullyWallets()
     isSmartContractWallet.cache.clear?.()
     jest.clearAllMocks()
-    jest.spyOn(web3ReadOnly, 'getWeb3ReadOnly').mockImplementation(() => ({ getCode: getCodeMock }) as unknown as JsonRpcProvider)
+    jest
+      .spyOn(web3ReadOnly, 'getWeb3ReadOnly')
+      .mockImplementation(() => ({ getCode: getCodeMock }) as unknown as JsonRpcProvider)
   })
 
   it('knows the Gully Wallet by its label only', () => {
