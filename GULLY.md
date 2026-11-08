@@ -5,8 +5,8 @@ Gully Chain. It is a fork of the Safe{Wallet} web app and, like it, licensed und
 v3.0 (see `LICENSE` and `apps/web/LICENSE`, unchanged). Source of the running build:
 https://github.com/gully-labs/safe-wallet-monorepo/tree/gully/testnet
 
-- App: https://multisig.gullychain.xyz
-- Backend (Safe Client Gateway): https://multisig.gullychain.xyz/cgw
+- App: https://gullymultisig.xyz
+- Backend (Safe Client Gateway): https://gullymultisig.xyz/cgw
 - Default chain: Gully Chain Testnet, chain id 485590, shortName `gully-test`
 
 ## Base version

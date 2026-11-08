@@ -74,14 +74,14 @@ jobs:
           O=apps/web/out
           test -f $O/index.html
           has() { cat $O/_next/static/chunks/*.js $O/_next/static/chunks/pages/*.js $O/_next/static/chunks/pages/*/*.js 2>/dev/null | grep -qF -- "$1" || { echo "the export has no: $1"; exit 1; }; }
-          for m in gully-safe-activity 'A new version of Gully Multisig' 'https://gullychain.xyz/terms' 'https://multisig.gullychain.xyz/cgw' GULLY_NO_NATIVE_VALUE 0x29fcB43b46531BcA003ddC8FCB67FFE91900C762 'pays gas only' 'gully-chain-tools' 'gully-account-sidebar' 'holdermaps.xyz/gully/'; do has "$m"; done
+          for m in gully-safe-activity 'A new version of Gully Multisig' 'https://gullychain.xyz/terms' 'https://gullymultisig.xyz/cgw' GULLY_NO_NATIVE_VALUE 0x29fcB43b46531BcA003ddC8FCB67FFE91900C762 'pays gas only' 'gully-chain-tools' 'gully-account-sidebar' 'holdermaps.xyz/gully/'; do has "$m"; done
           # the product switcher's changelog comment names the retired host once; nothing else may, and it may not link it
           n=$(grep -rlF 'safe.gullychain.xyz' $O --include=*.js --include=*.html --include=*.txt --include=*.xml --include=*.json --include=*.webmanifest | grep -vxF "$O/assets/gc-switcher.js" | wc -l)
           [ "$n" = 0 ] || { echo "the export still names safe.gullychain.xyz:"; grep -rlF 'safe.gullychain.xyz' $O --include=*.js --include=*.html --include=*.txt --include=*.xml --include=*.json | head -5; exit 1; }
           ! grep -qF "//safe.gullychain.xyz" $O/assets/gc-switcher.js || { echo "the product switcher links the retired host"; exit 1; }
           n=$(grep -lF 'Gully Safe' $O/*.html $O/*/*.html 2>/dev/null | wc -l)
           [ "$n" = 0 ] || { echo "$n exported page(s) still say Gully Safe:"; grep -lF 'Gully Safe' $O/*.html $O/*/*.html | head -5; exit 1; }
-          grep -qF 'Gully Multisig' $O/welcome.html && grep -qF 'https://multisig.gullychain.xyz/' $O/sitemap.xml && grep -qF 'multisig.gullychain.xyz' $O/robots.txt
+          grep -qF 'Gully Multisig' $O/welcome.html && grep -qF 'https://gullymultisig.xyz/' $O/sitemap.xml && grep -qF 'gullymultisig.xyz' $O/robots.txt
           grep -q skipWaiting $O/sw.js && grep -q clientsClaim $O/sw.js
           echo "export checks OK"
           tar -czf /tmp/out.tgz -C apps/web out
