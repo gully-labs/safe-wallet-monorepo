@@ -25,7 +25,6 @@ import { useRouter } from 'next/router'
 import css from './styles.module.css'
 import { type ReactElement, useCallback, useMemo, useState } from 'react'
 import { OVERVIEW_EVENTS, OVERVIEW_LABELS, trackEvent } from '@/services/analytics'
-import { useAllSafesGrouped } from '@/hooks/safes'
 import useSafeAddress from '@/hooks/useSafeAddress'
 import { sameAddress } from '@safe-global/utils/utils/addresses'
 import uniq from 'lodash/uniq'
@@ -345,19 +344,11 @@ const NetworkSelector = ({
 
   const addNetworkFeatureEnabled = hasMultiChainAddNetworkFeature(currentChain)
 
-  const safesGrouped = useAllSafesGrouped()
   const availableChainIds = useMemo(() => {
-    if (!isSafeOpened) {
-      // Offer all chains
-      return configs.map((config) => config.chainId)
-    }
-    return uniq([
-      chainId,
-      ...(safesGrouped.allMultiChainSafes
-        ?.find((item) => sameAddress(item.address, safeAddress))
-        ?.safes.map((safe) => safe.chainId) ?? []),
-    ])
-  }, [chainId, configs, isSafeOpened, safeAddress, safesGrouped.allMultiChainSafes])
+    // Gully Multisig: every chain the config service serves is offered, also with a Safe open (upstream lists only the
+    // chains that Safe is deployed on, which left a one-chain Safe with a one-item selector)
+    return uniq([chainId, ...configs.map((config) => config.chainId)])
+  }, [chainId, configs])
 
   const [testNets, prodNets] = useMemo(
     () =>

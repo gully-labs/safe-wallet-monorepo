@@ -139,11 +139,11 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         </Track>
       </div>
 
-      {safeAddress && (
-        <div className={classnames(css.element, css.networkSelector)}>
-          <NetworkSelector offerSafeCreation compactButton={true} />
-        </div>
-      )}
+      {/* Gully Multisig: the network selector is on every route (upstream shows it only inside a Safe), so Gully Chain
+          Testnet, Anubis and any chain the config service adds can be picked before a Safe is open */}
+      <div className={classnames(css.element, css.networkSelector)} data-testid="gully-network-selector">
+        <NetworkSelector offerSafeCreation={Boolean(safeAddress)} compactButton={true} />
+      </div>
     </Paper>
   )
 }

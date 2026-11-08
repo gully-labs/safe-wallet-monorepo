@@ -1,3 +1,4 @@
+import NetworkSelector from '@/components/common/NetworkSelector'
 import { createElement, useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from 'react'
 import Script from 'next/script'
 import Head from 'next/head'
@@ -295,6 +296,9 @@ const GullyLanding = (): ReactElement => {
       <header className={css.topbar}>
         <div className={css.topbarInner}>
           {createElement('gc-switcher', { current: 'safe', theme: 'dark' })}
+          <div className={css.chainPick} data-testid="gully-network-selector">
+            <NetworkSelector compactButton={false} />
+          </div>
           <nav className={css.topnav} aria-label="Gully Multisig links">
             <a href={DOCS_SAFE} {...EXT}>
               <Icon name="bookOpen" size={18} /> Docs

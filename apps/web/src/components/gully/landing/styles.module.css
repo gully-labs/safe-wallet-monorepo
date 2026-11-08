@@ -46,6 +46,21 @@
   min-height: 60px;
 }
 
+.chainPick {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: #fff;
+}
+
+.chainPick :global(.MuiSelect-select),
+.chainPick :global(.MuiSelect-icon) {
+  color: #fff;
+}
+
 .topnav {
   display: flex;
   gap: 20px;
