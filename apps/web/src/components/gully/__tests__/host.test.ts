@@ -9,21 +9,17 @@ const HOST = 'https://gullymultisig.xyz'
 const OLD = 'multisig.gullychain.xyz'
 
 describe('Gully Multisig host', () => {
-  it('gateway URL points at the new host', () => {
+  it('the build names gullymultisig.xyz everywhere and the old address nowhere', () => {
     const env = read('.env.gully')
     expect(env).toContain(`NEXT_PUBLIC_GATEWAY_URL_PRODUCTION=${HOST}/cgw`)
     expect(env).toContain(`NEXT_PUBLIC_GATEWAY_URL_STAGING=${HOST}/cgw`)
-  })
 
-  it('site URL, OG image and canonical use the new host', () => {
     const meta = read('src/components/common/MetaTags/index.tsx')
     expect(meta).toContain(`SITE_URL = '${HOST}'`)
     expect(meta).toContain(`${HOST}/og-image.png`)
     expect(read('src/pages/cookie.tsx')).toContain(`${HOST}/cookie`)
     expect(read('src/components/gully/landing/GullyLanding.tsx')).toContain(`${HOST}/welcome`)
-  })
 
-  it('sitemap and robots use the new host only', () => {
     for (const f of ['public/sitemap.xml', 'public/robots.txt', '.env.gully']) {
       const t = read(f)
       expect(t).toContain('gullymultisig.xyz')
