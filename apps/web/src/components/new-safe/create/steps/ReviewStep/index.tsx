@@ -285,7 +285,7 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
       }
     } catch (err) {
       console.error(err)
-      setSubmitError('Error creating the Safe Account. Please try again later.')
+      setSubmitError('The multisig could not be created. Please try again.')
     } finally {
       setIsCreating(false)
     }
@@ -372,7 +372,7 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
       const error = asError(_err)
       const submitError = isWalletRejection(error)
         ? 'User rejected signing.'
-        : 'Error creating the Safe Account. Please try again later.'
+        : 'The multisig could not be created. Please try again.'
       setSubmitError(submitError)
 
       if (isWalletRejection(error)) {
@@ -432,7 +432,7 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
 
             {showNetworkWarning && (
               <Box sx={{ '&:not(:empty)': { mt: 3 } }}>
-                <NetworkWarning action="create a Safe Account" />
+                <NetworkWarning action="create a multisig" />
               </Box>
             )}
 
@@ -502,7 +502,7 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
               />
             </Grid>
 
-            {showNetworkWarning && <NetworkWarning action="create a Safe Account" />}
+            {showNetworkWarning && <NetworkWarning action="create a multisig" />}
 
             {!walletCanPay && !willRelay && (
               <ErrorMessage>
