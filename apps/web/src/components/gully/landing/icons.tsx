@@ -68,6 +68,26 @@ const PATHS = {
   ),
   chevronDown: <path d="m6 9 6 6 6-6" />,
   activity: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+  layers: (
+    <>
+      <path d="m12 2 10 6-10 6L2 8Z" />
+      <path d="m2 16 10 6 10-6" />
+      <path d="m2 12 10 6 10-6" />
+    </>
+  ),
+  link: (
+    <>
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </>
+  ),
+  menu: (
+    <>
+      <path d="M4 6h16" />
+      <path d="M4 12h16" />
+      <path d="M4 18h16" />
+    </>
+  ),
   arrowRight: (
     <>
       <path d="M5 12h14" />

@@ -19,7 +19,8 @@ const PageLayout = ({ pathname, children }: { pathname: string; children: ReactE
   const { txFlow, setFullWidth } = useContext(TxModalContext)
   const isSafeLabsTermsPage = pathname === AppRoutes.safeLabsTerms
   const isWelcomePage = pathname === AppRoutes.welcome.index
-  const hideHeader = isSafeLabsTermsPage || isWelcomePage
+  // Gully Multisig: /welcome shows the same header as the rest of the app (it used to hide it and draw its own bar)
+  const hideHeader = isSafeLabsTermsPage
 
   // Hide sidebar when transaction flow is open
   const isSidebarVisible = isSidebarOpen && !txFlow

@@ -1,12 +1,11 @@
-import { createElement, useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from 'react'
-import Script from 'next/script'
+import { useEffect, useMemo, useRef, type ReactElement } from 'react'
 import Head from 'next/head'
 import { formatEther } from 'ethers'
 import WelcomeLogin from '@/components/welcome/WelcomeLogin'
 import { GATEWAY_URL_PRODUCTION } from '@/config/constants'
 import { CountUp, CumulativeChart, DailyColumns } from './charts'
 import { Icon, type IconName } from './icons'
-import Mascot from './Mascot'
+import HeroLive from './HeroLive'
 import Footer from '@/components/common/Footer'
 import { GULLY_EXPLORER, useGullySafeStats, type SafeCreation } from './useGullySafeStats'
 import css from './styles.module.css'
@@ -252,9 +251,10 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
   )
 }
 
+const noop = () => {}
+
 const GullyLanding = (): ReactElement => {
-  const [celebrateKey, setCelebrateKey] = useState(0)
-  const onNewSafe = useCallback(() => setCelebrateKey((k) => k + 1), [])
+  const onNewSafe = noop
 
   const jsonLd = useMemo(
     () =>
@@ -289,28 +289,7 @@ const GullyLanding = (): ReactElement => {
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       </Head>
-      {/* GullyChain product switcher 1.8.3 (gully-ops sites/_shared/gc-switcher, byte-identical copy; kit v4 dark theme) */}
-      <Script src="/assets/gc-switcher.js" strategy="afterInteractive" />
-
-      <header className={css.topbar}>
-        <div className={css.topbarInner}>
-          {createElement('gc-switcher', { current: 'safe', theme: 'dark' })}
-          <nav className={css.topnav} aria-label="Gully Multisig links">
-            <a href={DOCS_SAFE} {...EXT}>
-              <Icon name="bookOpen" size={18} /> Docs
-            </a>
-            <a href={GULLY_EXPLORER} {...EXT}>
-              <Icon name="search" size={18} /> Explorer
-            </a>
-            <a href={BRIDGE} {...EXT}>
-              <Icon name="arrowLeftRight" size={18} /> Bridge
-            </a>
-          </nav>
-          <a href="https://dev.gullychain.xyz/quickstart/" className={css.btnPrimary}>
-            <Icon name="rocket" size={16} /> Start building
-          </a>
-        </div>
-      </header>
+      {/* the header is the app's own (PageLayout): the same links, order and primary button as the product landing */}
 
       <main>
         <section className={css.hero}>
@@ -345,7 +324,7 @@ const GullyLanding = (): ReactElement => {
             </div>
           </div>
           <div className={css.heroArt}>
-            <Mascot celebrateKey={celebrateKey} />
+            <HeroLive />
           </div>
         </section>
 

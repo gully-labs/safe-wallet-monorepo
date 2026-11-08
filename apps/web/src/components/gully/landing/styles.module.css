@@ -711,3 +711,68 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* the welcome hero's live card (replaces the mascot) */
+.heroLive {
+  background: var(--gc-ink);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.heroLiveHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gc-silver);
+  margin-bottom: 4px;
+}
+
+.heroLiveRow {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--gc-charcoal);
+  border-radius: 10px;
+}
+
+.heroLiveRow img {
+  border-radius: 50%;
+}
+
+.heroLiveName,
+.heroLiveNum {
+  display: grid;
+  line-height: 1.2;
+}
+
+.heroLiveName b {
+  font-size: 14px;
+}
+
+.heroLiveName small,
+.heroLiveNum small {
+  color: var(--gc-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.heroLiveNum {
+  text-align: right;
+}
+
+.heroLiveNum b {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--gc-green);
+  font-variant-numeric: tabular-nums;
+}

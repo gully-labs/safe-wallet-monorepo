@@ -19,6 +19,7 @@
 }
 
 .rightSideGroup {
+  margin-left: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,7 +39,7 @@
 
 .menuButton,
 .logo {
-  flex: 1;
+  flex: 0 0 auto;
   border: none;
   align-items: flex-start;
 }

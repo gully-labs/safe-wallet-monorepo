@@ -15,7 +15,7 @@ const GullySafeLogo = ({ compact = false }: { compact?: boolean }): ReactElement
       alt=""
       className={compact ? css.icon : css.logo}
     />
-    <span className={css.label}>Multisig</span>
+    <span className={css.label}>{compact ? 'Multisig' : 'Gully Multisig'}</span>
   </span>
 )
 
