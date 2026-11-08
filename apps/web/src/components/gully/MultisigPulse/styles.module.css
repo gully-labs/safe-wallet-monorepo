@@ -1,0 +1,160 @@
+.card {
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  background: var(--color-background-paper);
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  min-height: 420px; /* loaded height: nothing below it jumps while the gateway answers */
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.link {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary-main);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--color-background-main);
+  border: 1px solid transparent;
+}
+
+.kpiHot {
+  border-color: var(--color-primary-main);
+}
+
+.kpi b {
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+.kpi span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.plot {
+  margin-top: 12px;
+  min-height: 200px;
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.signers {
+  margin-top: 14px;
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 12px;
+}
+
+.signersHead {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.signersHead h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.signersHead span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.signerList {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.signer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 36px;
+  font-size: 14px;
+}
+
+.toSign {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--color-background-main);
+  color: var(--color-text-secondary);
+}
+
+.toSignHot {
+  background: var(--color-warning-background);
+  color: var(--color-warning-main);
+}
+
+@media (max-width: 599.95px) {
+  .card {
+    padding: var(--space-2);
+    min-height: 0;
+  }
+
+  .kpis {
+    gap: 8px;
+  }
+
+  .kpi b {
+    font-size: 22px;
+  }
+
+  .kpi span {
+    font-size: 11px;
+  }
+}

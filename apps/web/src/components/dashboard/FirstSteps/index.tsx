@@ -170,12 +170,7 @@ const AddFundsWidget = ({ completed }: { completed: boolean }) => {
               </Button>
             </Track>
           </Box>
-          <ModalDialog
-            open={open}
-            onClose={toggleDialog}
-            dialogTitle="Add funds to your Safe Account"
-            hideChainIndicator
-          >
+          <ModalDialog open={open} onClose={toggleDialog} dialogTitle="Add funds to your multisig" hideChainIndicator>
             <Box
               sx={{
                 px: 4,
@@ -366,7 +361,7 @@ const AccountReadyWidget = () => {
           mt: 2,
         }}
       >
-        Safe Account is ready!
+        Your multisig is ready!
       </Typography>
       <Typography>Continue to improve your account security and unlock more features</Typography>
     </Card>
@@ -452,7 +447,7 @@ const FirstSteps = () => {
                 mb: 1,
               }}
             >
-              {isActivating ? 'Account is being activated...' : 'Activate your Safe Account'}
+              {isActivating ? 'Your multisig is being activated...' : 'Activate your multisig'}
             </Typography>
 
             {isActivating ? (
@@ -464,7 +459,7 @@ const FirstSteps = () => {
                 <strong>
                   {stepsCompleted} of {completedItems.length} steps completed.
                 </strong>{' '}
-                Finish the next steps to start using all Safe Account features:
+                Finish the next steps to start using everything your multisig can do:
               </Typography>
             )}
           </Grid>
