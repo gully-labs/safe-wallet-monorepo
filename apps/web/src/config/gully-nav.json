@@ -10,6 +10,6 @@
   ],
   "primary": {
     "landing": { "label": "Open app", "href": "/welcome" },
-    "app": { "label": "New Safe", "href": "/new-safe/create" }
+    "app": { "label": "New multisig", "href": "/new-safe/create" }
   }
 }

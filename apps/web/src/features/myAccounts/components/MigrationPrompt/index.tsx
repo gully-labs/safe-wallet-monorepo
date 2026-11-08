@@ -12,11 +12,11 @@ interface MigrationPromptProps {
 const MigrationPrompt = ({ onProceed }: MigrationPromptProps) => {
   return (
     <Alert severity="info" data-testid="migration-prompt" sx={{ mb: 2 }}>
-      <AlertTitle sx={{ fontWeight: 700 }}>Add trusted Safes</AlertTitle>
-      Only Safes you trust will appear in your account list.
+      <AlertTitle sx={{ fontWeight: 700 }}>Add the multisigs you trust</AlertTitle>
+      Only multisigs you trust appear in this list.
       <Box sx={{ mt: 2 }}>
         <Button variant="contained" size="small" onClick={onProceed} data-testid="select-safes-button">
-          Add Safes
+          Choose multisigs
         </Button>
       </Box>
     </Alert>

@@ -10,6 +10,7 @@ import { type AllSafeItemsGrouped, useAllSafesGrouped } from '@/hooks/safes'
 import classNames from 'classnames'
 import useTrackSafesCount from '../../hooks/useTrackedSafesCount'
 import { DataWidget } from '../DataWidget'
+import GullyActivityCard from '@/components/gully/GullyActivityCard'
 
 type MyAccountsProps = {
   safes: AllSafeItemsGrouped
@@ -27,6 +28,9 @@ const MyAccounts = ({ safes, onLinkClick, isSidebar = false }: MyAccountsProps) 
       <Box className={classNames(css.myAccounts, { [css.sidebarAccounts]: isSidebar })}>
         <AccountsHeader isSidebar={isSidebar} onLinkClick={onLinkClick} />
 
+        {/* Gully Multisig: what is happening on the chains, live, above the list (not in the sidebar copy) */}
+        {!isSidebar && <GullyActivityCard />}
+
         <Paper sx={{ padding: 0 }}>
           <AccountListFilters setSearchQuery={setSearchQuery} />
 
@@ -38,7 +42,7 @@ const MyAccounts = ({ safes, onLinkClick, isSidebar = false }: MyAccountsProps) 
         </Paper>
 
         {isSidebar && <Divider />}
-        <DataWidget />
+        <DataWidget compact={!isSidebar} />
       </Box>
     </Box>
   )

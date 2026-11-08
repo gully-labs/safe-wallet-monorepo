@@ -14,13 +14,15 @@ describe('Gully Multisig shared navigation', () => {
     expect(nav.links.map((l: { id: string }) => l.id)).toEqual(['live', 'features', 'chains', 'security', 'docs'])
     expect(nav.links[0].appLabel).toBe('Dashboard')
     expect(nav.primary.landing.label).toBe('Open app')
-    expect(nav.primary.app.label).toBe('New Safe')
+    expect(nav.primary.app.label).toBe('New multisig')
   })
 
-  it('the app header uses it: links right after the logo, the one primary button, the lockup reads Gully Multisig', () => {
+  it('the app header uses it: links right after the logo, no competing primary button, the lockup reads Gully Multisig', () => {
     const header = read('components/common/Header/index.tsx')
     expect(header).toContain('<GullyNavLinks')
-    expect(header).toContain('NAV_PRIMARY')
+    // design slice 1 (owner, 2026-11-08 "bad ux"): the header shows one session control and no competing primary button;
+    // the app's primary action lives in the sidebar and in the phone menu (nav.primary.app)
+    expect(header).not.toContain('NAV_PRIMARY')
     expect(header).not.toContain('Start building')
     expect(read('components/common/GullySafeLogo/index.tsx')).toContain("'Gully Multisig'")
     // the logo no longer takes the free space (that was the empty band between it and the links)

@@ -15,7 +15,7 @@ const CreateButton = ({ isPrimary }: { isPrimary: boolean }) => {
         sx={buttonSx}
         component="a"
       >
-        Create account
+        Create a multisig
       </Button>
     </Link>
   )

@@ -42,3 +42,97 @@
 .container summary::-webkit-details-marker {
   display: none;
 }
+
+/* Gully Multisig toasts (kit v4): an ink card with a severity bar on the left, kit radius, a slide-in from the right
+   edge and a soft shadow instead of MUI's tinted alert. Every mutation in the app reports through these. */
+.row {
+  animation: toastIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.container :global(.MuiAlert-root) {
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  border-radius: 12px;
+  border: 1px solid var(--color-border-light);
+  border-left: 4px solid var(--color-info-main);
+  background: var(--color-background-paper);
+  color: var(--color-text-primary);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  padding: 10px 14px;
+  align-items: flex-start;
+}
+
+.container :global(.MuiAlert-icon) {
+  color: var(--color-info-main);
+  padding: 4px 0;
+}
+
+.container :global(.MuiAlert-standardSuccess),
+.container :global(.MuiAlert-filledSuccess) {
+  border-left-color: var(--color-success-main);
+}
+
+.container :global(.MuiAlert-standardSuccess .MuiAlert-icon) {
+  color: var(--color-success-main);
+}
+
+.container :global(.MuiAlert-standardWarning) {
+  border-left-color: var(--color-warning-main);
+}
+
+.container :global(.MuiAlert-standardWarning .MuiAlert-icon) {
+  color: var(--color-warning-main);
+}
+
+.container :global(.MuiAlert-standardError) {
+  border-left-color: var(--color-error-main);
+}
+
+.container :global(.MuiAlert-standardError .MuiAlert-icon) {
+  color: var(--color-error-main);
+}
+
+.container :global(.MuiAlert-message) {
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.container :global(.MuiAlert-action) {
+  padding-top: 0;
+  margin-right: -6px;
+}
+
+.container :global(.MuiAlert-action .MuiIconButton-root) {
+  color: var(--color-text-secondary);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 599.95px) {
+  .container {
+    right: 0;
+    left: 0;
+  }
+
+  .row {
+    max-width: none;
+    justify-content: center;
+    padding: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row {
+    animation: none;
+  }
+}

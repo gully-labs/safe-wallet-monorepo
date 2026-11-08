@@ -22,3 +22,24 @@
   margin: 4px;
   color: var(--color-text-secondary);
 }
+
+/* Gully Multisig: the compact form, one line of text links under the list */
+.compact {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  padding: var(--space-1) 0 var(--space-2);
+}
+
+.textLink {
+  color: var(--color-text-secondary) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+.textLink:hover {
+  color: var(--color-text-primary) !important;
+  background: transparent !important;
+}

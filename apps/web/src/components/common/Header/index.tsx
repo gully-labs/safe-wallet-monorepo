@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from 'react'
 import type { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import type { Url } from 'next/dist/shared/lib/router/router'
-import { Box, Button, IconButton, Paper } from '@mui/material'
+import { Box, IconButton, Paper } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import classnames from 'classnames'
 import css from './styles.module.css'
@@ -27,7 +27,8 @@ import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { BRAND_LOGO, BRAND_NAME } from '@/config/constants'
 import GullySafeLogo from '@/components/common/GullySafeLogo'
 import GullySignIn from '@/components/common/GullySignIn'
-import { GullyNavLinks, GullyNavMenu, NAV_PRIMARY } from '@/components/common/GullyNav'
+import { GullyNavLinks, GullyNavMenu } from '@/components/common/GullyNav'
+import useWallet from '@/hooks/wallets/useWallet'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -50,6 +51,7 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
   const router = useRouter()
   const { WalletConnectWidget } = useLoadFeature(WalletConnectFeature)
   const isOfficialHost = useIsOfficialHost()
+  const wallet = useWallet()
 
   // If on the home page, the logo should link to the Accounts or Welcome page, otherwise to the home page
   const logoHref = getLogoLink(router)
@@ -125,30 +127,27 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         </div>
       </Box>
 
-      {!isOfficialHost && (
-        <div className={classnames(css.element, css.hideMobile)}>
-          {/* the one primary action: "Open app" on the landing, "New Safe" in the app (config/gully-nav.json) */}
-          <Button component={Link} href={NAV_PRIMARY.href} size="small" variant="contained" disableElevation>
-            {NAV_PRIMARY.label}
-          </Button>
+      {/* Gully Multisig: ONE session control. Before a wallet is connected: the kit's "Sign in with Gully ID" button and
+          Connect. Once a wallet is connected only its chip stays (Gully ID sign-in, switch wallet and disconnect live in
+          the chip's menu, components/common/WalletInfo). On phones this group is the header's second row. */}
+      <div className={classnames(css.element, css.session)} data-testid="gully-session">
+        {!wallet && (
+          <div className={css.signIn}>
+            <GullySignIn />
+          </div>
+        )}
+
+        <div className={css.connectWallet}>
+          <Track label={OVERVIEW_LABELS.top_bar} {...OVERVIEW_EVENTS.OPEN_ONBOARD}>
+            <ConnectWallet />
+          </Track>
         </div>
-      )}
 
-      {/* Gully Multisig: on phones this slot is the header's second row (styles.module.css) */}
-      <div className={classnames(css.element, css.signIn)}>
-        <GullySignIn />
-      </div>
-
-      <div className={classnames(css.element, css.connectWallet)}>
-        <Track label={OVERVIEW_LABELS.top_bar} {...OVERVIEW_EVENTS.OPEN_ONBOARD}>
-          <ConnectWallet />
-        </Track>
-      </div>
-
-      {/* Gully Multisig: the network selector is on every route (upstream shows it only inside a Safe), so Gully Chain
-          Testnet, Anubis and any chain the config service adds can be picked before a Safe is open */}
-      <div className={classnames(css.element, css.networkSelector)} data-testid="gully-network-selector">
-        <NetworkSelector offerSafeCreation={Boolean(safeAddress)} compactButton={true} />
+        {/* the network selector is on every route (upstream shows it only inside a Safe), so Gully Chain Testnet, Anubis
+            and any chain the config service adds can be picked before a Safe is open */}
+        <div className={css.networkSelector} data-testid="gully-network-selector">
+          <NetworkSelector offerSafeCreation={Boolean(safeAddress)} compactButton={true} />
+        </div>
       </div>
     </Paper>
   )
