@@ -12,7 +12,7 @@ import Track from '@/components/common/Track'
 import { OVERVIEW_EVENTS } from '@/services/analytics/events/overview'
 import { MixpanelEventParams } from '@/services/analytics/mixpanel-events'
 import { useCurrentChain } from '@/hooks/useChains'
-import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
+import { GULLY_DOCS_URL } from '@/config/gully'
 import IndexingStatus from '@/components/sidebar/IndexingStatus'
 
 const SidebarFooter = (): ReactElement => {
@@ -63,7 +63,14 @@ const SidebarFooter = (): ReactElement => {
           {...OVERVIEW_EVENTS.HELP_CENTER}
           mixpanelParams={{ [MixpanelEventParams.SIDEBAR_ELEMENT]: 'Help Center' }}
         >
-          <IconButton href={HELP_CENTER_URL} target="_blank" data-testid="list-item-need-help" color="primary">
+          <IconButton
+            href={GULLY_DOCS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Help"
+            data-testid="list-item-need-help"
+            color="primary"
+          >
             <SvgIcon component={HelpCenterIcon} inheritViewBox fontSize="small" />
           </IconButton>
         </Track>

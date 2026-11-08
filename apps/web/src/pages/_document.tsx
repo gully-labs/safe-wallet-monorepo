@@ -18,6 +18,16 @@ export default class WebCoreDocument extends Document {
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
+          {/* Follow Gully Labs on X (owner, 2026-11-06): byte copy of gully-ops sites/_shared/x-banner. Sync on purpose, so
+              the bar is in place before the page paints; same-origin, CSP allows it. Not on the transaction flows. */}
+          {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+          <script
+            src="/gully-x-banner.js"
+            data-bg="var(--color-background-paper,#111716)"
+            data-fg="var(--color-primary-main,#12FF80)"
+            data-line="var(--color-border-light,#303033)"
+            data-skip="^/(transactions/tx|share)"
+          />
           <Main />
           <NextScript />
         </body>

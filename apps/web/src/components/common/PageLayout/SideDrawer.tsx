@@ -1,6 +1,7 @@
 import SpaceSidebar from 'src/features/spaces/components/SpaceSidebar'
 import { useIsSpaceRoute } from '@/hooks/useIsSpaceRoute'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import { useEffect, type ReactElement } from 'react'
 import { IconButton, Drawer, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -11,7 +12,10 @@ import classnames from 'classnames'
 import Sidebar from '@/components/sidebar/Sidebar'
 import css from './styles.module.css'
 import useDebounce from '@safe-global/utils/hooks/useDebounce'
-import { useIsSidebarRoute } from '@/hooks/useIsSidebarRoute'
+import { isAccountSidebarRoute, useIsSidebarRoute } from '@/hooks/useIsSidebarRoute'
+
+// Gully Multisig: its own chunk, the navigation of the app pages without an open Safe
+const GullyAccountSidebar = dynamic(() => import('@/components/sidebar/GullyAccountSidebar'), { ssr: false })
 
 type SideDrawerProps = {
   isOpen: boolean
@@ -45,7 +49,8 @@ const SideDrawer = ({ isOpen, onToggle }: SideDrawerProps): ReactElement => {
     }
   }, [onToggle, router, isSmallScreen])
 
-  const SidebarComponent = isSpaceRoute ? SpaceSidebar : Sidebar
+  const isAccountSidebar = !router.query.safe && isAccountSidebarRoute(router.pathname)
+  const SidebarComponent = isSpaceRoute ? SpaceSidebar : isAccountSidebar ? GullyAccountSidebar : Sidebar
 
   return (
     <>

@@ -104,12 +104,22 @@ const Footer: React.FC<FooterProps> = ({
           <>
             <li>
               <a href={GULLY_LABS_URL} target="_blank" rel="noopener noreferrer" className={css.badge}>
+                {/* Gully Labs kit 2026-11, byte-identical files: white on the dark theme, navy on the light one */}
                 <img
-                  src="/brand/badges/powered-by-gully-labs-dark.svg"
-                  srcSet="/brand/badges/powered-by-gully-labs-dark.png 1x, /brand/badges/powered-by-gully-labs-dark-2x.png 2x, /brand/badges/powered-by-gully-labs-dark-3x.png 3x"
-                  width={189}
+                  className={css.badgeOnDark}
+                  src="/brand/badges/powered-by-clear-white.svg"
+                  width={163}
                   height={56}
                   alt="Powered by Gully Labs"
+                  loading="lazy"
+                />
+                <img
+                  className={css.badgeOnLight}
+                  src="/brand/badges/powered-by-clear-navy.svg"
+                  width={163}
+                  height={56}
+                  alt="Powered by Gully Labs"
+                  loading="lazy"
                 />
               </a>
             </li>

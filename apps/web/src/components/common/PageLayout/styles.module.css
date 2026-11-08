@@ -1,7 +1,7 @@
 .header {
   position: fixed;
   left: 0;
-  top: 0;
+  top: var(--gxb-h, 0px);
   width: 100%;
   z-index: 1201;
   background: var(--color-background-paper);
@@ -45,7 +45,7 @@
   position: fixed;
   z-index: 4;
   left: 0;
-  top: 0;
+  top: var(--gxb-h, 0px);
   /* mimics MUI drawer animation */
   transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }

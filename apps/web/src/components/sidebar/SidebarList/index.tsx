@@ -17,10 +17,27 @@ export const SidebarList = ({ children, ...rest }: Omit<ListProps, 'className'>)
 
 export const SidebarListItemButton = ({
   href,
+  externalHref,
   children,
   disabled,
   ...rest
-}: Omit<ListItemButtonProps, 'sx'> & { href?: LinkProps['href'] }): ReactElement => {
+}: Omit<ListItemButtonProps, 'sx'> & { href?: LinkProps['href']; externalHref?: string }): ReactElement => {
+  // Gully Multisig: a link to another product, in a new tab
+  if (externalHref) {
+    return (
+      <ListItemButton
+        className={css.listItemButton}
+        component="a"
+        href={externalHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...(rest as object)}
+      >
+        {children}
+      </ListItemButton>
+    )
+  }
+
   const button = (
     <ListItemButton className={css.listItemButton} {...rest} sx={disabled ? { pointerEvents: 'none' } : undefined}>
       {children}

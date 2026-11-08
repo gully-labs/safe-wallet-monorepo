@@ -47,7 +47,22 @@
   transform: translateY(-1px);
 }
 
+.icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--gc-muted);
+}
+
+.card:hover .icon,
+.card:focus-visible .icon {
+  color: var(--gc-cyan);
+}
+
 .name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--gc-font);
   font-weight: 600;
   font-size: 16px;
