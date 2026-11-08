@@ -13,6 +13,7 @@ import StakeIcon from '@/public/images/common/stake.svg'
 import EarnIcon from '@/public/images/common/earn.svg'
 import { SvgIcon } from '@mui/material'
 import HubOutlinedIcon from '@mui/icons-material/HubOutlined'
+import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined'
 
 export type NavItem = { label: string; icon?: ReactElement; href: string; tag?: ReactElement; disabled?: boolean }
 
@@ -37,6 +38,7 @@ export const navItems: NavItem[] = [
   { label: 'Stake', icon: <SvgIcon component={StakeIcon} inheritViewBox />, href: AppRoutes.stake },
   // Gully Multisig: links to the other Gully products
   { label: 'Gully services', icon: <HubOutlinedIcon />, href: AppRoutes.gullyServices },
+  { label: 'Gully actions', icon: <BoltOutlinedIcon />, href: AppRoutes.gullyActions },
   {
     label: 'Settings',
     icon: <SvgIcon data-testid="settings-nav-icon" component={SettingsIcon} inheritViewBox />,

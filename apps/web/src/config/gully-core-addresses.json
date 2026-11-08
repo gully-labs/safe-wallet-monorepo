@@ -1,0 +1,19 @@
+{
+  "_source": "gully-ops l3/generated/gully-core.json (485590, Gully Core release 2) and gully-core-6714.json (Anubis, release 3), read 2026-11-08. Addresses only. feeController is the contract whose setBuilderFee the Safe calls: V5 on Anubis; Gully Chain Testnet still runs V4 (no setBuilderFee), so it is null there.",
+  "485590": {
+    "name": "Gully Chain Testnet",
+    "governanceSafe": "0xC5526E28B5cDe3C5962A224896804a499d5bb240",
+    "feeController": null,
+    "registry": "0x352e2881Ae34bCcF8e6bB3BC38dC0Ffe9e99Aa2a",
+    "launchpadKit": "0xE8Bbf42a7583C71085F26dd5c31Cb1e5448B0545",
+    "payToken": { "address": "0x65Ba03c6FA90Ed549f465D4c8f2e784D6eEB7E76", "symbol": "USDC.e", "decimals": 6 }
+  },
+  "6714": {
+    "name": "Anubis Network",
+    "governanceSafe": "0xaaa3ee4e1c7b6241156516D4B630A3bF2541f786",
+    "feeController": "0xC576eBFE93B3e524b2310d283E5eA6A91869cc7F",
+    "registry": "0x25f7B2B9e5875CdB338D90B9e5D8049919b5179e",
+    "launchpadKit": "0xb0BBe5b05A97Bd57DccF3fBd9CF420483b441a23",
+    "payToken": null
+  }
+}
