@@ -23,4 +23,11 @@ describe('Gully Multisig chain switcher', () => {
     expect(selector).toContain('configs.map((config) => config.chainId)')
     expect(selector).not.toContain('allMultiChainSafes')
   })
+
+  it('/swap goes to the Gully Core swap instead of loading the CoW widget, and /gully-services has an h1', () => {
+    const swap = read('pages/swap.tsx')
+    expect(swap).toContain('https://app.gullycore.xyz/swap')
+    expect(swap).not.toContain('cowprotocol')
+    expect(read('components/gully/GullyServices/index.tsx')).toContain('component="h1"')
+  })
 })
