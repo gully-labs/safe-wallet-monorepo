@@ -30,15 +30,24 @@ describe('describeCall', () => {
   })
 
   it('shortens an unnamed recipient and groups thousands', () => {
-    const d = describeCall({ to: USDC, data: enc('transfer(address to, uint256 amount)', [HOOK, 1_234_567_890_000n]) }, ctx)
+    const d = describeCall(
+      { to: USDC, data: enc('transfer(address to, uint256 amount)', [HOOK, 1_234_567_890_000n]) },
+      ctx,
+    )
     expect(d?.title).toBe('Pay 1,234,567.89 USDC.e to 0x3333…3333')
   })
 
   it('flags an unlimited approval as careful and plain approvals as normal', () => {
-    const unlimited = describeCall({ to: USDC, data: enc('approve(address spender, uint256 amount)', [ALICE, MaxUint256]) }, ctx)
+    const unlimited = describeCall(
+      { to: USDC, data: enc('approve(address spender, uint256 amount)', [ALICE, MaxUint256]) },
+      ctx,
+    )
     expect(unlimited?.title).toBe('Let Alice spend unlimited USDC.e')
     expect(unlimited?.level).toBe('careful')
-    const some = describeCall({ to: USDC, data: enc('approve(address spender, uint256 amount)', [ALICE, 25_000_000n]) }, ctx)
+    const some = describeCall(
+      { to: USDC, data: enc('approve(address spender, uint256 amount)', [ALICE, 25_000_000n]) },
+      ctx,
+    )
     expect(some?.title).toBe('Let Alice spend up to 25 USDC.e')
     expect(some?.level).toBe('normal')
     const zero = describeCall({ to: USDC, data: enc('approve(address spender, uint256 amount)', [ALICE, 0n]) }, ctx)
@@ -74,7 +83,10 @@ describe('describeCall', () => {
 
   it('decodes registry, launch fee, escrow and vault calls', () => {
     expect(
-      describeCall({ to: CTRL, data: enc('setListing(address hook, uint8 status, string reason)', [HOOK, 2, 'stolen funds']) }, ctx),
+      describeCall(
+        { to: CTRL, data: enc('setListing(address hook, uint8 status, string reason)', [HOOK, 2, 'stolen funds']) },
+        ctx,
+      ),
     ).toMatchObject({ title: 'Mark hook 0x3333…3333 as Malicious in the Gully Core registry', level: 'careful' })
     expect(describeCall({ to: CTRL, data: enc('setLaunchFee(uint256 newFeeWei)', [10n ** 15n]) }, ctx)?.title).toBe(
       'Set the Gully Core launch fee to 0.001 ETH',
@@ -100,7 +112,9 @@ describe('describeCall', () => {
     expect(describeCall({ to: USDC, data: '0x' }, ctx)).toBeNull()
     expect(describeCall({ to: USDC, data: null }, ctx)).toBeNull()
     expect(describeCall({ to: USDC, data: '0x895a74850000' }, ctx)).toBeNull()
-    expect(describeCall({ to: USDC, data: enc('transfer(address to, uint256 amount)', [ALICE, 1n]).slice(0, 40) }, ctx)).toBeNull()
+    expect(
+      describeCall({ to: USDC, data: enc('transfer(address to, uint256 amount)', [ALICE, 1n]).slice(0, 40) }, ctx),
+    ).toBeNull()
   })
 })
 

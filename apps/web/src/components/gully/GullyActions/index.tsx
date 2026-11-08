@@ -166,7 +166,8 @@ const GullyActions = (): ReactElement => {
           />
           {propose('Propose payouts', () => {
             const d = Number(decimals)
-            if (!Number.isInteger(d) || d < 0 || d > 36) return setError('Decimals must be a whole number from 0 to 36.')
+            if (!Number.isInteger(d) || d < 0 || d > 36)
+              return setError('Decimals must be a whole number from 0 to 36.')
             open('Gully Pay payouts', buildPayout(token, d, symbol || 'tokens', parsePayoutLines(payouts)))
           })}
         </Card>

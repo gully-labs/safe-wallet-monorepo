@@ -26,10 +26,7 @@ export const gullyChainRecord = (chainId: string): ChainRecord | undefined =>
   (addresses as unknown as Record<string, ChainRecord>)[chainId]
 
 const erc20 = new Interface(['function transfer(address to, uint256 amount)'])
-const feeController = new Interface([
-  'function setBuilderFee(uint16 newFee)',
-  'function cancelPendingBuilderFee()',
-])
+const feeController = new Interface(['function setBuilderFee(uint16 newFee)', 'function cancelPendingBuilderFee()'])
 const registry = new Interface(['function setListing(address hook, uint8 status, string reason)'])
 const kit = new Interface(['function setLaunchFee(uint256 newFeeWei)', 'function cancelPendingLaunchFee()'])
 const pausable = new Interface(['function pause()', 'function unpause()'])
@@ -49,7 +46,9 @@ const needController = (chainId: string): { to: string } | { error: string } => 
   const r = gullyChainRecord(chainId)
   if (!r) return { error: 'Gully Core has no record for this chain.' }
   if (!r.feeController) {
-    return { error: `${r.name} runs an older Gully Core fee controller without a builder fee. Nothing to propose here.` }
+    return {
+      error: `${r.name} runs an older Gully Core fee controller without a builder fee. Nothing to propose here.`,
+    }
   }
   return { to: r.feeController }
 }
@@ -87,7 +86,9 @@ export const buildSetListing = (chainId: string, hook: string, status: ListingSt
   if (status !== 'active' && reason.trim().length < 3) return fail('Give a short reason for the listing change.')
   return {
     ok: true,
-    calls: [call(r.registry, registry.encodeFunctionData('setListing', [getAddress(hook), LISTING[status], reason.trim()]))],
+    calls: [
+      call(r.registry, registry.encodeFunctionData('setListing', [getAddress(hook), LISTING[status], reason.trim()])),
+    ],
     summary: `Mark hook ${getAddress(hook)} as ${status} in the Gully Core registry`,
   }
 }

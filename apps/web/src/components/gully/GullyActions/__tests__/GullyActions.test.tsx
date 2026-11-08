@@ -64,7 +64,9 @@ describe('GullyActions', () => {
     ;(useChainId as jest.Mock).mockReturnValue('485590')
     renderPanel()
     fireEvent.change(screen.getByLabelText('Payouts (address amount)'), {
-      target: { value: '0x2222222222222222222222222222222222222222 500\n0x3333333333333333333333333333333333333333 12.5' },
+      target: {
+        value: '0x2222222222222222222222222222222222222222 500\n0x3333333333333333333333333333333333333333 12.5',
+      },
     })
     fireEvent.click(screen.getByText('Propose payouts'))
     const element = setTxFlow.mock.calls[0][0]

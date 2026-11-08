@@ -54,7 +54,9 @@ describe('gully actions', () => {
 
   it('builds cancel, listing, launch fee and pause calls the decoder understands', () => {
     const cancel = buildCancelBuilderFee(ANUBIS)
-    expect(cancel.ok && describeCall(cancel.calls[0])?.title).toBe('Cancel the scheduled Gully Core builder fee increase')
+    expect(cancel.ok && describeCall(cancel.calls[0])?.title).toBe(
+      'Cancel the scheduled Gully Core builder fee increase',
+    )
 
     const listing = buildSetListing(ANUBIS, A, 'malicious', 'drains users')
     expect(listing.ok && describeCall(listing.calls[0])).toMatchObject({ level: 'careful', group: 'gully-core' })
@@ -93,14 +95,22 @@ describe('gully actions', () => {
     expect(describeCall(b.calls[0], ctx)?.title).toBe('Pay 500 USDC.e to 0x2222…2222')
     expect(describeCall(b.calls[1], ctx)?.title).toBe('Pay 0.25 USDC.e to 0x3333…3333')
     expect(b.summary).toBe('Pay 500.25 USDC.e to 2 recipients')
-    const data = new Interface(['function transfer(address to, uint256 amount)']).decodeFunctionData('transfer', b.calls[1].data)
+    const data = new Interface(['function transfer(address to, uint256 amount)']).decodeFunctionData(
+      'transfer',
+      b.calls[1].data,
+    )
     expect(data.amount).toBe(250000n)
 
     expect(buildPayout(token.address, 6, 'USDC.e', [{ recipient: 'bob', amount: '1' }])).toEqual({
       ok: false,
       error: 'Line 1: "bob" is not an address.',
     })
-    expect(buildPayout(token.address, 6, 'USDC.e', [{ recipient: A, amount: '1' }, { recipient: B, amount: 'ten' }])).toEqual({
+    expect(
+      buildPayout(token.address, 6, 'USDC.e', [
+        { recipient: A, amount: '1' },
+        { recipient: B, amount: 'ten' },
+      ]),
+    ).toEqual({
       ok: false,
       error: 'Line 2: "ten" is not an amount.',
     })
