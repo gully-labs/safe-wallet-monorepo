@@ -54,15 +54,22 @@ describe('GullyIdSigner', () => {
     expect(onAdd).toHaveBeenCalledWith(A)
   })
 
-  it('shows nothing when not signed in, or when the address is already a signer', async () => {
+  it('shows nothing when not signed in', async () => {
     ;(useWallet as jest.Mock).mockReturnValue({ label: 'MetaMask', address: B })
     const spy = jest.spyOn(gullyIdWallet, 'readGullyIdSession').mockResolvedValue(null)
-    const { container, rerender } = render(<GullyIdSigner chainId="485590" existing={[B]} onAdd={jest.fn()} />)
+    const { container } = render(<GullyIdSigner chainId="485590" existing={[B]} onAdd={jest.fn()} />)
     await waitFor(() => expect(spy).toHaveBeenCalled())
     expect(container).toBeEmptyDOMElement()
-    spy.mockResolvedValue(session([{ chainId: 485590, address: A, kind: 'kernel-v3.3' }]))
-    rerender(<GullyIdSigner chainId="485590" existing={[A]} onAdd={jest.fn()} />)
-    await waitFor(() => expect(spy).toHaveBeenCalledTimes(2))
+  })
+
+  it('shows nothing when the Gully ID address is already a signer', async () => {
+    ;(useWallet as jest.Mock).mockReturnValue({ label: 'MetaMask', address: B })
+    const spy = jest
+      .spyOn(gullyIdWallet, 'readGullyIdSession')
+      .mockResolvedValue(session([{ chainId: 485590, address: A, kind: 'kernel-v3.3' }]))
+    const { container } = render(<GullyIdSigner chainId="485590" existing={[A]} onAdd={jest.fn()} />)
+    await waitFor(() => expect(spy).toHaveBeenCalled())
+    await new Promise((r) => setTimeout(r, 20))
     expect(container).toBeEmptyDOMElement()
   })
 })
