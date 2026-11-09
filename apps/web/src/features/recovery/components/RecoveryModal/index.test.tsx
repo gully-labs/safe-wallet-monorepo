@@ -176,7 +176,7 @@ describe('RecoveryModal', () => {
         )
 
         expect(container.innerHTML).toMatchSnapshot()
-        expect(queryByText('Recover this Account')).toBeFalsy()
+        expect(queryByText('Recover this multisig')).toBeFalsy()
       })
 
       it('should not render the proposal modal when there is no queue for recoverers on a non-sidebar route', () => {
@@ -208,7 +208,7 @@ describe('RecoveryModal', () => {
         )
 
         expect(container.innerHTML).toMatchSnapshot()
-        expect(queryByText('Recover this Account')).toBeFalsy()
+        expect(queryByText('Recover this multisig')).toBeFalsy()
       })
     })
   })

@@ -37,7 +37,7 @@ exports[`./index.stories DarkMode 1`] = `
             class="carouselItem"
           >
             <a
-              aria-label="Manage multiple Safes"
+              aria-label="Manage multiple multisigs"
               class="cardLink"
               href="https://app.safe.global/welcome/spaces"
             >
@@ -48,7 +48,7 @@ exports[`./index.stories DarkMode 1`] = `
                   class="iconContainer"
                 >
                   <img
-                    alt="Manage multiple Safes icon"
+                    alt="Manage multiple multisigs icon"
                     class="icon"
                     src="/images/explore-possible/spaces-large.svg"
                   />
@@ -59,7 +59,7 @@ exports[`./index.stories DarkMode 1`] = `
                   <p
                     class="title"
                   >
-                    Manage multiple Safes
+                    Manage multiple multisigs
                   </p>
                 </div>
               </div>
@@ -173,7 +173,7 @@ exports[`./index.stories Default 1`] = `
             class="carouselItem"
           >
             <a
-              aria-label="Manage multiple Safes"
+              aria-label="Manage multiple multisigs"
               class="cardLink"
               href="https://app.safe.global/welcome/spaces"
             >
@@ -184,7 +184,7 @@ exports[`./index.stories Default 1`] = `
                   class="iconContainer"
                 >
                   <img
-                    alt="Manage multiple Safes icon"
+                    alt="Manage multiple multisigs icon"
                     class="icon"
                     src="/images/explore-possible/spaces-large.svg"
                   />
@@ -195,7 +195,7 @@ exports[`./index.stories Default 1`] = `
                   <p
                     class="title"
                   >
-                    Manage multiple Safes
+                    Manage multiple multisigs
                   </p>
                 </div>
               </div>
@@ -309,7 +309,7 @@ exports[`./index.stories LightMode 1`] = `
             class="carouselItem"
           >
             <a
-              aria-label="Manage multiple Safes"
+              aria-label="Manage multiple multisigs"
               class="cardLink"
               href="https://app.safe.global/welcome/spaces"
             >
@@ -320,7 +320,7 @@ exports[`./index.stories LightMode 1`] = `
                   class="iconContainer"
                 >
                   <img
-                    alt="Manage multiple Safes icon"
+                    alt="Manage multiple multisigs icon"
                     class="icon"
                     src="/images/explore-possible/spaces-large.svg"
                   />
@@ -331,7 +331,7 @@ exports[`./index.stories LightMode 1`] = `
                   <p
                     class="title"
                   >
-                    Manage multiple Safes
+                    Manage multiple multisigs
                   </p>
                 </div>
               </div>
@@ -445,7 +445,7 @@ exports[`./index.stories NarrowViewport 1`] = `
             class="carouselItem"
           >
             <a
-              aria-label="Manage multiple Safes"
+              aria-label="Manage multiple multisigs"
               class="cardLink"
               href="https://app.safe.global/welcome/spaces"
             >
@@ -456,7 +456,7 @@ exports[`./index.stories NarrowViewport 1`] = `
                   class="iconContainer"
                 >
                   <img
-                    alt="Manage multiple Safes icon"
+                    alt="Manage multiple multisigs icon"
                     class="icon"
                     src="/images/explore-possible/spaces-large.svg"
                   />
@@ -467,7 +467,7 @@ exports[`./index.stories NarrowViewport 1`] = `
                   <p
                     class="title"
                   >
-                    Manage multiple Safes
+                    Manage multiple multisigs
                   </p>
                 </div>
               </div>

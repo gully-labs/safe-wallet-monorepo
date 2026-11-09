@@ -187,7 +187,7 @@ const AdvancedOptionsStep = ({ onSubmit, onBack, data, setStep }: StepRenderProp
               }}
             >
               Payment receiver
-              <Tooltip title="The payment receiver changes the predicted Safe address." arrow placement="top">
+              <Tooltip title="The payment receiver changes the predicted multisig address." arrow placement="top">
                 <span style={{ display: 'flex' }}>
                   <SvgIcon component={InfoIcon} inheritViewBox color="border" fontSize="small" />
                 </span>

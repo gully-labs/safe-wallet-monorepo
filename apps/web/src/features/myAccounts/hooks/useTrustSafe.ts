@@ -55,7 +55,7 @@ export function useTrustSafe() {
 
       dispatch(
         showNotification({
-          title: 'Safe confirmed',
+          title: 'Multisig confirmed',
           message: 'This multisig has been added to your trusted list',
           groupKey: `pin-safe-success-${address}`,
           variant: 'success',

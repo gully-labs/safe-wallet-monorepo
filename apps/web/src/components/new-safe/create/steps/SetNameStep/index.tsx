@@ -131,7 +131,7 @@ function SetNameStep({
                 Select Networks
               </Typography>
               <Typography variant="body2" mb={2}>
-                Choose which networks you want your account to be active on. You can add more networks later.{' '}
+                Choose which networks you want your multisig to be active on. You can add more networks later.{' '}
               </Typography>
               <SafeCreationNetworkInput isAdvancedFlow={isAdvancedFlow} name={SetNameStepFields.networks} />
             </Grid>

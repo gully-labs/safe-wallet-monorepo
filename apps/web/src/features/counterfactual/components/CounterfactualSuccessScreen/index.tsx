@@ -97,7 +97,7 @@ const CounterfactualSuccessScreen = () => {
           </Typography>
           <Typography variant="body2">
             {isCFCreation
-              ? `Activate the account ${isMultiChain ? 'per network' : ''} to unlock all features of your smart wallet.`
+              ? `Activate the multisig ${isMultiChain ? 'per network' : ''} to unlock all of its features.`
               : 'Start your journey to the smart account security now.'}
           </Typography>
           <Typography variant="body2">

@@ -64,7 +64,7 @@ const Activity = ({ safeAddress }: { safeAddress: string }): ReactElement => {
         </div>
         <div className={css.kpi}>
           <b>{!data ? '–' : <CountUp value={data.safes.length} />}</b>
-          <span>Safes on Gully Chain</span>
+          <span>Multisigs on Gully Chain</span>
         </div>
       </div>
       <div className={css.plot}>

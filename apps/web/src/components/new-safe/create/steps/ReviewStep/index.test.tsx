@@ -189,6 +189,6 @@ describe('ReviewStep', () => {
       <ReviewStep data={mockData} onSubmit={jest.fn()} onBack={jest.fn()} setStep={jest.fn()} />,
     )
 
-    expect(getByText(/activate your account/)).toBeInTheDocument()
+    expect(getByText(/activate your multisig/)).toBeInTheDocument()
   })
 })

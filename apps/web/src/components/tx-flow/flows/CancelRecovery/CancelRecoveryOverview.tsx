@@ -27,7 +27,7 @@ export function CancelRecoveryOverview(): ReactElement {
         <ReplaceTxIcon />
 
         <Typography mb={1} variant="h4" mt={5} fontWeight={700} textAlign="center">
-          Do you want to cancel the Account recovery?
+          Do you want to cancel the multisig recovery?
         </Typography>
 
         <Typography variant="body2" mb={3} textAlign="center">

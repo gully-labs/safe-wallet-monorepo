@@ -70,7 +70,7 @@ export function UpsertRecoveryFlowReview({ children, ...props }: ReviewTransacti
   return (
     <ReviewTransaction {...props}>
       <Typography>
-        This transaction will {isEdit ? 'update' : 'enable'} the Account recovery feature once executed.
+        This transaction will {isEdit ? 'update' : 'enable'} the multisig recovery feature once executed.
       </Typography>
 
       <TxDataRow title="Trusted Recoverer">

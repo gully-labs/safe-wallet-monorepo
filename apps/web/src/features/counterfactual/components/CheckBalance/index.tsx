@@ -27,7 +27,7 @@ const CheckBalance = () => {
       </Typography>
       <Typography variant="body2" mb={2}>
         Your Your multisig is not activated yet so we can only display your native balance. Non-native tokens may not
-        show up immediately after the multisig is deployed. Finish the onboarding to deploy your account onchain and
+        show up immediately after the multisig is deployed. Finish the onboarding to deploy your multisig onchain and
         unlock all features.{' '}
         {blockExplorerLink && (
           <>

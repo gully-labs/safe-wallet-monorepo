@@ -110,7 +110,7 @@ export const OwnerList = () => {
             Signers
           </Typography>
           <Typography mb={2}>
-            Signers have full control over the account, they can propose, sign and execute transactions, as well as
+            Signers have full control over the multisig, they can propose, sign and execute transactions, as well as
             reject them.
           </Typography>
 

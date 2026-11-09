@@ -72,7 +72,7 @@ export const EarnBannerCopy = () => {
       </Typography>
 
       <Typography variant="body1" className={css.content} mt={2}>
-        Deposit stablecoins, wstETH, ETH, and WBTC straight from your account and let your assets compound in minutes.{' '}
+        Deposit stablecoins, wstETH, ETH, and WBTC straight from your multisig and let your assets compound in minutes.{' '}
         <Track {...EARN_EVENTS.OPEN_EARN_LEARN_MORE} label={EARN_LABELS.safe_dashboard_banner}>
           <ExternalLink href={EARN_HELP_ARTICLE}>Learn more</ExternalLink>
         </Track>
@@ -138,7 +138,7 @@ const EarnInfo = ({ onGetStarted }: { onGetStarted: () => void }) => {
                   <Typography fontWeight="bold" mb={0.5}>
                     Never leave the app
                   </Typography>
-                  <Typography>Interact with your assets right in Safe Wallet UI.</Typography>
+                  <Typography>Interact with your assets right in Gully Multisig.</Typography>
                 </Box>
               </Stack>
 

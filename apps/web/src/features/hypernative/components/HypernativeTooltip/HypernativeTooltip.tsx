@@ -20,7 +20,7 @@ export const HypernativeTooltip = ({
         sx={{ width: 78, height: 18 }}
       />
 
-      <Typography variant="body2">{title || 'Hypernative Guardian is actively monitoring this account.'}</Typography>
+      <Typography variant="body2">{title || 'Hypernative Guardian is actively monitoring this multisig.'}</Typography>
     </Stack>
   )
 

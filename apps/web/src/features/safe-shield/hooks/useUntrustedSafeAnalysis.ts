@@ -25,7 +25,7 @@ const useUntrustedSafeAnalysis = (): UntrustedSafeAnalysisResult => {
     return {
       severity: Severity.CRITICAL,
       type: SafeStatus.UNTRUSTED,
-      title: 'Untrusted Safe',
+      title: 'Untrusted multisig',
       description:
         "You're creating a transaction from a multisig that isn't in your trusted list. Trust it if you recognize it.",
     }

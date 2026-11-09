@@ -115,7 +115,7 @@ const CreateSafe = () => {
   const CreateSafeSteps: TxStepperProps<NewSafeFormData>['steps'] = [
     {
       title: 'Set up the basics',
-      subtitle: 'Give a name to your account and select which networks to deploy it on.',
+      subtitle: 'Give a name to your multisig and select which networks to deploy it on.',
       render: (data, onSubmit, onBack, setStep) => (
         <SetNameStep
           setOverviewNetworks={setOverviewNetworks}

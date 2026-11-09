@@ -10,7 +10,7 @@ export const ChangeSignerSetupWarning = () => {
 
   return (
     <Alert severity="info" sx={{ border: 'none', mt: 0, mb: 0 }}>
-      {`Signers are not consistent across networks on this account. Changing signers will only affect the account on ${currentChain?.chainName}`}
+      {`Signers are not consistent across networks on this multisig. Changing signers will only affect the multisig on ${currentChain?.chainName}`}
     </Alert>
   )
 }

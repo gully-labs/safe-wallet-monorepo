@@ -122,7 +122,7 @@ const UpsertProposer = ({ onClose, onSuccess, proposer }: UpsertProposerProps) =
           variant: 'success',
           groupKey: 'add-proposer-success',
           title: 'Proposer added successfully!',
-          message: `${shortenAddress(data.address)} can now suggest transactions for this account.`,
+          message: `${shortenAddress(data.address)} can now suggest transactions for this multisig.`,
         }),
       )
 

@@ -30,7 +30,7 @@ export const useSafeSetupHints = (
     if (multiChain) {
       safeSetupWarningSteps.push({
         title: `Same address. Many networks.`,
-        text: 'You can choose which networks to deploy your account on and will need to deploy them one by one after creation.',
+        text: 'You can choose which networks to deploy your multisig on and will need to deploy them one by one after creation.',
       })
     }
 
