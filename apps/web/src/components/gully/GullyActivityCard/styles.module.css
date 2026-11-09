@@ -1,0 +1,334 @@
+/* Gully Multisig activity card (kit v4: ink card, emerald marks, Inter). Light and dark both read from the theme vars. */
+.card {
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  background: var(--color-background-paper);
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  margin-bottom: var(--space-3);
+  min-height: 300px; /* the loaded height, so the list below does not jump while the feed answers */
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-success-main);
+  background: var(--color-success-background);
+}
+
+.live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.liveStale {
+  color: var(--color-warning-main);
+  background: var(--color-warning-background);
+}
+
+.upd {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--color-background-main);
+}
+
+.kpi b {
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+.kpi span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.chains {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.chain {
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 12px;
+}
+
+.chainHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+
+.chainHead img {
+  border-radius: 50%;
+}
+
+.chainNums {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.chainNums b {
+  color: var(--color-text-primary);
+}
+
+.tag {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tagTest {
+  background: var(--color-warning-background);
+  color: var(--color-warning-main);
+}
+
+.tagMain {
+  background: var(--color-success-background);
+  color: var(--color-success-main);
+}
+
+.sparks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.fig {
+  margin: 0;
+  min-width: 0;
+}
+
+.fig figcaption {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.fig figcaption small {
+  font-size: 11px;
+}
+
+.spark {
+  position: relative;
+  width: 100%;
+}
+
+.sparkSvg {
+  display: block;
+  width: 100%;
+  height: 56px;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.sparkArea {
+  fill: var(--color-primary-main);
+  opacity: 0;
+  transition: opacity 600ms ease-out 900ms;
+}
+
+.drawn .sparkArea {
+  opacity: 0.12;
+}
+
+.sparkLine {
+  fill: none;
+  stroke: var(--color-primary-main);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.drawn .sparkLine {
+  animation: draw 1.2s ease-out forwards;
+}
+
+.sparkFlat {
+  stroke: var(--color-border-light);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.sparkDot {
+  fill: var(--color-primary-main);
+  stroke: var(--color-background-paper);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  animation: pulse 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sparkCross {
+  stroke: var(--color-text-secondary);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.6;
+}
+
+.sparkTip {
+  position: absolute;
+  top: -6px;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--color-text-primary);
+  color: var(--color-background-paper);
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sparkTip b {
+  font-size: 12px;
+}
+
+.note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.6;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 599.95px) {
+  .card {
+    padding: var(--space-2);
+    min-height: 0;
+  }
+
+  .kpis {
+    gap: 8px;
+  }
+
+  .kpi b {
+    font-size: 22px;
+  }
+
+  .kpi span {
+    font-size: 11px;
+  }
+
+  .sparks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chainNums {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawn .sparkLine {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .sparkArea {
+    transition: none;
+  }
+
+  .sparkDot,
+  .live i {
+    animation: none;
+  }
+}

@@ -95,9 +95,7 @@ describe('SignForm', () => {
     const { queryByText } = render(<SignForm {...defaultProps} isOwner={false} />)
 
     expect(
-      queryByText(
-        'You are currently not a signer of this Safe Account and won&apos;t be able to submit this transaction.',
-      ),
+      queryByText('You are currently not a signer of this multisig and won&apos;t be able to submit this transaction.'),
     ).not.toBeInTheDocument()
   })
 

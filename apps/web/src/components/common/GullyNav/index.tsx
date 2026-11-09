@@ -10,7 +10,12 @@ import css from './styles.module.css'
  * sites/gullymultisig.xyz/nav.json) feeds the landing header and the app header, so the lockup, the link order and the
  * primary button cannot drift apart. In the app "Live" reads "Dashboard".
  */
-export const NAV_LINKS = nav.links
+type AnyLink = (typeof nav.links)[number] & { landingOnly?: boolean; appOnly?: boolean }
+/** The app header's links: the landing-only anchors (Features, Chains, Security) would all land on one page here. */
+export const APP_LINKS = (nav.links as AnyLink[]).filter((l) => !l.landingOnly)
+/** The landing's links (no app-only destinations). */
+export const LANDING_LINKS = (nav.links as AnyLink[]).filter((l) => !l.appOnly)
+export const NAV_LINKS = APP_LINKS
 export const NAV_PRIMARY = nav.primary.app
 
 type NavLink = (typeof nav.links)[number]
@@ -19,16 +24,24 @@ const isExternal = (l: NavLink) => 'external' in l && l.external === true
 
 export const GullyNavLinks = ({ className }: { className?: string }): ReactElement => (
   <nav className={`${css.links} ${className ?? ''}`} aria-label="Gully Multisig">
-    {nav.links.map((l) =>
+    {APP_LINKS.map((l) =>
       isExternal(l) ? (
-        <a key={l.id} href={l.app} target="_blank" rel="noopener noreferrer" className={css.link}>
+        <a
+          key={l.id}
+          href={l.app}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={css.link}
+          title={labelOf(l)}
+          aria-label={labelOf(l)}
+        >
           <Icon name={l.icon as IconName} size={16} />
-          {labelOf(l)}
+          <span className={css.label}>{labelOf(l)}</span>
         </a>
       ) : (
-        <Link key={l.id} href={l.app} className={css.link}>
+        <Link key={l.id} href={l.app} className={css.link} title={labelOf(l)} aria-label={labelOf(l)}>
           <Icon name={l.icon as IconName} size={16} />
-          {labelOf(l)}
+          <span className={css.label}>{labelOf(l)}</span>
         </Link>
       ),
     )}
@@ -44,7 +57,7 @@ export const GullyNavMenu = (): ReactElement => {
         <Icon name={'menu' as IconName} size={22} />
       </IconButton>
       <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}>
-        {nav.links.map((l) => (
+        {APP_LINKS.map((l) => (
           <MenuItem
             key={l.id}
             component="a"

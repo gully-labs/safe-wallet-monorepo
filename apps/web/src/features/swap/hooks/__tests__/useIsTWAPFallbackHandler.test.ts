@@ -28,7 +28,7 @@ describe('useIsTWAPFallbackHandler', () => {
   })
 
   describe('should return `true`', () => {
-    it('if the Safe has the TWAP fallback handler set', () => {
+    it('if the multisig has the TWAP fallback handler set', () => {
       const { result } = renderHook(() => useIsTWAPFallbackHandler())
 
       expect(result.current).toBe(true)
@@ -42,12 +42,12 @@ describe('useIsTWAPFallbackHandler', () => {
   })
 
   describe('should return `false`', () => {
-    describe('if the Safe`s chain is not supported for TWAP', () => {
+    describe('if the multisig`s chain is not supported for TWAP', () => {
       beforeEach(() => {
         useSafeInfoSpy.mockReturnValue({ ...mockSafeInfo, safe: { ...mockSafeInfo.safe, chainId: '123' } })
       })
 
-      it('and the Safe has the TWAP fallback handler set for the', () => {
+      it('and the multisig has the TWAP fallback handler set for the', () => {
         const { result } = renderHook(() => useIsTWAPFallbackHandler())
 
         expect(result.current).toBe(false)
@@ -60,7 +60,7 @@ describe('useIsTWAPFallbackHandler', () => {
       })
     })
 
-    it('if the Safe does not have the TWAP fallback handler set', () => {
+    it('if the multisig does not have the TWAP fallback handler set', () => {
       useSafeInfoSpy.mockReturnValue({
         ...mockSafeInfo,
         safe: { ...mockSafeInfo.safe, fallbackHandler: { value: '0x123' } },
@@ -77,7 +77,7 @@ describe('useIsTWAPFallbackHandler', () => {
       expect(result.current).toBe(false)
     })
 
-    it('if the Safe info is not loaded', () => {
+    it('if the multisig info is not loaded', () => {
       useSafeInfoSpy.mockReturnValue({ ...mockSafeInfo, safe: {} as ExtendedSafeInfo, safeLoaded: false })
 
       const { result } = renderHook(() => useIsTWAPFallbackHandler())

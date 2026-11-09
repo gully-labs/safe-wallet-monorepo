@@ -123,7 +123,7 @@ describe('useNotificationsRenewal', () => {
     expect(registerNotificationsMock).not.toHaveBeenCalled()
   })
 
-  describe('if a Safe is loaded', () => {
+  describe('if a multisig is loaded', () => {
     it('should return the correct values for the loaded Safe`s chain', () => {
       const { result } = renderHook(() => useNotificationsRenewal())
 

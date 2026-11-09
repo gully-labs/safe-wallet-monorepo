@@ -7,7 +7,7 @@
 
 .myAccounts {
   width: 100vw;
-  max-width: 750px;
+  max-width: 1200px; /* Gully Multisig: the page fills a 1200 px column (the live card and the list share it) */
   margin: var(--space-2);
 }
 
@@ -92,6 +92,12 @@
 }
 
 @media (max-width: 599.95px) {
+  /* Gully Multisig: 16 px gutters on phones */
+  .myAccounts {
+    margin: var(--space-2) 0;
+    width: 100%;
+  }
+
   .header {
     flex-direction: column;
   }

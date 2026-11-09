@@ -15,7 +15,7 @@ import { AppRoutes } from '@/config/routes'
 import css from '@/components/sidebar/Sidebar/styles.module.css'
 
 const ITEMS: { label: string; icon: ReactElement; href: string }[] = [
-  { label: 'My accounts', icon: <WalletOutlinedIcon />, href: AppRoutes.welcome.accounts },
+  { label: 'My multisigs', icon: <WalletOutlinedIcon />, href: AppRoutes.welcome.accounts },
   { label: 'New multisig', icon: <AddCircleOutlineRoundedIcon />, href: AppRoutes.newSafe.create },
   { label: 'Add existing', icon: <FileDownloadOutlinedIcon />, href: AppRoutes.newSafe.load },
   { label: 'Gully services', icon: <HubOutlinedIcon />, href: AppRoutes.gullyServices },

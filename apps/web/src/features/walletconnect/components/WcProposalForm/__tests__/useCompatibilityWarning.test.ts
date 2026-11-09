@@ -68,7 +68,7 @@ describe('useCompatibilityWarning', () => {
 
       expect(result.current).toEqual({
         message:
-          'While bridging via Fake Bridge, please make sure that the desination address you send funds to matches the Safe address you have on the respective chain. Otherwise, the funds will be lost.',
+          'While bridging via Fake Bridge, please make sure that the desination address you send funds to matches the multisig address you have on the respective chain. Otherwise, the funds will be lost.',
         severity: 'warning',
       })
     })
@@ -86,7 +86,7 @@ describe('useCompatibilityWarning', () => {
 
       expect(result.current).toEqual({
         message:
-          'While bridging via this dApp, please make sure that the desination address you send funds to matches the Safe address you have on the respective chain. Otherwise, the funds will be lost.',
+          'While bridging via this dApp, please make sure that the desination address you send funds to matches the multisig address you have on the respective chain. Otherwise, the funds will be lost.',
         severity: 'warning',
       })
     })
@@ -105,7 +105,7 @@ describe('useCompatibilityWarning', () => {
       const { result } = renderHook(() => useCompatibilityWarning(proposal, true))
 
       expect(result.current).toEqual({
-        message: `Fake dApp does not support this Safe Account's network (this network). Please switch to a Safe Account on one of the supported networks below.`,
+        message: `Fake dApp does not support this multisig's network (this network). Please switch to a multisig on one of the supported networks below.`,
         severity: 'error',
       })
     })
@@ -122,7 +122,7 @@ describe('useCompatibilityWarning', () => {
       const { result } = renderHook(() => useCompatibilityWarning(proposal, true))
 
       expect(result.current).toEqual({
-        message: `This dApp does not support this Safe Account's network (this network). Please switch to a Safe Account on one of the supported networks below.`,
+        message: `This dApp does not support this multisig's network (this network). Please switch to a multisig on one of the supported networks below.`,
         severity: 'error',
       })
     })

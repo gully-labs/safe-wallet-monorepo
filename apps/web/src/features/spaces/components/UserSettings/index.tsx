@@ -27,7 +27,7 @@ const UserSettings = () => {
               Linked wallets
             </Typography>
             <Typography variant="body1">
-              A linked wallet allows you to sign in to your Safe Spaces while keeping all your data, such as account
+              A linked wallet allows you to sign in to your multisig Spaces while keeping all your data, such as account
               names and team members, consistent across all linked wallets.
             </Typography>
 

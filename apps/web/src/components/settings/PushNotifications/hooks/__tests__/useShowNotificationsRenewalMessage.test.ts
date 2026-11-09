@@ -156,7 +156,7 @@ describe('useShowNotificationsRenewalMessage', () => {
       await expectToNotShowNotification(() => useShowNotificationsRenewalMessage())
     })
 
-    it('if there are no preferences for the Safe', async () => {
+    it('if there are no preferences for the multisig', async () => {
       getPreferencesMock.mockReturnValueOnce(null)
       await expectToNotShowNotification(() => useShowNotificationsRenewalMessage())
     })
@@ -177,7 +177,7 @@ describe('useShowNotificationsRenewalMessage', () => {
       await expectToNotShowNotification(() => useShowNotificationsRenewalMessage())
     })
 
-    it('if the Safe`s token version is set', async () => {
+    it('if the multisig`s token version is set', async () => {
       useNotificationsTokenVersionSpy.mockReturnValueOnce({ ...notificationsTokenVersionMock, safeTokenVersion: V1 })
       await expectToNotShowNotification(() => useShowNotificationsRenewalMessage())
     })

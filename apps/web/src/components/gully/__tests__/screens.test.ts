@@ -20,7 +20,11 @@ const fakeDoc = () => {
   const handlers: Record<string, () => void> = {}
   return {
     handlers,
-    doc: { visibilityState: 'visible', addEventListener: (n: string, h: () => void) => (handlers[n] = h), removeEventListener: jest.fn() },
+    doc: {
+      visibilityState: 'visible',
+      addEventListener: (n: string, h: () => void) => (handlers[n] = h),
+      removeEventListener: jest.fn(),
+    },
   }
 }
 
@@ -61,7 +65,16 @@ describe('service worker updates', () => {
 describe('dailyExecutions', () => {
   it('counts real executions per local day, oldest first and today last', () => {
     const now = new Date(2026, 10, 2, 12).getTime()
-    const bars = dailyExecutions([new Date(2026, 10, 2, 1).getTime(), new Date(2026, 10, 1, 23).getTime(), new Date(2026, 10, 1, 1).getTime(), new Date(2026, 0, 1).getTime()], 3, now)
+    const bars = dailyExecutions(
+      [
+        new Date(2026, 10, 2, 1).getTime(),
+        new Date(2026, 10, 1, 23).getTime(),
+        new Date(2026, 10, 1, 1).getTime(),
+        new Date(2026, 0, 1).getTime(),
+      ],
+      3,
+      now,
+    )
     expect(bars.map((b) => b.v)).toEqual([0, 2, 1])
   })
 
@@ -102,7 +115,9 @@ describe('phone header', () => {
     const css = src('common/Header/styles.module.css')
     const phone = css.slice(css.indexOf('@media (max-width: 599.95px)'))
     expect(phone).toMatch(/\.element \{\s+height: 56px;/)
-    expect(phone).toMatch(/\.signIn \{[^}]*height: 52px;/)
-    expect(css.slice(0, css.indexOf('@media (max-width: 599.95px)'))).not.toContain('.signIn')
+    // the second row is the session group (Gully ID pill + Connect, or the wallet chip + chain); only the phone block
+    // turns it into a row of its own
+    expect(phone).toMatch(/\.session \{[^}]*order: 10;[^}]*height: 52px;/)
+    expect(css.slice(0, css.indexOf('@media (max-width: 599.95px)'))).not.toContain('order: 10')
   })
 })

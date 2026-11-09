@@ -20,6 +20,7 @@ import { NoFeeCampaignFeature, useIsNoFeeCampaignEnabled } from '@/features/no-f
 import { PortfolioFeature } from '@/features/portfolio'
 import { useLoadFeature } from '@/features/__core__'
 import TotalAssetValue from '@/components/balances/TotalAssetValue'
+import HoldingsBar from '@/components/gully/HoldingsBar'
 
 const Balances: NextPage = () => {
   const { NoFeeCampaignBanner } = useLoadFeature(NoFeeCampaignFeature)
@@ -82,6 +83,9 @@ const Balances: NextPage = () => {
                 </Stack>
               </Stack>
             </Box>
+
+            {/* Gully Multisig: where the value sits, one proportional bar (drawn only with a fiat value to compare) */}
+            <HoldingsBar />
 
             <AssetsTable
               setShowHiddenAssets={setShowHiddenAssets}

@@ -39,12 +39,12 @@ const UnknownContractError = ({ txData }: { txData: TransactionData | undefined 
             fontWeight: 700,
           }}
         >
-          This Safe Account was created with an unsupported base contract.
+          This multisig was created with an unsupported base contract.
         </Typography>
       </AlertTitle>
       {isMigrationPossible ? (
         <>
-          The Safe Account can be migrated to use the supported base contract. We advise to do that in the Safe&apos;s
+          The multisig can be migrated to use the supported base contract. We advise to do that in the multisig&apos;s
           settings before executing other transactions.
         </>
       ) : (

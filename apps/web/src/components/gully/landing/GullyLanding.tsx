@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react'
 import Head from 'next/head'
 import { formatEther } from 'ethers'
-import WelcomeLogin from '@/components/welcome/WelcomeLogin'
+import Link from 'next/link'
+import { AppRoutes } from '@/config/routes'
 import { GATEWAY_URL_PRODUCTION } from '@/config/constants'
 import { CountUp, CumulativeChart, DailyColumns } from './charts'
 import { Icon, type IconName } from './icons'
@@ -13,7 +14,7 @@ import { GULLY_PRIVACY_URL, GULLY_TERMS_URL } from '@/config/gully'
 
 /**
  * Gully Multisig landing (/welcome): marketing copy, the connect card, live Safe numbers and the mascot. The app serves
- * Anubis Network (6714, a mainnet) and Gully Chain Testnet (485590): the copy names both, and what is only on the
+ * Anubis Network (6714) and Kinetiq Elysium (99901), both mainnets, and Gully Chain Testnet (485590): the copy names them, and what is only on the
  * testnet (passkey signer contracts, the 4337 module and paymaster, the live numbers) says so.
  */
 
@@ -29,7 +30,7 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
   {
     icon: 'keyRound',
     title: 'Passkey signers',
-    text: 'The Safe WebAuthn signer contracts are live on Gully Chain Testnet, so a device passkey can be an owner of a Safe there.',
+    text: 'The Safe WebAuthn signer contracts are live on Gully Chain Testnet, so a device passkey can be an owner of a multisig there.',
   },
   {
     icon: 'fuel',
@@ -39,7 +40,7 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
   {
     icon: 'shieldCheck',
     title: 'Unmodified Safe 1.4.1 contracts',
-    text: 'The unmodified Safe 1.4.1 contracts: at the canonical addresses on Anubis Network, source-verified on verify.gullychain.xyz.',
+    text: 'The unmodified Safe 1.4.1 contracts: at the canonical addresses on Anubis Network, at the Gully Chain addresses on Kinetiq Elysium, source-verified on verify.gullychain.xyz.',
   },
 ]
 
@@ -50,19 +51,19 @@ const FAQ = [
   },
   {
     q: 'Which networks does it serve?',
-    a: 'Anubis Network (chain id 6714, a mainnet) and Gully Chain Testnet (chain id 485590, for developers). On Anubis Network the native coin gasDAI pays gas only and cannot be sent: a Safe there holds and moves ERC-20 tokens.',
+    a: 'Anubis Network (chain id 6714, a mainnet), Kinetiq Elysium (chain id 99901, a mainnet) and Gully Chain Testnet (chain id 485590, for developers). On Anubis Network the native coin gasDAI pays gas only and cannot be sent: a multisig there holds and moves ERC-20 tokens. On Kinetiq Elysium HYPE is the gas coin and can be sent like any native coin.',
   },
   {
     q: 'Are the contracts the official Safe contracts?',
-    a: 'Yes. They are the unmodified Safe 1.4.1 contracts. On Anubis Network they are at the canonical addresses; on Gully Chain Testnet they were deployed through a deterministic deployer, creation code checked against the published artifacts. The addresses are listed in the Gully Chain docs.',
+    a: 'Yes. They are the unmodified Safe 1.4.1 contracts. On Anubis Network they are at the canonical addresses; on Gully Chain Testnet and Kinetiq Elysium they were deployed through a deterministic deployer, at the same addresses on both, creation code checked against the published artifacts. The addresses are listed in the Gully Chain docs.',
   },
   {
     q: 'What does it cost?',
-    a: 'Gully Multisig is free. Creating a Safe and executing transactions cost gas on the chain you use: gasDAI on Anubis Network, test ETH on Gully Chain Testnet.',
+    a: 'Gully Multisig is free. Creating a multisig and executing transactions cost gas on the chain you use: gasDAI on Anubis Network, HYPE on Kinetiq Elysium, test ETH on Gully Chain Testnet.',
   },
   {
-    q: 'Can I watch a Safe without owning it?',
-    a: 'Yes. Use "Watch any account" with a Safe address to follow its balances and transactions read-only.',
+    q: 'Can I watch a multisig without owning it?',
+    a: 'Yes. Use "Watch any account" with a multisig address to follow its balances and transactions read-only.',
   },
 ]
 
@@ -163,7 +164,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
           Safes on Gully Chain, block by block
         </h2>
         <p className={css.sub}>
-          Read straight from the chain: every Safe the Safe 1.4.1 factories created, the transactions those Safes
+          Read straight from the chain: every Safe the multisig 1.4.1 factories created, the transactions those Safes
           executed and the ETH they hold. Refreshes every 20 seconds.
         </p>
       </div>
@@ -192,7 +193,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
               </span>
             </div>
           ) : (
-            <CumulativeChart points={cumulative} label="Safes created on Gully Chain, running total" />
+            <CumulativeChart points={cumulative} label="Multisigs created on Gully Chain, running total" />
           )}
         </div>
         <div className={css.panel}>
@@ -205,7 +206,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
               <span>No Safe transactions executed yet.</span>
             </div>
           ) : (
-            <DailyColumns bars={daily} label="Safe transactions executed per day" unit="transactions" />
+            <DailyColumns bars={daily} label="Multisig transactions executed per day" unit="transactions" />
           )}
         </div>
       </div>
@@ -227,7 +228,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
                 const info = infos[s.address]
                 return (
                   <tr key={s.address}>
-                    <td data-label="Safe">
+                    <td data-label="Multisig">
                       <a href={`${GULLY_EXPLORER}/address/${s.address}`} {...EXT} className={css.mono}>
                         {short(s.address)}
                       </a>
@@ -266,7 +267,7 @@ const GullyLanding = (): ReactElement => {
           operatingSystem: 'Web',
           url: 'https://gullymultisig.xyz/welcome',
           description:
-            'Multi-signature Safe smart accounts on Anubis Network and Gully Chain Testnet, on the unmodified Safe 1.4.1 contracts.',
+            'Multi-signature smart accounts on Anubis Network, Kinetiq Elysium and Gully Chain Testnet, on the unmodified Safe 1.4.1 contracts.',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           publisher: { '@type': 'Organization', name: 'Gully Labs', url: 'https://gullylabs.xyz' },
         },
@@ -293,16 +294,23 @@ const GullyLanding = (): ReactElement => {
       <main>
         <section className={css.hero}>
           <div className={css.heroCopy}>
-            <p className={css.eyebrow}>Anubis Network · Gully Chain Testnet · Safe 1.4.1</p>
+            <p className={css.eyebrow}>Anubis Network · Kinetiq Elysium · Gully Chain Testnet · Safe 1.4.1</p>
             <h1 className={css.h1}>
               Shared wallets, <span className={css.grad}>many signers</span>
             </h1>
             <p className={css.lead}>
-              Owners propose, a threshold signs, the Safe executes. The unmodified Safe 1.4.1 contracts, on Anubis
-              Network and Gully Chain Testnet.
+              Owners propose, a threshold signs, the multisig executes. The unmodified Safe 1.4.1 contracts.
             </p>
-            <div id="get-started" className={css.loginWrap}>
-              <WelcomeLogin />
+            {/* one primary action at full brand contrast; the wallet is asked for on the next screen, at the action */}
+            <div id="get-started" className={css.ctaRow}>
+              <Link href={AppRoutes.newSafe.create} className={css.btnPrimary} data-testid="hero-create">
+                Create a multisig
+              </Link>
+              <Link href={AppRoutes.newSafe.load} className={css.textLink} data-testid="hero-open">
+                Open an existing one
+              </Link>
+            </div>
+            <div className={css.heroNotes}>
               <p className={css.loginHint}>
                 On Anubis Network gasDAI pays gas only; tokens are ERC-20.{' '}
                 <a href={DOCS_SAFE} {...EXT}>

@@ -11,7 +11,7 @@ describe('useIsOutreachSafe', () => {
     jest.clearAllMocks()
   })
 
-  it('returns true if the Safe is targeted for messaging', () => {
+  it('returns true if the multisig is targeted for messaging', () => {
     const safeInfo = safeInfoBuilder().build()
     const outreachId = faker.number.int()
     jest.spyOn(useSafeInfoHook, 'default').mockReturnValue({
@@ -38,7 +38,7 @@ describe('useIsOutreachSafe', () => {
     expect(result.current).toEqual({ isTargeted: true, loading: false })
   })
 
-  it('returns false if the Safe is not targeted for messaging', () => {
+  it('returns false if the multisig is not targeted for messaging', () => {
     const safeInfo = safeInfoBuilder().build()
     const outreachId = faker.number.int()
     jest.spyOn(useSafeInfoHook, 'default').mockReturnValue({

@@ -81,7 +81,7 @@ const SafeHeader = (): ReactElement => {
           <Track
             {...NESTED_SAFE_EVENTS.OPEN_LIST}
             label={NESTED_SAFE_LABELS.header}
-            mixpanelParams={{ [MixpanelEventParams.SIDEBAR_ELEMENT]: 'Nested Safes' }}
+            mixpanelParams={{ [MixpanelEventParams.SIDEBAR_ELEMENT]: 'Nested multisigs' }}
           >
             <NestedSafesButton chainId={safe.chainId} safeAddress={safe.address.value} />
           </Track>

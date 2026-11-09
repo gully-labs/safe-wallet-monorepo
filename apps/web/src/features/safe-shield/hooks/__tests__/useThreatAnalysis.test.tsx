@@ -312,7 +312,7 @@ describe('useThreatAnalysis - Nested Transaction Detection', () => {
     })
   })
 
-  it('should use nested Safe address and version for nested threat analysis', async () => {
+  it('should use nested multisig address and version for nested threat analysis', async () => {
     const approveHashTx = buildSafeTransaction(encodeApproveHash(APPROVE_HASH))
     const nestedSafeTx = buildSafeTransaction('0x1234')
     const nestedSafeInfo = buildNestedSafeInfo()

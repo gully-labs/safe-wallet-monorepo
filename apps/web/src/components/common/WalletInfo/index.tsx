@@ -14,6 +14,7 @@ import useChainId from '@/hooks/useChainId'
 import { useAuthLogoutV1Mutation } from '@safe-global/store/gateway/AUTO_GENERATED/auth'
 import { setUnauthenticated } from '@/store/authSlice'
 import { logError, Errors } from '@/services/exceptions'
+import GullySignIn from '@/components/common/GullySignIn'
 
 type WalletInfoProps = {
   wallet: ConnectedWallet
@@ -96,6 +97,11 @@ export const WalletInfo = ({ wallet, balance, currentChainId, onboard, addressBo
       </Box>
 
       <Box display="flex" flexDirection="column" gap={2} width={1}>
+        {/* Gully Multisig: identity lives in the session menu once a wallet is connected (the header shows one chip) */}
+        <Box display="flex" justifyContent="center" data-testid="wallet-info-gully-id">
+          <GullySignIn />
+        </Box>
+
         <ChainSwitcher fullWidth />
 
         <Button variant="contained" size="small" onClick={handleSwitchWallet} fullWidth>

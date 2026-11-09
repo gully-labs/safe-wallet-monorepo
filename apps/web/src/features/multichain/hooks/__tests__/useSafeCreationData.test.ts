@@ -342,7 +342,7 @@ describe('useSafeCreationData', () => {
     })
   })
 
-  it('should throw an error if the Safe creation uses reimbursement', async () => {
+  it('should throw an error if the multisig creation uses reimbursement', async () => {
     const setupData = Safe__factory.createInterface().encodeFunctionData('setup', [
       [faker.finance.ethereumAddress(), faker.finance.ethereumAddress()],
       1,
@@ -375,7 +375,7 @@ describe('useSafeCreationData', () => {
     })
   })
 
-  it('should throw an error if the Safe creation uses an unknown setupModules call', async () => {
+  it('should throw an error if the multisig creation uses an unknown setupModules call', async () => {
     const setupData = Safe__factory.createInterface().encodeFunctionData('setup', [
       [faker.finance.ethereumAddress(), faker.finance.ethereumAddress()],
       1,

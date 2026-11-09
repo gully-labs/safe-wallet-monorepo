@@ -67,7 +67,7 @@ const NestedTxSuccessScreen = ({ txId }: Props) => {
     >
       <Box padding={3} mt={3} display="flex" flexDirection="column" alignItems="center" gap={2}>
         <Box className={css.icon}>
-          <SvgIcon component={NestedSafeIcon} inheritViewBox fontSize="large" alt="Nested Safe" />
+          <SvgIcon component={NestedSafeIcon} inheritViewBox fontSize="large" alt="Nested multisig" />
         </Box>
         <Typography data-testid="transaction-status" variant="h6" marginTop={2} fontWeight={700}>
           A nested transaction was created
@@ -78,7 +78,7 @@ const NestedTxSuccessScreen = ({ txId }: Props) => {
         <Stack spacing={2} width="70%">
           <Box display="flex" flexDirection="column" alignItems="start" gap={1}>
             <Typography variant="body2" color="text.secondary">
-              Parent Safe
+              Parent multisig
             </Typography>
             <EthHashInfo address={cachedPendingTx.signerAddress} name={parentSafeAddress} shortAddress={false} />
           </Box>

@@ -157,7 +157,7 @@ const ReplaySafeDialog = ({
         <DialogContent data-testid="add-chain-dialog">
           <FormProvider {...formMethods}>
             <Stack spacing={2}>
-              <Typography>Add this Safe to another network with the same address.</Typography>
+              <Typography>Add this multisig to another network with the same address.</Typography>
 
               {chain && (
                 <Box
@@ -190,14 +190,14 @@ const ReplaySafeDialog = ({
                 </Stack>
               ) : safeCreationDataError ? (
                 <ErrorMessage error={safeCreationDataError} level="error">
-                  Could not determine the Safe creation parameters.
+                  Could not determine the multisig creation parameters.
                 </ErrorMessage>
               ) : isUnsupportedSafeCreationVersion ? (
                 <ErrorMessage>
                   This account was created from an outdated mastercopy. Adding another network is not possible.
                 </ErrorMessage>
               ) : noChainsAvailable ? (
-                <ErrorMessage level="error">This Safe cannot be replayed on any chains.</ErrorMessage>
+                <ErrorMessage level="error">This multisig cannot be replayed on any chains.</ErrorMessage>
               ) : (
                 <>
                   {!chain && (

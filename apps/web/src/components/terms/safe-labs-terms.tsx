@@ -100,7 +100,7 @@ const SafeLabsTerms = () => {
                         'Continuous development of Safe{Wallet} features',
                         'Security standards recognized in the industry',
                         'Alignment with Safe DAO governance',
-                        'Leading interface to the Safe Smart Contract multi-signature wallet',
+                        'Leading interface to the multisig Smart Contract multi-signature wallet',
                       ].map((text, index) => (
                         <div key={index} className={css.featureItem}>
                           <div className={css.checkIcon}>

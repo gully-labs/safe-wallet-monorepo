@@ -34,7 +34,7 @@ describe('FallbackHandler', () => {
               name: 'FallbackHandlerName',
             },
           },
-        }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+        } as unknown as ReturnType<typeof useSafeInfoHook.default>),
     )
 
     const fbHandler = render(<FallbackHandler />)
@@ -69,7 +69,7 @@ describe('FallbackHandler', () => {
               name: 'FallbackHandlerName',
             },
           },
-        }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+        } as unknown as ReturnType<typeof useSafeInfoHook.default>),
     )
 
     const fbHandler = render(<FallbackHandler />)
@@ -100,7 +100,7 @@ describe('FallbackHandler', () => {
               value: GOERLI_FALLBACK_HANDLER,
             },
           },
-        }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+        } as unknown as ReturnType<typeof useSafeInfoHook.default>),
     )
 
     const fbHandler = render(<FallbackHandler />)
@@ -119,7 +119,7 @@ describe('FallbackHandler', () => {
               version: '1.3.0',
               chainId: '5',
             },
-          }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+          } as unknown as ReturnType<typeof useSafeInfoHook.default>),
       )
 
       const fbHandler = render(<FallbackHandler />)
@@ -144,7 +144,7 @@ describe('FallbackHandler', () => {
               version: '1.3.0',
               chainId: '5',
             },
-          }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+          } as unknown as ReturnType<typeof useSafeInfoHook.default>),
       )
 
       const fbHandler = render(<FallbackHandler />)
@@ -172,7 +172,7 @@ describe('FallbackHandler', () => {
                 value: '0x123',
               },
             },
-          }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+          } as unknown as ReturnType<typeof useSafeInfoHook.default>),
       )
 
       const fbHandler = render(<FallbackHandler />)
@@ -180,7 +180,7 @@ describe('FallbackHandler', () => {
       await waitFor(() => {
         expect(
           fbHandler.queryByText(
-            'The fallback handler adds fallback logic for funtionality that may not be present in the Safe Account contract. Learn more about the fallback handler',
+            'The fallback handler adds fallback logic for funtionality that may not be present in the multisig contract. Learn more about the fallback handler',
           ),
         ).toBeDefined()
 
@@ -206,7 +206,7 @@ describe('FallbackHandler', () => {
                 value: '0x123',
               },
             },
-          }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+          } as unknown as ReturnType<typeof useSafeInfoHook.default>),
       )
 
       const fbHandler = render(<FallbackHandler />)
@@ -218,7 +218,7 @@ describe('FallbackHandler', () => {
     })
   })
 
-  it('should render nothing if the Safe Account version does not support Fallback Handlers', () => {
+  it('should render nothing if the multisig version does not support Fallback Handlers', () => {
     jest.spyOn(useSafeInfoHook, 'default').mockImplementation(
       () =>
         ({
@@ -226,7 +226,7 @@ describe('FallbackHandler', () => {
             version: '1.0.0',
             chainId: '5',
           },
-        }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+        } as unknown as ReturnType<typeof useSafeInfoHook.default>),
     )
 
     const fbHandler = render(<FallbackHandler />)
@@ -245,14 +245,14 @@ describe('FallbackHandler', () => {
               value: TWAP_FALLBACK_HANDLER,
             },
           },
-        }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+        } as unknown as ReturnType<typeof useSafeInfoHook.default>),
     )
 
     const { getByText } = render(<FallbackHandler />)
 
     expect(
       getByText(
-        "This is CoW's fallback handler. It is needed for this Safe to be able to use the TWAP feature for Swaps.",
+        "This is CoW's fallback handler. It is needed for this multisig to be able to use the TWAP feature for Swaps.",
       ),
     ).toBeInTheDocument()
   })
@@ -268,14 +268,14 @@ describe('FallbackHandler', () => {
               value: TWAP_FALLBACK_HANDLER,
             },
           },
-        }) as unknown as ReturnType<typeof useSafeInfoHook.default>,
+        } as unknown as ReturnType<typeof useSafeInfoHook.default>),
     )
 
     const { queryByText } = render(<FallbackHandler />)
 
     expect(
       queryByText(
-        "This is CoW's fallback handler. It is needed for this Safe to be able to use the TWAP feature for Swaps.",
+        "This is CoW's fallback handler. It is needed for this multisig to be able to use the TWAP feature for Swaps.",
       ),
     ).not.toBeInTheDocument()
   })

@@ -7,6 +7,7 @@ import type { ReactElement } from 'react'
 import ModalDialog from '@/components/common/ModalDialog'
 import { useAppDispatch } from '@/store'
 import { removeAddressBookEntry } from '@/store/addressBookSlice'
+import { showNotification } from '@/store/notificationsSlice'
 import useChainId from '@/hooks/useChainId'
 import useAddressBook from '@/hooks/useAddressBook'
 
@@ -19,6 +20,13 @@ const RemoveDialog = ({ handleClose, address }: { handleClose: () => void; addre
 
   const handleConfirm = () => {
     dispatch(removeAddressBookEntry({ chainId, address }))
+    dispatch(
+      showNotification({
+        variant: 'info',
+        groupKey: 'address-book',
+        message: `${name ?? 'The entry'} was removed from your address book.`,
+      }),
+    )
     handleClose()
   }
 

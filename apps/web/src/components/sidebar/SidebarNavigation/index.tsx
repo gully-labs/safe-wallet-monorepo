@@ -131,7 +131,7 @@ const Navigation = (): ReactElement | null => {
         return (
           <React.Fragment key={item.href}>
             {item.href === AppRoutes.gullyServices && <GullyChainTools />}
-            <Tooltip title={isDisabled ? 'You need to activate your Safe first.' : ''} placement="right" arrow>
+            <Tooltip title={isDisabled ? 'You need to activate your multisig first.' : ''} placement="right" arrow>
               <div>
                 <ListItemButton
                   // disablePadding

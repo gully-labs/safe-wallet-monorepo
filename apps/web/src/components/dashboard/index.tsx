@@ -8,7 +8,8 @@ import AssetsWidget from '@/components/dashboard/Assets'
 import Overview from '@/components/dashboard/Overview/Overview'
 import ExplorePossibleWidget from '@/components/dashboard/ExplorePossibleWidget'
 import GullyServices from '@/components/gully/GullyServices'
-import GullySafeActivity from '@/components/gully/GullySafeActivity'
+import MultisigPulse from '@/components/gully/MultisigPulse'
+import SignBanner from '@/components/gully/SignBanner'
 import { useIsRecoverySupported } from '@/features/recovery/hooks/useIsRecoverySupported'
 import { useHasFeature } from '@/hooks/useChains'
 import css from './styles.module.css'
@@ -101,12 +102,17 @@ const Dashboard = (): ReactElement => {
         </Grid>
       </Grid>
 
+      {/* Gully Multisig: what a signer has to do, first */}
+      <div className={css.hideIfEmpty} style={{ marginBottom: 'var(--space-3)' }}>
+        <SignBanner />
+      </div>
+
       <div className={css.dashboardGrid}>
         <div className={css.leftCol}>
           <Overview />
 
-          {/* Gully Multisig: live activity of this Safe on Gully Chain; nothing on other chains */}
-          <GullySafeActivity />
+          {/* Gully Multisig: this multisig's pulse from the gateway's history and queue, on every chain */}
+          <MultisigPulse />
 
           {noAssets ? (
             <Stack spacing={1}>
