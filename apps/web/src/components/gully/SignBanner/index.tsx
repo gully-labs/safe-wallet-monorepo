@@ -37,9 +37,11 @@ const SignBanner = (): ReactElement | null => {
           </b>
         )}
       </p>
-      <Button component={Link} href={queueUrl} variant="contained" size="small" disableElevation className={css.btn}>
-        {toSign > 0 ? 'Review and sign' : 'Execute'}
-      </Button>
+      <Link href={queueUrl} passHref legacyBehavior>
+        <Button component="a" variant="contained" size="small" disableElevation className={css.btn}>
+          {toSign > 0 ? 'Review and sign' : 'Execute'}
+        </Button>
+      </Link>
     </div>
   )
 }
