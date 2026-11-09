@@ -3,7 +3,6 @@ import gullyChains from '@/config/gully-chains.json'
 import gullyContracts from '@/config/gully-contracts.json'
 
 const TESTNET_ONLY = /faucet|test ETH|testnet-bridge|testnet-explorer|free testnet/i
-const elysium = { chainId: ELYSIUM_CHAIN_ID, chainName: 'Kinetiq Elysium', nativeCurrency: { symbol: 'HYPE' } }
 
 describe('Gully Multisig on Kinetiq Elysium (99901): HYPE is sendable, the Gully-route Safe contracts are registered', () => {
   it('is chain 99901', () => {
