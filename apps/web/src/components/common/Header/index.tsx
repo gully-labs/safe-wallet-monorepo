@@ -143,8 +143,8 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
           </Track>
         </div>
 
-        {/* the network selector is on every route (upstream shows it only inside a Safe), so Gully Chain Testnet, Anubis
-            and any chain the config service adds can be picked before a Safe is open */}
+        {/* the network selector is on every route (upstream shows it only inside a multisig), so Gully Chain Testnet, Anubis
+            and any chain the config service adds can be picked before a multisig is open */}
         <div className={css.networkSelector} data-testid="gully-network-selector">
           <GullyChainSwitcher />
         </div>

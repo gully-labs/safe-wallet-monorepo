@@ -174,7 +174,7 @@ const GullyActions = (): ReactElement => {
 
         <Card
           title="Token launches"
-          text="Launching a token takes a launch configuration this panel does not build yet. Launch from the Gully Core app and use this Safe as the owner."
+          text="Launching a token takes a launch configuration this panel does not build yet. Launch from the Gully Core app and use this multisig as the owner."
         >
           <Button
             component="a"

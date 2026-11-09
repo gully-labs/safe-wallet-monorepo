@@ -191,7 +191,7 @@ const AddAccounts = () => {
               Add multisigs
             </Typography>
             <Typography mb={2}>
-              You can add any multisig to your Space. This is currently limited to {SAFE_ACCOUNTS_LIMIT} Safe Accounts.
+              You can add any multisig to your Space. This is currently limited to {SAFE_ACCOUNTS_LIMIT} multisigs.
             </Typography>
             <Card>
               <FormProvider {...formMethods}>
