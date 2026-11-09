@@ -12,7 +12,7 @@ export const holdingShares = (items: { symbol: string; fiat: number }[], max = M
   const priced = items.filter((i) => Number.isFinite(i.fiat) && i.fiat > 0).sort((a, b) => b.fiat - a.fiat)
   const total = priced.reduce((s, i) => s + i.fiat, 0)
   if (total <= 0) return []
-  const top = priced.slice(0, max).map((i) => ({ label: i.symbol, fiat: i.fiat, share: i.fiat / total }))
+  const top: Holding[] = priced.slice(0, max).map((i) => ({ label: i.symbol, fiat: i.fiat, share: i.fiat / total }))
   const rest = priced.slice(max).reduce((s, i) => s + i.fiat, 0)
   if (rest > 0) top.push({ label: 'Other', fiat: rest, share: rest / total, other: true })
   return top
