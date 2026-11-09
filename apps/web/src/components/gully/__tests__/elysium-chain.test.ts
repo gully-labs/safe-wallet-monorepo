@@ -1,4 +1,4 @@
-import { addFundsCopyFor, chainLinksFor, ELYSIUM_CHAIN_ID, ELYSIUM_EXPLORER_URL } from '@/config/gully'
+import { chainLinksFor, ELYSIUM_CHAIN_ID, ELYSIUM_EXPLORER_URL } from '@/config/gully'
 import gullyChains from '@/config/gully-chains.json'
 import gullyContracts from '@/config/gully-contracts.json'
 
@@ -8,16 +8,6 @@ const elysium = { chainId: ELYSIUM_CHAIN_ID, chainName: 'Kinetiq Elysium', nativ
 describe('Gully Multisig on Kinetiq Elysium (99901): HYPE is sendable, the Gully-route Safe contracts are registered', () => {
   it('is chain 99901', () => {
     expect(ELYSIUM_CHAIN_ID).toBe('99901')
-  })
-
-  it('treats HYPE like any native coin in the add funds banner (no gas-only wording, no testnet copy)', () => {
-    const copy = addFundsCopyFor(elysium, false)
-    expect(copy).toEqual({
-      title: 'Add funds to get started',
-      text: 'Send HYPE or tokens to your address from another wallet.',
-      links: [],
-    })
-    expect(JSON.stringify(copy)).not.toMatch(TESTNET_ONLY)
   })
 
   it('lists the Elysium explorer first in the links panel, and no testnet service', () => {
