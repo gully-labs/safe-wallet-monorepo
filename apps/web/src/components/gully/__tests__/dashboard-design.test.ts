@@ -23,7 +23,7 @@ const tx = (timestamp: number, txStatus: Transaction['txStatus'], missing: strin
       confirmationsSubmitted: 2 - missing.length,
       missingSigners: missing.map((value) => ({ value })),
     },
-  }) as Transaction
+  } as Transaction)
 
 const A = '0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 const B = '0xBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
