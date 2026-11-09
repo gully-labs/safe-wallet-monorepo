@@ -91,9 +91,7 @@
   box-sizing: border-box;
   margin-right: var(--space-1);
   background-color: var(--color-background-main);
-  transition:
-    border-color 200ms ease,
-    background-color 200ms ease;
+  transition: border-color 200ms ease, background-color 200ms ease;
 }
 
 .status :global .MuiListItemIcon-root svg {
