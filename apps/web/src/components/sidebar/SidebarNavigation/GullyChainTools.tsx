@@ -40,7 +40,7 @@ const GullyChainTools = (): ReactElement | null => {
       await navigator.clipboard.writeText(safeAddress)
       dispatch(showNotification({ message: addressCopiedMessage(tool.label), variant: 'success', groupKey }))
     } catch {
-      dispatch(showNotification({ message: 'Could not copy the Safe address.', variant: 'warning', groupKey }))
+      dispatch(showNotification({ message: 'Could not copy the multisig address.', variant: 'warning', groupKey }))
     }
   }
 

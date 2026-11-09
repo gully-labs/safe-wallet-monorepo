@@ -57,7 +57,7 @@ describe('SanctionWrapper', () => {
     expect(queryByText('Not sanctioned')).toBeFalsy()
   })
 
-  it('should render the disclaimer if the Safe is sanctioned', () => {
+  it('should render the disclaimer if the multisig is sanctioned', () => {
     const safe = faker.finance.ethereumAddress()
     const wallet = faker.finance.ethereumAddress()
 

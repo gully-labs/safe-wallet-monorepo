@@ -74,11 +74,11 @@ const CreateNestedSafe = () => {
     <TxFlow<SetupNestedSafeForm>
       initialData={{ name: '', assets: [] }}
       icon={NestedSafeIcon}
-      subtitle="Create a Nested Safe"
+      subtitle="Create a Nested multisig"
       ReviewTransactionComponent={ReviewNestedSafeCreationComponent}
       onSubmit={handleSubmit}
     >
-      <TxFlowStep title="Set up Nested Safe">
+      <TxFlowStep title="Set up Nested multisig">
         <SetUpNestedSafe />
       </TxFlowStep>
     </TxFlow>

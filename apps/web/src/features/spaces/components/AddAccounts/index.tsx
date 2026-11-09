@@ -113,7 +113,7 @@ const AddAccounts = () => {
 
       if (result.error) {
         // @ts-ignore
-        setError(result.error?.data?.message || 'Something went wrong adding one or more Safe Accounts.')
+        setError(result.error?.data?.message || 'Something went wrong adding one or more multisigs.')
         return
       }
 
@@ -188,11 +188,10 @@ const AddAccounts = () => {
         <DialogContent sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <Container fixed maxWidth="sm" disableGutters>
             <Typography component="div" variant="h1" mb={1}>
-              Add Safe Accounts
+              Add multisigs
             </Typography>
             <Typography mb={2}>
-              You can add any Safe Account to your Space. This is currently limited to {SAFE_ACCOUNTS_LIMIT} Safe
-              Accounts.
+              You can add any multisig to your Space. This is currently limited to {SAFE_ACCOUNTS_LIMIT} multisigs.
             </Typography>
             <Card>
               <FormProvider {...formMethods}>

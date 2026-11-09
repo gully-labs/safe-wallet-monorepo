@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { AppRoutes } from '@/config/routes'
+import GullyEmptyPage from '@/components/gully/GullyEmptyPage'
 
 // Rewrite the URL to put the Safe address into the query.
 export const _getRedirectUrl = (location: Location): string | undefined => {
@@ -45,7 +46,20 @@ const Custom404: NextPage = () => {
     }
   }, [router])
 
-  return <main>{!isRedirecting && <h1>404 - Page not found</h1>}</main>
+  if (isRedirecting) return <main />
+
+  return (
+    <GullyEmptyPage
+      code="404"
+      title="This page does not exist"
+      actions={[
+        { label: 'My multisigs', href: AppRoutes.welcome.accounts, primary: true },
+        { label: 'Create a multisig', href: AppRoutes.newSafe.create },
+      ]}
+    >
+      <p>The address may be mistyped, or the page moved. Your multisigs are one tap away.</p>
+    </GullyEmptyPage>
+  )
 }
 
 export default Custom404

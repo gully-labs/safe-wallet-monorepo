@@ -31,8 +31,8 @@ const AdvancedCreateSafe = () => {
 
   const CreateSafeSteps: TxStepperProps<NewSafeFormData>['steps'] = [
     {
-      title: 'Select network and name of your Safe Account',
-      subtitle: 'Select the network on which to create your Safe Account',
+      title: 'Pick the network and a name for your multisig',
+      subtitle: 'Pick the chain your multisig will live on',
       render: (data, onSubmit, onBack, setStep) => (
         <SetNameStep
           isAdvancedFlow
@@ -48,8 +48,7 @@ const AdvancedCreateSafe = () => {
     },
     {
       title: 'Signers and confirmations',
-      subtitle:
-        'Set the signer wallets of your Safe Account and how many need to confirm to execute a valid transaction.',
+      subtitle: 'Add the signers of your multisig and how many of them must confirm a transaction before it can run.',
       render: (data, onSubmit, onBack, setStep) => (
         <OwnerPolicyStep
           setDynamicHint={setDynamicHint}
@@ -62,15 +61,14 @@ const AdvancedCreateSafe = () => {
     },
     {
       title: 'Advanced settings',
-      subtitle: 'Choose the Safe version and optionally a specific salt nonce',
+      subtitle: 'Choose the contract version and, if you need one, a salt nonce',
       render: (data, onSubmit, onBack, setStep) => (
         <AdvancedOptionsStep data={data} onSubmit={onSubmit} onBack={onBack} setStep={setStep} />
       ),
     },
     {
       title: 'Review',
-      subtitle:
-        "You're about to create a new Safe Account and will have to confirm the transaction with your connected wallet.",
+      subtitle: "You're about to create a multisig. Your connected wallet confirms the deployment transaction.",
       render: (data, onSubmit, onBack, setStep) => (
         <ReviewStep data={data} onSubmit={onSubmit} onBack={onBack} setStep={setStep} />
       ),
@@ -123,7 +121,7 @@ const AdvancedCreateSafe = () => {
               pb: 2,
             }}
           >
-            Create new Safe Account
+            Create a multisig
           </Typography>
         </Grid>
         <Grid

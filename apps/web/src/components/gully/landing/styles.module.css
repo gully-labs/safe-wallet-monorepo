@@ -121,7 +121,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 40px;
-  align-items: center;
+  /* two columns aligned top: the live card sits beside the headline, not half a screen below it */
+  align-items: start;
 }
 
 .heroCopy {
@@ -166,6 +167,56 @@
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 4px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gc-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.textLink:hover {
+  color: var(--gc-white);
+}
+
+.heroNotes {
+  margin-top: 16px;
+  max-width: 520px;
+}
+
+.heroChart {
+  margin-top: 6px;
+  padding: 10px 12px 4px;
+  background: var(--gc-charcoal);
+  border-radius: 10px;
+}
+
+.heroChartTabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.heroChartTabs button {
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--gc-silver);
+  font: 600 12px/1 var(--gc-font);
+  cursor: pointer;
+}
+
+.heroChartTabs button[aria-pressed='true'] {
+  border-color: var(--gc-cyan);
+  color: var(--gc-white);
 }
 
 .loginWrap {
@@ -721,7 +772,8 @@
   display: grid;
   gap: 8px;
   width: 100%;
-  max-width: 460px;
+  max-width: 520px;
+  justify-self: end;
 }
 
 .heroLiveHead {

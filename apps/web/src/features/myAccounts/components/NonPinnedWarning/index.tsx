@@ -49,8 +49,8 @@ const NonPinnedWarning = ({
       >
         <AlertTitle sx={{ fontWeight: 700 }}>Not in your trusted list</AlertTitle>
         <Typography variant="body2" sx={{ mb: 1 }}>
-          You’re a signer of this Safe, but you haven’t marked it as trusted yet. Malicious actors may have added you
-          without your knowledge. Trusting a Safe helps you recognize it and reduces the risk of impersonation.
+          You’re a signer of this multisig, but you haven’t marked it as trusted yet. Malicious actors may have added
+          you without your knowledge. Trusting a multisig helps you recognize it and reduces the risk of impersonation.
         </Typography>
         <Box>
           <Button
@@ -60,7 +60,7 @@ const NonPinnedWarning = ({
             onClick={onOpenConfirmDialog}
             data-testid="add-to-pinned-list-button"
           >
-            Trust this Safe
+            Trust this multisig
           </Button>
         </Box>
       </Alert>

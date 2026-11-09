@@ -51,10 +51,10 @@ const AddManually = ({ handleAddSafe }: { handleAddSafe: (data: AddManuallyFormV
     try {
       const result = await triggerGetSafe({ chainId, safeAddress: address }).unwrap()
       if (!result) {
-        return 'Address given is not a valid Safe Account address'
+        return 'Address given is not a valid multisig address'
       }
     } catch (error) {
-      return 'Address given is not a valid Safe Account address'
+      return 'Address given is not a valid multisig address'
     }
   }
 
@@ -103,7 +103,7 @@ const AddManually = ({ handleAddSafe }: { handleAddSafe: (data: AddManuallyFormV
               <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
                 <AddressInput
                   data-testid="add-address-input"
-                  label="Safe Account"
+                  label="multisig"
                   chain={selectedChain}
                   validate={validateSafeAddress}
                   name="address"

@@ -40,39 +40,39 @@ const staticHints: Record<
   { title: string; variant: AlertColor; steps: { title: string; text: string | ReactElement }[] }
 > = {
   1: {
-    title: 'Safe Account creation',
+    title: 'Multisig creation',
     variant: 'info',
     steps: [
       {
         title: 'Network fee',
-        text: 'Deploying your Safe Account requires the payment of the associated network fee with your connected wallet. An estimation will be provided in the last step.',
+        text: 'Deploying your multisig costs the network fee, paid by your connected wallet. An estimation will be provided in the last step.',
       },
       {
         title: 'Address book privacy',
-        text: 'The name of your Safe Account will be stored in a local address book on your device and can be changed at a later stage. It will not be shared with us or any third party.',
+        text: 'The name of your multisig is stored in the address book on your device and can be changed at a later stage. It will not be shared with us or any third party.',
       },
     ],
   },
   2: {
-    title: 'Safe Account creation',
+    title: 'Multisig creation',
     variant: 'info',
     steps: [
       {
         title: 'Flat hierarchy',
-        text: 'Every signer has the same rights within the Safe Account and can propose, sign and execute transactions that have the required confirmations.',
+        text: 'Every signer has the same rights within the multisig and can propose, sign and execute transactions that have the required confirmations.',
       },
       {
         title: 'Managing Signers',
-        text: 'You can always change the number of signers and required confirmations in your Safe Account after creation.',
+        text: 'You can change the signers and the required confirmations any time after creation.',
       },
       {
-        title: 'Safe Account setup',
+        title: 'Multisig setup',
         text: (
           <>
-            Not sure how many signers and confirmations you need for your Safe Account?
+            Not sure how many signers and confirmations you need?
             <br />
             <ExternalLink href={HelpCenterArticle.SAFE_SETUP} fontWeight="bold">
-              Learn more about setting up your Safe Account.
+              Learn more about setting up a multisig.
             </ExternalLink>
           </>
         ),
@@ -80,7 +80,7 @@ const staticHints: Record<
     ],
   },
   3: {
-    title: 'Safe Account creation',
+    title: 'Multisig creation',
     variant: 'info',
     steps: [
       {
@@ -90,12 +90,12 @@ const staticHints: Record<
     ],
   },
   4: {
-    title: 'Safe Account usage',
+    title: 'Using your multisig',
     variant: 'success',
     steps: [
       {
-        title: 'Connect your Safe Account',
-        text: 'In our Safe Apps section you can connect your Safe Account to over 70 dApps directly or via Wallet Connect to interact with any application.',
+        title: 'Connect your multisig',
+        text: 'Connect your multisig to any dApp through WalletConnect and sign its transactions with your signers.',
       },
     ],
   },
@@ -130,8 +130,7 @@ const CreateSafe = () => {
     },
     {
       title: 'Signers and confirmations',
-      subtitle:
-        'Set the signer wallets of your Safe Account and how many need to confirm to execute a valid transaction.',
+      subtitle: 'Add the signers of your multisig and how many of them must confirm a transaction before it can run.',
       render: (data, onSubmit, onBack, setStep) => (
         <OwnerPolicyStep
           setDynamicHint={setDynamicHint}
@@ -144,8 +143,7 @@ const CreateSafe = () => {
     },
     {
       title: 'Review',
-      subtitle:
-        "You're about to create a new Safe Account and will have to confirm the transaction with your connected wallet.",
+      subtitle: "You're about to create a multisig. Your connected wallet confirms the deployment transaction.",
       render: (data, onSubmit, onBack, setStep) => (
         <ReviewStep data={data} onSubmit={onSubmit} onBack={onBack} setStep={setStep} />
       ),
@@ -198,7 +196,7 @@ const CreateSafe = () => {
               pb: 2,
             }}
           >
-            Create new Safe Account
+            Create a multisig
           </Typography>
         </Grid>
         <Grid

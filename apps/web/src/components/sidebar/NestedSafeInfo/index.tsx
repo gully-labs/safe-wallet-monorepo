@@ -11,9 +11,9 @@ export function NestedSafeInfo(): ReactElement {
     <Box display="flex" flexDirection="column" alignItems="center" pt={1}>
       <NestedSafes />
       <Box display="flex" gap={1} py={2}>
-        <Typography fontWeight={700}>No Nested Safes yet</Typography>
+        <Typography fontWeight={700}>No Nested multisigs yet</Typography>
         <Tooltip
-          title="Nested Safes are separate wallets owned by your main Account, perfect for organizing different funds and projects."
+          title="Nested multisigs are separate wallets owned by your main Account, perfect for organizing different funds and projects."
           placement="top"
           arrow
           sx={{ ml: 1 }}
@@ -34,7 +34,7 @@ export function NestedSafeInfo(): ReactElement {
           <SvgIcon component={NestedSafesIcon} inheritViewBox color="primary" sx={{ fontSize: 20 }} />
         </Avatar>
         <Typography variant="body2" fontWeight={700}>
-          Nested Safes allow you to:
+          Nested multisigs allow you to:
         </Typography>
       </Box>
       <List sx={{ p: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>

@@ -8,6 +8,7 @@ import { type ReactElement, useState, type MouseEvent, useMemo } from 'react'
 
 import ModalDialog from '@/components/common/ModalDialog'
 import { upsertAddressBookEntries } from '@/store/addressBookSlice'
+import { showNotification } from '@/store/notificationsSlice'
 import { useAppDispatch } from '@/store'
 
 import css from './styles.module.css'
@@ -65,6 +66,13 @@ const ImportDialog = ({ handleClose }: { handleClose: () => void }): ReactElemen
     }
 
     trackEvent({ ...ADDRESS_BOOK_EVENTS.IMPORT, label: entries.length })
+    dispatch(
+      showNotification({
+        variant: 'success',
+        groupKey: 'address-book',
+        message: `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'} imported into your address book.`,
+      }),
+    )
 
     handleClose()
   }

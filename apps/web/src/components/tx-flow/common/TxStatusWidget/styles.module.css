@@ -80,3 +80,43 @@
     display: flex;
   }
 }
+
+/* ---- Gully Multisig kit: the Create / Signed / Execute stepper beside the flow -------------------------------- */
+.status :global .MuiListItemIcon-root {
+  border-radius: 50%;
+  border: 2px solid var(--color-primary-main);
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  box-sizing: border-box;
+  margin-right: var(--space-1);
+  background-color: var(--color-background-main);
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.status :global .MuiListItemIcon-root svg {
+  width: 10px;
+  height: 10px;
+}
+
+.incomplete :global .MuiListItemIcon-root {
+  border-color: var(--color-border-light);
+  color: var(--color-text-secondary);
+}
+
+.status::before {
+  left: 8px;
+  border-left-color: var(--color-border-light);
+}
+
+.status :global .MuiListItem-root {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.status :global .MuiListItem-root > * {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 11px;
+}

@@ -99,3 +99,65 @@
     display: none;
   }
 }
+
+/* ---- Gully Multisig kit: the create / add-existing stepper --------------------------------------------------- */
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.progress :global .MuiLinearProgress-root {
+  height: 3px;
+}
+
+/* the primary action of every step is the signature button: kit pill, shine sweep, pressed scale, focus ring */
+.content :global(.MuiButton-contained) {
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 700;
+  padding-left: 22px;
+  padding-right: 22px;
+  transition: transform 120ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.content :global(.MuiButton-contained:not(:disabled))::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 700ms ease;
+  pointer-events: none;
+}
+
+.content :global(.MuiButton-contained:not(:disabled):hover)::before {
+  transform: translateX(120%);
+}
+
+.content :global(.MuiButton-contained:not(:disabled):active) {
+  transform: scale(0.98);
+}
+
+.content :global(.MuiButton-root:focus-visible) {
+  outline: 3px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+
+.content :global(.MuiButton-outlined),
+.content :global(.MuiButton-text) {
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content :global(.MuiButton-contained)::before {
+    display: none;
+  }
+
+  .content :global(.MuiButton-contained:not(:disabled):active) {
+    transform: none;
+  }
+}

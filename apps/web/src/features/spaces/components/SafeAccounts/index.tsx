@@ -34,7 +34,7 @@ const SpaceSafeAccounts = () => {
     <>
       {isInvited && <PreviewInvite />}
       <Typography variant="h1" mb={3}>
-        Safe Accounts
+        multisigs
       </Typography>
       <Stack
         direction="row"

@@ -92,7 +92,7 @@ export const mockExecTransactionData: TransactionData = {
   },
   to: {
     value: mockNestedSafeAddress,
-    name: 'Nested Safe',
+    name: 'Nested multisig',
     logoUri: null,
   },
   value: '0',

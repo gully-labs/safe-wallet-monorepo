@@ -28,7 +28,7 @@ describe('Gully Multisig: the dashboard copy follows the chain of the open Safe'
     const copy = addFundsCopyFor(anubis, true)
     expect(copy.title).toBe('Add tokens to get started')
     expect(copy.text).toBe(
-      'gasDAI pays gas only on Anubis Network and cannot be sent to a Safe. Tokens are ERC-20: send tokens to your address from another wallet, or bring them in over the bridge.',
+      'gasDAI pays gas only on Anubis Network and cannot be sent to a multisig. Tokens are ERC-20: send tokens to your address from another wallet, or bring them in over the bridge.',
     )
     expect(copy.links.map((l) => l.href)).toEqual([ANUBIS_BRIDGE_URL, ANUBIS_EXPLORER_URL])
     expect(ANUBIS_BRIDGE_URL).toBe('https://app.anubisbridge.com')
@@ -103,9 +103,11 @@ describe('Gully Multisig: the landing names the chains it serves', () => {
   const landing = readFileSync(join(__dirname, '..', 'landing', 'GullyLanding.tsx'), 'utf8')
 
   it('leads with Anubis Network and has one h1', () => {
-    expect(landing).toContain('Anubis Network · Gully Chain Testnet · Safe 1.4.1')
+    expect(landing).toContain('Anubis Network · Kinetiq Elysium · Gully Chain Testnet · Safe 1.4.1')
     expect(landing.match(/<h1\b/g)).toHaveLength(1)
-    expect(landing).toContain('Anubis Network (chain id 6714, a mainnet) and Gully Chain Testnet (chain id 485590')
+    expect(landing).toContain(
+      'Anubis Network (chain id 6714, a mainnet), Kinetiq Elysium (chain id 99901, a mainnet) and Gully Chain Testnet (chain id 485590',
+    )
   })
 
   it('does not send visitors to the faucet, and makes no audit claim of its own', () => {

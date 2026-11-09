@@ -45,7 +45,7 @@ describe('recovery-state', () => {
 
   describe('isMaliciousRecovery', () => {
     describe('non-MultiSend', () => {
-      it('should return true if the transaction is not calling the Safe itself', () => {
+      it('should return true if the transaction is not calling the multisig itself', () => {
         const chainId = '1'
         const version = latestSafeVersion
         const safeAddress = faker.finance.ethereumAddress()
@@ -58,7 +58,7 @@ describe('recovery-state', () => {
         expect(_isMaliciousRecovery({ chainId, version, safeAddress, transaction })).toBe(true)
       })
 
-      it('should return false if the transaction is calling the Safe itself', () => {
+      it('should return false if the transaction is calling the multisig itself', () => {
         const chainId = '1'
         const version = latestSafeVersion
         const safeAddress = faker.finance.ethereumAddress()
@@ -110,7 +110,7 @@ describe('recovery-state', () => {
         })
       })
       ;[...PRE_MULTI_SEND_CALL_ONLY_VERSIONS, ...SUPPORTED_MULTI_SEND_CALL_ONLY_VERSIONS].forEach((version) => {
-        it(`should return true if the transaction is an official MultiSend call and not every transaction in the batch calls the Safe itself for Safe version ${version}`, () => {
+        it(`should return true if the transaction is an official MultiSend call and not every transaction in the batch calls the multisig itself for Safe version ${version}`, () => {
           const chainId = '1'
           const version = latestSafeVersion
           const safeAddress = faker.finance.ethereumAddress()
@@ -148,7 +148,7 @@ describe('recovery-state', () => {
       })
 
       SUPPORTED_MULTI_SEND_CALL_ONLY_VERSIONS.forEach((version) => {
-        it(`should return false if the transaction is an official MultiSend call and every transaction in the batch calls the Safe itself for Safe version ${version}`, () => {
+        it(`should return false if the transaction is an official MultiSend call and every transaction in the batch calls the multisig itself for Safe version ${version}`, () => {
           const chainId = '1'
           const safeAddress = faker.finance.ethereumAddress()
 
@@ -272,7 +272,7 @@ describe('recovery-state', () => {
       jest.clearAllMocks()
     })
 
-    it('should return the Safe creation receipt', async () => {
+    it('should return the multisig creation receipt', async () => {
       const transactionService = faker.internet.url({ appendSlash: false })
       const safeAddress = faker.finance.ethereumAddress()
       const transactionHash = `0x${faker.string.hexadecimal()}`
@@ -302,7 +302,7 @@ describe('recovery-state', () => {
       expect(receipt).toStrictEqual(creationReceipt)
     })
 
-    it('should memoize the Safe creation receipt', async () => {
+    it('should memoize the multisig creation receipt', async () => {
       const transactionService = faker.internet.url({ appendSlash: false })
       const safeAddress = faker.finance.ethereumAddress()
       const transactionHash = `0x${faker.string.hexadecimal()}`
@@ -334,7 +334,7 @@ describe('recovery-state', () => {
       expect(global.fetch).toHaveBeenCalledTimes(1)
     })
 
-    it('should throw an error if the Safe creation receipt cannot be fetched', async () => {
+    it('should throw an error if the multisig creation receipt cannot be fetched', async () => {
       const transactionService = faker.internet.url({ appendSlash: false })
       const safeAddress = faker.finance.ethereumAddress()
 
@@ -359,7 +359,7 @@ describe('recovery-state', () => {
   })
 
   describe('getRecoveryState', () => {
-    it('should return the recovery state from the Safe creation block', async () => {
+    it('should return the recovery state from the multisig creation block', async () => {
       const safeAddress = faker.finance.ethereumAddress()
       const chainId = '1'
       const version = '1.3.0'

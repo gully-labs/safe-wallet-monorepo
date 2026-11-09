@@ -2,11 +2,11 @@ const NESTED_SAFES_CATEGORY = 'nested-safes'
 
 export const NESTED_SAFE_EVENTS = {
   OPEN_LIST: {
-    action: 'Open nested Safe list',
+    action: 'Open nested multisig list',
     category: NESTED_SAFES_CATEGORY,
   },
   OPEN_NESTED_SAFE: {
-    action: 'Open nested Safe',
+    action: 'Open nested multisig',
     category: NESTED_SAFES_CATEGORY,
   },
   SHOW_ALL: {

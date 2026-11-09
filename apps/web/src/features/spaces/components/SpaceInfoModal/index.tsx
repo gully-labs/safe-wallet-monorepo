@@ -77,7 +77,7 @@ const SpaceInfoModal = ({
             <List sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <ListItem disablePadding>
                 <ListIcon />
-                Bring all your Safe Accounts into one shared space.
+                Bring all your multisigs into one shared space.
               </ListItem>
 
               <ListItem disablePadding>

@@ -62,15 +62,15 @@ const ConnectionSteps = [
   'Select WalletConnect as the wallet',
   'Copy the pairing code and paste it into the input field above',
   'Approve the session',
-  'dApp is now connected to the Safe',
+  'dApp is now connected to the multisig',
 ]
 
 const InteractionTitle = 'How do I interact with a dApp?'
 const InteractionSteps = [
   'Connect a dApp by following the above steps',
-  'Ensure the dApp is connected to the same chain as your Safe Account',
+  'Ensure the dApp is connected to the same chain as your multisig',
   'Initiate a transaction/signature request via the dApp',
-  'Transact/sign as normal via the Safe',
+  'Transact/sign as normal via the multisig',
 ]
 
 const WcHints = (): ReactElement => {

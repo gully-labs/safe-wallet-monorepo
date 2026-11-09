@@ -12,8 +12,8 @@ export const MigrateToL2Information = ({ variant }: { variant: 'history' | 'queu
         </AlertTitle>
         <Typography>
           {variant === 'history'
-            ? 'This Safe was using an incompatible base contract. This transaction includes the migration to a supported base contract.'
-            : 'This Safe is currently using an incompatible base contract. The transaction was automatically modified to first migrate to a supported base contract.'}
+            ? 'This multisig was using an incompatible base contract. This transaction includes the migration to a supported base contract.'
+            : 'This multisig is currently using an incompatible base contract. The transaction was automatically modified to first migrate to a supported base contract.'}
         </Typography>
       </Alert>
     </Box>

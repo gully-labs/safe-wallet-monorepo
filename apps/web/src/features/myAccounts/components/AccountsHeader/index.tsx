@@ -26,7 +26,7 @@ const AddSafeButton = ({ trackingLabel, onLinkClick }: { trackingLabel: string; 
           startIcon={<SvgIcon component={AddIcon} inheritViewBox fontSize="small" />}
           sx={{ height: '36px', width: '100%', px: 2 }}
         >
-          <Box mt="1px">Add</Box>
+          <Box mt="1px">Add an existing one</Box>
         </Button>
       </Link>
     </Track>
@@ -44,7 +44,7 @@ const AccountsHeader = ({ isSidebar, onLinkClick }: { isSidebar: boolean; onLink
     <Box className={classNames(css.header, { [css.sidebarHeader]: isSidebar })}>
       {isSidebar || !isSpacesFeatureEnabled ? (
         <Typography variant="h1" fontWeight={700} className={css.title}>
-          Accounts
+          My multisigs
         </Typography>
       ) : (
         <AccountsNavigation />

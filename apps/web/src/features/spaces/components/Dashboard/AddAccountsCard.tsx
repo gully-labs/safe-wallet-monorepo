@@ -17,12 +17,12 @@ const AddAccountsCard = () => {
       <Stack direction={{ xs: 'column-reverse', md: 'row' }} alignItems="center" spacing={3}>
         <Box sx={{ flex: 2 }}>
           <Typography variant="h4" fontWeight={700} mb={2}>
-            Add your Safe Accounts
+            Add your multisigs
           </Typography>
 
           <Typography variant="body1" color="primary.light" mb={2}>
-            Start by adding Safe Accounts to your space. Any accounts that are linked to your connected wallet can be
-            added to the space.
+            Start by adding multisigs to your space. Any accounts that are linked to your connected wallet can be added
+            to the space.
           </Typography>
 
           <Track {...SPACE_EVENTS.ADD_ACCOUNTS_MODAL} label={SPACE_LABELS.space_dashboard_card}>

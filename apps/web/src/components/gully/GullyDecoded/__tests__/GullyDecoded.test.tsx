@@ -28,7 +28,7 @@ describe('GullyDecoded', () => {
     expect(container).toBeEmptyDOMElement()
   })
 
-  it('decodes a Gully Core call found in the data of a Safe transaction', () => {
+  it('decodes a Gully Core call found in the data of a multisig transaction', () => {
     const data = new Interface(['function setBuilderFee(uint16 newFee)']).encodeFunctionData('setBuilderFee', [3000])
     const { getByTestId } = render(<GullyDecoded to={ALICE} data={data} value="0" />)
     expect(getByTestId('gully-decoded-title')).toHaveTextContent('Set the Gully Core builder fee to 0.30%')

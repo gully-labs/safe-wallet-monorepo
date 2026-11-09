@@ -3,7 +3,7 @@ import { addOrUpdateSafe, removeSafe, addedSafesSlice } from '../addedSafesSlice
 
 describe('addedSafesSlice', () => {
   describe('addOrUpdateSafe', () => {
-    it('should add a Safe to the store', () => {
+    it('should add a multisig to the store', () => {
       const safe0 = { chainId: '1', address: { value: '0x0' }, threshold: 1, owners: [{ value: '0x123' }] } as SafeState
       const state = addedSafesSlice.reducer(undefined, addOrUpdateSafe({ safe: safe0 }))
       expect(state).toEqual({
@@ -30,7 +30,7 @@ describe('addedSafesSlice', () => {
   })
 
   describe('removeSafe', () => {
-    it('should remove a Safe from the store', () => {
+    it('should remove a multisig from the store', () => {
       const state = addedSafesSlice.reducer(
         { '1': { ['0x0']: {} as SafeState, ['0x1']: {} as SafeState }, '4': { ['0x0']: {} as SafeState } },
         removeSafe({ chainId: '1', address: '0x1' }),

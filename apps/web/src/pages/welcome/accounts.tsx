@@ -10,7 +10,7 @@ const Accounts: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`${BRAND_NAME} – My accounts`}</title>
+        <title>{`${BRAND_NAME} – My multisigs`}</title>
       </Head>
 
       <MyAccounts />

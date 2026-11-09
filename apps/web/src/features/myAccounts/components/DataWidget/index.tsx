@@ -17,7 +17,11 @@ import css from './styles.module.css'
 import { AppRoutes } from '@/config/routes'
 import { useRouter } from 'next/router'
 
-export const DataWidget = (): ReactElement => {
+/**
+ * Local data (added multisigs, address book, settings). `compact` (Gully Multisig, the My multisigs page) renders one
+ * quiet line of text links under the list instead of a card: importing is rare, the primary actions are above.
+ */
+export const DataWidget = ({ compact = false }: { compact?: boolean } = {}): ReactElement => {
   const [importModalOpen, setImportModalOpen] = useState(false)
   const [fileName, setFileName] = useState<string>()
   const [jsonData, setJsonData] = useState<string>()
@@ -36,15 +40,45 @@ export const DataWidget = (): ReactElement => {
     setImportModalOpen(false)
   }
 
+  const dialog = importModalOpen && (
+    <ImportDialog
+      fileName={fileName}
+      setFileName={setFileName}
+      jsonData={jsonData}
+      setJsonData={setJsonData}
+      onClose={onClose}
+    />
+  )
+
+  if (compact) {
+    return (
+      <Box className={css.compact} data-testid="data-widget-compact">
+        <Track {...OVERVIEW_EVENTS.IMPORT_DATA} label={trackingLabel}>
+          <Button data-testid="import-btn" variant="text" size="small" onClick={onImport} className={css.textLink}>
+            Import your multisig data
+          </Button>
+        </Track>
+        {hasData && (
+          <Track {...OVERVIEW_EVENTS.EXPORT_DATA} label={trackingLabel}>
+            <Button variant="text" size="small" onClick={exportAppData} className={css.textLink}>
+              Export
+            </Button>
+          </Track>
+        )}
+        {dialog}
+      </Box>
+    )
+  }
+
   return (
     <Card className={css.card}>
       <CardHeader
         className={css.cardHeader}
         title={
           <>
-            <b>{hasData ? 'Export or import your Safe data' : 'Import your Safe data'}</b>
+            <b>{hasData ? 'Export or import your multisig data' : 'Import your multisig data'}</b>
             <Tooltip
-              title="Download or upload your local data with your added Safe Accounts, address book and settings."
+              title="Download or upload your local data with your added multisigs, address book and settings."
               placement="top"
               arrow
             >
@@ -84,15 +118,7 @@ export const DataWidget = (): ReactElement => {
           </Track>
         </Box>
       </CardContent>
-      {importModalOpen && (
-        <ImportDialog
-          fileName={fileName}
-          setFileName={setFileName}
-          jsonData={jsonData}
-          setJsonData={setJsonData}
-          onClose={onClose}
-        />
-      )}
+      {dialog}
     </Card>
   )
 }

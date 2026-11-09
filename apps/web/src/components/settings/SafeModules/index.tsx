@@ -80,8 +80,8 @@ const SafeModules = () => {
         <Grid item xs>
           <Box>
             <Typography>
-              Modules allow you to customize the access-control logic of your Safe Account. Modules are potentially
-              risky, so make sure to only use modules from trusted sources. Learn more about modules{' '}
+              Modules allow you to customize the access-control logic of your multisig. Modules are potentially risky,
+              so make sure to only use modules from trusted sources. Learn more about modules{' '}
               <ExternalLink href="https://help.safe.global/en/articles/40827-what-is-a-module">here</ExternalLink>
             </Typography>
             {safeModules.length === 0 ? (

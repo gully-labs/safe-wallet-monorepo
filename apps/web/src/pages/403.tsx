@@ -1,24 +1,15 @@
-import { AppRoutes } from '@/config/routes'
 import type { NextPage } from 'next'
-import Link from 'next/link'
-import MUILink from '@mui/material/Link'
+import { AppRoutes } from '@/config/routes'
+import GullyEmptyPage from '@/components/gully/GullyEmptyPage'
 
-const Custom403: NextPage = () => {
-  return (
-    <main>
-      <h1>403 - Access Restricted</h1>
-      <p>
-        We regret to inform you that access to this service is currently unavailable in your region. For further
-        information, you may refer to our{' '}
-        <Link href={AppRoutes.terms} passHref legacyBehavior>
-          <MUILink target="_blank" rel="noreferrer">
-            terms
-          </MUILink>
-        </Link>
-        . We apologize for any inconvenience this may cause. Thank you for your understanding.
-      </p>
-    </main>
-  )
-}
+const Custom403: NextPage = () => (
+  <GullyEmptyPage
+    code="403"
+    title="Not available in your region"
+    actions={[{ label: 'Read the terms', href: AppRoutes.terms }]}
+  >
+    <p>Gully Multisig cannot be used from where you are connecting. The terms say which regions are served.</p>
+  </GullyEmptyPage>
+)
 
 export default Custom403

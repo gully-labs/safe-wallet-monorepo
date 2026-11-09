@@ -29,6 +29,14 @@ jest.mock(
     },
 )
 
+jest.mock(
+  '@/components/common/GullyChainSwitcher',
+  () =>
+    function GullyChainSwitcher() {
+      return <div>GullyChainSwitcher</div>
+    },
+)
+
 jest.mock('@/hooks/useIsOfficialHost', () => ({
   useIsOfficialHost: () => true,
 }))
@@ -125,17 +133,19 @@ describe('Header', () => {
     expect(screen.queryByText('WalletConnect')).not.toBeInTheDocument()
   })
 
-  it('renders the NetworkSelector when safeAddress exists', () => {
+  it('renders the chain switcher when safeAddress exists', () => {
     jest.spyOn(useSafeAddress, 'default').mockReturnValue(faker.finance.ethereumAddress())
 
     render(<Header />)
-    expect(screen.getByText('NetworkSelector')).toBeInTheDocument()
+    // the header mounts the shared Gully chain switcher (gc-chain-switcher) in place of the stock NetworkSelector
+    expect(screen.getByText('GullyChainSwitcher')).toBeInTheDocument()
   })
 
-  it('renders the NetworkSelector without a Safe too (Gully Multisig: a chain switcher on every route)', () => {
+  it('renders the chain switcher without a multisig too (Gully Multisig: a chain switcher on every route)', () => {
     jest.spyOn(useSafeAddress, 'default').mockReturnValue('')
 
     render(<Header />)
-    expect(screen.getByText('NetworkSelector')).toBeInTheDocument()
+    // the header mounts the shared Gully chain switcher (gc-chain-switcher) in place of the stock NetworkSelector
+    expect(screen.getByText('GullyChainSwitcher')).toBeInTheDocument()
   })
 })

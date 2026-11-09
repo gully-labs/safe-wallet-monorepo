@@ -67,7 +67,7 @@ describe('useBannerVisibility', () => {
     })
   })
 
-  describe('when wallet is not a Safe owner', () => {
+  describe('when wallet is not a multisig owner', () => {
     it('should return showBanner: false, loading: false', () => {
       jest.spyOn(useBannerStorageHook, 'useBannerStorage').mockReturnValue(true)
       jest.spyOn(useWalletHook, 'default').mockReturnValue(mockWallet)
@@ -894,7 +894,7 @@ describe('useBannerVisibility', () => {
         })
       })
 
-      it('should NOT show banner if user is not a Safe owner, even when Safe is targeted', () => {
+      it('should NOT show banner if user is not a multisig owner, even when Safe is targeted', () => {
         jest.spyOn(useIsHypernativeFeatureHook, 'useIsHypernativeFeature').mockReturnValue(true)
         jest.spyOn(useBannerStorageHook, 'useBannerStorage').mockReturnValue(true)
         jest.spyOn(useWalletHook, 'default').mockReturnValue(mockWallet)

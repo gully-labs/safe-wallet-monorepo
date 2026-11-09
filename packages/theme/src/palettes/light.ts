@@ -13,8 +13,8 @@ const lightPalette: ColorPalette = {
     contrast: '#FFFFFF',
   },
   primary: {
-    dark: '#3c3c3c',
-    main: '#121312',
+    dark: '#003F27',
+    main: '#005B39',
     light: '#636669',
   },
   secondary: {
