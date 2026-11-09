@@ -11,7 +11,8 @@ const walk = (dir: string): string[] =>
   readdirSync(dir).flatMap((n) => {
     const p = join(dir, n)
     if (statSync(p).isDirectory()) return n === 'node_modules' ? [] : walk(p)
-    return /\.tsx?$/.test(n) && !/stories/.test(n) ? [p] : []
+    // test files are not visible copy (and this file names the strings it bans)
+    return /\.tsx?$/.test(n) && !/stories|\.test\.|\.spec\./.test(n) && !p.includes('__tests__') ? [p] : []
   })
 
 describe('wording', () => {

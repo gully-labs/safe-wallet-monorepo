@@ -132,7 +132,7 @@ describe('Header', () => {
     expect(screen.getByText('NetworkSelector')).toBeInTheDocument()
   })
 
-  it('renders the NetworkSelector without a Safe too (Gully Multisig: a chain switcher on every route)', () => {
+  it('renders the NetworkSelector without a multisig too (Gully Multisig: a chain switcher on every route)', () => {
     jest.spyOn(useSafeAddress, 'default').mockReturnValue('')
 
     render(<Header />)
