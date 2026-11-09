@@ -42,8 +42,8 @@ export function RecoveryInProgressCard({ orientation = 'vertical', onClose, reco
   const title = isExecutable
     ? 'Account can be recovered'
     : isExpired
-      ? 'Account recovery expired'
-      : 'Account recovery in progress'
+      ? 'Multisig recovery expired'
+      : 'Multisig recovery in progress'
   const desc = isExecutable
     ? 'The review window has passed and it is now possible to execute the recovery proposal.'
     : isExpired

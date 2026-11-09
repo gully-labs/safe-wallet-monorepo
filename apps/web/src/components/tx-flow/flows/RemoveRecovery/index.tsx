@@ -25,7 +25,7 @@ function RemoveRecoveryFlow({ delayModifier }: RecoveryFlowProps): ReactElement 
       subtitle="Remove Recoverer"
       ReviewTransactionComponent={RemoveRecoveryReviewStep}
     >
-      <TxFlowStep title="Remove Account recovery">
+      <TxFlowStep title="Remove Multisig recovery">
         <RemoveRecoveryFlowOverview delayModifier={delayModifier} />
       </TxFlowStep>
     </TxFlow>

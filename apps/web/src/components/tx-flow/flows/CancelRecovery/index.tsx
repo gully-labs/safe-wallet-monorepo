@@ -7,7 +7,7 @@ import { TxFlow } from '../../TxFlow'
 import { TxFlowStep } from '../../TxFlowStep'
 import type ReviewTransaction from '@/components/tx/ReviewTransactionV2'
 
-const TITLE = 'Cancel Account recovery'
+const TITLE = 'Cancel Multisig recovery'
 
 type CancelRecoveryFlowProps = {
   recovery: RecoveryQueueItem

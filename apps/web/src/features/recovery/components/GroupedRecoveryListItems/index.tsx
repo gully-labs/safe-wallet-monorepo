@@ -23,7 +23,7 @@ function Disclaimer({ isMalicious }: { isMalicious: boolean }): ReactElement {
     >
       <Typography>
         <Typography component="span" fontWeight={700}>
-          Cancelling {isMalicious ? 'malicious transaction' : 'Account recovery'}.
+          Cancelling {isMalicious ? 'malicious transaction' : 'Multisig recovery'}.
         </Typography>{' '}
         You will need to execute the cancellation.{' '}
         <Track {...RECOVERY_EVENTS.LEARN_MORE} label="tx-queue">

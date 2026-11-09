@@ -25,9 +25,9 @@ const RecoveryTxNotifications = {
 }
 
 const RecoveryTxNotificationTitles = {
-  [RecoveryTxType.PROPOSAL]: 'Account recovery proposal',
-  [RecoveryTxType.EXECUTION]: 'Account recovery',
-  [RecoveryTxType.SKIP_EXPIRED]: 'Account recovery cancellation',
+  [RecoveryTxType.PROPOSAL]: 'Multisig recovery proposal',
+  [RecoveryTxType.EXECUTION]: 'Multisig recovery',
+  [RecoveryTxType.SKIP_EXPIRED]: 'Multisig recovery cancellation',
 }
 
 export function useRecoveryTxNotifications(): void {

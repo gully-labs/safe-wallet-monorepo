@@ -34,7 +34,7 @@ function RecoverAccountFlow(): ReactElement {
 
   return (
     <TxLayout
-      title={step === 0 ? 'Start Account recovery' : 'Confirm transaction'}
+      title={step === 0 ? 'Start Multisig recovery' : 'Confirm transaction'}
       subtitle="Change Account settings"
       icon={SaveAddressIcon}
       step={step}
