@@ -42,7 +42,7 @@ const GullyServices = (): ReactElement | null => {
 
   return (
     <section className={css.panel} data-testid="gully-services" data-chain={chainId}>
-      <Typography variant="h2" className={css.title}>
+      <Typography variant="h2" component="h1" className={css.title}>
         {links.title}
       </Typography>
       <Typography className={css.subtitle}>{links.subtitle}</Typography>

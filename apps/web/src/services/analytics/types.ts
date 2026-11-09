@@ -49,6 +49,7 @@ export enum TxFlowType {
   CHANGE_THRESHOLD = 'change-threshold',
   CONFIRM_BATCH = 'confirm-batch',
   CONFIRM_TX = 'confirm-tx',
+  GULLY_ACTION = 'gully-action',
   NFT_TRANSFER = 'nft-transfer',
   REJECT_TX = 'reject-tx',
   REMOVE_GUARD = 'remove-guard',

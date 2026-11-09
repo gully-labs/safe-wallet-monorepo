@@ -33,6 +33,7 @@ import { StakingTxDepositInfo, StakingTxExitInfo, StakingTxWithdrawInfo } from '
 import { Box } from '@mui/material'
 import css from './styles.module.css'
 import { VaultDepositTxInfo, VaultRedeemTxInfo } from '@/features/earn'
+import { queueLabel } from '@/services/gully-decode'
 
 export const TransferTx = ({
   info,
@@ -95,7 +96,7 @@ export const TransferTx = ({
 }
 
 const CustomTx = ({ info }: { info: CustomTransactionInfo }): ReactElement => {
-  return <Box className={css.txInfo}>{info.methodName}</Box>
+  return <Box className={css.txInfo}>{queueLabel(info.methodName) ?? info.methodName}</Box>
 }
 
 const CreationTx = ({ info }: { info: CreationTransactionInfo }): ReactElement => {

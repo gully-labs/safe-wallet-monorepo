@@ -36,10 +36,7 @@ const MetaTags = ({ prefetchUrl, pathname }: { prefetchUrl: string; pathname: st
       <meta property="og:image" content={OG_IMAGE_URL} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta
-        property="og:image:alt"
-        content="Gully Multisig: shared wallets, many signers. The Gully Chain icon and mascot."
-      />
+      <meta property="og:image:alt" content="Gully Multisig: shared wallets, many signers. The Gully Chain icon." />
       <meta property="og:description" content={descriptionText} />
       <meta property="og:title" content={canonicalUrl ? landingTitle : titleText} />
       <meta name="twitter:card" content="summary_large_image" />

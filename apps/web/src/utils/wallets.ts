@@ -7,6 +7,7 @@ const EMPTY_DATA = '0x'
 import memoize from 'lodash/memoize'
 import { PRIVATE_KEY_MODULE_LABEL } from '@/services/private-key-module/constants'
 import { type JsonRpcProvider } from 'ethers'
+import { isKnownGullyWallet } from '@/utils/gully-wallet'
 
 const WALLETCONNECT = 'WalletConnect'
 const WC_LEDGER = 'Ledger Wallet'
@@ -72,6 +73,8 @@ export const isEIP7702DelegatedAccount = async (address: string, provider?: Json
 
 export const isSmartContractWallet = memoize(
   async (_chainId: string, address: string): Promise<boolean> => {
+    // A Gully Wallet (Gully ID passkey, Kernel account) is a contract signer even before it has code on chain
+    if (isKnownGullyWallet(address)) return true
     const isContract = await isSmartContract(address)
     const isEIP7702 = await isEIP7702DelegatedAccount(address)
     return isContract && !isEIP7702

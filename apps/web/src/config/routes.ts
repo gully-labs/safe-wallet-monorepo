@@ -10,6 +10,7 @@ export const AppRoutes = {
   privacy: '/privacy',
   licenses: '/licenses',
   gullyServices: '/gully-services',
+  gullyActions: '/gully-actions',
   index: '/',
   imprint: '/imprint',
   home: '/home',
