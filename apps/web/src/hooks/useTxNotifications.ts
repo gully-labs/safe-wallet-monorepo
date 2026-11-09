@@ -16,6 +16,7 @@ import { getTxLink } from '@/utils/tx-link'
 import { useLazyTransactionsGetTransactionByIdV1Query } from '@safe-global/store/gateway/AUTO_GENERATED/transactions'
 import { getExplorerLink } from '@safe-global/utils/utils/gateway'
 import { getGuardErrorInfo } from '@/utils/transaction-errors'
+import { preloadGlToast, showGlToast } from '@/components/gully/LiveUi/glToast'
 
 const TxNotifications = {
   [TxEvent.SIGN_FAILED]: 'Failed to sign. Please try again.',
@@ -55,6 +56,7 @@ const useTxNotifications = (): void => {
 
   useEffect(() => {
     if (!chain) return
+    preloadGlToast()
 
     const entries = Object.entries(TxNotifications) as [keyof typeof TxNotifications, string][]
 
@@ -86,6 +88,16 @@ const useTxNotifications = (): void => {
           } catch {}
         }
 
+        const link = txId
+          ? getTxLink(txId, chain, safeAddress)
+          : txHash
+            ? getExplorerLink(txHash, chain.blockExplorerUriTemplate)
+            : undefined
+
+        // Gully Multisig: successes (proposed, signed, executed) show the kit toast; errors and progress keep the
+        // snackbar. Until gl-actions.js is loaded the snackbar shows them too (never both).
+        if (isSuccess && showGlToast(`${humanDescription}: ${message}`, { href: link?.href })) return
+
         dispatch(
           showNotification({
             title: humanDescription,
@@ -93,11 +105,7 @@ const useTxNotifications = (): void => {
             detailedMessage: isError ? detail.error.message : undefined,
             groupKey,
             variant: isError ? Variant.ERROR : isSuccess ? Variant.SUCCESS : Variant.INFO,
-            link: txId
-              ? getTxLink(txId, chain, safeAddress)
-              : txHash
-                ? getExplorerLink(txHash, chain.blockExplorerUriTemplate)
-                : undefined,
+            link,
           }),
         )
       }),
