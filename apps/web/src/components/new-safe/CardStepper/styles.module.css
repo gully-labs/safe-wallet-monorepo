@@ -119,10 +119,7 @@
   font-weight: 700;
   padding-left: 22px;
   padding-right: 22px;
-  transition:
-    transform 120ms ease,
-    box-shadow 160ms ease,
-    background-color 160ms ease;
+  transition: transform 120ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .content :global(.MuiButton-contained:not(:disabled))::before {
