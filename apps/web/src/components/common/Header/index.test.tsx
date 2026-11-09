@@ -29,6 +29,14 @@ jest.mock(
     },
 )
 
+jest.mock(
+  '@/components/common/GullyChainSwitcher',
+  () =>
+    function GullyChainSwitcher() {
+      return <div>GullyChainSwitcher</div>
+    },
+)
+
 jest.mock('@/hooks/useIsOfficialHost', () => ({
   useIsOfficialHost: () => true,
 }))

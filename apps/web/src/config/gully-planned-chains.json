@@ -1,0 +1,11 @@
+[
+  {
+    "chainId": "99901",
+    "chainName": "Kinetiq Elysium",
+    "shortName": "elysium",
+    "nativeSymbol": "HYPE",
+    "isTestnet": false,
+    "logo": "/cfg/media/chains/99901/chain_logo.png",
+    "note": "Elysium is being deployed."
+  }
+]

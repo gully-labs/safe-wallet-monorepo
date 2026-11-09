@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import classnames from 'classnames'
 import css from './styles.module.css'
 import ConnectWallet from '@/components/common/ConnectWallet'
-import NetworkSelector from '@/components/common/NetworkSelector'
+import GullyChainSwitcher from '@/components/common/GullyChainSwitcher'
 import SafeTokenWidget from '@/components/common/SafeTokenWidget'
 import NotificationCenter from '@/components/notification-center/NotificationCenter'
 import { AppRoutes } from '@/config/routes'
@@ -146,7 +146,7 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         {/* the network selector is on every route (upstream shows it only inside a Safe), so Gully Chain Testnet, Anubis
             and any chain the config service adds can be picked before a Safe is open */}
         <div className={css.networkSelector} data-testid="gully-network-selector">
-          <NetworkSelector offerSafeCreation={Boolean(safeAddress)} compactButton={true} />
+          <GullyChainSwitcher />
         </div>
       </div>
     </Paper>
