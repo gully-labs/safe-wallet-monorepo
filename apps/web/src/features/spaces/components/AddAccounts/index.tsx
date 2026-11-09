@@ -200,7 +200,7 @@ const AddAccounts = () => {
                     <TextField
                       id="search-by-name"
                       placeholder="Search"
-                      aria-label="Search Safe list by name"
+                      aria-label="Search multisig list by name"
                       variant="filled"
                       hiddenLabel
                       onChange={(e) => {

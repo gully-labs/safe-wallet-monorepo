@@ -62,11 +62,11 @@ export const InconsistentSignerSetupWarning = () => {
   return (
     <ErrorMessage level="warning" title="Signers are not consistent">
       <Typography display="inline" mr={1}>
-        Signers are different on these networks of this account:
+        Signers are different on these networks of this multisig:
       </Typography>
       <ChainIndicatorList chainIds={deviatingChainIds} />
       <Typography display="inline">
-        To manage your account easier and to prevent lose of funds, we recommend keeping the same signers.
+        To manage your multisig more easily and to prevent lose of funds, we recommend keeping the same signers.
       </Typography>
     </ErrorMessage>
   )

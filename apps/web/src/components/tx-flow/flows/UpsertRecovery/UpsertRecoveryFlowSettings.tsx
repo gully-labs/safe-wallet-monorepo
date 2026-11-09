@@ -135,7 +135,7 @@ export function UpsertRecoveryFlowSettings({ delayModifier }: { delayModifier?: 
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <Alert severity="warning" sx={{ border: 'unset' }}>
-            Your Recoverer will be able to reset your Account setup. Only select an address that you trust.{' '}
+            Your Recoverer will be able to reset your multisig setup. Only select an address that you trust.{' '}
             <Track {...RECOVERY_EVENTS.LEARN_MORE} label="recover-setup-flow">
               <ExternalLink href={HelpCenterArticle.RECOVERY} title={HelperCenterArticleTitles.RECOVERY}>
                 Learn more

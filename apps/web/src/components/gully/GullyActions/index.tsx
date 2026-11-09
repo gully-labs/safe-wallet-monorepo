@@ -132,7 +132,7 @@ const GullyActions = (): ReactElement => {
 
         <Card
           title="Pause a contract"
-          text="Calls pause() or unpause() on a Gully contract the Safe owns. Check the address: the call fails on a contract without a pause switch."
+          text="Calls pause() or unpause() on a Gully contract the multisig owns. Check the address: the call fails on a contract without a pause switch."
         >
           <TextField
             label="Contract address"
@@ -148,7 +148,7 @@ const GullyActions = (): ReactElement => {
 
         <Card
           title="Gully Pay payouts"
-          text="Pay several people in one transaction: one address and one amount per line. The Safe needs the balance."
+          text="Pay several people in one transaction: one address and one amount per line. The multisig needs the balance."
         >
           <TextField label="Token address" value={token} onChange={(e) => setToken(e.target.value)} size="small" />
           <Stack direction="row" spacing={2}>

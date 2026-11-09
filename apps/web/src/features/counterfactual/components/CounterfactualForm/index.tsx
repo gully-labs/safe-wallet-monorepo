@@ -113,7 +113,7 @@ export const CounterfactualForm = ({
     <>
       <form onSubmit={handleSubmit}>
         <Alert severity="info" sx={{ mb: 2, border: 0 }}>
-          Executing this transaction will activate your account.
+          Executing this transaction will activate your multisig.
           <br />
           <ul style={{ margin: 0, padding: '4px 16px 0' }}>
             <li>

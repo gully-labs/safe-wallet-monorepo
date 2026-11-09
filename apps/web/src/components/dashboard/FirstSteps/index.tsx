@@ -133,8 +133,8 @@ const AddFundsWidget = ({ completed }: { completed: boolean }) => {
   const { noNativeValue, note } = useGullyNoNativeValue()
   const title = noNativeValue ? 'Add tokens' : 'Add native assets'
   const content = noNativeValue
-    ? `${note} Receive tokens to start interacting with your account.`
-    : `Receive ${chain?.nativeCurrency.name} to start interacting with your account.`
+    ? `${note} Receive tokens to start interacting with your multisig.`
+    : `Receive ${chain?.nativeCurrency.name} to start interacting with your multisig.`
 
   const toggleDialog = () => {
     setOpen((prev) => !prev)
@@ -320,7 +320,7 @@ const ActivateSafeWidget = ({
   const [open, setOpen] = useState<boolean>(false)
 
   const title = `Activate account ${chain ? 'on ' + chain.chainName : ''}`
-  const content = 'Activate your account to start using all benefits of Safe'
+  const content = 'Activate your multisig to start using all of Gully Multisig'
 
   return (
     <>
@@ -363,7 +363,7 @@ const AccountReadyWidget = () => {
       >
         Your multisig is ready!
       </Typography>
-      <Typography>Continue to improve your account security and unlock more features</Typography>
+      <Typography>Continue to improve your multisig security and unlock more features</Typography>
     </Card>
   )
 }
@@ -452,7 +452,7 @@ const FirstSteps = () => {
 
             {isActivating ? (
               <Typography variant="body2">
-                <strong>This may take a few minutes.</strong> Once activated, your account will be up and running.
+                <strong>This may take a few minutes.</strong> Once activated, your multisig will be up and running.
               </Typography>
             ) : (
               <Typography variant="body2">

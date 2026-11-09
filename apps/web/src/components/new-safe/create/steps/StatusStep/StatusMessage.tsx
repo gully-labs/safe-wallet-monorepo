@@ -12,24 +12,24 @@ const getStep = (status: SafeCreationEvent) => {
     case SafeCreationEvent.AWAITING_EXECUTION:
       return {
         description: 'Your account is awaiting activation',
-        instruction: 'Activate the account to unlock all features of your smart wallet',
+        instruction: 'Activate the multisig to unlock all of its features',
       }
     case SafeCreationEvent.PROCESSING:
     case SafeCreationEvent.RELAYING:
       return {
-        description: 'We are activating your account',
-        instruction: 'It can take some minutes to create your account, but you can check the progress below.',
+        description: 'We are activating your multisig',
+        instruction: 'It can take some minutes to create your multisig, but you can check the progress below.',
       }
     case SafeCreationEvent.FAILED:
       return {
         description: "Your account couldn't be created",
         instruction:
-          'The creation transaction was rejected by the connected wallet. You can retry or create an account from scratch.',
+          'The creation transaction was rejected by the connected wallet. You can retry or create a multisig from scratch.',
       }
     case SafeCreationEvent.REVERTED:
       return {
         description: "Your account couldn't be created",
-        instruction: 'The creation transaction reverted. You can retry or create an account from scratch.',
+        instruction: 'The creation transaction reverted. You can retry or create a multisig from scratch.',
       }
     case SafeCreationEvent.SUCCESS:
       return {

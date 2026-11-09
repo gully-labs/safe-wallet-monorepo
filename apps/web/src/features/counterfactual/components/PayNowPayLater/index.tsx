@@ -43,7 +43,7 @@ const PayNowPayLater = ({
       </Typography>
       {isMultiChain && (
         <ErrorMessage level="info">
-          You will need to <b>activate your account</b> separately on each network. Make sure you have funds on your
+          You will need to <b>activate your multisig</b> separately on each network. Make sure you have funds on your
           wallet to pay the network fee.
         </ErrorMessage>
       )}
@@ -54,7 +54,7 @@ const PayNowPayLater = ({
               <CheckRoundedIcon fontSize="small" color="inherit" />
             </ListItemIcon>
             <Typography variant="body2">
-              Start exploring the accounts now, and activate them later to start making transactions
+              Start exploring the multisigs now, and activate them later to start making transactions
             </Typography>
           </ListItem>
         )}

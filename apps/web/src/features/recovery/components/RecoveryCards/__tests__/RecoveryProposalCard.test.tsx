@@ -19,10 +19,10 @@ describe('RecoveryProposalCard', () => {
         />,
       )
 
-      expect(queryByText('Recover this Account')).toBeTruthy()
+      expect(queryByText('Recover this multisig')).toBeTruthy()
       expect(
         queryByText(
-          'The connected wallet was chosen as a trusted Recoverer. You can help the owner regain access by resetting the Account setup.',
+          'The connected wallet was chosen as a trusted Recoverer. You can help the owner regain access by resetting the multisig setup.',
         ),
       ).toBeTruthy()
       expect(queryByText('Learn more')).toBeTruthy()
@@ -48,10 +48,10 @@ describe('RecoveryProposalCard', () => {
       />,
     )
 
-    expect(queryByText('Recover this Account')).toBeTruthy()
+    expect(queryByText('Recover this multisig')).toBeTruthy()
     expect(
       queryByText(
-        'The connected wallet was chosen as a trusted Recoverer. You can help the owner regain access by resetting the Account setup.',
+        'The connected wallet was chosen as a trusted Recoverer. You can help the owner regain access by resetting the multisig setup.',
       ),
     ).toBeTruthy()
     expect(queryByText('Learn more')).toBeTruthy()

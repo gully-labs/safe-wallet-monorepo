@@ -126,7 +126,7 @@ function RecoverAccountReview({ threshold, owners }: RecoverAccountReviewProps):
     <>
       <TxCard>
         <Typography mb={1}>
-          This transaction will reset the Account setup, changing the signers
+          This transaction will reset the multisig setup, changing the signers
           {newThreshold !== safe.threshold ? ' and threshold' : ''}.
         </Typography>
 

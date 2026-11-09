@@ -71,7 +71,7 @@ describe('NonPinnedWarning', () => {
     expect(screen.getByText('Similar address detected')).toBeInTheDocument()
     expect(screen.getByText(/address poisoning attack/i)).toBeInTheDocument()
     expect(screen.getByText('I understand, add anyway')).toBeInTheDocument()
-    expect(screen.getByText('Similar Safe in your account')).toBeInTheDocument()
+    expect(screen.getByText('Similar multisig in your list')).toBeInTheDocument()
   })
 
   it('should call onConfirmAdd when confirm button is clicked in dialog', async () => {

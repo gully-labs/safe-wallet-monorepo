@@ -128,7 +128,7 @@ const ReplaySafeDialog = ({
         showNotification({
           variant: 'success',
           groupKey: 'replay-safe-success',
-          message: `Successfully added your account on ${selectedChain.chainName}`,
+          message: `Successfully added your multisig on ${selectedChain.chainName}`,
         }),
       )
     } catch (err) {
@@ -186,7 +186,7 @@ const ReplaySafeDialog = ({
                   }}
                 >
                   <CircularProgress />
-                  <Typography variant="body2">Loading Safe data</Typography>
+                  <Typography variant="body2">Loading multisig data</Typography>
                 </Stack>
               ) : safeCreationDataError ? (
                 <ErrorMessage error={safeCreationDataError} level="error">
