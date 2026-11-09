@@ -72,7 +72,7 @@ const mockChainsConfig = (v2ChainIds: string[]) => {
     () =>
       ({
         data: { entities, ids: Object.keys(entities) },
-      }) as never,
+      } as never),
   )
 }
 
