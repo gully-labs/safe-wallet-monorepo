@@ -237,6 +237,7 @@ export const ExecuteForm = ({
               <Tooltip title={tooltip} placement="top">
                 <Box sx={{ minWidth: '112px', width: ['100%', '100%', '100%', 'auto'] }}>
                   <SplitMenuButton
+                    holdToSign
                     selected={slotId}
                     onChange={({ id }) => onChange?.(id)}
                     options={options}

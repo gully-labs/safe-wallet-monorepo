@@ -66,3 +66,31 @@
   display: block;
   min-height: 190px;
 }
+
+/* transaction steps: gl-stepper in the flow header, room reserved until the module loads */
+.stepper {
+  padding: 12px var(--space-3, 24px) 4px;
+}
+
+.stepper :global(gl-stepper:not(:defined)) {
+  display: block;
+  min-height: 26px;
+}
+
+/* the hold-to-sign pill fills its slot; ink text on the kit emerald on both themes (contrast 7.9:1) */
+.signKit {
+  display: flex;
+  flex: 1;
+  --gl-ink: #0b0f14;
+  --gl-surface: #ffffff;
+}
+
+.signKit :global(gl-sign-button) {
+  display: block;
+  width: 100%;
+}
+
+.signKit :global(gl-sign-button)::part(button) {
+  width: 100%;
+  justify-content: center;
+}

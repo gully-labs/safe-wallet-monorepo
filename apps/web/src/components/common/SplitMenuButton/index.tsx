@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem'
 import MenuList from '@mui/material/MenuList'
 import { Box, CircularProgress, ListItemText, Popover, Tooltip } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check'
+import { GlHoldToSign } from '@/components/gully/LiveUi/Actions'
 
 type Option = {
   id: string
@@ -21,6 +22,7 @@ export default function SplitMenuButton({
   selected,
   disabledIndex,
   loading = false,
+  holdToSign = false,
 }: {
   options: Option[]
   disabled?: boolean
@@ -30,6 +32,8 @@ export default function SplitMenuButton({
   selected?: Option['id']
   disabledIndex?: number
   loading?: boolean
+  /** Gully Multisig: the main action is a hold-to-sign button (gl-sign-button) that submits the surrounding form */
+  holdToSign?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -74,20 +78,34 @@ export default function SplitMenuButton({
   const { label, id } = useMemo(() => options[selectedIndex] || {}, [options, selectedIndex])
   const maxCharLen = Math.max(...options.map(({ id, label }) => (label || id).length)) + 2
 
+  const mainButton = (
+    <Button
+      data-testid={`combo-submit-${id}`}
+      onClick={handleClick}
+      type="submit"
+      disabled={disabled}
+      sx={{ minWidth: `${maxCharLen}ch !important`, height: '100%' }}
+    >
+      {loading ? <CircularProgress size={20} /> : label || id}
+    </Button>
+  )
+
   return (
     <>
       <ButtonGroup variant="contained" ref={anchorRef} aria-label="Button group with a nested menu" fullWidth>
         <Tooltip title={tooltip} placement="top">
           <Box flex={1}>
-            <Button
-              data-testid={`combo-submit-${id}`}
-              onClick={handleClick}
-              type="submit"
-              disabled={disabled}
-              sx={{ minWidth: `${maxCharLen}ch !important`, height: '100%' }}
-            >
-              {loading ? <CircularProgress size={20} /> : label || id}
-            </Button>
+            {holdToSign ? (
+              <GlHoldToSign
+                action={label || id || 'sign'}
+                disabled={disabled}
+                loading={loading}
+                testId={`combo-submit-${id}`}
+                fallback={mainButton}
+              />
+            ) : (
+              mainButton
+            )}
           </Box>
         </Tooltip>
 
@@ -99,7 +117,14 @@ export default function SplitMenuButton({
             onClick={handleToggle}
             disabled={loading}
             data-testid="combo-submit-dropdown"
-            sx={{ minWidth: '0 !important', maxWidth: 48, px: 1.5, height: '100%' }}
+            sx={{
+              minWidth: '0 !important',
+              maxWidth: 48,
+              px: 1.5,
+              height: '100%',
+              // beside the hold-to-sign pill: its own round button, not the right half of a split button
+              ...(holdToSign && { borderRadius: '999px !important', ml: 1, minHeight: 48 }),
+            }}
           >
             <ArrowDropDownIcon />
           </Button>
