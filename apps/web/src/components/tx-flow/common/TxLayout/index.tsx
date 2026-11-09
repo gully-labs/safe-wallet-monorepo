@@ -25,6 +25,7 @@ import css from './styles.module.css'
 import ChainIndicator from '@/components/common/ChainIndicator'
 import SafeInfo from '@/components/tx-flow/common/SafeInfo'
 import SafeShieldWidget from '@/features/safe-shield'
+import { GlStepper, stepLabels as defaultStepLabels } from '@/components/gully/LiveUi/Actions'
 import { SafeShieldProvider } from '@/features/safe-shield/SafeShieldContext'
 
 export const TxLayoutHeader = ({
@@ -76,6 +77,8 @@ type TxLayoutProps = {
   isReplacement?: boolean
   isMessage?: boolean
   hideSafeShield?: boolean
+  /** Gully Multisig: names for the gl-stepper (one per step); default Details … Review and sign */
+  stepLabels?: string[]
 }
 
 const TxLayout = ({
@@ -93,6 +96,7 @@ const TxLayout = ({
   isReplacement = false,
   isMessage = false,
   hideSafeShield = false,
+  stepLabels,
 }: TxLayoutProps): ReactElement => {
   const smallScreenBreakpoint = 'md'
   const theme = useTheme()
@@ -146,11 +150,17 @@ const TxLayout = ({
                     </div>
 
                     <Paper data-testid="modal-header" className={css.header}>
-                      {!hideProgress && (
-                        <Box className={css.progressBar}>
-                          <ProgressBar value={progress} />
-                        </Box>
-                      )}
+                      {!hideProgress &&
+                        (steps.length > 1 ? (
+                          <GlStepper
+                            steps={stepLabels?.length === steps.length ? stepLabels : defaultStepLabels(steps.length)}
+                            current={step}
+                          />
+                        ) : (
+                          <Box className={css.progressBar}>
+                            <ProgressBar value={progress} />
+                          </Box>
+                        ))}
 
                       <TxLayoutHeader subtitle={subtitle} icon={icon} hideNonce={hideNonce} fixedNonce={fixedNonce} />
                     </Paper>
