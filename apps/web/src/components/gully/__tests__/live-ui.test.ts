@@ -13,12 +13,12 @@ const sha = (p: string) =>
     .update(readFileSync(join(web, p)))
     .digest('hex')
 
-// gully-ops main 150f89a2, sites/_shared/gully-live-ui (Gully Live UI 1.0.2): copies must stay byte-identical
+// gully-ops main d103c613, sites/_shared/gully-live-ui (Gully Live UI 1.0.3): copies must stay byte-identical
 const CANON: Record<string, string> = {
-  'gl-core.js': 'f4a9e6e84ad1503d384439dd366dc891d55317f277b0cfa596d032ff45a613dc',
+  'gl-core.js': '98743e360fb20313afcd43dd26bb82064b9c4d1430e4fb48aebf0022cc1e2f1a',
   'gl-stat.js': '41dd5116b927af7e6c4238eeacc2b7250e90f18edd8d6df1d5252fc0c2e2f212',
   'gl-chart.js': 'efaa236579d9a3cf1333c5b14cb714789a55aaed8c6d31b8c8dfdf7cc381fabd',
-  'gl-actions.js': 'efaba4ef2ad7301b5099cb29b0ad0f73a45d51b6379bad317b83faca9b1d41b2',
+  'gl-actions.js': 'f4519c881a4671896ff4223768770c05dbb9b7340d5a81c454c415dc0d9e95d7',
 }
 
 describe('Gully Live UI vendored byte-identical', () => {

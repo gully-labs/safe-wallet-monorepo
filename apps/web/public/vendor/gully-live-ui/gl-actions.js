@@ -36,10 +36,15 @@ export class GlStepper extends HTMLElement {
   connectedCallback() { this.render(); } attributeChangedCallback() { if (this.isConnected) this.render(); }
   render() {
     const steps = (this.getAttribute('steps') || '').split(',').map((s) => s.trim()).filter(Boolean), cur = Number(this.getAttribute('current') || 0);
-    this._r.innerHTML = `<style>:host{display:block;font:var(--gl-font);color:var(--gl-ink)}ol{display:flex;gap:6px;list-style:none;margin:0;padding:0;counter-reset:s;flex-wrap:wrap}
-li{display:flex;align-items:center;gap:8px;color:var(--gl-muted);font-size:.9em}li:not(:last-child)::after{content:"";width:24px;height:1px;background:var(--gl-line);margin-left:2px}
-b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--gl-line);font-size:.85em;flex:none}
-li.done b{background:var(--gl-ink);color:var(--gl-surface);border-color:var(--gl-ink)}li.on{color:var(--gl-ink);font-weight:600}li.on b{border:2px solid var(--gl-accent)}</style>
+    // One row at every width (1.0.3): the connectors stretch between the steps instead of wrapping loose at the end of a
+    // line (Multisig at 390 px); under 480 px of room only the current step keeps its visible label (the others stay in
+    // the accessibility tree), and long labels end in an ellipsis.
+    this._r.innerHTML = `<style>:host{display:block;font:var(--gl-font);color:var(--gl-ink);container-type:inline-size}ol{display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0;counter-reset:s;flex-wrap:nowrap;min-width:0}
+li{display:flex;align-items:center;gap:8px;color:var(--gl-muted);font-size:.9em;min-width:min-content;flex:0 1 auto}li:not(:last-child){flex:1 1 0}li:not(:last-child)::after{content:"";flex:1 1 12px;min-width:12px;height:1px;background:var(--gl-line);margin-left:2px}
+span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@container (max-width:480px){ol,li{gap:4px}li:not(:last-child)::after{min-width:8px;margin-left:0}li:not(.on) span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}}
+b{display:grid;place-items:center;box-sizing:border-box;width:26px;height:26px;border-radius:50%;border:1px solid var(--gl-line);font-size:.85em;flex:none}
+li.done b{background:var(--gl-ink);color:var(--gl-surface);border-color:var(--gl-ink)}li.on{color:var(--gl-ink);font-weight:600;flex:1 1 auto;max-width:60%;min-width:0}li.on b{border:2px solid var(--gl-accent)}</style>
 <ol part="steps">${steps.map((s, i) => `<li class="${i < cur ? 'done' : i === cur ? 'on' : ''}"${i === cur ? ' aria-current="step"' : ''}><b>${i < cur ? '✓' : i + 1}</b><span>${esc(s)}</span></li>`).join('')}</ol>`;
   }
 }
