@@ -126,7 +126,7 @@ describe('My multisigs', () => {
     expect(card).toContain('fetch(STATS_URL')
     expect(card).toContain('No activity yet on')
     expect(card).toContain('did not answer')
-    expect(card).toContain('<CountUp')
+    expect(card).toContain('<GlStat')
     expect(card).toContain('<Sparkline')
     expect(read('components/gully/GullyActivityCard/styles.module.css')).toContain('prefers-reduced-motion')
   })

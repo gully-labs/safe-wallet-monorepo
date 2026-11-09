@@ -149,23 +149,25 @@ export const CumulativeChart = ({ points, label }: { points: CumulativePoint[]; 
           </span>
         </div>
       )}
-      <table className={css.srOnly}>
-        <caption>{label}</caption>
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {points.map((p, i) => (
-            <tr key={i}>
-              <td>{fmtDate(p.t, true)}</td>
-              <td>{p.v}</td>
+      <div className={css.srOnly}>
+        <table>
+          <caption>{label}</caption>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Total</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {points.map((p, i) => (
+              <tr key={i}>
+                <td>{fmtDate(p.t, true)}</td>
+                <td>{p.v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
@@ -173,7 +175,15 @@ export const CumulativeChart = ({ points, label }: { points: CumulativePoint[]; 
 export type DailyBar = { day: number; v: number }
 
 /** Count per day as columns (one series), zero-filled. */
-export const DailyColumns = ({ bars, label, unit }: { bars: DailyBar[]; label: string; unit: string }): ReactElement => {
+export const DailyColumns = ({
+  bars,
+  label,
+  unit,
+}: {
+  bars: DailyBar[]
+  label: string
+  unit: string
+}): ReactElement => {
   const [ref, width] = useWidth<HTMLDivElement>()
   const [hover, setHover] = useState<number | null>(null)
 
@@ -201,7 +211,14 @@ export const DailyColumns = ({ bars, label, unit }: { bars: DailyBar[]; label: s
   return (
     <div className={css.chartWrap} ref={ref}>
       {geo && (
-        <svg width={width} height={H} className={css.svg} role="img" aria-label={label} onMouseLeave={() => setHover(null)}>
+        <svg
+          width={width}
+          height={H}
+          className={css.svg}
+          role="img"
+          aria-label={label}
+          onMouseLeave={() => setHover(null)}
+        >
           {geo.ticks.map((v) => (
             <g key={v}>
               <line x1={PAD.left} x2={width - PAD.right} y1={geo.y(v)} y2={geo.y(v)} className={css.grid} />
@@ -257,29 +274,37 @@ export const DailyColumns = ({ bars, label, unit }: { bars: DailyBar[]; label: s
           </span>
         </div>
       )}
-      <table className={css.srOnly}>
-        <caption>{label}</caption>
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>{unit}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bars.map((b) => (
-            <tr key={b.day}>
-              <td>{fmtDate(b.day)}</td>
-              <td>{b.v}</td>
+      <div className={css.srOnly}>
+        <table>
+          <caption>{label}</caption>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>{unit}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {bars.map((b) => (
+              <tr key={b.day}>
+                <td>{fmtDate(b.day)}</td>
+                <td>{b.v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
 
 /** Number that counts up to its value when it changes (instant under prefers-reduced-motion). */
-export const CountUp = ({ value, format = (n) => String(Math.round(n)) }: { value: number; format?: (n: number) => string }) => {
+export const CountUp = ({
+  value,
+  format = (n) => String(Math.round(n)),
+}: {
+  value: number
+  format?: (n: number) => string
+}) => {
   const [shown, setShown] = useState(0)
   const from = useRef(0)
   useEffect(() => {

@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState, type ReactElement } from 'react'
-import { CountUp } from '@/components/gully/landing/charts'
+import { GlChart, GlKit, GlStat, liveCss, type Point } from '@/components/gully/LiveUi'
+import { logoForTheme, useIsDarkTheme } from '@/components/gully/chainLogo'
 import Sparkline from './Sparkline'
 import { agoText, readCache, STATS_URL, summarize, writeCache, type StatsFile } from './stats'
 import css from './styles.module.css'
 
 const POLL_MS = 60_000
-const LOGO = (id: number) => `/cfg/media/chains/${id}/chain_logo.png`
+const LOGO = (id: number, dark: boolean) => logoForTheme(`/cfg/media/chains/${id}/chain_logo.png`, dark)
 
 type Feed = { stats: StatsFile | null; error: string | null; loading: boolean }
 
@@ -49,13 +50,25 @@ export const useActivityFeed = (): Feed => {
 
 /**
  * Gully Multisig, "My multisigs": what is happening on the chains this app serves, live. Multisigs created, transactions
- * executed and chains served, counted up, then one row per chain with two 30-day sparklines. Real numbers only: the
+ * executed and chains served on Gully Live UI tiles (gl-stat), one 30-day chart of all chains (gl-chart), then one row
+ * per chain with two 30-day sparklines. Real numbers only: the
  * feed is each chain's Safe transaction service; while it loads the numbers read an en dash, and if it cannot be read
  * the card says so and keeps the last numbers this browser saw.
  */
 const GullyActivityCard = (): ReactElement => {
   const { stats, error, loading } = useActivityFeed()
   const summary = useMemo(() => summarize(stats), [stats])
+  const dark = useIsDarkTheme()
+  const sum = (key: 'created' | 'executed'): number[] => {
+    const out: number[] = []
+    for (const c of summary?.perChain ?? []) c[key].forEach((p, i) => (out[i] = (out[i] ?? 0) + p.v))
+    return out
+  }
+  const executed = sum('executed')
+  const series: Point[] = summary?.perChain[0]
+    ? summary.perChain[0].executed.map((p, i): Point => [p.day, executed[i] ?? 0])
+    : []
+  const waiting = loading && !summary
 
   return (
     <section
@@ -73,27 +86,48 @@ const GullyActivityCard = (): ReactElement => {
         <span className={css.upd}>{summary ? agoText(summary.updated) : ''}</span>
       </div>
 
-      <div className={css.kpis}>
-        <div className={css.kpi}>
-          <b>{summary ? <CountUp value={summary.multisigs} /> : '–'}</b>
-          <span>multisigs created</span>
+      <GlKit className={css.kpis}>
+        <div className={liveCss.stats}>
+          <GlStat
+            label="Multisigs created"
+            value={summary ? summary.multisigs : null}
+            spark={sum('created')}
+            loading={waiting}
+            live={!error}
+            full
+            testId="kpi-multisigs"
+          />
+          <GlStat
+            label="Transactions executed"
+            value={summary ? summary.transactions : null}
+            spark={executed}
+            loading={waiting}
+            live={!error}
+            full
+            testId="kpi-transactions"
+          />
+          <GlStat label="Chains served" value={summary ? summary.chains : null} loading={waiting} full />
         </div>
-        <div className={css.kpi}>
-          <b>{summary ? <CountUp value={summary.transactions} /> : '–'}</b>
-          <span>transactions executed</span>
+        <div className={liveCss.chart}>
+          <GlChart
+            kind="bars"
+            height={140}
+            series={series}
+            loading={waiting}
+            title="Transactions executed per day, last 30 days, all chains"
+            unit="transactions"
+            empty={error ? `The activity feed did not answer (${error}). Retrying every minute.` : undefined}
+            testId="activity-chart"
+          />
         </div>
-        <div className={css.kpi}>
-          <b>{summary ? <CountUp value={summary.chains} /> : '–'}</b>
-          <span>chains served</span>
-        </div>
-      </div>
+      </GlKit>
 
       {summary ? (
         <ul className={css.chains}>
           {summary.perChain.map((c) => (
             <li key={c.id} className={css.chain}>
               <div className={css.chainHead}>
-                <img src={LOGO(c.id)} width={24} height={24} alt="" />
+                <img src={LOGO(c.id, dark)} width={24} height={24} alt="" />
                 <b>{c.name}</b>
                 <span className={`${css.tag} ${c.kind === 'testnet' ? css.tagTest : css.tagMain}`}>{c.kind}</span>
                 <span className={css.chainNums}>

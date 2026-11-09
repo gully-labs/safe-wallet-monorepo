@@ -67,17 +67,19 @@ const HoldingsBar = (): ReactElement | null => {
           </li>
         ))}
       </ul>
-      <table className={css.srOnly}>
-        <caption>Share of value by asset</caption>
-        <tbody>
-          {holdings.map((h) => (
-            <tr key={h.label}>
-              <td>{h.label}</td>
-              <td>{pct(h.share)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={css.srOnly}>
+        <table>
+          <caption>Share of value by asset</caption>
+          <tbody>
+            {holdings.map((h) => (
+              <tr key={h.label}>
+                <td>{h.label}</td>
+                <td>{pct(h.share)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </figure>
   )
 }
