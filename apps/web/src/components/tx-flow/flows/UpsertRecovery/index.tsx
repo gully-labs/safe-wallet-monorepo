@@ -43,13 +43,13 @@ function UpsertRecoveryFlow({ delayModifier }: { delayModifier?: RecoveryState[n
       eventCategory={TxFlowType.SETUP_RECOVERY}
       ReviewTransactionComponent={UpsertRecoveryFlowReview}
       icon={RecoveryPlus}
-      title="Account recovery"
+      title="Multisig recovery"
       subtitle="Set up account recovery"
     >
-      <TxFlowStep title="Account recovery" subtitle="How does recovery work" hideNonce hideProgress>
+      <TxFlowStep title="Multisig recovery" subtitle="How does recovery work" hideNonce hideProgress>
         <UpsertRecoveryFlowIntro />
       </TxFlowStep>
-      <TxFlowStep title="Account recovery" subtitle="Set up recovery settings" icon={RecoveryPlus}>
+      <TxFlowStep title="Multisig recovery" subtitle="Set up recovery settings" icon={RecoveryPlus}>
         <UpsertRecoveryFlowSettings />
       </TxFlowStep>
     </TxFlow>

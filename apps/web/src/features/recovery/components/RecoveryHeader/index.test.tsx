@@ -21,7 +21,7 @@ describe('RecoveryHeader', () => {
 
     const { queryByText } = render(<InternalRecoveryHeader isProposalInProgress={false} isRecoverer queue={queue} />)
 
-    expect(queryByText('Account recovery in progress')).toBeTruthy()
+    expect(queryByText('Multisig recovery in progress')).toBeTruthy()
   })
 
   it('should render the proposal widget when there is no queue for recoverers', () => {

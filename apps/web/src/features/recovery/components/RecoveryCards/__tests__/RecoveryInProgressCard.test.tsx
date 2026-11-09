@@ -69,7 +69,7 @@ describe('RecoveryInProgressCard', () => {
         expect(queryByText(unit)).toBeFalsy()
       })
 
-      expect(queryByText('Account recovery expired')).toBeTruthy()
+      expect(queryByText('Multisig recovery expired')).toBeTruthy()
       expect(
         queryByText(
           'The pending recovery proposal has expired and needs to be cancelled before a new one can be created.',
@@ -103,7 +103,7 @@ describe('RecoveryInProgressCard', () => {
         />,
       )
 
-      expect(queryByText('Account recovery in progress')).toBeTruthy()
+      expect(queryByText('Multisig recovery in progress')).toBeTruthy()
       expect(queryByText('The recovery process has started. This Account will be ready to recover in:')).toBeTruthy()
       ;['days', 'hrs', 'mins'].forEach((unit) => {
         expect(queryByText(unit)).toBeTruthy()
@@ -155,7 +155,7 @@ describe('RecoveryInProgressCard', () => {
         expect(queryByText(unit)).toBeFalsy()
       })
 
-      expect(queryByText('Account recovery expired')).toBeTruthy()
+      expect(queryByText('Multisig recovery expired')).toBeTruthy()
       expect(
         queryByText(
           'The pending recovery proposal has expired and needs to be cancelled before a new one can be created.',
@@ -176,7 +176,7 @@ describe('RecoveryInProgressCard', () => {
 
       expect(queryByText('Go to queue')).toBeFalsy()
 
-      expect(queryByText('Account recovery in progress')).toBeTruthy()
+      expect(queryByText('Multisig recovery in progress')).toBeTruthy()
       expect(queryByText('The recovery process has started. This Account will be ready to recover in:')).toBeTruthy()
       ;['days', 'hrs', 'mins'].forEach((unit) => {
         expect(queryByText(unit)).toBeTruthy()

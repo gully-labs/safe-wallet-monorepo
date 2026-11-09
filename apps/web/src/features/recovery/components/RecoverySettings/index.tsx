@@ -116,7 +116,7 @@ function RecoverySettings(): ReactElement {
         <Grid item lg={4} xs={12}>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
             <Typography variant="h4" fontWeight="bold">
-              Account recovery
+              Multisig recovery
             </Typography>
           </Box>
         </Grid>

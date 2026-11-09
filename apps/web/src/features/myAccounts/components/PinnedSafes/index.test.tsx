@@ -26,7 +26,7 @@ describe('PinnedSafes', () => {
     expect(container.firstChild).toBeNull()
   })
 
-  it('does not render "Manage trusted Safes" button when no pinned safes exist', () => {
+  it('does not render "Manage trusted multisigs" button when no pinned safes exist', () => {
     const nonPinnedSafes: AllSafeItems = [
       { name: 'NotPinned', address: '0x3', isPinned: false, chainId: '3', isReadOnly: false, lastVisited: 0 },
     ]
@@ -38,7 +38,7 @@ describe('PinnedSafes', () => {
     expect(screen.queryByTestId('add-more-safes-button')).not.toBeInTheDocument()
   })
 
-  it('renders the "Trusted Safes" header when there are pinned safes', () => {
+  it('renders the "Trusted multisigs" header when there are pinned safes', () => {
     const pinnedSafes: AllSafeItems = [
       { name: 'PinnedSafe1', address: '0x1', isPinned: true, chainId: '1', isReadOnly: false, lastVisited: 0 },
     ]
@@ -78,7 +78,7 @@ describe('PinnedSafes', () => {
     expect(callProps.onLinkClick).toBe(onLinkClickMock)
   })
 
-  it('shows "Manage trusted Safes" button when there are pinned safes and onOpenSelectionModal is provided', () => {
+  it('shows "Manage trusted multisigs" button when there are pinned safes and onOpenSelectionModal is provided', () => {
     const pinnedSafes: AllSafeItems = [
       { name: 'PinnedSafe1', address: '0x1', isPinned: true, chainId: '1', isReadOnly: false, lastVisited: 0 },
     ]
@@ -91,7 +91,7 @@ describe('PinnedSafes', () => {
     expect(addButton).toHaveTextContent('Manage trusted multisigs')
   })
 
-  it('calls onOpenSelectionModal when "Manage trusted Safes" button is clicked', () => {
+  it('calls onOpenSelectionModal when "Manage trusted multisigs" button is clicked', () => {
     const pinnedSafes: AllSafeItems = [
       { name: 'PinnedSafe1', address: '0x1', isPinned: true, chainId: '1', isReadOnly: false, lastVisited: 0 },
     ]

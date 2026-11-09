@@ -26,7 +26,7 @@ export default function RecoveryType({
       </Box>
       <Box>
         <Typography color={isMalicious ? 'error.main' : undefined}>
-          {isMalicious ? 'Malicious transaction' : 'Account recovery'}
+          {isMalicious ? 'Malicious transaction' : 'Multisig recovery'}
         </Typography>
 
         {date && (
