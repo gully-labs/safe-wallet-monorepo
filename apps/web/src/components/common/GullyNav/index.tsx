@@ -26,14 +26,22 @@ export const GullyNavLinks = ({ className }: { className?: string }): ReactEleme
   <nav className={`${css.links} ${className ?? ''}`} aria-label="Gully Multisig">
     {APP_LINKS.map((l) =>
       isExternal(l) ? (
-        <a key={l.id} href={l.app} target="_blank" rel="noopener noreferrer" className={css.link}>
+        <a
+          key={l.id}
+          href={l.app}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={css.link}
+          title={labelOf(l)}
+          aria-label={labelOf(l)}
+        >
           <Icon name={l.icon as IconName} size={16} />
-          {labelOf(l)}
+          <span className={css.label}>{labelOf(l)}</span>
         </a>
       ) : (
-        <Link key={l.id} href={l.app} className={css.link}>
+        <Link key={l.id} href={l.app} className={css.link} title={labelOf(l)} aria-label={labelOf(l)}>
           <Icon name={l.icon as IconName} size={16} />
-          {labelOf(l)}
+          <span className={css.label}>{labelOf(l)}</span>
         </Link>
       ),
     )}

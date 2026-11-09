@@ -3,6 +3,7 @@
   align-items: center;
   gap: 2px;
   margin-left: 8px;
+  min-width: 0;
 }
 
 .link {
@@ -35,6 +36,19 @@
   gap: 10px;
   min-height: 48px;
   font-weight: 600;
+}
+
+/* 900 to 1200 px: icons only (the label is the tooltip and the accessible name), so the header stays one row */
+@media (max-width: 1199.95px) {
+  .label {
+    display: none;
+  }
+
+  .link {
+    min-width: 40px;
+    justify-content: center;
+    padding: 0 8px;
+  }
 }
 
 /* desktop only: below 900 px the header shows the one menu button instead */

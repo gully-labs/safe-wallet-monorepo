@@ -103,9 +103,11 @@ describe('Gully Multisig: the landing names the chains it serves', () => {
   const landing = readFileSync(join(__dirname, '..', 'landing', 'GullyLanding.tsx'), 'utf8')
 
   it('leads with Anubis Network and has one h1', () => {
-    expect(landing).toContain('Anubis Network · Gully Chain Testnet · Safe 1.4.1')
+    expect(landing).toContain('Anubis Network · Kinetiq Elysium · Gully Chain Testnet · Safe 1.4.1')
     expect(landing.match(/<h1\b/g)).toHaveLength(1)
-    expect(landing).toContain('Anubis Network (chain id 6714, a mainnet) and Gully Chain Testnet (chain id 485590')
+    expect(landing).toContain(
+      'Anubis Network (chain id 6714, a mainnet), Kinetiq Elysium (chain id 99901, a mainnet) and Gully Chain Testnet (chain id 485590',
+    )
   })
 
   it('does not send visitors to the faucet, and makes no audit claim of its own', () => {

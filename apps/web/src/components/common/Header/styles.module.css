@@ -88,6 +88,24 @@
 .signIn {
   display: flex;
   align-items: center;
+  gap: 8px;
+}
+
+/* the primary and secondary actions never wrap or shrink, and neither does the switcher (it was cut off at 1515 px) */
+.signInButton,
+.newMultisig {
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 40px;
+}
+
+.signInItem {
+  min-height: 48px;
+}
+
+.session,
+.networkSelector {
+  flex-shrink: 0;
 }
 
 @media (max-width: 899.95px) {
@@ -112,6 +130,11 @@
 @media (max-width: 599.95px) {
   .hideMobile {
     display: none;
+  }
+
+  /* phones: the sidebar and the menu carry "New multisig"; the session row keeps Sign in and the switcher */
+  .newMultisig {
+    display: none !important;
   }
 
   /* Gully Multisig: two rows on phones. The session group (Gully ID pill + Connect, or the wallet chip + chain) gets its
