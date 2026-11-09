@@ -116,6 +116,8 @@ apps/tx-builder/build/*
 !.env.sample
 !.env.*.sample
 !.env.template
+# Gully Multisig public build config (NEXT_PUBLIC_* values only), loaded by apps/web/scripts/gully-build.sh.
+!apps/web/.env.gully
 *.key
 *.p8
 *.p12
