@@ -136,7 +136,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
 
   const tiles = [
     {
-      label: 'Safes on Gully Chain',
+      label: 'Multisigs on Gully Chain',
       value: data?.safes.length ?? 0,
       fmt: (n: number) => Math.round(n).toLocaleString('en-US'),
     },
@@ -146,7 +146,7 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
       fmt: (n: number) => Math.round(n).toLocaleString('en-US'),
     },
     {
-      label: 'ETH held in Safes',
+      label: 'ETH held in multisigs',
       value: held,
       fmt: (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 4 }),
     },
@@ -161,11 +161,11 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
           {error && !data ? 'Live data unavailable' : 'Live from Gully Chain Testnet'}
         </p>
         <h2 id="live-title" className={css.h2}>
-          Safes on Gully Chain, block by block
+          Multisigs on Gully Chain, block by block
         </h2>
         <p className={css.sub}>
-          Read straight from the chain: every Safe the multisig 1.4.1 factories created, the transactions those Safes
-          executed and the ETH they hold. Refreshes every 20 seconds.
+          Read straight from the chain: every multisig the Safe 1.4.1 factories created, the transactions those
+          multisigs executed and the ETH they hold. Refreshes every 20 seconds.
         </p>
       </div>
 
@@ -182,14 +182,14 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
 
       <div className={css.charts}>
         <div className={css.panel}>
-          <h3 className={css.panelTitle}>Safes created, total</h3>
+          <h3 className={css.panelTitle}>Multisigs created, total</h3>
           {loading && !data ? (
             <div className={css.chartSkel} />
           ) : cumulative.length === 0 ? (
             <div className={css.empty}>
               <Icon name="activity" />
               <span>
-                {error ? 'Could not reach the Gully Chain RPC. Retrying…' : 'No Safes yet. Yours can be the first.'}
+                {error ? 'Could not reach the Gully Chain RPC. Retrying…' : 'No multisigs yet. Yours can be the first.'}
               </span>
             </div>
           ) : (
@@ -197,13 +197,13 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
           )}
         </div>
         <div className={css.panel}>
-          <h3 className={css.panelTitle}>Safe transactions per day, last 14 days</h3>
+          <h3 className={css.panelTitle}>Multisig transactions per day, last 14 days</h3>
           {loading && !data ? (
             <div className={css.chartSkel} />
           ) : (data?.executions.length ?? 0) === 0 ? (
             <div className={css.empty}>
               <Icon name="activity" />
-              <span>No Safe transactions executed yet.</span>
+              <span>No multisig transactions executed yet.</span>
             </div>
           ) : (
             <DailyColumns bars={daily} label="Multisig transactions executed per day" unit="transactions" />
@@ -213,11 +213,11 @@ const LiveSection = ({ onNewSafe }: { onNewSafe: () => void }): ReactElement => 
 
       {latest.length > 0 && (
         <div className={css.panel}>
-          <h3 className={css.panelTitle}>Latest Safes</h3>
+          <h3 className={css.panelTitle}>Latest multisigs</h3>
           <table className={css.table}>
             <thead>
               <tr>
-                <th scope="col">Safe</th>
+                <th scope="col">Multisig</th>
                 <th scope="col">Signers</th>
                 <th scope="col">Txs (nonce)</th>
                 <th scope="col">Created</th>

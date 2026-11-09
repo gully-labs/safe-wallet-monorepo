@@ -9,15 +9,15 @@ import { healthUrl, SWITCHER_SRC, SWITCHER_SURFACE } from '../../common/GullyCha
 const src = join(__dirname, '..', '..', '..')
 const read = (p: string) => readFileSync(join(src, p), 'utf8')
 
-// sha256 of gully-ops sites/_shared/gc-chain-switcher/gc-chain-switcher.js 1.0.1, equal to the live
+// sha256 of gully-ops sites/_shared/gc-chain-switcher/gc-chain-switcher.js 1.0.3, equal to the live
 // https://gullycore.xyz/assets/gc-chain-switcher.js on 2026-11-09. Update both when the canonical file changes.
-const CANONICAL_SHA256 = 'bf08bfd154c577b1c62f2041467dbbe39f38574bf794d962555731ab15d2e407'
+const CANONICAL_SHA256 = '8fc16fe2383b8a729d8f86bf552d64553ce4ebdeaffb517a887497e50f2ad10f'
 
 describe('the shared chain switcher', () => {
   it('ships as a byte-identical copy of the canonical file', () => {
     const bytes = readFileSync(join(src, '..', 'public', SWITCHER_SRC))
     expect(createHash('sha256').update(bytes).digest('hex')).toBe(CANONICAL_SHA256)
-    expect(bytes.toString('utf8')).toContain("GC_CHAIN_SWITCHER_VERSION = '1.0.1'")
+    expect(bytes.toString('utf8')).toContain("GC_CHAIN_SWITCHER_VERSION = '1.0.3'")
   })
 
   it('is mounted in the header for the multisig surface in event mode, routing stays in the app', () => {
