@@ -2,7 +2,7 @@
  * Gully Live UI: shared helpers (gl-core.js). Canonical source: gully-labs/gully-ops sites/_shared/gully-live-ui/.
  * Copy files byte-identical; theme with CSS custom properties (tokens.css), never by editing a component.
  */
-export const GULLY_LIVE_UI_VERSION = '1.0.2';
+export const GULLY_LIVE_UI_VERSION = '1.0.3';
 
 /** true when the visitor asked for less motion (and in environments without matchMedia). */
 export const reducedMotion = () => typeof matchMedia !== 'function' || matchMedia('(prefers-reduced-motion: reduce)').matches;
