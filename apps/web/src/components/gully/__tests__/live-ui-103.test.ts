@@ -11,7 +11,10 @@ const sha = (p: string) =>
     .digest('hex')
 
 describe('Gully Live UI 1.0.3', () => {
-  it('gl-actions.js and gl-core.js are the 1.0.3 files', () => {
+  it('the wrapper loads 1.0.3, and gl-actions.js and gl-core.js are the 1.0.3 files', () => {
+    expect(readFileSync(join(web, 'src/components/gully/LiveUi/index.tsx'), 'utf8')).toContain(
+      "LIVE_UI_VERSION = '1.0.3'",
+    )
     expect(sha('public/vendor/gully-live-ui/gl-actions.js')).toBe(
       'f4519c881a4671896ff4223768770c05dbb9b7340d5a81c454c415dc0d9e95d7',
     )
@@ -20,12 +23,6 @@ describe('Gully Live UI 1.0.3', () => {
     )
     expect(readFileSync(join(web, 'public/vendor/gully-live-ui/gl-core.js'), 'utf8')).toContain(
       "GULLY_LIVE_UI_VERSION = '1.0.3'",
-    )
-  })
-
-  it('the wrapper names the version it loads', () => {
-    expect(readFileSync(join(web, 'src/components/gully/LiveUi/index.tsx'), 'utf8')).toContain(
-      "LIVE_UI_VERSION = '1.0.3'",
     )
   })
 })
