@@ -619,11 +619,14 @@
     padding-top: 32px;
   }
 
+  /* the headline and the primary action come first; the live card follows at full width (it overflowed at 390) */
   .heroArt {
-    order: -1;
     width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+  }
+
+  .heroLive {
+    max-width: none;
+    justify-self: stretch;
   }
 
   .tiles,
@@ -827,4 +830,22 @@
   font-weight: 800;
   color: var(--gc-green);
   font-variant-numeric: tabular-nums;
+}
+
+/* the hero notes sit under left-aligned copy: left-aligned, no card padding */
+.heroNotes .loginHint {
+  padding: 4px 0;
+  text-align: left;
+}
+
+@media (max-width: 599.95px) {
+  .heroLiveRow {
+    grid-template-columns: 24px minmax(0, 1fr) auto auto;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .heroLiveNum b {
+    font-size: 17px;
+  }
 }
