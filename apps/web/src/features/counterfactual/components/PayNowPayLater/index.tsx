@@ -78,7 +78,7 @@ const PayNowPayLater = ({
           <ListItemIcon className={css.listItem}>
             <CheckRoundedIcon fontSize="small" color="inherit" />
           </ListItemIcon>
-          <Typography variant="body2">Safe doesn&apos;t profit from the fees.</Typography>
+          <Typography variant="body2">Gully Multisig doesn&apos;t profit from the fees.</Typography>
         </ListItem>
       </List>
       {!isMultiChain && (
