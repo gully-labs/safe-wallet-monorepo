@@ -11,7 +11,11 @@ describe('Gully Multisig shared navigation', () => {
   it('one data file: lockup, link order and the two primary buttons', () => {
     const nav = JSON.parse(read('config/gully-nav.json'))
     expect(nav.brand.name).toBe('Gully Multisig')
-    expect(nav.links.map((l: { id: string }) => l.id)).toEqual(['live', 'features', 'chains', 'security', 'docs'])
+    const ids = (f: (l: { landingOnly?: boolean; appOnly?: boolean }) => boolean) =>
+      nav.links.filter(f).map((l: { id: string }) => l.id)
+    expect(ids((l) => !l.appOnly)).toEqual(['live', 'features', 'chains', 'security', 'docs'])
+    // public-by-default (owner, 2026-11-09): no nav items resolving to the same page, so the app shows app destinations
+    expect(ids((l) => !l.landingOnly)).toEqual(['live', 'services', 'swap', 'docs'])
     expect(nav.links[0].appLabel).toBe('Dashboard')
     expect(nav.primary.landing.label).toBe('Open app')
     expect(nav.primary.app.label).toBe('New multisig')
