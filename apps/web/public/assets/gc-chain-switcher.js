@@ -1,5 +1,5 @@
 /*!
- * Gully chain switcher 1.0.1  <gc-chain-switcher surface="core" current="6714"></gc-chain-switcher>
+ * Gully chain switcher 1.0.3  <gc-chain-switcher surface="core" current="6714"></gc-chain-switcher>
  * Canonical source: gully-labs/gully-ops sites/_shared/gc-chain-switcher/gc-chain-switcher.js (spec: README.md next to it).
  * One network switcher for every Gully surface (Core app, gullycore.xyz, docs, explorer, bridge, offerwall, kre8, Multisig),
  * fed by the Gully Core manifest's chain list (https://gullycore.xyz/manifest.json, chains[].surfaces says which surface
@@ -20,7 +20,7 @@
  *             (wallet_switchEthereumChain, then wallet_addEthereumChain with the manifest's RPC and explorer); last chain remembered
  *             (localStorage gc-chain); search appears over 6 rows; arrows, Home/End, Esc; aria-label "Network: <name>".
  */
-export const GC_CHAIN_SWITCHER_VERSION = '1.0.1';
+export const GC_CHAIN_SWITCHER_VERSION = '1.0.3';
 export const DEFAULT_MANIFEST = 'https://gullycore.xyz/manifest.json';
 export const SURFACES = ['core', 'site', 'docs', 'explorer', 'bridge', 'offerwall', 'kre8', 'multisig'];
 
@@ -32,7 +32,7 @@ export function chainsFor(manifest, surface, currentId) {
     const s = c.surfaces || {};
     if (surface === 'explorer') return !!s.explorer;
     return !!s[surface];
-  });
+  }).map((c) => (c.statusBy && c.statusBy[surface] ? { ...c, status: c.statusBy[surface] } : c)); // live on this surface first
   const cur = flagged.find((c) => String(c.chainId) === String(currentId) && c.status !== 'coming'); // a coming chain is never current
   const rest = flagged.filter((c) => c !== cur);
   const main = rest.filter((c) => c.kind === 'mainnet'), test = rest.filter((c) => c.kind !== 'mainnet');
@@ -51,10 +51,10 @@ const isBrowser = typeof window !== 'undefined' && typeof customElements !== 'un
 if (isBrowser && !customElements.get('gc-chain-switcher')) {
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const CSS = `
-:host{display:inline-block;--gcs-ink:#0F0E0B;--gcs-paper:#fff;--gcs-cream:#FEF4E3;--gcs-line:#E3D9C7;--gcs-muted:#6B655A;--gcs-accent:#FD7716;--gcs-live:#1E9E5A;--gcs-warn:#D9A400;--gcs-down:#D23B2B;--gcs-radius:12px;font:500 14px/1.2 Inter,system-ui,sans-serif;color:var(--gcs-ink)}
+:host{display:inline-block;--gcs-ink:#0F0E0B;--gcs-paper:#fff;--gcs-cream:#FEF4E3;--gcs-line:#E3D9C7;--gcs-muted:#6B655A;--gcs-accent:#FD7716;--gcs-live:#1E9E5A;--gcs-warn:#D9A400;--gcs-down:#D23B2B;--gcs-radius:12px;font:var(--gcs-font,500 14px/1.2 Inter,system-ui,sans-serif);color:var(--gcs-ink)}
 :host([theme=dark]){--gcs-ink:#FEF4E3;--gcs-paper:#1A1917;--gcs-cream:#242321;--gcs-line:#3A3732;--gcs-muted:#A39D90}
 *{box-sizing:border-box}
-.trig{display:inline-flex;align-items:center;gap:8px;min-height:44px;min-width:44px;padding:0 12px 0 8px;border:1px solid var(--gcs-line);border-radius:999px;background:var(--gcs-paper);color:inherit;cursor:pointer;font:inherit}
+.trig{display:inline-flex;align-items:center;gap:8px;min-height:var(--gcs-trig-h,44px);min-width:var(--gcs-trig-h,44px);padding:0 12px 0 8px;border:var(--gcs-trig-border,1px solid var(--gcs-line));border-radius:var(--gcs-trig-radius,999px);background:var(--gcs-trig-bg,var(--gcs-paper));color:inherit;cursor:pointer;font:inherit}
 .trig:hover{border-color:var(--gcs-accent)}
 .trig:focus-visible,.row:focus-visible,.srch:focus-visible,.wal:focus-visible{outline:2px solid var(--gcs-accent);outline-offset:2px}
 .ic{position:relative;width:24px;height:24px;flex:none}
