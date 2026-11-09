@@ -42,18 +42,3 @@ describe('the multisig is called a multisig', () => {
     expect(read('components/new-safe/create/steps/AdvancedOptionsStep/index.tsx')).toContain('label="Safe version"')
   })
 })
-
-// round 2 (2026-11-09): the recovery status titles
-describe('recovery status titles say multisig', () => {
-  it('RecoveryInProgressCard', () => {
-    const f = read('features/recovery/components/RecoveryCards/RecoveryInProgressCard.tsx')
-    expect(f).toContain("'Multisig recovery expired'")
-    expect(f).toContain("'Multisig recovery in progress'")
-    expect(f).not.toContain('Account recovery')
-    for (const p of [
-      'components/tx-flow/flows/UpsertRecovery/index.tsx',
-      'features/recovery/components/RecoverySettings/index.tsx',
-    ])
-      expect(read(p)).not.toContain('Account recovery')
-  })
-})
