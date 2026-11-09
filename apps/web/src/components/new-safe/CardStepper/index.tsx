@@ -5,6 +5,7 @@ import css from './styles.module.css'
 import { Card, LinearProgress, CardHeader, Avatar, Typography, CardContent } from '@mui/material'
 import type { TxStepperProps } from './useCardStepper'
 import { useCardStepper } from './useCardStepper'
+import { GlStepper } from '@/components/gully/LiveUi/Actions'
 
 export function CardStepper<StepperData>(props: TxStepperProps<StepperData>) {
   const [progressColor, setProgressColor] = useState(lightPalette.secondary.main)
@@ -12,28 +13,19 @@ export function CardStepper<StepperData>(props: TxStepperProps<StepperData>) {
   const { steps } = props
   const currentStep = steps[activeStep]
   const progress = ((activeStep + 1) / steps.length) * 100
+  const titled = steps.filter((s) => s.title)
 
   return (
     <Card className={css.card}>
       <Box className={css.progress} color={progressColor}>
         <LinearProgress color="inherit" variant="determinate" value={Math.min(progress, 100)} />
       </Box>
-      {/* Gully Multisig: the whole path at a glance */}
-      {steps.length > 1 && (
-        <ol className={css.path} aria-label="Steps">
-          {steps.map((s, i) =>
-            s.title ? (
-              <li
-                key={i}
-                className={i === activeStep ? css.pathOn : i < activeStep ? css.pathDone : undefined}
-                aria-current={i === activeStep ? 'step' : undefined}
-              >
-                <span className={css.pathN}>{i + 1}</span>
-                <span className={css.pathT}>{s.title}</span>
-              </li>
-            ) : null,
-          )}
-        </ol>
+      {/* Gully Multisig: the whole path at a glance, on the shared Gully Live UI stepper */}
+      {titled.length > 1 && (
+        <GlStepper
+          steps={titled.map((s) => s.title)}
+          current={currentStep.title ? titled.indexOf(currentStep) : titled.length}
+        />
       )}
       {currentStep.title && (
         <CardHeader

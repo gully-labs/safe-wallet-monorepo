@@ -35,7 +35,8 @@ export const GlStepper = ({ steps, current }: { steps: string[]; current: number
   return (
     <GlKit className={css.stepper}>
       {createElement('gl-stepper', {
-        steps: steps.join(','),
+        // the element splits its attribute on commas: a comma inside a title becomes U+201A (looks the same)
+        steps: steps.map((s) => s.replace(/,/g, '‚')).join(','),
         current: String(current),
         'data-testid': 'gully-tx-stepper',
       })}

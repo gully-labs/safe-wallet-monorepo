@@ -2,13 +2,13 @@ import { createElement, useEffect, useRef, type ReactElement, type ReactNode } f
 import css from './styles.module.css'
 
 /**
- * Gully Live UI 1.0.1 in Gully Multisig: the shared live components (gully-ops sites/_shared/gully-live-ui), copied
+ * Gully Live UI 1.0.2 in Gully Multisig: the shared live components (gully-ops sites/_shared/gully-live-ui), copied
  * byte-identical into /public/vendor/gully-live-ui and loaded as browser modules, so webpack, lint and prettier never
  * touch them and the sync check can compare the served files with the canonical ones. gl-stat and gl-chart are
  * used on the live cards; gl-stepper and gl-sign-button (gl-actions.js, see Actions.tsx) on the transaction steps.
  * Theme: the Gully Chain kit tokens (light and dark) in styles.module.css, on the .glKit wrapper.
  */
-export const LIVE_UI_VERSION = '1.0.1'
+export const LIVE_UI_VERSION = '1.0.2'
 export const LIVE_UI_BASE = '/vendor/gully-live-ui'
 export const LIVE_UI_FILES = ['gl-core.js', 'gl-stat.js', 'gl-chart.js', 'gl-actions.js'] as const
 
