@@ -8,6 +8,7 @@ import FiatValue from '../FiatValue'
 import UnknownChainIcon from '@/public/images/common/unknown.svg'
 import useChains from '@/hooks/useChains'
 import { useChain } from '@/hooks/useChains'
+import { useChainLogo } from '@/components/gully/chainLogo'
 
 type ChainIndicatorProps = {
   chainId?: string
@@ -47,6 +48,7 @@ const ChainIndicator = ({
   const { configs: chains } = useChains()
   const chainConfig = useChain(id) || (showUnknown ? fallbackChainConfig : null)
   const noChains = chains.length === 0
+  const logoSrc = useChainLogo(chainConfig?.chainLogoUri)
 
   const style = useMemo(() => {
     if (!chainConfig) return
@@ -59,13 +61,7 @@ const ChainIndicator = ({
   }, [chainConfig])
 
   const logoComponent = chainConfig?.chainLogoUri ? (
-    <img
-      src={chainConfig.chainLogoUri ?? undefined}
-      alt={`${chainConfig.chainName} Logo`}
-      width={imageSize}
-      height={imageSize}
-      loading="lazy"
-    />
+    <img src={logoSrc} alt={`${chainConfig.chainName} Logo`} width={imageSize} height={imageSize} loading="lazy" />
   ) : (
     <SvgIcon
       component={UnknownChainIcon}

@@ -4,6 +4,7 @@ import { Box, Skeleton } from '@mui/material'
 import css from './styles.module.css'
 import Identicon, { type IdenticonProps } from '../Identicon'
 import { useChain } from '@/hooks/useChains'
+import { useChainLogo } from '@/components/gully/chainLogo'
 
 interface ThresholdProps {
   threshold: number | string
@@ -25,20 +26,13 @@ interface SafeIconProps extends IdenticonProps {
 
 export const ChainIcon = ({ chainId }: { chainId: string }) => {
   const chainConfig = useChain(chainId)
+  const logoSrc = useChainLogo(chainConfig?.chainLogoUri)
 
   if (!chainConfig) {
     return <Skeleton variant="circular" width={40} height={40} />
   }
 
-  return (
-    <img
-      src={chainConfig.chainLogoUri ?? undefined}
-      alt={`${chainConfig.chainName} Logo`}
-      width={40}
-      height={40}
-      loading="lazy"
-    />
-  )
+  return <img src={logoSrc} alt={`${chainConfig.chainName} Logo`} width={40} height={40} loading="lazy" />
 }
 
 const SafeIcon = ({

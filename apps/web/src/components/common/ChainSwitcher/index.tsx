@@ -5,6 +5,7 @@ import { useCurrentChain } from '@/hooks/useChains'
 import useOnboard from '@/hooks/wallets/useOnboard'
 import useIsWrongChain from '@/hooks/useIsWrongChain'
 import { switchWalletChain } from '@/services/tx/tx-sender/sdk'
+import { useChainLogo } from '@/components/gully/chainLogo'
 
 const ChainSwitcher = ({
   fullWidth,
@@ -17,6 +18,7 @@ const ChainSwitcher = ({
   const onboard = useOnboard()
   const isWrongChain = useIsWrongChain()
   const [loading, setIsLoading] = useState<boolean>(false)
+  const logoSrc = useChainLogo(chain?.chainLogoUri)
 
   const handleChainSwitch = useCallback(async () => {
     if (!onboard || !chain) return
@@ -42,13 +44,7 @@ const ChainSwitcher = ({
       ) : (
         <>
           <Typography noWrap>Switch to&nbsp;</Typography>
-          <img
-            src={chain?.chainLogoUri ?? undefined}
-            alt={`${chain?.chainName} Logo`}
-            width={24}
-            height={24}
-            loading="lazy"
-          />
+          <img src={logoSrc} alt={`${chain?.chainName} Logo`} width={24} height={24} loading="lazy" />
           <Typography noWrap>&nbsp;{chain?.chainName}</Typography>
         </>
       )}

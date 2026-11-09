@@ -1,0 +1,68 @@
+/* Gully Live UI tokens for Gully Multisig: the Gully Chain kit rows of tokens.css (gully-live-ui 1.0.0), light and
+   dark, with the card surface taken from the app theme (#FFFFFF light; #111716 dark, between the kit's validated
+   #0B0F14 and #121A21). Charts read --gl-series-1..3 (validated slots), never the brand accent. */
+.glKit {
+  --gl-font: 500 14px/1.4 Inter, system-ui, sans-serif;
+  --gl-font-num: 700 1.5rem/1.1 Inter, system-ui, sans-serif;
+  --gl-accent: #10b981;
+  --gl-ink: #0b0f14;
+  --gl-ink-2: #3a362e;
+  --gl-muted: #6b655a;
+  --gl-surface: var(--color-background-paper, #ffffff);
+  --gl-surface-2: #eef6f2;
+  --gl-line: #d5e3dc;
+  --gl-series-1: #0e9f6e;
+  --gl-series-2: #4c5bd4;
+  --gl-series-3: #c2410c;
+  --gl-up: #1e9e5a;
+  --gl-down: #d23b2b;
+  --gl-warn: #b98900;
+  --gl-radius: 12px;
+  --gl-pill: 999px;
+  min-width: 0;
+}
+
+:global([data-theme='dark']) .glKit {
+  --gl-ink: #e8f2ee;
+  --gl-ink-2: #c9d6d1;
+  --gl-muted: #8fa39b;
+  --gl-surface: var(--color-background-paper, #111716);
+  --gl-surface-2: #121a21;
+  --gl-line: #1f2a33;
+  --gl-series-1: #1aa676;
+  --gl-series-2: #7584ee;
+  --gl-series-3: #d57230;
+}
+
+/* always-ink cards (the welcome hero): the dark rows on the card's own ink */
+.glKit.glKitDark {
+  --gl-ink: #e8f2ee;
+  --gl-ink-2: #c9d6d1;
+  --gl-muted: #8fa39b;
+  --gl-surface: var(--gc-ink, #0b0f14);
+  --gl-surface-2: #121a21;
+  --gl-line: #1f2a33;
+  --gl-series-1: #1aa676;
+  --gl-series-2: #7584ee;
+  --gl-series-3: #d57230;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 8px;
+}
+
+/* custom elements are display:block from their own :host rule; until the module loads they are unknown inline
+   elements, so reserve the loaded height and avoid a jump */
+.stats :global(gl-stat:not(:defined)) {
+  display: block;
+  min-height: 92px;
+  border: 1px solid var(--gl-line);
+  border-radius: var(--gl-radius);
+}
+
+.chart :global(gl-chart:not(:defined)) {
+  display: block;
+  min-height: 190px;
+}
