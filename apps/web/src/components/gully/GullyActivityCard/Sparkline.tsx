@@ -98,23 +98,25 @@ const Sparkline = ({ points, label, unit }: { points: DayPoint[]; label: string;
           </b>
         </div>
       )}
-      <table className={css.srOnly}>
-        <caption>{label}</caption>
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>{unit}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {points.map((p) => (
-            <tr key={p.day}>
-              <td>{fmtDate(p.day)}</td>
-              <td>{p.v}</td>
+      <div className={css.srOnly}>
+        <table>
+          <caption>{label}</caption>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>{unit}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {points.map((p) => (
+              <tr key={p.day}>
+                <td>{fmtDate(p.day)}</td>
+                <td>{p.v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

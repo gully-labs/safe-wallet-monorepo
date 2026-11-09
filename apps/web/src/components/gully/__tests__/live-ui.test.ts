@@ -94,3 +94,14 @@ describe('chain marks on the dark theme', () => {
     },
   )
 })
+
+// 2026-11-09 signed-out design gate: /welcome/accounts scrolled sideways 33 px at 390. Cause: the screen-reader tables
+// carried .srOnly themselves, and a table never shrinks below its content nor clips, so the hidden table widened the
+// page. The tables now sit inside a block .srOnly wrapper that clips them.
+describe('screen-reader tables never widen the page', () => {
+  it.each(['GullyActivityCard/Sparkline.tsx', 'HoldingsBar/index.tsx', 'landing/charts.tsx'])('%s', (f) => {
+    const src = read(`src/components/gully/${f}`)
+    expect(src).not.toContain('<table className={css.srOnly}>')
+    expect(src).toMatch(/<div className=\{css\.srOnly\}>\s*<table>/)
+  })
+})
