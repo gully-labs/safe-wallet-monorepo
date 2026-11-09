@@ -44,6 +44,8 @@ export const GULLY_SERVICES: GullyService[] = [
  */
 export const GULLY_TESTNET_CHAIN_ID = '485590'
 export const ANUBIS_CHAIN_ID = '6714'
+// Kinetiq Elysium (99901, a mainnet; owner 2026-11-08): HYPE is a real native coin, so it can be sent like ETH.
+export const ELYSIUM_CHAIN_ID = '99901'
 
 export type ChainLinks = {
   title: string
@@ -74,9 +76,27 @@ const ANUBIS_LINKS: ChainLinks = {
   ],
 }
 
+// Kinetiq Elysium (99901): the chain's own explorer and site; of the Gully services only the ones that serve Elysium.
+export const ELYSIUM_EXPLORER_URL = 'https://scan.elysp.com'
+export const ELYSIUM_SITE_URL = 'https://kinetiq.xyz'
+
+const ELYSIUM_LINKS: ChainLinks = {
+  title: 'Kinetiq Elysium',
+  subtitle:
+    'HYPE is the gas coin on Kinetiq Elysium and can be sent like any native coin; tokens are ERC-20. Links open in a new tab.',
+  services: [
+    { name: 'Elysium explorer', description: 'Blocks, transactions and tokens', href: ELYSIUM_EXPLORER_URL },
+    { name: 'Kinetiq', description: 'The chain and its bridge', href: ELYSIUM_SITE_URL },
+    { name: 'Verify', description: 'Safe contract sources, Sourcify', href: 'https://verify.gullychain.xyz/' },
+    { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/safe/' },
+    { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
+  ],
+}
+
 const CHAIN_LINKS: Record<string, ChainLinks> = {
   [GULLY_TESTNET_CHAIN_ID]: TESTNET_LINKS,
   [ANUBIS_CHAIN_ID]: ANUBIS_LINKS,
+  [ELYSIUM_CHAIN_ID]: ELYSIUM_LINKS,
 }
 
 /** The links panel of a chain; undefined for a chain we have no checked links for (the panel is then left out). */

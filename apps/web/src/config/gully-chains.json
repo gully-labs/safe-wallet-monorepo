@@ -1,5 +1,5 @@
 {
-  "$comment": "Gully Multisig: Safe contracts of every served chain besides Gully Chain Testnet (gully-contracts.json). The chain list itself (name, RPC, explorer, logo, features) comes from the Gully Config Service; these addresses are registered in the safe-deployments tables because the chains are not in @safe-global/safe-deployments. Source of truth: gully-ops l3/safe/chains/<chainId>.json and gullychain-sdk src/registry.ts.",
+  "$comment": "Gully Multisig: Safe contracts of every served chain besides Gully Chain Testnet (gully-contracts.json). The chain list itself (name, RPC, explorer, logo, features) comes from the Gully Config Service; these addresses are registered in the safe-deployments tables because the chains are not in @safe-global/safe-deployments. Route \"gully\" = the Arachnid deployer with Gully Chain’s creation code and salts (Kinetiq Elysium 99901, where Safe’s singleton factory is absent), so the addresses equal gully-contracts.json. Source of truth: gully-ops l3/safe/chains/<chainId>.json and gullychain-sdk src/registry.ts.",
   "chains": [
     {
       "chainId": "6714",
@@ -18,6 +18,31 @@
         "simulateTxAccessor": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
         "safeToL2Setup": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54",
         "safeToL2Migration": "0xfF83F6335d8930cBad1c0D439A841f01888D9f69"
+      }
+    },
+    {
+      "chainId": "99901",
+      "name": "Kinetiq Elysium",
+      "route": "gully",
+      "safeVersion": "1.4.1",
+      "contracts": {
+        "singleton": "0x639245e8476E03e789a244f279b5843b9633b2E7",
+        "safeL2": "0x76667330c237Fb40f28d74563cdAAae4b06C23Ec",
+        "proxyFactory": "0xd9d2Ba03a7754250FDD71333F444636471CACBC4",
+        "fallbackHandler": "0xcB4a8d3609A7CCa2D9c063a742f75c899BF2f7b5",
+        "multiSend": "0x7B21BBDBdE8D01Df591fdc2dc0bE9956Dde1e16C",
+        "multiSendCallOnly": "0x32228dDEA8b9A2bd7f2d71A958fF241D79ca5eEC",
+        "signMessageLib": "0x309C7b0A0D2f250Be322739753386911E1187C4E",
+        "createCall": "0x8BbCaE989A0Bdf15c8E783357a0E5848e36233d0",
+        "simulateTxAccessor": "0xB59bD9861a97F9c309B7b73338503507580625D2",
+        "safeToL2Setup": "0x5DC954024c42433BF567eb072992A83b4d480A0a",
+        "safeToL2Migration": "0xf91b2B39B185395502Da5DD797bB659A169ba2E4",
+        "tokenCallbackHandler": "0x63117fd9761850f4aC685457E484A01D752D5cC4",
+        "webAuthnSharedSigner": "0xB3a6Aa3eDDD715dbD84aD465Ab0f98919eBB6d5C",
+        "webAuthnSignerFactory": "0xfF25690FC38De1572c2C8075966Bb813f60a095F",
+        "safe4337Module": "0x75cf11467937ce3F2f357CE24ffc3DBF8fD5c226",
+        "safeModuleSetup": "0x2dd68b007B46fBe91B9A7c3EDa5A7a1063cB5b47",
+        "daimoP256Verifier": "0xc2b78104907F722DABAc4C69f826a522B2754De4"
       }
     }
   ]
