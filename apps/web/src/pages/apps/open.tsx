@@ -16,6 +16,7 @@ import useChainId from '@/hooks/useChainId'
 import { AppRoutes } from '@/config/routes'
 import { getOrigin } from '@/components/safe-apps/utils'
 import { useHasFeature } from '@/hooks/useChains'
+import { isGullyAppUrl } from '@/config/gullyApps'
 
 import { FEATURES } from '@safe-global/utils/utils/chains'
 
@@ -65,7 +66,9 @@ const SafeApps: NextPage = () => {
     return null
   }
 
-  if (isModalVisible) {
+  // Gully Multisig: Gully's own apps (config/gullyApps.ts) are first party, listed by our config service and request no
+  // browser feature: no third-party disclaimer before them
+  if (isModalVisible && !(isGullyAppUrl(appUrl) && safeAppData)) {
     return (
       <SafeAppsInfoModal
         key={isLoading ? 'loading' : 'loaded'}

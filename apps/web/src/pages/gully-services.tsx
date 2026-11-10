@@ -7,10 +7,10 @@ import PageHeader from '@/components/common/PageHeader'
 const GullyServicesPage: NextPage = () => (
   <>
     <Head>
-      <title>{`${BRAND_NAME} – Gully services`}</title>
+      <title>{`${BRAND_NAME} – Services`}</title>
     </Head>
 
-    <PageHeader title="Gully services" noBorder />
+    <PageHeader title="Services" noBorder />
     <main>
       <GullyServices />
     </main>

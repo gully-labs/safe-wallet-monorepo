@@ -52,7 +52,7 @@ describe('Gully Multisig: the dashboard copy follows the chain of the open Safe'
 describe('Gully Multisig: the links panel follows the chain', () => {
   it('lists the Gully Chain services on the testnet', () => {
     const links = chainLinksFor(GULLY_TESTNET_CHAIN_ID)
-    expect(links?.title).toBe('Gully services')
+    expect(links?.title).toBe('Gully Chain Testnet')
     expect(links?.services).toBe(GULLY_SERVICES)
     expect(links?.services.map((s) => s.name)).toEqual(expect.arrayContaining(['Bridge', 'Faucet', 'Explorer']))
   })

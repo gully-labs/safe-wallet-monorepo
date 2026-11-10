@@ -1,5 +1,7 @@
 import { useState, type ReactElement } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useIsHydrated } from '@/hooks/useIsHydrated'
 import { IconButton, Menu, MenuItem } from '@mui/material'
 import nav from '@/config/gully-nav.json'
 import { Icon, type IconName } from '@/components/gully/landing/icons'
@@ -22,7 +24,19 @@ type NavLink = (typeof nav.links)[number]
 const labelOf = (l: NavLink) => ('appLabel' in l && l.appLabel ? l.appLabel : l.label)
 const isExternal = (l: NavLink) => 'external' in l && l.external === true
 
-export const GullyNavLinks = ({ className }: { className?: string }): ReactElement => (
+/** Services and Swap act on the open multisig: their links carry its `safe` (Swap then opens in-app at once). */
+const KEEPS_SAFE = new Set(['services', 'swap'])
+const useHref = () => {
+  const { query } = useRouter()
+  // after hydration only: the static prerender has no query, so the first client render must match it
+  const hydrated = useIsHydrated()
+  const safe = hydrated && typeof query.safe === 'string' ? query.safe : undefined
+  return (l: NavLink): string => (safe && KEEPS_SAFE.has(l.id) ? `${l.app}?safe=${encodeURIComponent(safe)}` : l.app)
+}
+
+export const GullyNavLinks = ({ className }: { className?: string }): ReactElement => {
+  const hrefOf = useHref()
+  return (
   <nav className={`${css.links} ${className ?? ''}`} aria-label="Gully Multisig">
     {APP_LINKS.map((l) =>
       isExternal(l) ? (
@@ -39,18 +53,20 @@ export const GullyNavLinks = ({ className }: { className?: string }): ReactEleme
           <span className={css.label}>{labelOf(l)}</span>
         </a>
       ) : (
-        <Link key={l.id} href={l.app} className={css.link} title={labelOf(l)} aria-label={labelOf(l)}>
+        <Link key={l.id} href={hrefOf(l)} className={css.link} title={labelOf(l)} aria-label={labelOf(l)}>
           <Icon name={l.icon as IconName} size={16} />
           <span className={css.label}>{labelOf(l)}</span>
         </Link>
       ),
     )}
   </nav>
-)
+  )
+}
 
 /** The phone version: one menu button with the same links in the same order, then the primary action. */
 export const GullyNavMenu = (): ReactElement => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)
+  const hrefOf = useHref()
   return (
     <>
       <IconButton aria-label="Menu" onClick={(e) => setAnchor(e.currentTarget)} size="large" className={css.menuBtn}>
@@ -61,7 +77,7 @@ export const GullyNavMenu = (): ReactElement => {
           <MenuItem
             key={l.id}
             component="a"
-            href={l.app}
+            href={hrefOf(l)}
             onClick={() => setAnchor(null)}
             {...(isExternal(l) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className={css.menuItem}

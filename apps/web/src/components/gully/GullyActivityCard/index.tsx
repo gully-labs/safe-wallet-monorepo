@@ -114,8 +114,8 @@ const GullyActivityCard = (): ReactElement => {
             height={140}
             series={series}
             loading={waiting}
-            title="Transactions executed per day, last 30 days, all chains"
-            unit="transactions"
+            title="Transactions executed per day (tx), last 30 days, all chains"
+            unit="plain"
             empty={error ? `The activity feed did not answer (${error}). Retrying every minute.` : undefined}
             testId="activity-chart"
           />

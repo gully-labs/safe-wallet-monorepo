@@ -1,4 +1,5 @@
-/** Gully Multisig: Gully Labs links and the Gully services shown in the app. All open in a new tab. */
+/** Gully Multisig: Gully Labs links and the links "Around <chain>" on the services page (they open in a new tab; the
+ * Gully services that run inside the multisig are Safe Apps, config/gullyApps.ts). */
 
 export const GULLY_LABS_URL = 'https://gullylabs.xyz'
 // The Gully Multisig guide: the sidebar's help button
@@ -18,9 +19,18 @@ export type GullyService = {
   href: string
 }
 
-// Gully Chain products only (owner rule 2026-10-29/30, same list as gc-switcher 1.8.3 minus Safe itself). kre8.fun and
-// the other Gully products (Pay, HolderMaps, Security, ...) are listed once, on the Ecosystem page.
+// Around Gully Chain Testnet (owner rule 2026-10-29/30: Gully Chain products only; other Gully products are on the
+// Ecosystem page). Gully Core is not here: it runs inside the multisig (config/gullyApps.ts). The bridge has no Safe App
+// yet, so it stays a link.
 export const GULLY_SERVICES: GullyService[] = [
+  { name: 'Explorer', description: 'Blocks, transactions and tokens', href: 'https://testnet.gullyscan.xyz/' },
+  { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
+  { name: 'Faucet', description: 'Free test ETH for this testnet', href: 'https://faucet.gullychain.xyz/' },
+  { name: 'Verify', description: 'Contract source, Sourcify', href: 'https://verify.gullychain.xyz/' },
+  { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/multisig/' },
+  { name: 'Ecosystem', description: 'Projects on Gully Chain', href: 'https://gullychain.xyz/ecosystem/' },
+  { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
+] = [
   { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
   {
     name: 'Explorer',
@@ -46,6 +56,9 @@ export const GULLY_TESTNET_CHAIN_ID = '485590'
 export const ANUBIS_CHAIN_ID = '6714'
 // Kinetiq Elysium (99901, a mainnet; owner 2026-11-08): HYPE is a real native coin, so it can be sent like ETH.
 export const ELYSIUM_CHAIN_ID = '99901'
+// Robinhood Chain (4663, a mainnet; Gully-run transaction service since 2026-11-10): ETH, Safe's canonical addresses.
+export const ROBINHOOD_CHAIN_ID = '4663'
+export const ROBINHOOD_EXPLORER_URL = 'https://robinhoodchain.blockscout.com'
 
 export type ChainLinks = {
   title: string
@@ -54,8 +67,8 @@ export type ChainLinks = {
 }
 
 const TESTNET_LINKS: ChainLinks = {
-  title: 'Gully services',
-  subtitle: 'Everything else on Gully Chain. Links open in a new tab; other projects are on the Ecosystem page.',
+  title: 'Gully Chain Testnet',
+  subtitle: 'Test funds only: the faucet gives free test ETH, nothing here has real value.',
   services: GULLY_SERVICES,
 }
 
@@ -66,12 +79,12 @@ export const ANUBIS_EXPLORER_URL = 'https://browser.anubispace.org'
 const ANUBIS_LINKS: ChainLinks = {
   title: 'Anubis Network',
   subtitle:
-    'gasDAI pays gas only on Anubis Network and cannot be sent. Tokens are ERC-20: a multisig here holds and moves tokens. Links open in a new tab.',
+    'gasDAI pays gas only on Anubis Network and cannot be sent. Tokens are ERC-20: a multisig here holds and moves tokens.',
   services: [
     { name: 'Anubis bridge', description: 'Move tokens to and from Anubis Network', href: ANUBIS_BRIDGE_URL },
     { name: 'Anubis explorer', description: 'Blocks, transactions and tokens', href: ANUBIS_EXPLORER_URL },
     { name: 'Verify', description: 'Safe contract sources, Sourcify', href: 'https://verify.gullychain.xyz/' },
-    { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/safe/' },
+    { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/multisig/' },
     { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
   ],
 }
@@ -83,12 +96,24 @@ export const ELYSIUM_SITE_URL = 'https://kinetiq.xyz'
 const ELYSIUM_LINKS: ChainLinks = {
   title: 'Kinetiq Elysium',
   subtitle:
-    'HYPE is the gas coin on Kinetiq Elysium and can be sent like any native coin; tokens are ERC-20. Links open in a new tab.',
+    'HYPE is the gas coin on Kinetiq Elysium and can be sent like any native coin; tokens are ERC-20.',
   services: [
     { name: 'Elysium explorer', description: 'Blocks, transactions and tokens', href: ELYSIUM_EXPLORER_URL },
     { name: 'Kinetiq', description: 'The chain and its bridge', href: ELYSIUM_SITE_URL },
     { name: 'Verify', description: 'Safe contract sources, Sourcify', href: 'https://verify.gullychain.xyz/' },
-    { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/safe/' },
+    { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/multisig/' },
+    { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
+  ],
+}
+
+// Robinhood Chain (4663): the chain's explorer; of the Gully services only the ones that serve Robinhood.
+const ROBINHOOD_LINKS: ChainLinks = {
+  title: 'Robinhood Chain',
+  subtitle: 'ETH is the gas coin on Robinhood Chain and can be sent; tokens are ERC-20.',
+  services: [
+    { name: 'Robinhood explorer', description: 'Blocks, transactions and tokens', href: ROBINHOOD_EXPLORER_URL },
+    { name: 'Verify', description: 'Safe contract sources, Sourcify', href: 'https://verify.gullychain.xyz/' },
+    { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/multisig/' },
     { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
   ],
 }
@@ -97,6 +122,7 @@ const CHAIN_LINKS: Record<string, ChainLinks> = {
   [GULLY_TESTNET_CHAIN_ID]: TESTNET_LINKS,
   [ANUBIS_CHAIN_ID]: ANUBIS_LINKS,
   [ELYSIUM_CHAIN_ID]: ELYSIUM_LINKS,
+  [ROBINHOOD_CHAIN_ID]: ROBINHOOD_LINKS,
 }
 
 /** The links panel of a chain; undefined for a chain we have no checked links for (the panel is then left out). */
