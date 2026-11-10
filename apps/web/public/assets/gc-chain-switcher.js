@@ -1,5 +1,5 @@
 /*!
- * Gully chain switcher 1.0.3  <gc-chain-switcher surface="core" current="6714"></gc-chain-switcher>
+ * Gully chain switcher 1.0.4  <gc-chain-switcher surface="core" current="6714"></gc-chain-switcher>
  * Canonical source: gully-labs/gully-ops sites/_shared/gc-chain-switcher/gc-chain-switcher.js (spec: README.md next to it).
  * One network switcher for every Gully surface (Core app, gullycore.xyz, docs, explorer, bridge, offerwall, kre8, Multisig),
  * fed by the Gully Core manifest's chain list (https://gullycore.xyz/manifest.json, chains[].surfaces says which surface
@@ -20,7 +20,7 @@
  *             (wallet_switchEthereumChain, then wallet_addEthereumChain with the manifest's RPC and explorer); last chain remembered
  *             (localStorage gc-chain); search appears over 6 rows; arrows, Home/End, Esc; aria-label "Network: <name>".
  */
-export const GC_CHAIN_SWITCHER_VERSION = '1.0.3';
+export const GC_CHAIN_SWITCHER_VERSION = '1.0.4';
 export const DEFAULT_MANIFEST = 'https://gullycore.xyz/manifest.json';
 export const SURFACES = ['core', 'site', 'docs', 'explorer', 'bridge', 'offerwall', 'kre8', 'multisig'];
 
@@ -99,8 +99,34 @@ ul{list-style:none;margin:0;padding:0}
 
   class GcChainSwitcher extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); this._m = null; this._health = {}; this._q = ''; }
+    /* Every attribute is also a PROPERTY with a setter that reflects to the attribute (1.0.4). React 19 (and other
+       frameworks) assign a prop as a property once the element is upgraded: with getter-only accessors the assignment
+       threw "Cannot set property surface of #<GcChainSwitcher> which has only a getter" on every re-render after the
+       module loaded (owner console, app.gullycore.xyz 2026-11-09: SiteNav → "[route] failed to load or render" on
+       /app/governance and /embed). Attributes that change after connection re-render. */
+    static observedAttributes = ['surface', 'current', 'mode', 'manifest', 'health', 'theme', 'wallet', 'compact-below'];
     get surface() { return this.getAttribute('surface') || 'site'; }
+    set surface(v) { this.setAttribute('surface', String(v)); }
     get mode() { return this.getAttribute('mode') || 'link'; }
+    set mode(v) { this.setAttribute('mode', String(v)); }
+    get current() { return this.getAttribute('current') || ''; }
+    set current(v) { if (v == null || v === '') this.removeAttribute('current'); else this.setAttribute('current', String(v)); }
+    get manifest() { return this.getAttribute('manifest') || DEFAULT_MANIFEST; }
+    set manifest(v) { this.setAttribute('manifest', String(v)); }
+    get health() { return this.getAttribute('health') || ''; }
+    set health(v) { if (v == null || v === '') this.removeAttribute('health'); else this.setAttribute('health', String(v)); }
+    get theme() { return this.getAttribute('theme') || 'light'; }
+    set theme(v) { this.setAttribute('theme', String(v)); }
+    get wallet() { return this.getAttribute('wallet') || 'on'; }
+    set wallet(v) { this.setAttribute('wallet', String(v)); }
+    get compactBelow() { return parseInt(this.getAttribute('compact-below') || '480', 10); }
+    set compactBelow(v) { this.setAttribute('compact-below', String(v)); }
+    attributeChangedCallback(name, was, now) {
+      if (was === now || !this._root || !this._m) return; // before connection the attributes are read in connectedCallback
+      if (name === 'current' && now && chainsFor(this._m, this.surface, now).current) this._cur = String(now);
+      this.render();
+      if (name === 'current' || name === 'health') this.probe();
+    }
     async connectedCallback() {
       const sheet = document.createElement('style'); sheet.textContent = CSS; this.shadowRoot.append(sheet);
       this._root = document.createElement('div'); this.shadowRoot.append(this._root);

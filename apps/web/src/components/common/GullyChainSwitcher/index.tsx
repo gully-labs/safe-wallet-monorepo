@@ -12,6 +12,8 @@ import { OVERVIEW_EVENTS, trackEvent } from '@/services/analytics'
 
 /** The shared Gully chain switcher, served from this host as a byte-identical copy of gully-ops sites/_shared/gc-chain-switcher. */
 export const SWITCHER_SRC = '/assets/gc-chain-switcher.js'
+/** Version of that copy (gully-ops sites/_shared/gc-chain-switcher; 1.0.4 adds property setters, which React 19 needs). */
+export const SWITCHER_VERSION = '1.0.4'
 export const SWITCHER_SURFACE = 'multisig'
 
 /** Where the browser can ask this chain's transaction service whether it is up (same host for Gully's own stacks). */
