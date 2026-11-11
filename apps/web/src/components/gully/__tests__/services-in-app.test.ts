@@ -17,7 +17,8 @@ const src = (p: string) => readFileSync(join(__dirname, '..', '..', '..', p), 'u
 describe('Gully services run inside the multisig (Safe Apps)', () => {
   it('Swap, Locks, Vaults, Distribute and Stock markets on every served chain, the testnet on the testnet build', () => {
     expect(GULLY_APPS.map((a) => a.id)).toEqual(['swap', 'locks', 'vaults', 'distribute', 'stocks'])
-    for (const id of ['6714', '4663', '99901']) expect(gullyAppUrl('swap', id)).toBe('https://app.gullycore.xyz/safe-apps/swap')
+    for (const id of ['6714', '4663', '99901'])
+      expect(gullyAppUrl('swap', id)).toBe('https://app.gullycore.xyz/safe-apps/swap')
     expect(gullyAppUrl('swap', '485590')).toBe('https://testnet.gullycore.xyz/safe-apps/swap')
     expect(gullyAppsFor('8453')).toEqual([])
     expect(gullyAppsFor(undefined)).toEqual([])
@@ -62,7 +63,8 @@ describe('Gully services run inside the multisig (Safe Apps)', () => {
     expect(panel).toContain('Around {chainName}')
     expect(panel).toContain('AppRoutes.apps.open')
     expect(JSON.stringify(chainLinksFor(ROBINHOOD_CHAIN_ID))).not.toMatch(/faucet|test ETH/i)
-    for (const id of ['6714', '4663', '99901', '485590']) expect(JSON.stringify(chainLinksFor(id))).not.toContain('Links open in a new tab')
+    for (const id of ['6714', '4663', '99901', '485590'])
+      expect(JSON.stringify(chainLinksFor(id))).not.toContain('Links open in a new tab')
   })
 })
 
@@ -72,6 +74,8 @@ describe('Clean UX', () => {
   })
   it('the dashboard chart axis labels are plain numbers, the unit in the title', () => {
     const card = src('components/gully/GullyActivityCard/index.tsx')
-    expect(card).toContain('title="Transactions executed per day (tx), last 30 days, all chains"\n            unit="plain"')
+    expect(card).toContain(
+      'title="Transactions executed per day (tx), last 30 days, all chains"\n            unit="plain"',
+    )
   })
 })

@@ -13,7 +13,11 @@ export type GullyAppId = 'swap' | 'locks' | 'vaults' | 'distribute' | 'stocks'
 export type GullyApp = { id: GullyAppId; name: string; line: string }
 
 export const GULLY_APPS: GullyApp[] = [
-  { id: 'swap', name: 'Swap', line: 'Trade tokens on Gully Core. Approval and swap go to the queue as one transaction.' },
+  {
+    id: 'swap',
+    name: 'Swap',
+    line: 'Trade tokens on Gully Core. Approval and swap go to the queue as one transaction.',
+  },
   { id: 'locks', name: 'Locks', line: 'Lock liquidity or vest tokens from this multisig.' },
   { id: 'vaults', name: 'Vaults', line: 'Open a Gully Core vault this multisig owns.' },
   { id: 'distribute', name: 'Distribute', line: 'Splits, airdrops and batch sends from this multisig.' },

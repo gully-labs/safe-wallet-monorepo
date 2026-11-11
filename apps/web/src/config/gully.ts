@@ -80,8 +80,7 @@ export const ELYSIUM_SITE_URL = 'https://kinetiq.xyz'
 
 const ELYSIUM_LINKS: ChainLinks = {
   title: 'Kinetiq Elysium',
-  subtitle:
-    'HYPE is the gas coin on Kinetiq Elysium and can be sent like any native coin; tokens are ERC-20.',
+  subtitle: 'HYPE is the gas coin on Kinetiq Elysium and can be sent like any native coin; tokens are ERC-20.',
   services: [
     { name: 'Elysium explorer', description: 'Blocks, transactions and tokens', href: ELYSIUM_EXPLORER_URL },
     { name: 'Kinetiq', description: 'The chain and its bridge', href: ELYSIUM_SITE_URL },

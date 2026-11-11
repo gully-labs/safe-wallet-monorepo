@@ -37,29 +37,29 @@ const useHref = () => {
 export const GullyNavLinks = ({ className }: { className?: string }): ReactElement => {
   const hrefOf = useHref()
   return (
-  <nav className={`${css.links} ${className ?? ''}`} aria-label="Gully Multisig">
-    {APP_LINKS.map((l) =>
-      isExternal(l) ? (
-        <a
-          key={l.id}
-          href={l.app}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={css.link}
-          title={labelOf(l)}
-          aria-label={labelOf(l)}
-        >
-          <Icon name={l.icon as IconName} size={16} />
-          <span className={css.label}>{labelOf(l)}</span>
-        </a>
-      ) : (
-        <Link key={l.id} href={hrefOf(l)} className={css.link} title={labelOf(l)} aria-label={labelOf(l)}>
-          <Icon name={l.icon as IconName} size={16} />
-          <span className={css.label}>{labelOf(l)}</span>
-        </Link>
-      ),
-    )}
-  </nav>
+    <nav className={`${css.links} ${className ?? ''}`} aria-label="Gully Multisig">
+      {APP_LINKS.map((l) =>
+        isExternal(l) ? (
+          <a
+            key={l.id}
+            href={l.app}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={css.link}
+            title={labelOf(l)}
+            aria-label={labelOf(l)}
+          >
+            <Icon name={l.icon as IconName} size={16} />
+            <span className={css.label}>{labelOf(l)}</span>
+          </a>
+        ) : (
+          <Link key={l.id} href={hrefOf(l)} className={css.link} title={labelOf(l)} aria-label={labelOf(l)}>
+            <Icon name={l.icon as IconName} size={16} />
+            <span className={css.label}>{labelOf(l)}</span>
+          </Link>
+        ),
+      )}
+    </nav>
   )
 }
 
