@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement } from 'react'
+import { useEffect, type ReactElement, useRef } from 'react'
 import classnames from 'classnames'
 import type { CheckboxProps } from '@mui/material'
 import { Grid, Button, Checkbox, FormControlLabel, Typography, Paper, SvgIcon, Box } from '@mui/material'
@@ -234,8 +234,28 @@ const CookieBannerPopup = (): ReactElement | null => {
     }
   }, [dispatch, shouldOpen])
 
+  // Gully Multisig: the banner's height is published as --gully-cookie-banner-h while it is open, so pages that fill the
+  // screen (the Safe Apps disclaimer on /apps/open) keep their buttons above it instead of under it (390 px phones).
+  const popupRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const root = document.documentElement
+    const el = popupRef.current
+    if (!cookiePopup.open || !el) {
+      root.style.removeProperty('--gully-cookie-banner-h')
+      return
+    }
+    const publish = () => root.style.setProperty('--gully-cookie-banner-h', `${Math.ceil(el.getBoundingClientRect().height)}px`)
+    publish()
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(publish) : undefined
+    ro?.observe(el)
+    return () => {
+      ro?.disconnect()
+      root.style.removeProperty('--gully-cookie-banner-h')
+    }
+  }, [cookiePopup.open])
+
   return cookiePopup.open ? (
-    <div className={css.popup}>
+    <div className={css.popup} ref={popupRef}>
       <CookieAndTermBanner warningKey={cookiePopup.warningKey} inverted />
     </div>
   ) : null
