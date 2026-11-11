@@ -1,7 +1,15 @@
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { chainLinksFor, ROBINHOOD_CHAIN_ID } from '@/config/gully'
-import { GULLY_APPS, gullyAppsFor, gullyAppUrl, isGullyAppUrl, openAppQuery } from '@/config/gullyApps'
+import {
+  GULLY_APPS,
+  gullyAppsFor,
+  gullyAppUrl,
+  isGullyAppUrl,
+  isListingOnlyAppUrl,
+  openAppQuery,
+  TX_BUILDER_URL,
+} from '@/config/gullyApps'
 
 const src = (p: string) => readFileSync(join(__dirname, '..', '..', '..', p), 'utf8')
 
@@ -26,8 +34,17 @@ describe('Gully services run inside the multisig (Safe Apps)', () => {
     expect(isGullyAppUrl('https://app.gullycore.xyz/safe-apps/swap')).toBe(true)
     expect(isGullyAppUrl('https://evil.example/app.gullycore.xyz')).toBe(false)
     expect(src('pages/apps/open.tsx')).toContain('isModalVisible && !(isGullyAppUrl(appUrl) && safeAppData)')
-    expect(src('hooks/safe-apps/useSafeAppFromManifest.ts')).toContain('!isGullyAppUrl(appUrl)')
+    expect(src('hooks/safe-apps/useSafeAppFromManifest.ts')).toContain('!isListingOnlyAppUrl(appUrl)')
     expect(src('config/constants.ts')).toContain("SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL = ''")
+  })
+
+  it('the Transaction Builder opens from its listing: no manifest fetch its host would refuse (no CORS header)', () => {
+    expect(TX_BUILDER_URL).toBe('https://apps-portal.safe.global/tx-builder')
+    expect(isListingOnlyAppUrl(TX_BUILDER_URL)).toBe(true)
+    expect(isListingOnlyAppUrl(`${TX_BUILDER_URL}/`)).toBe(true)
+    expect(isListingOnlyAppUrl('https://testnet.gullycore.xyz/safe-apps/swap')).toBe(true)
+    expect(isListingOnlyAppUrl('https://apps-portal.safe.global/tx-builder-evil')).toBe(false)
+    expect(isListingOnlyAppUrl('https://other.example/app')).toBe(false)
   })
 
   it('the header Swap opens the swap app in-app, never another site', () => {

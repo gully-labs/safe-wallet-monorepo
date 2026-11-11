@@ -51,6 +51,16 @@ export const gullyAppsFor = (chainId: string | undefined): (GullyApp & { url: st
 export const isGullyAppUrl = (url: string | undefined): boolean =>
   !!url && /^https:\/\/(app|testnet)\.gullycore\.xyz(\/|$)/.test(url)
 
+/**
+ * Safe's Transaction Builder, listed on our config service (tag `transaction-builder`) for every served chain. Its host
+ * sends no CORS header, so the browser cannot read its manifest from our origin: the config service listing is used.
+ */
+export const TX_BUILDER_URL = 'https://apps-portal.safe.global/tx-builder'
+
+/** An app whose config service listing is its manifest (no manifest fetch across origins): Gully's and the Tx Builder. */
+export const isListingOnlyAppUrl = (url: string | undefined): boolean =>
+  isGullyAppUrl(url) || (!!url && (url === TX_BUILDER_URL || url.startsWith(`${TX_BUILDER_URL}/`)))
+
 /** The query of /apps/open for an app and a multisig (`safe` is `<shortName>:<address>`). */
 export const openAppQuery = (shortName: string, safeAddress: string, url: string) => ({
   safe: `${shortName}:${safeAddress}`,
