@@ -23,7 +23,13 @@ const walk = (dir: string, out: string[] = []): string[] => {
 }
 
 // the shared scripts carry their own changelog (they name the v3 files they removed), and this file names them on purpose
-const EXEMPT = [/public[\/]assets[\/]gc-(switcher|connect)\.js$/, /brand-v4\.test\.ts$/]
+// public/assets/chains: other chains' own marks (Anubis, Base, ...), byte-identical copies of the Gully Core kit's chain
+// icons for gc-chain-switcher 1.0.6 icon-base; their colours are those chains', not a Gully kit's.
+const EXEMPT = [
+  /public[\/]assets[\/]gc-(switcher|connect)\.js$/,
+  /public[\/]assets[\/]chains[\/]/,
+  /brand-v4\.test\.ts$/,
+]
 const TEXT = /\.(ts|tsx|js|jsx|css|json|webmanifest|html|svg|md)$/
 
 const SCANNED = [

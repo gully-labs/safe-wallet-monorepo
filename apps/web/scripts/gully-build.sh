@@ -28,6 +28,12 @@ corepack enable
 yarn install --immutable
 yarn workspace @safe-global/web after-install
 yarn workspace @safe-global/web build
+# Low-memory build (GULLY_LOW_MEM_BUILD=1, see next.config.mjs): the type check runs here, after the build has freed
+# its memory, and still fails the build.
+if [ "${GULLY_LOW_MEM_BUILD:-0}" = "1" ]; then
+  NODE_OPTIONS="${GULLY_TSC_NODE_OPTIONS:---max-old-space-size=2800}" yarn workspace @safe-global/web type-check
+  echo "Type check OK"
+fi
 yarn workspace @safe-global/web integrity
 
 echo "Static export ready: $ROOT/apps/web/out"

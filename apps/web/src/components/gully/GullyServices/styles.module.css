@@ -73,3 +73,67 @@
   font-size: 13px;
   color: var(--gc-muted);
 }
+
+/* 2026-11-10: "Use from this multisig" (in-app Safe Apps) and "Around <chain>" (new-tab links) */
+.sectionHead {
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.sectionHead:first-of-type {
+  margin-top: var(--space-2);
+}
+
+.sectionTitle {
+  font-family: var(--gc-font);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--gc-white);
+}
+
+.sectionNote {
+  font-size: 13px;
+  color: var(--gc-muted);
+  margin-top: 4px;
+}
+
+.picker {
+  margin-bottom: var(--space-2);
+}
+
+.pickerField {
+  min-width: min(360px, 100%);
+}
+
+.inline {
+  color: var(--gc-cyan);
+}
+
+.appIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  flex: none;
+}
+
+.external {
+  width: 14px;
+  height: 14px;
+  margin-left: auto;
+  color: var(--gc-muted);
+}
+
+.cardOff {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cardOff:hover {
+  transform: none;
+  border-color: #1a1f1e;
+}
+
+@media (max-width: 599px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

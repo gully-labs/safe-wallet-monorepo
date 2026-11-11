@@ -6,6 +6,7 @@ import useAsync from '@safe-global/utils/hooks/useAsync'
 import { getEmptySafeApp } from '@/components/safe-apps/utils'
 import type { SafeAppDataWithPermissions } from '@/components/safe-apps/types'
 import { asError } from '@safe-global/utils/services/exceptions/utils'
+import { isListingOnlyAppUrl } from '@/config/gullyApps'
 
 type UseSafeAppFromManifestReturnType = {
   safeApp: SafeAppDataWithPermissions
@@ -18,7 +19,10 @@ const useSafeAppFromManifest = (
   safeAppData?: SafeAppData,
 ): UseSafeAppFromManifestReturnType => {
   const [data, error, isLoading] = useAsync<SafeAppDataWithPermissions>(() => {
-    if (appUrl && chainId && safeAppData) return fetchSafeAppFromManifest(appUrl, chainId)
+    // Gully Multisig: for our own apps and the Transaction Builder the listing (config service) is the manifest; no fetch
+    // across origins for them
+    if (appUrl && chainId && safeAppData && !isListingOnlyAppUrl(appUrl))
+      return fetchSafeAppFromManifest(appUrl, chainId)
   }, [appUrl, chainId, safeAppData])
 
   const emptyApp = useMemo(() => getEmptySafeApp(appUrl, safeAppData), [appUrl, safeAppData])

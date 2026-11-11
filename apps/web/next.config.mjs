@@ -70,6 +70,10 @@ const withPWA = withPWAInit({
 
 const isProd = process.env.NODE_ENV === 'production'
 const enableExperimentalOptimizations = process.env.ENABLE_EXPERIMENTAL_OPTIMIZATIONS === '1'
+// Gully Multisig: GULLY_LOW_MEM_BUILD=1 makes `next build` fit the 3 GB build container of the Gully boxes. No browser
+// source maps, one build worker, webpack memory optimizations, and the type check and lint run as their own steps
+// in scripts/gully-build.sh instead of inside the build (the in-build type check worker was the one killed at 3 GB).
+const lowMemBuild = process.env.GULLY_LOW_MEM_BUILD === '1'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -88,13 +92,18 @@ const nextConfig = {
 
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: false,
-  productionBrowserSourceMaps: true,
+  productionBrowserSourceMaps: !lowMemBuild,
   eslint: {
     dirs: ['src', 'cypress'],
+    ignoreDuringBuilds: lowMemBuild,
+  },
+  typescript: {
+    ignoreBuildErrors: lowMemBuild,
   },
   ...(isProd || enableExperimentalOptimizations
     ? {
         experimental: {
+          ...(lowMemBuild ? { cpus: 1, workerThreads: false, webpackMemoryOptimizations: true } : {}),
           optimizePackageImports: [
             '@mui/material',
             '@mui/icons-material',

@@ -42,7 +42,7 @@ const useThirdPartyCookies = (): ThirdPartyCookiesType => {
   }, [])
 
   useEffect(() => {
-    if (isSafari()) {
+    if (isSafari() || !SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL) {
       return
     }
 

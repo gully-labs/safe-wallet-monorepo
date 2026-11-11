@@ -12,8 +12,13 @@ import { OVERVIEW_EVENTS, trackEvent } from '@/services/analytics'
 
 /** The shared Gully chain switcher, served from this host as a byte-identical copy of gully-ops sites/_shared/gc-chain-switcher. */
 export const SWITCHER_SRC = '/assets/gc-chain-switcher.js'
-/** Version of that copy (gully-ops sites/_shared/gc-chain-switcher; 1.0.4 adds property setters, which React 19 needs). */
-export const SWITCHER_VERSION = '1.0.4'
+/**
+ * Version of that copy (gully-ops sites/_shared/gc-chain-switcher, main c48ae8aa). 1.0.4 adds property setters (React 19);
+ * 1.0.6 falls back to a bundled chain list when the manifest cannot be loaded, and to letter marks for broken icons.
+ */
+export const SWITCHER_VERSION = '1.0.6'
+/** This host's copies of the kit chain icons (public/assets/chains, byte-identical to gully-ops sites/gullycore.xyz/chains). */
+export const SWITCHER_ICON_BASE = '/assets/chains/'
 export const SWITCHER_SURFACE = 'multisig'
 
 /** Where the browser can ask this chain's transaction service whether it is up (same host for Gully's own stacks). */
@@ -97,6 +102,7 @@ const GullyChainSwitcher = (): ReactElement => {
     current: chainId,
     theme: isDark ? 'dark' : 'light',
     'compact-below': '480',
+    'icon-base': SWITCHER_ICON_BASE,
     ...(health ? { health } : {}),
     'data-testid': 'gully-chain-trigger',
     'aria-label': `Network: ${current?.chainName ?? 'loading'}`,

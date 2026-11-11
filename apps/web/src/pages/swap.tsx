@@ -2,42 +2,34 @@ import { useEffect } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Button, Typography } from '@mui/material'
 import { BRAND_NAME } from '@/config/constants'
+import { AppRoutes } from '@/config/routes'
+import useChainId from '@/hooks/useChainId'
+import { gullyAppUrl } from '@/config/gullyApps'
+import GullyServices from '@/components/gully/GullyServices'
 
-// Gully Multisig does not embed a swap widget (the upstream page loaded the CoW Swap widget, which is not served here and
-// aborted). Swaps live in Gully Core: this route sends the visitor there, keeping a token and amount if one was passed.
-export const GULLY_CORE_SWAP = 'https://app.gullycore.xyz/swap'
-
+// Gully Multisig: Swap runs INSIDE the multisig (owner 2026-11-10, "why isnt there a swap in the app?"): Gully Core's swap
+// as a Safe App on the selected chain (config/gullyApps.ts). With a multisig open (?safe=) this opens it at once; without,
+// it asks which of your multisigs on this chain swaps. (Until 2026-11-10 this page sent visitors to app.gullycore.xyz.)
 const SwapPage: NextPage = () => {
   const router = useRouter()
-  const { token, amount } = router.query
-  const params = new URLSearchParams()
-  if (token) params.set('token', String(token))
-  if (amount) params.set('amount', String(amount))
-  const target = params.toString() ? `${GULLY_CORE_SWAP}?${params.toString()}` : GULLY_CORE_SWAP
+  const chainId = useChainId()
+  const safe = typeof router.query.safe === 'string' ? router.query.safe : undefined
+  const appUrl = gullyAppUrl('swap', chainId)
 
   useEffect(() => {
-    if (router.isReady) window.location.replace(target)
-  }, [router.isReady, target])
+    if (router.isReady && safe && appUrl) {
+      router.replace({ pathname: AppRoutes.apps.open, query: { safe, appUrl } })
+    }
+  }, [router, safe, appUrl])
 
   return (
     <>
       <Head>
-        <title>{`${BRAND_NAME} – Swap on Gully Core`}</title>
-        <meta name="robots" content="noindex, nofollow" />
+        <title>{`${BRAND_NAME} – Swap`}</title>
       </Head>
-
-      <main style={{ textAlign: 'center', padding: '48px 16px' }}>
-        <Typography variant="h1" mb={1}>
-          Swap on Gully Core
-        </Typography>
-        <Typography color="text.secondary" mb={3}>
-          Swaps run on Gully Core, not inside Gully Multisig. Taking you there.
-        </Typography>
-        <Button component="a" href={target} variant="contained">
-          Open Gully Core
-        </Button>
+      <main>
+        <GullyServices only={['swap']} heading="Swap from a multisig" />
       </main>
     </>
   )

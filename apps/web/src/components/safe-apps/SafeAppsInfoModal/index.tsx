@@ -114,15 +114,24 @@ const SafeAppsInfoModal = ({
       sx={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         flexDirection: 'column',
         height: 'calc(100vh - 52px)',
+        // Gully Multisig: room at the bottom for the cookie banner while it is open (CookieAndTermBanner publishes its
+        // height), so the disclaimer's buttons are never under it; scrolls inside on short screens (390 px phones).
+        boxSizing: 'border-box',
+        pb: 'var(--gully-cookie-banner-h, 0px)',
+        overflowY: 'auto',
+        px: 2,
       }}
     >
       <Box
         data-testid="app-info-modal"
         sx={({ palette }) => ({
-          width: '450px',
+          // Gully Multisig: fits a 390 px phone (was a fixed 450 px: the page scrolled sideways)
+          width: '100%',
+          maxWidth: '450px',
+          my: 'auto',
           backgroundColor: palette.background.paper,
           boxShadow: `1px 2px 10px 0 ${alpha(palette.text.primary, 0.18)}`,
         })}

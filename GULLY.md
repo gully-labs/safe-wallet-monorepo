@@ -57,12 +57,16 @@ included when `NEXT_PUBLIC_GULLY_ENABLE_PK_WALLET=true` (default `false`).
 
 Config-driven (Gully Config Service, chain features of 485590), keep these off: `NATIVE_SWAPS*`, `BRIDGE`, `STAKING*`,
 `EARN*`, `RISK_MITIGATION`, `HYPERNATIVE*`, `TX_SIMULATION`, `PUSH_NOTIFICATIONS`, `RECOVERY`, `ZODIAC_ROLES`,
-`RELAYING`, `MIXPANEL`, `NATIVE_WALLETCONNECT`, `SAFE_APPS`, `SPACES`, `MULTI_CHAIN_SAFE_*`, `TARGETED_SURVEY`,
+`RELAYING`, `MIXPANEL`, `NATIVE_WALLETCONNECT`, `SPACES`, `MULTI_CHAIN_SAFE_*`, `TARGETED_SURVEY`,
 `SAP_BANNER`, `EURCV_BOOST`.
 `SPENDING_LIMIT` is ON (since 2026-10-30): AllowanceModule 0.1.1 at `0x0Fd09Bd80206854b1dAd588A2eFCd7573De536b9` on 485590
 (canonical code, Arachnid-deployed, so not in `@safe-global/safe-modules-deployments`; the address is overlaid from
 `apps/web/src/config/gully-contracts.json` `modules.allowanceModule` in `spendingLimitDeployments.ts`).
 `DOMAIN_LOOKUP` on enables `.gully` names (registry from the chain's `ensRegistryAddress`).
+`SAFE_APPS` is ON (since 2026-11-10) with only Gully's own apps listed by our config service (gully-ops
+`l3/safe/add_safe_apps.py`): Gully Core Swap, Locks, Vaults, Distribute and Stock markets (`config/gullyApps.ts`,
+gully-core-app `/safe-apps/*`). The multisig proposes, its owners sign. Gully apps skip the third-party disclaimer and the
+cross-origin manifest fetch, and the Safe-run third-party-cookie probe is off. The header's Swap opens Swap in-app.
 
 ## Gully changes in this fork
 

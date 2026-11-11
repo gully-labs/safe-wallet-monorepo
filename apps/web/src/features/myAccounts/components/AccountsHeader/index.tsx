@@ -1,4 +1,3 @@
-import ConnectWalletButton from '@/components/common/ConnectWallet/ConnectWalletButton'
 import Track from '@/components/common/Track'
 import { AppRoutes } from '@/config/routes'
 import AccountsNavigation from '../AccountsNavigation'
@@ -53,14 +52,12 @@ const AccountsHeader = ({ isSidebar, onLinkClick }: { isSidebar: boolean; onLink
       <Box className={css.headerButtons}>
         <AddSafeButton trackingLabel={trackingLabel} onLinkClick={onLinkClick} />
 
-        {wallet ? (
+        {/* Gully Multisig: signed out, the header's one Sign in (Gully ID, then Connect a wallet inside it) is the only
+            auth entry; no second Connect button here */}
+        {wallet && (
           <Track {...OVERVIEW_EVENTS.CREATE_NEW_SAFE} label={trackingLabel}>
             <CreateButton isPrimary />
           </Track>
-        ) : (
-          <Box sx={{ '& button': { height: '36px' } }}>
-            <ConnectWalletButton small={true} />
-          </Box>
         )}
       </Box>
     </Box>

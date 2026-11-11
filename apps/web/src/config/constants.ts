@@ -100,7 +100,8 @@ export const SAFE_LOCKING_ADDRESS: { [chainId: string]: string } = {
   [chains.sep]: '0xb161ccb96b9b817F9bDf0048F212725128779DE9',
 }
 
-export const SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL = 'https://third-party-cookies-check.gnosis-safe.com'
+// Gully Multisig: empty = no probe (it framed a Safe-run host; the apps served here are Gully's own)
+export const SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL = ''
 export const SAFE_APPS_DEMO_SAFE_MAINNET = 'eth:0xfF501B324DC6d78dC9F983f140B9211c3EdB4dc7'
 export const SAFE_APPS_SDK_DOCS_URL =
   'https://help.safe.global/en/articles/145503-how-to-create-a-safe-app-with-safe-apps-sdk-and-list-it'
