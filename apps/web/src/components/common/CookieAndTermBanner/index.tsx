@@ -244,7 +244,8 @@ const CookieBannerPopup = (): ReactElement | null => {
       root.style.removeProperty('--gully-cookie-banner-h')
       return
     }
-    const publish = () => root.style.setProperty('--gully-cookie-banner-h', `${Math.ceil(el.getBoundingClientRect().height)}px`)
+    const publish = () =>
+      root.style.setProperty('--gully-cookie-banner-h', `${Math.ceil(el.getBoundingClientRect().height)}px`)
     publish()
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(publish) : undefined
     ro?.observe(el)

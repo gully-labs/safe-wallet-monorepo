@@ -51,7 +51,7 @@ describe('Gully Live UI 1.0.4 and gc-chain-switcher 1.0.4', () => {
     expect(sw).toContain('set mode(v)')
     expect(sw).toContain('set current(v)')
     expect(sw).toContain(
-      "static observedAttributes = ['surface', 'current', 'mode', 'manifest', 'health', 'theme', 'wallet', 'compact-below']",
+      "static observedAttributes = ['surface', 'current', 'mode', 'manifest', 'health', 'theme', 'wallet', 'compact-below', 'icon-base']",
     )
   })
 })

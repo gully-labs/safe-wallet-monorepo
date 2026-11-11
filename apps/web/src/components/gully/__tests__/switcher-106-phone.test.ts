@@ -19,7 +19,9 @@ describe('gc-chain-switcher 1.0.6 on Gully Multisig', () => {
     const have = readdirSync(join(web, 'public', 'assets', 'chains'))
     for (const n of names) expect(have).toContain(n)
     // the testnet mark is the kit file (gully-ops sites/gullycore.xyz/chains/gully-chain-testnet.svg), not a redraw
-    const h = createHash('sha256').update(readFileSync(join(web, 'public', 'assets', 'chains', 'gully-chain-testnet.svg'))).digest('hex')
+    const h = createHash('sha256')
+      .update(readFileSync(join(web, 'public', 'assets', 'chains', 'gully-chain-testnet.svg')))
+      .digest('hex')
     expect(h).toMatch(/^[0-9a-f]{64}$/)
   })
 })
