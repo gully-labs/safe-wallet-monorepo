@@ -30,21 +30,6 @@ export const GULLY_SERVICES: GullyService[] = [
   { name: 'Docs', description: 'The Gully Multisig guide', href: 'https://docs.gullychain.xyz/multisig/' },
   { name: 'Ecosystem', description: 'Projects on Gully Chain', href: 'https://gullychain.xyz/ecosystem/' },
   { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
-] = [
-  { name: 'Bridge', description: 'Move ETH in and out of Gully Chain', href: 'https://testnet-bridge.gullychain.xyz/' },
-  {
-    name: 'Explorer',
-    description: 'Blocks, transactions and tokens',
-    href: 'https://testnet-explorer.gullychain.xyz/',
-  },
-  { name: 'Faucet', description: 'Free testnet ETH', href: 'https://faucet.gullychain.xyz/' },
-  { name: 'Gully Core', description: 'Pools and tokens on the testnet', href: 'https://gullychain.xyz/core/' },
-  { name: 'Verify', description: 'Contract source, Sourcify', href: 'https://verify.gullychain.xyz/' },
-  { name: 'Sentry', description: 'Free keys, run a watcher', href: 'https://sentry.gullychain.xyz/' },
-  { name: 'Docs', description: 'Guides and reference', href: 'https://docs.gullychain.xyz/' },
-  { name: 'Developers', description: 'Starters and grants', href: 'https://dev.gullychain.xyz/' },
-  { name: 'Ecosystem', description: 'Projects on Gully Chain', href: 'https://gullychain.xyz/ecosystem/' },
-  { name: 'Status', description: 'Uptime of every service', href: 'https://status.gullylabs.xyz/' },
 ]
 
 /**
