@@ -33,6 +33,9 @@ export const useRefetchBalances = () => {
   const isPositionsEnabled = useHasFeature(FEATURES.POSITIONS) ?? false
   const isPortfolioEndpointEnabled = useHasFeature(FEATURES.PORTFOLIO_ENDPOINT) ?? false
   const shouldUsePortfolioEndpoint = isPositionsEnabled && isPortfolioEndpointEnabled
+  // Gully: the positions endpoint is only called on chains with the POSITIONS feature (off on every Gully chain;
+  // the gateway answers 404 there), so a chain without it never asks for positions.
+  const shouldUsePositionsEndpoint = isPositionsEnabled && !isPortfolioEndpointEnabled
 
   const {
     refetch: portfolioRefetch,
@@ -53,7 +56,7 @@ export const useRefetchBalances = () => {
   const { refetch: positionsRefetch, isFetching: positionsIsFetching } = usePositionsGetPositionsV1Query(
     { chainId, safeAddress, fiatCode: currency },
     {
-      skip: shouldUsePortfolioEndpoint || !safeAddress || !chainId || !currency,
+      skip: !shouldUsePositionsEndpoint || !safeAddress || !chainId || !currency,
     },
   )
 
@@ -73,21 +76,22 @@ export const useRefetchBalances = () => {
     if (shouldUsePortfolioEndpoint) {
       return portfolioRefetch()
     }
-    await Promise.all([positionsRefetch(), txServiceBalancesRefetch()])
-  }, [shouldUsePortfolioEndpoint, portfolioRefetch, positionsRefetch, txServiceBalancesRefetch])
+    await Promise.all([shouldUsePositionsEndpoint ? positionsRefetch() : undefined, txServiceBalancesRefetch()])
+  }, [shouldUsePortfolioEndpoint, shouldUsePositionsEndpoint, portfolioRefetch, positionsRefetch, txServiceBalancesRefetch])
 
   const refetchPositions = useCallback(async () => {
     if (shouldUsePortfolioEndpoint) {
       return portfolioRefetch()
     }
+    if (!shouldUsePositionsEndpoint) return
     return positionsRefetch()
-  }, [shouldUsePortfolioEndpoint, portfolioRefetch, positionsRefetch])
+  }, [shouldUsePortfolioEndpoint, shouldUsePositionsEndpoint, portfolioRefetch, positionsRefetch])
 
   const fulfilledTimeStamp = shouldUsePortfolioEndpoint ? portfolioFulfilledTimeStamp : undefined
 
   const isFetching = shouldUsePortfolioEndpoint
     ? portfolioIsFetching
-    : positionsIsFetching || txServiceBalancesIsFetching
+    : (shouldUsePositionsEndpoint && positionsIsFetching) || txServiceBalancesIsFetching
 
   return { refetch, refetchPositions, shouldUsePortfolioEndpoint, fulfilledTimeStamp, isFetching }
 }

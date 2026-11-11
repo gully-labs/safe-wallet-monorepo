@@ -59,12 +59,13 @@ export const useBannerVisibility = (bannerType: BannerType): BannerVisibilityRes
   const isTxReportButton = bannerType === BannerType.TxReportButton
   const skipBalanceCheck = bannerType === BannerType.NoBalanceCheck
 
+  // Gully: no targeted-messaging calls on chains without HYPERNATIVE (every Gully chain; the gateway answers 404)
   const { isTargeted: isPromoTargeted, loading: outreachLoading } = useIsOutreachSafe(HYPERNATIVE_OUTREACH_ID, {
-    skip: isTxReportButton,
+    skip: isTxReportButton || !isEnabled,
   })
   const { isTargeted: isAllowlistedSafe, loading: allowlistLoading } = useIsOutreachSafe(
     HYPERNATIVE_ALLOWLIST_OUTREACH_ID,
-    { skip: !isTxReportButton },
+    { skip: !isTxReportButton || !isEnabled },
   )
 
   const hasEnoughBalance = hasSufficientBalance(balances.fiatTotal)

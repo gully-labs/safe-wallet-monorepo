@@ -1,5 +1,6 @@
 import { useIsOutreachSafe } from '@/features/targeted-features'
 import { useIsHypernativeGuard } from './useIsHypernativeGuard'
+import { useIsHypernativeFeature } from './useIsHypernativeFeature'
 import { HYPERNATIVE_ALLOWLIST_OUTREACH_ID } from '../constants'
 
 export type HypernativeEligibility = {
@@ -15,8 +16,12 @@ export type HypernativeEligibility = {
  */
 export const useIsHypernativeEligible = (): HypernativeEligibility => {
   const { isHypernativeGuard, loading: guardLoading } = useIsHypernativeGuard()
+  // Gully: the allowlist is a targeted-messaging outreach; chains without HYPERNATIVE (every Gully chain) never ask
+  // the gateway for it (it answers 404 there).
+  const isHypernativeFeature = useIsHypernativeFeature()
   const { isTargeted: isAllowlistedSafe, loading: outreachLoading } = useIsOutreachSafe(
     HYPERNATIVE_ALLOWLIST_OUTREACH_ID,
+    { skip: !isHypernativeFeature },
   )
 
   return {
