@@ -77,7 +77,13 @@ export const useRefetchBalances = () => {
       return portfolioRefetch()
     }
     await Promise.all([shouldUsePositionsEndpoint ? positionsRefetch() : undefined, txServiceBalancesRefetch()])
-  }, [shouldUsePortfolioEndpoint, shouldUsePositionsEndpoint, portfolioRefetch, positionsRefetch, txServiceBalancesRefetch])
+  }, [
+    shouldUsePortfolioEndpoint,
+    shouldUsePositionsEndpoint,
+    portfolioRefetch,
+    positionsRefetch,
+    txServiceBalancesRefetch,
+  ])
 
   const refetchPositions = useCallback(async () => {
     if (shouldUsePortfolioEndpoint) {

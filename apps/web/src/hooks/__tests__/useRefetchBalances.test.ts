@@ -181,7 +181,7 @@ describe('useRefetchBalances', () => {
       jest.spyOn(useChains, 'useHasFeature').mockReturnValue(false)
       jest
         .spyOn(positionsQueries, 'usePositionsGetPositionsV1Query')
-        .mockImplementation((...args) => ({ ...positionsQuery(...args), refetch: positionsRefetch }) as any)
+        .mockImplementation((...args) => ({ ...positionsQuery(...args), refetch: positionsRefetch } as any))
       jest.spyOn(balancesQueries, 'useBalancesGetBalancesV1Query').mockReturnValue({
         refetch: txServiceBalancesRefetch,
       } as any)
