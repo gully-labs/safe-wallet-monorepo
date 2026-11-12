@@ -846,6 +846,18 @@ describe('useBannerVisibility', () => {
         expect(useIsOutreachSafeHook.useIsOutreachSafe).toHaveBeenCalledWith(HYPERNATIVE_OUTREACH_ID, { skip: false })
       })
 
+      // Gully: chains without HYPERNATIVE never call targeted-messaging (the gateway answers 404 there)
+      it('skips both targeted-messaging queries when the chain has no HYPERNATIVE feature', () => {
+        jest.spyOn(useIsHypernativeFeatureHook, 'useIsHypernativeFeature').mockReturnValue(false)
+
+        renderHook(() => useBannerVisibility(BannerType.Promo))
+
+        expect(useIsOutreachSafeHook.useIsOutreachSafe).toHaveBeenCalledWith(HYPERNATIVE_OUTREACH_ID, { skip: true })
+        expect(useIsOutreachSafeHook.useIsOutreachSafe).toHaveBeenCalledWith(HYPERNATIVE_ALLOWLIST_OUTREACH_ID, {
+          skip: true,
+        })
+      })
+
       it('should show banner for NoBalanceCheck type when Safe is targeted', () => {
         jest.spyOn(useIsHypernativeFeatureHook, 'useIsHypernativeFeature').mockReturnValue(true)
         jest.spyOn(useBannerStorageHook, 'useBannerStorage').mockReturnValue(true)

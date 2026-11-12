@@ -121,7 +121,6 @@ describe('useRefetchBalances', () => {
       const positionsRefetch = jest.fn().mockResolvedValue({})
       const txServiceBalancesRefetch = jest.fn().mockResolvedValue({})
 
-      jest.spyOn(useChains, 'useHasFeature').mockReturnValue(false)
       jest.spyOn(positionsQueries, 'usePositionsGetPositionsV1Query').mockReturnValue({
         refetch: positionsRefetch,
       } as any)
@@ -157,7 +156,6 @@ describe('useRefetchBalances', () => {
       const positionsRefetch = jest.fn().mockResolvedValue({})
       const txServiceBalancesRefetch = jest.fn().mockResolvedValue({})
 
-      jest.spyOn(useChains, 'useHasFeature').mockReturnValue(false)
       jest.spyOn(positionsQueries, 'usePositionsGetPositionsV1Query').mockReturnValue({
         refetch: positionsRefetch,
       } as any)
@@ -171,6 +169,31 @@ describe('useRefetchBalances', () => {
 
       expect(positionsRefetch).toHaveBeenCalled()
       expect(txServiceBalancesRefetch).not.toHaveBeenCalled()
+    })
+  })
+
+  // Gully: chains without POSITIONS (every Gully chain) never call /positions (the gateway answers 404 there)
+  describe('POSITIONS feature off', () => {
+    it('skips the positions query and never refetches it', async () => {
+      const positionsQuery = jest.fn().mockReturnValue({ refetch: jest.fn() })
+      const positionsRefetch = jest.fn().mockResolvedValue({})
+      const txServiceBalancesRefetch = jest.fn().mockResolvedValue({})
+      jest.spyOn(useChains, 'useHasFeature').mockReturnValue(false)
+      jest
+        .spyOn(positionsQueries, 'usePositionsGetPositionsV1Query')
+        .mockImplementation((...args) => ({ ...positionsQuery(...args), refetch: positionsRefetch } as any))
+      jest.spyOn(balancesQueries, 'useBalancesGetBalancesV1Query').mockReturnValue({
+        refetch: txServiceBalancesRefetch,
+      } as any)
+
+      const { result } = renderHook(() => useRefetchBalances())
+      await result.current.refetch()
+      await result.current.refetchPositions()
+
+      expect(positionsQuery).toHaveBeenCalled()
+      for (const call of positionsQuery.mock.calls) expect(call[1]).toEqual(expect.objectContaining({ skip: true }))
+      expect(positionsRefetch).not.toHaveBeenCalled()
+      expect(txServiceBalancesRefetch).toHaveBeenCalled()
     })
   })
 })
