@@ -75,7 +75,7 @@ const ANUBIS_LINKS: ChainLinks = {
 }
 
 // Kinetiq Elysium (99901): the chain's own explorer and site; of the Gully services only the ones that serve Elysium.
-export const ELYSIUM_EXPLORER_URL = 'https://scan.elysp.com'
+export const ELYSIUM_EXPLORER_URL = 'https://elysium.kinetiq.xyz/explorer'
 export const ELYSIUM_SITE_URL = 'https://kinetiq.xyz'
 
 const ELYSIUM_LINKS: ChainLinks = {

@@ -14,7 +14,7 @@ describe('Gully Multisig on Kinetiq Elysium (99901): HYPE is sendable, the Gully
     expect(links?.title).toBe('Kinetiq Elysium')
     expect(links?.subtitle).toContain('HYPE is the gas coin on Kinetiq Elysium and can be sent')
     expect(links?.services[0]?.href).toBe(ELYSIUM_EXPLORER_URL)
-    expect(ELYSIUM_EXPLORER_URL).toBe('https://scan.elysp.com')
+    expect(ELYSIUM_EXPLORER_URL).toBe('https://elysium.kinetiq.xyz/explorer')
     expect(JSON.stringify(links)).not.toMatch(TESTNET_ONLY)
     expect((links?.services ?? []).every((s) => s.href.startsWith('https://'))).toBe(true)
   })
