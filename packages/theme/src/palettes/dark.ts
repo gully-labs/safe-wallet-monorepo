@@ -2,33 +2,33 @@ import type { ColorPalette } from './types'
 
 /**
  * Unified dark mode color palette.
- * Gully Multisig: GullyChain brand kit v4 (GN 2.0 roles): ink #0A0F0E ground, #111716 cards, charcoal #1A1F1E surfaces,
- * emerald #00C878 primary (ink text), deep green #005B39, mint #2CF29A live/links, white/silver text, #8FA09C secondary,
- * kit success #10B981 / warning #F59E0B / error #EF4444.
+ * Gully Multisig: Gully Labs kit (2026-11-22, same tokens as the gullymultisig.xyz landing): navy #0E1C38 ground,
+ * #142547 cards, #1B2E56 surfaces, blue #4C6BD6 primary (white text), light blue #8FA8EC links, #F1F3F8 text,
+ * #A9B4CF secondary. Success, warning and error keep their meaning colours.
  * Merged from web and mobile palettes with mobile's extended colors as the base.
  */
 const darkPalette: ColorPalette = {
   text: {
-    primary: '#FFFFFF',
-    secondary: '#8FA09C',
-    disabled: '#8FA09C',
-    contrast: '#0A0F0E',
+    primary: '#F1F3F8',
+    secondary: '#A9B4CF',
+    disabled: '#A9B4CF',
+    contrast: '#FFFFFF',
   },
   primary: {
-    dark: '#005B39',
-    main: '#00C878',
-    light: '#D0D5DA',
+    dark: '#3754A0',
+    main: '#4C6BD6',
+    light: '#C9D2E8',
   },
   secondary: {
-    dark: '#8FA09C',
+    dark: '#A9B4CF',
     main: '#FFFFFF',
-    light: '#2CF29A',
-    background: '#111716',
+    light: '#8FA8EC',
+    background: '#142547',
   },
   border: {
-    main: '#8FA09C',
-    light: '#1A1F1E',
-    background: '#0A0F0E',
+    main: '#6B7BA3',
+    light: '#2A3B63',
+    background: '#0E1C38',
   },
   error: {
     dark: '#FFE0E6',
@@ -47,10 +47,10 @@ const darkPalette: ColorPalette = {
     background: '#173026',
   },
   info: {
-    dark: '#D9F4FB',
-    main: '#00C878',
-    light: '#458898',
-    background: '#203339',
+    dark: '#D9E2FB',
+    main: '#6F8DDF',
+    light: '#5A73B8',
+    background: '#17284D',
   },
   warning: {
     dark: '#FFE4CB',
@@ -64,28 +64,28 @@ const darkPalette: ColorPalette = {
     contrastText: '#FF8C00',
   },
   background: {
-    default: '#0A0F0E',
-    main: '#0A0F0E',
-    sheet: '#0A0F0E',
-    paper: '#111716',
-    light: '#111716',
-    secondary: '#1A1F1E',
+    default: '#0E1C38',
+    main: '#0E1C38',
+    sheet: '#0E1C38',
+    paper: '#142547',
+    light: '#142547',
+    secondary: '#1B2E56',
     skeleton: 'rgba(255, 255, 255, 0.04)',
     disabled: '#7878801F',
   },
   backdrop: {
-    main: '#8FA09C',
+    main: '#A9B4CF',
   },
   logo: {
     main: '#FFFFFF',
-    background: '#1A1F1E',
+    background: '#1B2E56',
   },
   static: {
-    main: '#0A0F0E',
-    light: '#8FA09C',
+    main: '#0E1C38',
+    light: '#A9B4CF',
     primary: '#FFFFFF',
     textSecondary: '#A1A3A7',
-    textBrand: '#00C878',
+    textBrand: '#8FA8EC',
   },
 }
 

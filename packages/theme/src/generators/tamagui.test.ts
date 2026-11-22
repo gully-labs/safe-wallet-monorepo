@@ -21,15 +21,15 @@ describe('generateTamaguiColorTokens', () => {
   it('should have correct light mode values', () => {
     const tokens = generateTamaguiColorTokens()
 
-    expect(tokens.textPrimaryLight).toBe('#121312')
-    expect(tokens.primaryMainLight).toBe('#121312')
+    expect(tokens.textPrimaryLight).toBe('#0E1C38')
+    expect(tokens.primaryMainLight).toBe('#0E1C38')
   })
 
   it('should have correct dark mode values', () => {
     const tokens = generateTamaguiColorTokens()
 
-    expect(tokens.textPrimaryDark).toBe('#FFFFFF')
-    expect(tokens.primaryMainDark).toBe('#00C878') // Gully Multisig: kit v4 emerald
+    expect(tokens.textPrimaryDark).toBe('#F1F3F8')
+    expect(tokens.primaryMainDark).toBe('#4C6BD6') // Gully Multisig: Gully Labs kit blue
   })
 })
 
