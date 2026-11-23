@@ -20,14 +20,14 @@ describe('empty pages', () => {
 })
 
 describe('light theme parity', () => {
-  it('the light primary is the kit deep green in the palette and the generated variables alike', () => {
+  it('the light primary is the Gully Labs kit blue in the palette and the generated variables alike', () => {
     expect(read('../../../packages/theme/src/palettes/light.ts')).toMatch(
-      /primary: \{\s*dark: '#003F27',\s*main: '#005B39'/,
+      /primary: \{\s*dark: '#2D468A',\s*main: '#3754A0'/,
     )
     const vars = read('styles/vars.css')
     const light = vars.slice(0, vars.indexOf("[data-theme='dark']"))
-    expect(light).toContain('--color-primary-main: #005b39;')
-    expect(light).toContain('--color-primary-dark: #003f27;')
+    expect(light).toContain('--color-primary-main: #3754a0;')
+    expect(light).toContain('--color-primary-dark: #2d468a;')
   })
 
   it('no hard-coded Safe black on the connect buttons', () => {

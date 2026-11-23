@@ -38,7 +38,7 @@ describe('Gully Live UI 1.0.4 and gc-chain-switcher 1.0.4', () => {
     expect(sha('public/vendor/gully-live-ui/gl-chart.js')).toBe(
       'efaa236579d9a3cf1333c5b14cb714789a55aaed8c6d31b8c8dfdf7cc381fabd',
     )
-    expect(sha(`public${SWITCHER_SRC}`)).toBe('43dab76dc4d544e6266af5108d61af71478af7da936191a605a9dd1c4890345a')
+    expect(sha(`public${SWITCHER_SRC}`)).toBe('33bbf05e22f237069a3165afd81ab0c94284d7ce36039101f18e47e51fa4da45')
 
     const core = read('public/vendor/gully-live-ui/gl-core.js')
     expect(core).toContain("GULLY_LIVE_UI_VERSION = '1.0.4'")
