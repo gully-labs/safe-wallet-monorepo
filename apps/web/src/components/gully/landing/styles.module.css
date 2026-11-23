@@ -88,7 +88,7 @@
 }
 
 .btnPrimary:hover {
-  background: #2cf29a;
+  background: var(--gc-mint);
 }
 
 .page .btnGhost {

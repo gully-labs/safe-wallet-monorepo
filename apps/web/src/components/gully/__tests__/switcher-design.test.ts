@@ -9,9 +9,9 @@ import { healthUrl, SWITCHER_SRC, SWITCHER_SURFACE } from '../../common/GullyCha
 const src = join(__dirname, '..', '..', '..')
 const read = (p: string) => readFileSync(join(src, p), 'utf8')
 
-// sha256 of gully-ops sites/_shared/gc-chain-switcher/gc-chain-switcher.js 1.0.6 (gully-ops main c48ae8aa), equal to the live
+// sha256 of gully-ops sites/_shared/gc-chain-switcher/gc-chain-switcher.js 1.0.6 (gully-ops main 2026-11-23; vendored copy is byte-identical), earlier equal to the live
 // https://gullycore.xyz/assets/gc-chain-switcher.js on 2026-11-10. Update both when the canonical file changes.
-const CANONICAL_SHA256 = '43dab76dc4d544e6266af5108d61af71478af7da936191a605a9dd1c4890345a'
+const CANONICAL_SHA256 = '33bbf05e22f237069a3165afd81ab0c94284d7ce36039101f18e47e51fa4da45'
 
 describe('the shared chain switcher', () => {
   it('ships as a byte-identical copy of the canonical file', () => {

@@ -27,24 +27,25 @@ main {
   width: 100%;
 }
 
-/* Gully Multisig: GullyChain brand kit v4 tokens (GN 2.0 roles; the --gc-* names are kept, the values are kit v4).
-   night = ink ground, ink = cards, cyan = the emerald primary (ink text on it), blue = deep green fills,
-   green = mint (live, links, focus), white = text, muted = AA secondary text on ink. */
+/* Gully Multisig: Gully Labs kit tokens (2026-11-22; the --gc-* names are kept so every rule keeps working, the values
+   are the same as the gullymultisig.xyz landing). night = navy ground, ink = cards, charcoal = surfaces, cyan = the
+   blue primary (white text on it), blue = deep blue fills, green = light blue (live, links, focus), white = text,
+   muted = AA secondary text on navy. Same in light and dark: the theme colours come from --color-* (vars.css). */
 :root {
-  --gc-night: #0a0f0e;
-  --gc-ink: #111716;
-  --gc-charcoal: #1a1f1e;
-  --gc-blue: #005b39;
-  --gc-cyan: #00c878;
-  --gc-green: #2cf29a;
-  --gc-emerald: #00c878;
-  --gc-deep-green: #005b39;
-  --gc-mint: #2cf29a;
-  --gc-silver: #d0d5da;
-  --gc-white: #ffffff;
-  --gc-muted: #8fa09c;
-  --gc-line: rgba(208, 213, 218, 0.12);
-  --gc-chain-gradient: linear-gradient(90deg, #2cf29a, #007a4b);
+  --gc-night: var(--color-background-default, #0e1c38);
+  --gc-ink: var(--color-background-paper, #142547);
+  --gc-charcoal: var(--color-background-secondary, #1b2e56);
+  --gc-blue: #3754a0;
+  --gc-cyan: var(--color-primary-main, #4c6bd6);
+  --gc-green: var(--color-secondary-light, #8fa8ec);
+  --gc-emerald: var(--color-primary-main, #4c6bd6);
+  --gc-deep-green: #3754a0;
+  --gc-mint: var(--color-secondary-light, #8fa8ec);
+  --gc-silver: var(--color-primary-light, #c9d2e8);
+  --gc-white: var(--color-text-primary, #f1f3f8);
+  --gc-muted: var(--color-text-secondary, #a9b4cf);
+  --gc-line: var(--color-border-light, #2a3b63);
+  --gc-chain-gradient: linear-gradient(90deg, #6f8ddf, #3754a0);
   --gc-font: 'Inter', system-ui, sans-serif;
 }
 
