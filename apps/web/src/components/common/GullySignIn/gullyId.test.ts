@@ -50,13 +50,13 @@ describe('gullyId', () => {
     expect(document.head.querySelector('script')).toBeNull()
   })
 
-  it('tries /sdk/v1.js first, falls back to /sdk.js, and resolves null when both fail', async () => {
-    expect(sdkUrls('https://gullyid.xyz')).toEqual(['https://gullyid.xyz/sdk/v1.js', 'https://gullyid.xyz/sdk.js'])
+  it('tries the pinned /sdk/v1.7.1.js first, falls back to /sdk.js, and resolves null when both fail', async () => {
+    expect(sdkUrls('https://gullyid.xyz')).toEqual(['https://gullyid.xyz/sdk/v1.7.1.js', 'https://gullyid.xyz/sdk.js'])
     const cfg = { clientId: 'gully-safe', issuer: DEFAULT_GULLY_ID_ISSUER }
     const first = loadGullyId(cfg)
     expect(loadGullyId(cfg)).toBe(first)
     let s = document.head.querySelector('script') as HTMLScriptElement
-    expect(s.src).toBe('https://gullyid.xyz/sdk/v1.js')
+    expect(s.src).toBe('https://gullyid.xyz/sdk/v1.7.1.js')
     s.dispatchEvent(new Event('error'))
     s = document.head.querySelector('script') as HTMLScriptElement
     expect(s.src).toBe('https://gullyid.xyz/sdk.js')

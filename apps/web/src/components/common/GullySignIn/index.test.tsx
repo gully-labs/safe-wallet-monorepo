@@ -33,6 +33,20 @@ describe('GullySignIn', () => {
     ;(useWallet as jest.Mock).mockReturnValue(null)
   })
 
+  it('draws the shared chip when the SDK has renderSignIn (1.7+)', async () => {
+    const { client } = mockSdk()
+    const renderSignIn = jest.fn((el: HTMLElement) => {
+      const b = document.createElement('button')
+      b.textContent = 'Gully ID | Sign in'
+      el.appendChild(b)
+      return jest.fn()
+    })
+    ;(client as unknown as { renderSignIn: typeof renderSignIn }).renderSignIn = renderSignIn
+    render(<GullySignIn />)
+    await waitFor(() => expect(renderSignIn).toHaveBeenCalledWith(expect.any(HTMLElement), { style: 'chip', theme: 'dark' }))
+    expect(client.renderButton).not.toHaveBeenCalled()
+  })
+
   it('renders nothing when the flag is off, and says so on <html>', () => {
     const { container } = render(<GullySignIn config={null} />)
     expect(container).toBeEmptyDOMElement()
