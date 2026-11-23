@@ -56,7 +56,10 @@ const GullySignIn = ({ config = GULLY_ID_CONFIG }: { config?: GullyIdConfig | nu
         return
       }
       if (!slot.current) return
-      unmountButton = gully.renderButton(slot.current, { passkey: false, theme: isDark ? 'dark' : 'light', size: 's' })
+      // SDK 1.7+: the shared entry ("Gully ID | Sign in", same chip as every Gully product); older SDKs keep the kit button.
+      unmountButton = gully.renderSignIn
+        ? gully.renderSignIn(slot.current, { style: 'chip', theme: isDark ? 'dark' : 'light' })
+        : gully.renderButton(slot.current, { passkey: false, theme: isDark ? 'dark' : 'light', size: 's' })
       setReady(true)
     })
     return () => {

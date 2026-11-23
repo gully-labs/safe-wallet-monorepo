@@ -30,6 +30,8 @@ export type GullyClient = {
   session(): GullySession | null
   signOut(): Promise<void>
   onChange(cb: (s: GullySession | null) => void): () => void
+  /** SDK 1.7+: the shared "Gully ID | Sign in" entry (chip), wallet chip once signed in, shared modal with failure states. */
+  renderSignIn?(el: HTMLElement, o?: { style?: 'chip' | 'promise' | 'pill'; theme?: 'dark' | 'light' | 'auto'; onSignIn?: (s: GullySession) => void; onError?: (e: unknown) => void }): () => void
   renderButton(
     el: HTMLElement,
     o?: {
@@ -64,7 +66,7 @@ export const GULLY_ID_CONFIG = getGullyIdConfig(
 )
 
 /** The SDK URLs, tried in order: the 1.x channel, then the legacy all-majors URL (live before the v1 channel). */
-export const sdkUrls = (issuer: string): string[] => [`${issuer}/sdk/v1.js`, `${issuer}/sdk.js`]
+export const sdkUrls = (issuer: string): string[] => [`${issuer}/sdk/v1.7.1.js`, `${issuer}/sdk.js`]
 
 /** Publishes the flag on <html data-gully-id="on|off" data-gully-id-client="..."> so a live audit can read it. */
 export const markGullyIdFlag = (cfg: GullyIdConfig | null): void => {
