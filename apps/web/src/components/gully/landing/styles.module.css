@@ -1,6 +1,6 @@
 /* Gully Multisig landing: Gully Terminal look (black ground, GullyChain accents, square 4px buttons). */
 .page {
-  --line: rgba(208, 213, 218, 0.1);
+  --line: rgba(111, 141, 223, 0.1);
   background: var(--gc-night);
   color: var(--gc-white);
   font-family: var(--gc-font);
@@ -31,7 +31,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(10, 15, 14, 0.85);
+  background: color-mix(in srgb, var(--gc-night) 85%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -92,13 +92,13 @@
 }
 
 .page .btnGhost {
-  border: 1px solid rgba(208, 213, 218, 0.25);
+  border: 1px solid rgba(111, 141, 223, 0.25);
   color: var(--gc-white);
 }
 
 .btnGhost:hover {
   border-color: var(--gc-cyan);
-  background: rgba(0, 200, 120, 0.08);
+  background: rgba(76, 107, 214, 0.08);
 }
 
 .btnPrimary:focus-visible,
@@ -159,7 +159,7 @@
   max-width: 560px;
   font-size: 17px;
   line-height: 1.6;
-  color: #d0d5da;
+  color: var(--gc-muted);
 }
 
 .ctaRow {
@@ -310,7 +310,7 @@
 .chartSkel {
   display: block;
   border-radius: 4px;
-  background: linear-gradient(90deg, rgba(208, 213, 218, 0.05), rgba(208, 213, 218, 0.12), rgba(208, 213, 218, 0.05));
+  background: linear-gradient(90deg, rgba(111, 141, 223, 0.05), rgba(111, 141, 223, 0.12), rgba(111, 141, 223, 0.05));
   background-size: 200% 100%;
   animation: shimmer 1.4s linear infinite;
 }
@@ -414,7 +414,7 @@
 }
 
 .card:hover {
-  border-color: rgba(0, 200, 120, 0.5);
+  border-color: rgba(76, 107, 214, 0.5);
   transform: translateY(-2px);
 }
 
@@ -425,7 +425,7 @@
   height: 40px;
   border-radius: 4px;
   color: var(--gc-cyan);
-  background: rgba(0, 200, 120, 0.1);
+  background: rgba(76, 107, 214, 0.1);
   margin-bottom: 14px;
 }
 
@@ -506,7 +506,7 @@
 .faqItem p {
   margin: 0;
   padding: 0 16px 16px;
-  color: #d0d5da;
+  color: var(--gc-muted);
   line-height: 1.6;
   font-size: 15px;
 }
@@ -543,7 +543,7 @@
 }
 
 .linkCard:hover {
-  border-color: rgba(0, 200, 120, 0.5);
+  border-color: rgba(76, 107, 214, 0.5);
 }
 
 .linkCard span {
@@ -757,7 +757,7 @@
   padding: 12px 16px 14px;
   text-align: center;
   font-size: 14px;
-  color: var(--gn-text-2, #d0d5da);
+  color: var(--gc-muted);
 }
 
 .loginHint a {

@@ -54,6 +54,26 @@ describe('useChainId hook', () => {
     expect(result.current).toEqual('137')
   })
 
+  // Gully: a Safe is read on its own chain even before the chain configs have loaded (none are mocked here)
+  it.each([
+    ['gully-test', '485590'],
+    ['anubis', '6714'],
+    ['elysium', '99901'],
+    ['robinhood', '4663'],
+  ])('reads a %s Safe on chain %s before the chain configs load', (shortName, chainId) => {
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: {
+        pathname: '/home',
+        search: `?safe=${shortName}:0xeeA52db4B0233c4170cca7ef109aE70FE8f67F4c`,
+      },
+    })
+
+    const { result } = renderHook(() => useChainId())
+
+    expect(result.current).toEqual(chainId)
+  })
+
   it('should return the default chainId if no query params', () => {
     const { result } = renderHook(() => useChainId())
     expect(result.current).toBe('11155111')
