@@ -104,7 +104,7 @@ describe('useChainId hook', () => {
       () =>
         ({
           chainId: '1337',
-        }) as ConnectedWallet,
+        } as ConnectedWallet),
     )
 
     jest.spyOn(useChains, 'default').mockImplementation(() => ({

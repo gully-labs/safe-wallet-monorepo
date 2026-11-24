@@ -16,14 +16,11 @@ export function useParentSafe() {
 
   // Gully: only a contract owner can be a parent Safe. Asking the gateway about an EOA owner (most 1-of-1 Safes) gave a
   // 404 from our own gateway on every page, so the owner's code is read first.
-  const [ownerIsContract] = useAsync<boolean>(
-    async () => {
-      if (!isEnabled || !maybeParent || !web3ReadOnly) return false
-      const code = await web3ReadOnly.getCode(maybeParent)
-      return !!code && code !== '0x'
-    },
-    [isEnabled, maybeParent, web3ReadOnly],
-  )
+  const [ownerIsContract] = useAsync<boolean>(async () => {
+    if (!isEnabled || !maybeParent || !web3ReadOnly) return false
+    const code = await web3ReadOnly.getCode(maybeParent)
+    return !!code && code !== '0x'
+  }, [isEnabled, maybeParent, web3ReadOnly])
 
   const { data: parentSafe } = useSafesGetSafeV1Query(
     {
