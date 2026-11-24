@@ -34,9 +34,9 @@
 
 .watchViewAccountLink button:hover {
   --variant-containedBg: var(--color-background-secondary);
-  --variant-textBg: rgba(0, 200, 120, 0.08);
+  --variant-textBg: rgba(76, 107, 214, 0.08);
   --variant-outlinedBorder: var(--gc-cyan);
-  --variant-outlinedBg: rgba(0, 200, 120, 0.08);
+  --variant-outlinedBg: rgba(76, 107, 214, 0.08);
 }
 
 .orDivider::after {
