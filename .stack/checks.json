@@ -1,0 +1,5 @@
+{ "repo": "safe-wallet-monorepo", "product": "multisig", "checks": [
+  { "type": "kit", "kit": "gc-chain-switcher", "dir": "apps/web/public/assets" },
+  { "type": "kit", "kit": "gc-switcher", "dir": "apps/web/public/assets" },
+  { "type": "kit", "kit": "gully-live-ui", "dir": "apps/web/public/vendor/gully-live-ui" }
+] }
